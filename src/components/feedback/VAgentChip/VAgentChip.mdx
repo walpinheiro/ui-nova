@@ -1,0 +1,39 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VAgentChipStories from './VAgentChip.stories';
+
+<Meta of={VAgentChipStories} />
+# Agent Chip
+**Categoria:** feedback  
+Indicador compacto de execução de ferramenta do agente (pending, success, error) com duração e retry.
+
+## Component
+<Canvas of={VAgentChipStories.Pending} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VAgentChip } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VAgentChip label="search_docs" status="pending" :duration-ms="0" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Pending · Success · Error · Expressive fill animation quando `motion="expressive"`.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Pending fill | scaleX | spring | ease-spring |
+| Success/Error | icon appear | 160ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+`role="status"`, `aria-live="polite"` e `aria-busy` durante pending. Retry com `aria-label` configurável.
+## Anatomy
+Root → fill (pending) → label → duration → status icon → optional retry button.

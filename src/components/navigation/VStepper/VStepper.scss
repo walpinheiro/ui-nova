@@ -1,0 +1,191 @@
+.v-stepper {
+  @apply font-sans text-text-medium;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--v-space-2);
+  width: 100%;
+  color: var(--v-color-text);
+  font-family: var(--v-font-family-sans);
+
+  &--disabled,
+  &[aria-disabled='true'] {
+    opacity: var(--v-state-disabled-opacity);
+    pointer-events: none;
+  }
+
+  &--loading,
+  &[aria-busy='true'] {
+    opacity: var(--v-state-loading-opacity);
+  }
+
+  &__loader {
+    display: inline-block;
+    width: var(--v-loader-size);
+    height: var(--v-loader-size);
+    border: var(--v-loader-border-width) solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--v-radius-circle);
+    animation: v-stepper-spin var(--v-motion-spin-duration) linear infinite;
+    flex-shrink: 0;
+  }
+
+  &__list {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  &__step {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    flex: 1 1 0;
+    min-width: 0;
+
+    &--disabled {
+      opacity: var(--v-state-disabled-opacity);
+    }
+  }
+
+  &__step-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--v-space-2);
+    width: 100%;
+    text-align: center;
+  }
+
+  &__marker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(var(--v-space-8));
+    height: calc(var(--v-space-8));
+    border-radius: var(--v-radius-circle);
+    border: var(--v-border-width) solid var(--v-color-border);
+    background: var(--v-color-surface);
+    color: var(--v-color-text-muted);
+    font-size: var(--v-font-size-text-small);
+    font-weight: var(--v-font-weight-semibold);
+    cursor: pointer;
+    transition:
+      background var(--v-motion-fast) var(--v-ease-standard),
+      border-color var(--v-motion-fast) var(--v-ease-standard),
+      color var(--v-motion-fast) var(--v-ease-standard);
+
+    &:hover:not(:disabled) {
+      border-color: var(--v-color-primary-200);
+      color: var(--v-color-primary-text);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    &--current {
+      border-color: var(--v-color-primary);
+      background: var(--v-color-primary);
+      color: var(--v-color-on-primary);
+    }
+
+    &--completed {
+      border-color: var(--v-color-primary);
+      background: color-mix(in srgb, var(--v-color-primary) 12%, var(--v-color-surface));
+      color: var(--v-color-primary-text);
+    }
+  }
+
+  &__index {
+    line-height: 1;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--v-space-1);
+    min-width: 0;
+    padding-inline: var(--v-space-1);
+  }
+
+  &__label {
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+    font-weight: var(--v-font-weight-medium);
+    color: var(--v-color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__description {
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+    color: var(--v-color-text-muted);
+  }
+
+  &__step--current &__label {
+    color: var(--v-color-text);
+    font-weight: var(--v-font-weight-semibold);
+  }
+
+  &__step--completed &__label {
+    color: var(--v-color-text);
+  }
+
+  &__connector {
+    position: absolute;
+    top: calc(var(--v-space-4));
+    left: calc(50% + var(--v-space-4));
+    right: calc(-50% + var(--v-space-4));
+    height: var(--v-border-width);
+    background: var(--v-color-border);
+    pointer-events: none;
+
+    &--completed {
+      background: var(--v-color-primary);
+    }
+  }
+
+  &--sm &__marker {
+    width: calc(var(--v-space-6));
+    height: calc(var(--v-space-6));
+    font-size: var(--v-font-size-text-small);
+  }
+
+  &--lg &__marker {
+    width: calc(var(--v-space-8) + var(--v-space-1));
+    height: calc(var(--v-space-8) + var(--v-space-1));
+    font-size: var(--v-font-size-text-medium);
+  }
+
+  &--subtle &__marker--upcoming {
+    border-color: transparent;
+    background: var(--v-color-neutral-50);
+  }
+
+  &--primary &__marker--current {
+    box-shadow: var(--v-shadow-sm);
+  }
+}
+
+@keyframes v-stepper-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-stepper,
+  .v-stepper__loader,
+  .v-stepper__marker {
+    transition: none;
+    animation: none;
+  }
+}

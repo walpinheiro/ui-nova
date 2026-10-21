@@ -1,0 +1,109 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VAccordionStories from './VAccordion.stories';
+
+<Meta of={VAccordionStories} />
+
+# Accordion
+
+Progressive disclosure for FAQs, settings panels, and any content that benefits from a clear, compact hierarchy.
+
+## Overview
+
+`VAccordion` manages one or more `VAccordionItem` sections. The default mode keeps one section open at a time; set `multiple` to allow several open sections.
+
+<Canvas of={VAccordionStories.Default} />
+
+## Anatomy
+
+Each item is composed of a full-width trigger, an optional leading visual, a title, a trailing indicator, and a region panel. The trigger and panel are linked with `aria-controls` and `aria-labelledby`.
+
+## Variants
+
+<Canvas of={VAccordionStories.Variants} />
+
+`default`, `divided`, `bordered`, and `leading-icon` mirror the visual variants shown in the reference board. The leading icon is provided with the named `icon` slot.
+
+## Sizes and states
+
+<Canvas of={VAccordionStories.Sizes} />
+
+<Canvas of={VAccordionStories.States} />
+
+Available sizes are `sm`, `md` (default), and `lg`. Triggers expose collapsed, expanded, disabled, and loading states through `aria-expanded`, `aria-disabled`, `aria-busy`, `data-state`, and stable test IDs.
+
+## Props
+
+<Controls />
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `modelValue` | `string \| number \| Array<string \| number> \| null` | `undefined` | Open item value, or an array in multiple mode. |
+| `multiple` | `boolean` | `false` | Allows more than one item to remain open. |
+| `variant` | `default \| divided \| bordered \| leading-icon` | `default` | Visual treatment for the item stack. |
+| `size` | `sm \| md \| lg` | `md` | Density and typography scale. |
+| `disabled` | `boolean` | `false` | Disables all triggers. |
+| `loading` | `boolean` | `false` | Marks the accordion busy and renders panel skeletons while keeping triggers usable. |
+| `ariaLabel` | `string` | `undefined` | Accessible name for the accordion group. |
+
+`VAccordionItem` accepts `id`, `value`, `title`, `disabled`, `loading`, and `ariaLabel`.
+
+## Events and slots
+
+- `update:modelValue` emits the open value (`null` when a single item is closed, an array in multiple mode).
+- `open-change` emits the same normalized value whenever a trigger changes state.
+- The default item slot renders panel content; `title` replaces the text label; `icon` supplies a leading visual in `leading-icon` mode.
+
+## Motion
+
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover/pressed | background/color | `--v-motion-fast` | `--v-ease-out` |
+| Focus-visible | outline | `--v-motion-fast` | `--v-ease-out` |
+| Expand/collapse | grid rows/opacity | `--v-motion-normal` | `--v-ease-out` |
+| Indicator | transform | `--v-motion-fast` | `--v-ease-standard` |
+
+The panel uses a grid-row transition so content pushes the following item instead of floating over it. `prefers-reduced-motion: reduce` disables all accordion transitions.
+
+## Accessibility
+
+Triggers are native buttons with `aria-expanded`, `aria-controls`, and a visible `:focus-visible` ring. Panels use `role="region"` and `aria-labelledby`. `Enter` and `Space` use native button activation; Arrow Up/Down/Left/Right, Home, and End move focus between enabled triggers. Disabled triggers are removed from the tab order by native `disabled` semantics.
+
+## Usage
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { VAccordion, VAccordionItem } from 'vueui-nova-kit'
+
+const open = ref<string | null>('pricing')
+</script>
+
+<template>
+  <VAccordion v-model="open" aria-label="FAQ">
+    <VAccordionItem id="pricing" title="How does pricing work?">
+      <p>We offer a free plan for individuals and a Pro plan for teams.</p>
+    </VAccordionItem>
+  </VAccordion>
+</template>
+```
+
+For multiple open items:
+
+```vue
+<VAccordion v-model="open" multiple>
+  <VAccordionItem id="one" title="First section">...</VAccordionItem>
+  <VAccordionItem id="two" title="Second section">...</VAccordionItem>
+</VAccordion>
+```
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VAccordion } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VAccordion size="md" variant="default" :multiple="false" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").

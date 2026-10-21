@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VPanelStories from './VPanel.stories';
+
+<Meta of={VPanelStories} />
+# Panel
+**Categoria:** containment  
+O `VPanel` é um contentor flexível para agrupar conteúdo relacionado — informação, ações e media — em secções claras e autocontidas. Cabeçalho do poster: **"Panel — A flexible container for grouped content"**. Promessa do hero: *"Panel provides a flexible content container for related information, actions, and media.
+
+## Component
+<Canvas of={VPanelStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VPanel } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VPanel size="md" variant="default" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Enter/Exit | opacity/transform | 160ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa primeiro, foco visível, labels acessíveis e teclado conforme o padrão WAI-ARIA correspondente.
+## Anatomy
+Root → optional leading visual → content/slot → optional actions/feedback.

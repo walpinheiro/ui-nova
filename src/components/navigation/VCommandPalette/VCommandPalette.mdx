@@ -1,0 +1,47 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VCommandPaletteStories from './VCommandPalette.stories';
+
+<Meta of={VCommandPaletteStories} />
+# VCommandPalette
+
+**Categoria:** navigation
+
+Superfície universal de busca de comandos: encontrar conteúdo, executar ações e navegar pelo app a partir de um único lugar. Rápida, versátil e **keyboard-first**.
+
+## Component
+<Canvas of={VCommandPaletteStories.Default} />
+## Anatomy
+1. **Input** — lupa + placeholder + badge `⌘K`
+2. **Group label** — Recent, Navigation, Actions
+3. **Result row** — ícone + label + badge de atalho
+4. **Shortcut badge** — hint de teclado
+5. **Empty state** — ícone + mensagem + sugestão
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VCommandPalette } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VCommandPalette model-value size="md" variant="global-search" placeholder="Search for anything…" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Closed · Hover result · Focus input · Selected result · Loading · Empty
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Open/Close | opacity/transform | 160ms | ease-out |
+| Result highlight | background/color | 100ms | standard |
+| Input focus | box-shadow | 100ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+`role="dialog"` com `aria-modal`, `aria-expanded`, input `role="combobox"` com `aria-activedescendant`, grupos com `role="group"`, live region para contagem/empty, Arrow keys + Enter + Escape.

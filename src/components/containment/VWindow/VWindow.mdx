@@ -1,0 +1,51 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VWindowStories from './VWindow.stories';
+
+<Meta of={VWindowStories} />
+# Window
+**Categoria:** containment
+Desktop-like application container (spec `DESIGN-SPEC.md`): titlebar com semáforo macOS + app icon + título + ações, sidebar Overview/Notes/Tasks/Assets/Settings, content area, resize handle e backdrop no modal.
+
+Exemplo (spec §3):
+
+```vue
+<Window v-model:open="open" title="Project Notes" :width="960" :height="640">
+  <template #default>
+    <p class="text-slate-600">Your content goes here.</p>
+  </template>
+</Window>
+```
+
+## Component
+<Canvas of={VWindowStories.ProjectNotes} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VWindow } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VWindow size="md" variant="default" title="Project Notes" active resizable :width="960" :height="640" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Active/Inactive · Hover · Focus-visible · Pressed · Disabled · Loading · Modal com backdrop.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Open (scale 0.98→1 + fade) | opacity/transform | 160ms | out |
+| Close | opacity/transform | 100ms | in |
+
+Respeitar `prefers-reduced-motion` (abertura vira fade simples ou nada).
+## Accessibility
+`role="dialog"` + `aria-modal` no modal (senão `role="region"`), título/label acessível, Tab percorre controles, Esc fecha, setas redimensionam, foco visível, focus trap no modal com retorno ao trigger, estrutura screen-reader friendly.
+## Anatomy
+Backdrop (modal) → Root → Titlebar (traffic-lights + app icon + title + actions) → Sidebar + Content → Resize handle.

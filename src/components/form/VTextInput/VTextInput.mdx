@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VTextInputStories from './VTextInput.stories';
+
+<Meta of={VTextInputStories} />
+# Text Input
+**Categoria:** form  
+Campo de texto de linha única para formulários e busca, com label, helper, erro, ícone, prefixo/sufixo e clear.
+
+## Component
+<Canvas of={VTextInputStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VTextInput } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VTextInput size="md" placeholder="Enter text" label="Label" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Filled · Invalid · Success · Disabled · Readonly.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Focus ring | border-color/box-shadow/transform | 100ms | ease-out |
+| Placeholder → value | placeholder opacity | 100ms | ease-out |
+| Clear reveal | opacity/scale | 100ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Label associado via `for`/`id`, `aria-describedby` para helper/erro/sucesso, `aria-invalid` no erro, clear focável com `aria-label`, ícones decorativos com `aria-hidden`, suporte a `autocomplete`/`name`/`type`.
+## Anatomy
+Root (`v-text-input`) → label → control (leading icon, prefix, input, suffix, status icon, clear) → helper/error/success. Data-test-ids: `v-text-input`, `v-text-input-field`, `v-text-input-label`, `v-text-input-leading-icon`, `v-text-input-prefix`, `v-text-input-suffix`, `v-text-input-clear`, `v-text-input-helper`, `v-text-input-error`.

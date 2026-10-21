@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VOtpInputStories from './VOtpInput.stories';
+
+<Meta of={VOtpInputStories} />
+# OTP Input
+**Categoria:** form  
+Campo de código de verificação com input lógico único, slots visuais, colar código completo e auto-submit.
+
+## Component
+<Canvas of={VOtpInputStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VOtpInput } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VOtpInput :length="6" size="md" aria-label="Verification code" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Empty · Active · Filled · Error · Success · Disabled.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Focus ring | box-shadow | 100ms | ease-out |
+| Error | translateX shake | 280ms | ease-out |
+| Success | opacity | 100ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Input lógico único com `inputmode="numeric"` e `autocomplete="one-time-code"`, slots `aria-hidden`, erro com `role="alert"`.
+## Anatomy
+Root (`v-otp-input`) → slots → hidden input → helper/error/success/resend. Data-test-ids: `v-otp-input`, `v-otp-slot-{index}`, `v-otp-hidden-input`.

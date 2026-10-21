@@ -1,0 +1,113 @@
+.v-bar-list {
+  --v-bar-list-thickness: 6px;
+  --v-bar-list-strong: var(--v-color-primary);
+  --v-bar-list-soft: var(--v-color-primary-200);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--v-space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--v-font-family-sans);
+  font-size: var(--v-font-size-text-small);
+  line-height: var(--v-line-height-text-small);
+  color: var(--v-color-text);
+
+  &--sm {
+    --v-bar-list-thickness: 4px;
+
+    gap: var(--v-space-2);
+  }
+
+  &__item {
+    display: grid;
+    align-items: center;
+    gap: var(--v-space-3);
+  }
+
+  &--inline &__item {
+    grid-template-columns: minmax(7rem, 40%) 1fr minmax(2.5rem, auto);
+  }
+
+  &--stacked &__item {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'label value'
+      'track track';
+    row-gap: 6px;
+  }
+
+  &--stacked &__label {
+    grid-area: label;
+  }
+
+  &--stacked &__value {
+    grid-area: value;
+  }
+
+  &--stacked &__track {
+    grid-area: track;
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__label-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__hint {
+    font-size: var(--v-font-size-caption);
+    line-height: var(--v-line-height-caption);
+    color: var(--v-color-text-muted);
+  }
+
+  &__track {
+    position: relative;
+    display: block;
+    height: var(--v-bar-list-thickness);
+    overflow: hidden;
+    border-radius: var(--v-radius-pill);
+  }
+
+  &--stacked &__track {
+    background: var(--v-color-neutral-100);
+  }
+
+  &__fill {
+    display: block;
+    height: 100%;
+    min-width: var(--v-bar-list-thickness);
+    border-radius: inherit;
+    background: var(--v-bar-list-soft);
+    transition: width var(--v-motion-normal, 200ms) var(--v-ease-out);
+  }
+
+  &__item--strong &__fill {
+    background: var(--v-bar-list-strong);
+  }
+
+  &__item--strong &__value {
+    color: var(--v-color-text);
+    font-weight: var(--v-font-weight-medium);
+  }
+
+  &__value {
+    text-align: right;
+    color: var(--v-color-text-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-bar-list__fill {
+    transition: none;
+  }
+}

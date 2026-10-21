@@ -1,0 +1,111 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VBannerStories from './VBanner.stories';
+
+<Meta of={VBannerStories} />
+
+# VBanner
+
+Faixa de aviso **da página ou do app**: ocupa a largura toda no topo, sem cantos arredondados nem sombra, em uma linha compacta (título + descrição) com as ações à direita. Use texto curto e reserve banners para informação de alto valor.
+
+**VBanner × VAlert:** para mensagens sobre um trecho do conteúdo (um formulário, um card), use o `VAlert`.
+
+## Overview
+
+<Canvas of={VBannerStories.Default} />
+
+O banner comunica informação sem bloquear o fluxo. `info` e `neutral` anunciam com `role="status"`; `warning` e `error` usam `role="alert"`. O estado controlado usa `v-model` e o fechamento emite `update:modelValue` e `close`.
+
+## Anatomy
+
+- **Icon** — glifo de 16px na cor da variante: `info`, `circle-check`, `triangle-alert`, `circle-alert` e `megaphone` (neutral, anúncio de produto); substituível pelo slot `icon`.
+- **Title** — título curto, via `title` ou slot `title`.
+- **Description** — contexto opcional, via `description` ou slot `description`.
+- **Action(s)** — conteúdo interativo no slot `action`.
+- **Dismiss** — botão de fechar opcional (ícone `x`).
+- **Container** — fundo `*-soft` da variante e uma linha inferior; sem raio e sem sombra. Alturas: `sm` 36px, `md` 44px, `lg` 52px.
+
+## Variants and sizes
+
+<Canvas of={VBannerStories.Variants} />
+<Canvas of={VBannerStories.Sizes} />
+
+| Prop | Valores | Padrão |
+|---|---|---|
+| `variant` | `info`, `success`, `warning`, `error`, `neutral` | `info` |
+| `size` | `sm`, `md`, `lg` | `md` |
+
+## States
+
+<Canvas of={VBannerStories.States} />
+
+`disabled` remove a interação e reduz a opacidade. `loading` anuncia atividade, mantém a anatomia e impede o dismiss. `closable` mostra o botão de dispensa. `Escape` dispensa quando o banner é fechável; a transição deixa um placeholder "Banner dismissed".
+
+## Props
+
+<Controls />
+
+| Prop | Tipo | Descrição |
+|---|---|---|
+| `title` | `string` | Mensagem principal. |
+| `description` | `string` | Contexto opcional. |
+| `modelValue` | `boolean` | Controla a visibilidade; `false` representa dismissado. |
+| `closable` | `boolean` | Mostra o controle de dismiss. |
+| `closeOnEscape` | `boolean` | Permite fechar com `Escape`; padrão `true`. |
+| `dismissLabel` | `string` | Label acessível do botão `×`. |
+| `dismissedText` | `string` | Texto do placeholder após fechar. |
+| `disabled` / `loading` | `boolean` | Estados não interativo e ocupado. |
+
+## Events and slots
+
+- `update:modelValue(false)` — emitido ao fechar.
+- `close` — emitido ao fechar por click ou `Escape`.
+- `icon`, `title`, `description`, `action` — slots nomeados para conteúdo customizado.
+- default slot — conteúdo textual quando `title` e `description` não são usados.
+
+## Motion
+
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Entrada | `opacity`, `transform` | `--v-motion-normal` | `--v-ease-out` |
+| Dismiss | `opacity`, `transform` | `--v-motion-fast` | `--v-ease-in` |
+| Hover / press do dismiss | `background`, `color`, `transform` | `--v-motion-fast` / `--v-motion-press` | `--v-ease-out` |
+
+`prefers-reduced-motion: reduce` remove transições, animações e deslocamento.
+
+## Accessibility
+
+- Mensagem anunciada por role semântico e `aria-live` apropriado.
+- Ícone padrão é decorativo; o texto permanece sempre disponível para leitores de ecrã.
+- Ações e dismiss usam elementos nativos, com Enter/Space e foco visível.
+- `Escape` fecha banners dispensáveis, sem capturar o foco.
+- O dismiss tem área mínima `--v-button-min-target` e move o foco para o próximo elemento focável quando possível.
+
+## Example
+
+```vue
+<VBanner
+  variant="info"
+  title="New version available"
+  description="A new version of VueUI Nova is available."
+  closable
+  @close="handleClose"
+>
+  <template #action>
+    <VButton size="sm">Update now</VButton>
+  </template>
+</VBanner>
+```
+
+<Stories />
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VBanner } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VBanner variant="info" size="md" title="New version available" description="A new version of VueUI Nova is available with performance improvements." closable />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").

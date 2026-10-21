@@ -1,0 +1,26 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VDateRangePickerStories from './VDateRangePicker.stories';
+
+<Meta of={VDateRangePickerStories} />
+# Date Range Picker
+**Categoria:** form  
+Seleção de intervalo start-end com calendário duplo, presets e ações Apply/Cancel.
+
+## Component
+<Canvas of={VDateRangePickerStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VDateRangePicker } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VDateRangePicker size="md" placeholder="Select date range" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />

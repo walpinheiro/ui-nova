@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VDrawerStories from './VDrawer.stories';
+
+<Meta of={VDrawerStories} />
+# Drawer
+**Categoria:** feedback  
+Painel contextual slide-in que revela detalhes e ações sem tirar o usuário da página atual. Usar para detalhes, settings, filtros ou fluxos de criação mantendo o contexto. Promessa hero: "Reveal details without leaving context. A slide-in panel for every moment." Pilares: Contextual (keep users in flow without navigation), Flexible (supports multiple sizes and content), Versatile (details, forms, settings).
+
+## Component
+<Canvas of={VDrawerStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VDrawer } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VDrawer :model-value="false" title="Project details" placement="right" size="md" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Enter/Exit | opacity/transform | 160ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa primeiro, foco visível, labels acessíveis e teclado conforme o padrão WAI-ARIA correspondente.
+## Anatomy
+Root → optional leading visual → content/slot → optional actions/feedback.

@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VTagInputStories from './VTagInput.stories';
+
+<Meta of={VTagInputStories} />
+# Tag Input
+**Categoria:** form  
+Campo para adicionar, editar e remover tags com sugestões, validação e suporte a colar listas. Cada token é um `VTag` (`variant="soft"`, removível) — não um `VBadge`.
+
+## Component
+<Canvas of={VTagInputStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VTagInput } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VTagInput placeholder="Add a tag…" size="md" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Empty · Typing · Focus · Hover tag · Selected suggestion · Disabled · Read-only.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Chip add | transform/opacity | 150ms | ease-out |
+| Chip remove | transform/opacity | 120ms | ease-out |
+| Suggestions | translateY/opacity | 200ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Combobox com `aria-expanded`, remove com `aria-label`, `aria-live` para adições/remoções, navegação por teclado.
+## Anatomy
+Root (`v-tag-input`) → tags → input → suggestions. Data-test-ids: `v-tag-input`, `v-tag-input-field`, `v-tag`, `v-tag-remove`, `v-tag-suggestions`.

@@ -1,0 +1,208 @@
+.v-progress {
+  --v-progress-track-bg: var(--v-color-neutral-200);
+  --v-progress-fill-bg: var(--v-color-primary);
+  --v-progress-fill-success: var(--v-color-success-base);
+  --v-progress-fill-error: var(--v-color-error-base);
+  --v-progress-label-color: var(--v-color-text-muted);
+  --v-progress-size-sm: var(--v-space-1);
+  --v-progress-size-md: var(--v-space-2);
+  --v-progress-size-lg: var(--v-space-3);
+  --v-progress-track-height: var(--v-progress-size-md);
+  --v-progress-ring-width: var(--v-progress-ring-width-md);
+
+  @apply flex w-full items-center gap-2 font-sans;
+  box-sizing: border-box;
+  color: var(--v-progress-label-color);
+  font-family: var(--v-font-family-sans);
+  font-size: var(--v-font-size-text-small);
+  line-height: var(--v-line-height-text-small);
+
+  &--sm {
+    --v-progress-size-sm: var(--v-space-1);
+    --v-progress-size-md: var(--v-space-1);
+    --v-progress-size-lg: var(--v-space-2);
+    --v-progress-track-height: var(--v-progress-size-sm);
+    --v-progress-ring-width: var(--v-progress-ring-width-sm);
+  }
+
+  &--md {
+    --v-progress-ring-width: var(--v-progress-ring-width-md);
+  }
+
+  &--lg {
+    --v-progress-size-sm: var(--v-space-2);
+    --v-progress-size-md: var(--v-space-3);
+    --v-progress-size-lg: var(--v-space-4);
+    --v-progress-track-height: var(--v-progress-size-lg);
+    --v-progress-ring-width: var(--v-progress-ring-width-lg);
+  }
+
+  &--circular {
+    display: inline-block;
+    width: auto;
+    vertical-align: top;
+  }
+
+  &--success {
+    --v-progress-fill-bg: var(--v-progress-fill-success);
+  }
+
+  &--error {
+    --v-progress-fill-bg: var(--v-progress-fill-error);
+  }
+
+  &__linear {
+    @apply flex min-w-0 flex-1 items-center gap-2;
+    width: 100%;
+  }
+
+  &__track {
+    @apply relative min-w-0 flex-1 shrink-0;
+    box-sizing: border-box;
+    width: 100%;
+    height: var(--v-progress-track-height);
+    min-height: var(--v-progress-track-height);
+    max-height: var(--v-progress-track-height);
+    overflow: hidden;
+    border-radius: calc(var(--v-progress-track-height) / 2);
+    background: var(--v-progress-track-bg);
+  }
+
+  &__value {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: calc(var(--v-progress-value, 0) * 100%);
+    border-radius: 0;
+    background: var(--v-progress-fill-bg);
+    transition: width var(--v-motion-normal) var(--v-ease-standard);
+  }
+
+  &__value--indeterminate {
+    width: 40%;
+    animation: v-progress-indeterminate-linear var(--v-motion-slow) var(--v-ease-standard) infinite;
+  }
+
+  &__label {
+    flex-shrink: 0;
+    color: var(--v-progress-label-color);
+    font-size: inherit;
+    line-height: inherit;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__status-icon {
+    @apply inline-flex shrink-0 items-center justify-center;
+
+    &--success {
+      color: var(--v-progress-fill-success);
+    }
+
+    &--error {
+      color: var(--v-progress-fill-error);
+    }
+  }
+
+  &__circular-wrap {
+    @apply relative shrink-0;
+    box-sizing: border-box;
+    flex: none;
+  }
+
+  &__circular {
+    display: block;
+    box-sizing: border-box;
+    flex: none;
+    overflow: visible;
+    transform: rotate(-90deg);
+    transform-origin: center center;
+  }
+
+  &__ring-track,
+  &__ring-value {
+    fill: none;
+  }
+
+  &__ring-track {
+    stroke: var(--v-progress-track-bg);
+  }
+
+  &__ring-value {
+    stroke: var(--v-progress-fill-bg);
+    stroke-linecap: round;
+    transition: stroke-dashoffset var(--v-motion-normal) var(--v-ease-standard);
+  }
+
+  &__ring-value--indeterminate {
+    stroke-dasharray: 25 75;
+    stroke-dashoffset: 0;
+    animation: v-progress-indeterminate-circular var(--v-motion-spin-duration) linear infinite;
+    transform-origin: center;
+  }
+
+  &__circular-center {
+    @apply absolute inset-0 flex items-center justify-center;
+    pointer-events: none;
+
+    .v-progress__label {
+      font-size: var(--v-font-size-caption);
+      line-height: 1;
+    }
+  }
+
+  &--lg &__circular-center .v-progress__label {
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+  }
+
+  &:focus-within .v-progress__track,
+  &:focus-within .v-progress__circular {
+    outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+    outline-offset: var(--v-focus-ring-offset);
+  }
+}
+
+@keyframes v-progress-indeterminate-linear {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+@keyframes v-progress-indeterminate-circular {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-progress__value,
+  .v-progress__ring-value {
+    transition: none;
+  }
+
+  .v-progress__value--indeterminate,
+  .v-progress__ring-value--indeterminate {
+    animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+
+  .v-progress__track,
+  .v-progress__ring-track {
+    background: Canvas;
+    stroke: CanvasText;
+  }
+
+  .v-progress__value,
+  .v-progress__ring-value {
+    background: Highlight;
+    stroke: Highlight;
+  }
+}

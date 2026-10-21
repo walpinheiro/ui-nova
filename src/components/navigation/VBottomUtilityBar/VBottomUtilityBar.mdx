@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VBottomUtilityBarStories from './VBottomUtilityBar.stories';
+
+<Meta of={VBottomUtilityBarStories} />
+# Bottom Utility Bar
+**Categoria:** navigation  
+Componente VueUI Nova para **bottom utility bar**, seguindo tokens semânticos e Light Mode como referência principal.
+
+## Component
+<Canvas of={VBottomUtilityBarStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VBottomUtilityBar } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VBottomUtilityBar size="md" variant="default" :fixed="false" safe-area bordered aria-label="Editor utility bar" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Enter/Exit | opacity/transform | 160ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa primeiro, foco visível, labels acessíveis e teclado conforme o padrão WAI-ARIA correspondente.
+## Anatomy
+Root → optional leading visual → content/slot → optional actions/feedback.

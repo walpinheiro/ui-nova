@@ -1,0 +1,27 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Docs/Evidências" />
+
+# Evidências
+
+Material de verificação gerado a partir do **Storybook em execução com o código atual** (Playwright) — não são mockups. Estes arquivos vivem no repositório (não são servidos pelo Storybook); abra-os localmente.
+
+| Arquivo | Conteúdo |
+|---|---|
+| `evidence/RASTREABILIDADE.md` | Templates × biblioteca: para cada bloco visível, qual componente da biblioteca (ou parte local) o renderiza, com screenshots light/dark |
+| `evidence/sidebar/index.html` | Página navegável com os fluxos do `VSidebar` (acordeão, multinível, busca, teclado, chevrons, grupos…) em claro e escuro |
+| `evidence/sidebar/EVIDENCIAS.md` | Resumo dos fluxos do VSidebar com contagem de asserções (PASS/FAIL) |
+| `evidence/sidebar/assertions.json` | Log das asserções automatizadas |
+| `evidence/audit/SUMMARY.md` | Auditoria visual da biblioteca (light/dark) e backlog de lacunas — ver [Docs / Lacunas](/?path=/docs/docs-lacunas--docs) |
+| `evidence/shots/**` | Capturas das stories (`node scripts/shot.cjs`) |
+| `evidence/docs/**` | Capturas das páginas de docs do Storybook em light e dark |
+| `evidence/docs-coverage.json` | Resultado de `npm run docs:coverage` (cobertura de stories/docs por export público) |
+
+## Como regenerar
+
+```bash
+npm run storybook                         # http://localhost:6006
+node scripts/shot.cjs --filter "templates-" --theme both --full
+node scripts/sidebar-evidence.cjs         # evidências do VSidebar
+npm run docs:coverage -- http://localhost:6006
+```

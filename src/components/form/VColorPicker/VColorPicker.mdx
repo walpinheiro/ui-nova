@@ -1,0 +1,26 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VColorPickerStories from './VColorPicker.stories';
+
+<Meta of={VColorPickerStories} />
+# Color Picker
+**Categoria:** form  
+Seleção de cor para temas, branding e ferramentas criativas com popover, paletas, HEX e alpha.
+
+## Component
+<Canvas of={VColorPickerStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VColorPicker } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VColorPicker size="md" model-value="#6366F1" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />

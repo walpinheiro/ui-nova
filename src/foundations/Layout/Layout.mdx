@@ -1,0 +1,32 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as LayoutStories from './Layout.stories';
+
+<Meta of={LayoutStories} />
+
+# Layout
+
+**Categoria:** Foundations
+
+Tokens de **flex/stack**, **z-index** e **breakpoints** para qualquer projecto que importe `vueui-nova-kit/tokens.css`. Gaps semânticos (`--v-flex-gap-*`, `--v-stack-gap-*`) apontam para a escala `--v-space-*`; camadas (`--v-z-index-*`) alimentam dropdowns, modais, toasts e tooltips.
+
+## 1. Classes funcionais
+
+| Classe | Token | Uso |
+|---|---|---|
+| `flex` + `gap-4` | `--v-space-4` / `--v-flex-gap-md` | Linhas e toolbars |
+| `z-modal` | `--v-z-index-modal` | Dialogs |
+| `z-tooltip` | `--v-z-index-tooltip` | Tooltips acima de modais |
+
+<Canvas of={LayoutStories.FunctionalClasses} />
+
+## 2. Exemplos visuais
+
+<Canvas of={LayoutStories.Examples} />
+
+## 3. Como customizar
+
+<Canvas of={LayoutStories.Customize} />
+
+## 4. Tokens (busca)
+
+<Canvas of={LayoutStories.TokenCatalogStory} />

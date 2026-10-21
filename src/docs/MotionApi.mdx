@@ -1,0 +1,27 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as MotionApiStories from './MotionApi.stories';
+
+<Meta of={MotionApiStories} />
+
+# Motion API
+
+Utilitários puros (sem DOM) exportados por `vueui-nova-kit`. Os tokens de duração/easing estão em [Foundations / Motion](/?path=/docs/foundations-motion--docs).
+
+| Export | Descrição |
+|---|---|
+| `SPRING_PRESETS` | `snappy`, `bouncy`, `critical` (`visualDuration`, `bounce`) |
+| `springStep(current, target, velocity, stiffness?, damping?, dt?)` | Um passo de mola amortecida |
+| `zetaFromBounce(bounce)` | Converte `bounce` em fator de amortecimento ζ |
+| `springReadings(t, doneOpacity?, strikeLag?)` | Leituras visuais derivadas do progresso da mola |
+| `GESTURE_DEFAULTS` | `swipeThreshold`, `flickVelocity`, `rubberBandFactor` |
+| `rubberBand(value, min, max, factor?)` | Resistência elástica fora do intervalo |
+| `snapFromVelocity(offset, velocity, threshold?, flick?)` | Decide se o gesto completa |
+
+## Molas
+<Canvas of={MotionApiStories.Springs} />
+
+## springReadings
+<Canvas of={MotionApiStories.SpringReadingsStory} />
+
+## Gestos
+<Canvas of={MotionApiStories.Gestures} />

@@ -1,0 +1,122 @@
+// Sidebar patterns shared by the templates (Sales Overview, Insights Detail) and the
+// VSidebar "Montagem" stories, so the documented examples are the same pixels as the templates.
+// Selectors are compounded with `.v-sidebar` to win over the VSidebar variant rules.
+
+// ── App rail: VSidebar variant="icons" (the flat look is the variant default) ──
+.sp-app-rail.v-sidebar {
+  flex: none;
+  position: sticky;
+  top: 0;
+  padding: 16px 10px;
+  --v-sidebar-bg: transparent;
+}
+
+// ── Side panel: <aside class="sp-side"> wrapping a VSidebar.sp-side__nav ────────
+.sp-side {
+  flex: none;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  width: 248px;
+  height: 100vh;
+  border-inline: 1px solid var(--v-color-divider);
+}
+
+.sp-side__nav.v-sidebar {
+  height: 100%;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+// ── Scope / workspace switcher (VSidebar #header) ──────────────────────────────
+.sp-switcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--v-color-border);
+  border-radius: 12px;
+  background: var(--v-color-surface);
+  color: var(--v-color-text);
+  font: 600 14px var(--v-font-family-sans);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--v-color-neutral-50);
+  }
+
+  &:focus-visible {
+    outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+    outline-offset: 2px;
+  }
+}
+
+.sp-switcher__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sp-switcher__mark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #fb923c, #ea580c);
+  color: #fff;
+  font-weight: 700;
+}
+
+// ── Workspace rail: collapsible VSidebar (icons ⇄ icons + labels) ──────────────
+.sp-rail.v-sidebar {
+  flex: none;
+  align-self: stretch;
+  border-right: 1px solid var(--v-color-divider);
+
+  .v-sidebar__header-slot {
+    margin-bottom: 16px;
+  }
+}
+
+.sp-rail__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  // Collapsed: VSidebar already stacks the header under its expand toggle.
+  &.is-collapsed {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+// Footer shortcuts span the rail like the nav items, so collapsed icons share the rail axis.
+.sp-rail__foot {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+
+  > * {
+    display: flex;
+    width: 100%;
+  }
+
+  .v-nav-item {
+    width: 100%;
+  }
+}
+
+.sp-rail.v-sidebar--collapsed .sp-rail__foot .v-nav-item {
+  justify-content: center;
+  padding: 0;
+}

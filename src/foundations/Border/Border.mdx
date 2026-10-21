@@ -1,0 +1,28 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as BorderStories from './Border.stories';
+
+<Meta of={BorderStories} />
+
+# Borda
+
+**Categoria:** Foundations
+
+Largura (`--v-border-width`), cor (`--v-color-border`) e anel de foco (`--v-focus-ring-*`). Componentes críticos usam `--v-field-border-width-strong` (2px).
+
+## 1. Classes funcionais
+
+<Canvas of={BorderStories.FunctionalClasses} />
+
+## 2. Exemplos visuais
+
+Comparação 1px vs 2px, cores default/disabled, tracejado e focus ring.
+
+<Canvas of={BorderStories.Examples} />
+
+## 3. Como customizar
+
+<Canvas of={BorderStories.Customize} />
+
+## 4. Tokens (busca)
+
+<Canvas of={BorderStories.TokenCatalogStory} />

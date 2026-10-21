@@ -1,0 +1,57 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VNotificationCenterStories from './VNotificationCenter.stories';
+
+<Meta of={VNotificationCenterStories} />
+# Notification Center
+**Categoria:** feedback  
+Centro de notificações in-app para mensagens, alertas e atualizações sem sair do fluxo de trabalho. Agrupa e filtra notificações (tabs All/Unread/Mentions/Updates), sinaliza não-lidas com badge e pontos, oferece gestão rápida ("Mark all as read", "View all notifications →") e agrupa por tempo ("Today", "Yesterday").
+
+## Component
+<Canvas of={VNotificationCenterStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VNotificationCenter } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VNotificationCenter size="md" variant="default" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Enter/Exit | opacity/transform | 160ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa primeiro, foco visível, labels acessíveis e teclado conforme o padrão WAI-ARIA correspondente.
+## Anatomy
+Root → optional leading visual → content/slot → optional actions/feedback.
+
+## Tokens
+
+| Token | Uso |
+|---|---|
+| `--v-notification-center-trigger-size` | Botão sino (derivado de `--v-icon-size-*`) |
+| `--v-notification-badge-border-width` | Borda do contador no trigger |
+| `--v-notification-tab-indicator-width` | Indicador da tab ativa |
+| `--v-radius-pill` | Trigger expressive aberto |
+| `--v-sr-only-size` | Região live / sr-only |
+
+```css
+:root {
+  --v-notification-badge-border-width: 3px;
+  --v-notification-tab-indicator-width: 3px;
+}
+```

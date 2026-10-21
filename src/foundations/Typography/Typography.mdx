@@ -1,0 +1,26 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as TypographyStories from './Typography.stories';
+
+<Meta of={TypographyStories} />
+
+# Tipografia
+
+**Categoria:** Foundations
+
+Família, tamanhos, line-heights e pesos via `--v-font-*` e `--v-line-height-*`. Classes Tailwind `text-*`, `leading-*` e `font-*` mapeiam directamente para estes tokens.
+
+## 1. Classes funcionais
+
+<Canvas of={TypographyStories.FunctionalClasses} />
+
+## 2. Exemplos visuais
+
+<Canvas of={TypographyStories.Examples} />
+
+## 3. Como customizar
+
+<Canvas of={TypographyStories.Customize} />
+
+## 4. Tokens (busca)
+
+<Canvas of={TypographyStories.TokenCatalogStory} />

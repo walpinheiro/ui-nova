@@ -1,0 +1,42 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VRadioGroupStories from './VRadioGroup.stories';
+
+<Meta of={VRadioGroupStories} />
+# Radio Group
+**Categoria:** form  
+Seleção única entre opções mutuamente exclusivas, com layouts vertical, horizontal e card.
+
+## Component
+<Canvas of={VRadioGroupStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VRadioGroup } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VRadioGroup size="md" layout="vertical" label="Notification method" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Unselected · Hover · Focus · Selected · Pressed · Disabled · Disabled Selected · Error.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | border-color | 100ms | ease-out |
+| Select | dot scale/opacity | 140ms | standard |
+| Focus ring | box-shadow | 120ms | ease-out |
+| Pressed | transform scale | 70ms | ease-in |
+| Card select | background/border | 140ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+`fieldset` + `legend`, inputs nativos `type="radio"`, Tab e arrow keys, foco visível, área mínima 44×44px, `aria-invalid` no erro.
+## Anatomy
+Root (`v-radiogroup`) → legend → options → option (input, ring, dot, label/description) → error. Data-test-ids: `v-radiogroup`, `v-radiogroup-legend`, `v-radiogroup-option-{value}`, `v-radiogroup-input-{value}`, `v-radiogroup-label-{value}`, `v-radiogroup-description-{value}`, `v-radiogroup-error`.

@@ -1,0 +1,26 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as ShadowStories from './Shadow.stories';
+
+<Meta of={ShadowStories} />
+
+# Sombra
+
+**Categoria:** Foundations
+
+Escala `--v-shadow-sm` … `--v-shadow-xl` para cards, popovers e overlays. Classes `shadow-*` no Tailwind consomem estes tokens.
+
+## 1. Classes funcionais
+
+<Canvas of={ShadowStories.FunctionalClasses} />
+
+## 2. Exemplos visuais
+
+<Canvas of={ShadowStories.Examples} />
+
+## 3. Como customizar
+
+<Canvas of={ShadowStories.Customize} />
+
+## 4. Tokens (busca)
+
+<Canvas of={ShadowStories.TokenCatalogStory} />

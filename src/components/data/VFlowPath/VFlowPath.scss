@@ -1,0 +1,201 @@
+.v-flow-path {
+  font-family: var(--v-font-family-sans);
+  color: var(--v-color-text);
+  container-type: inline-size;
+
+  &__list {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__node {
+    display: flex;
+    flex: 0 1 auto;
+    align-items: center;
+    gap: var(--v-space-3);
+    min-width: 11rem;
+    padding: var(--v-space-3) var(--v-space-4);
+    border: 1px solid var(--v-color-border);
+    border-radius: var(--v-radius-md);
+    background: var(--v-color-surface);
+    box-shadow: var(--v-shadow-sm);
+  }
+
+  &__node-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--v-radius-sm);
+    color: var(--v-color-success-strong);
+    background: var(--v-color-success-soft);
+  }
+
+  &__node-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__node-title {
+    font-size: var(--v-font-size-text-medium);
+    line-height: var(--v-line-height-text-medium);
+    font-weight: var(--v-font-weight-medium);
+  }
+
+  &__node-subtitle {
+    font-size: var(--v-font-size-caption);
+    line-height: var(--v-line-height-caption);
+    color: var(--v-color-text-muted);
+  }
+
+  &__edge {
+    --v-flow-edge-color: var(--v-color-success-base);
+
+    position: relative;
+    display: flex;
+    flex: 1 1 8rem;
+    align-items: center;
+    justify-content: center;
+    min-width: 6rem;
+    min-height: 2.5rem;
+
+    &--warning {
+      --v-flow-edge-color: var(--v-color-warning-base);
+    }
+
+    &--error {
+      --v-flow-edge-color: var(--v-color-error-base);
+    }
+
+    &--neutral {
+      --v-flow-edge-color: var(--v-color-border-strong);
+    }
+
+    &--active {
+      --v-flow-edge-color: var(--v-color-primary);
+    }
+  }
+
+  &__line {
+    position: absolute;
+    inset-inline: 0;
+    top: 50%;
+    height: 2px;
+    background: var(--v-flow-edge-color);
+    transform: translateY(-50%);
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      content: '';
+      border: 2px solid var(--v-flow-edge-color);
+      border-radius: var(--v-radius-circle);
+      background: var(--v-color-surface);
+      transform: translateY(-50%);
+    }
+
+    &::before {
+      left: -4px;
+    }
+
+    &::after {
+      right: -4px;
+    }
+  }
+
+  &--animated &__edge--active &__line {
+    background: repeating-linear-gradient(90deg, var(--v-flow-edge-color) 0 6px, transparent 6px 10px);
+    background-size: 20px 2px;
+    animation: v-flow-path-dash 600ms linear infinite;
+  }
+
+  &__chip {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    gap: var(--v-space-3);
+    padding: var(--v-space-1) var(--v-space-3);
+    border: 1px solid var(--v-color-border);
+    border-radius: var(--v-radius-sm);
+    background: var(--v-color-surface);
+  }
+
+  &__metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__metric-value {
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+    font-weight: var(--v-font-weight-semibold);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  &__metric-label {
+    font-size: 0.625rem;
+    line-height: 1.2;
+    color: var(--v-color-text-muted);
+  }
+
+  @container (max-width: 34rem) {
+    .v-flow-path__list {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .v-flow-path__edge {
+      flex-basis: auto;
+      min-height: 4rem;
+    }
+
+    .v-flow-path__line {
+      inset-inline: auto;
+      inset-block: 0;
+      left: 50%;
+      top: 0;
+      width: 2px;
+      height: auto;
+      transform: translateX(-50%);
+
+      &::before,
+      &::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      &::before {
+        top: -4px;
+      }
+
+      &::after {
+        top: auto;
+        right: auto;
+        bottom: -4px;
+      }
+    }
+  }
+}
+
+@keyframes v-flow-path-dash {
+  to {
+    background-position: 20px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-flow-path--animated .v-flow-path__edge--active .v-flow-path__line {
+    animation: none;
+  }
+}

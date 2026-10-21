@@ -1,0 +1,41 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VSwitchStories from './VSwitch.stories';
+
+<Meta of={VSwitchStories} />
+# Switch
+**Categoria:** form  
+Toggle binário on/off para configurações e preferências, com thumb animado e suporte a label/descrição.
+
+## Component
+<Canvas of={VSwitchStories.Labeled} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VSwitch } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VSwitch size="md" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Off · Hover Off · Focus Off · On · Hover On · Focus On · Pressed · Disabled Off · Disabled On.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Toggle | transform/background | 160ms | standard |
+| Hover | box-shadow/tint | 100ms | ease-out |
+| Focus ring | box-shadow | 120ms | ease-out |
+| Pressed | thumb scale | 70ms | ease-in |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+`role="switch"`, Space/Enter para alternar, label visível, foco com anel de 2px, opacidade no disabled, área mínima 44×24px.
+## Anatomy
+Root (`v-switch`) → input → track → icon → thumb → label/description. Data-test-ids: `v-switch`, `v-switch-input`, `v-switch-track`, `v-switch-thumb`, `v-switch-icon`, `v-switch-label`, `v-switch-description`.

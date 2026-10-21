@@ -1,0 +1,80 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VSegmentedControlStories from './VSegmentedControl.stories';
+
+<Meta of={VSegmentedControlStories} />
+
+# Segmented Control
+
+**Categoria:** navigation  
+Controle segmentado inline de escolha única entre opções relacionadas — alternativa compacta a tabs para trocar views, períodos ou ordenação.
+
+## Overview
+
+<Canvas of={VSegmentedControlStories.IconAndText} />
+
+## Anatomy
+
+1. **Container** — trilho com borda sutil e fundo `--v-segmented-bg`
+2. **Segment** — opção clicável com divisórias verticais entre itens
+3. **Selected indicator** — bloco deslizante com fundo azul-claro e borda brand
+4. **Label** — texto do segmento
+5. **Optional icon** — ícone à esquerda do label (ou sozinho em icon-only)
+
+## Variants
+
+<Stories />
+
+| Variante | Uso |
+|---|---|
+| Text only | Day / Week / Month |
+| Icon only | Lista / grade / calendário (exige `ariaLabel`) |
+| Icon + text | List / Grid / Calendar |
+| Pill | Light / Dark / System com radius total |
+
+## States
+
+Default · Hover (fundo azul-claro) · Focus-visible (anel 2px) · Pressed · Selected (indicador + texto brand) · Disabled (opacidade reduzida).
+
+## Props
+
+<Controls />
+
+## Events
+
+| Evento | Payload | Descrição |
+|---|---|---|
+| `update:modelValue` | `string` | Emitido ao selecionar um segmento |
+
+## Motion
+
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Indicator slide | `transform`, `width` | 200ms (`--v-segmented-motion`) | `ease-in-out` |
+| Hover / pressed | `background`, `color` | 100ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+
+## Accessibility
+
+- Container: `role="radiogroup"`
+- Segmentos: `role="radio"` com `aria-checked`
+- Navegação por setas ←/→, Home/End
+- `aria-label` no grupo (obrigatório em icon-only)
+- Foco visível em cada segmento
+
+## Do / Don't
+
+**Do:** use labels paralelos e concisos (Day/Week/Month).  
+**Don't:** use ações verbosas ("Show list view") — descreva o conteúdo, não a ação.
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VSegmentedControl } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VSegmentedControl size="md" variant="default" aria-label="Select view mode" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").

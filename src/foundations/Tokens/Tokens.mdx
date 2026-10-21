@@ -1,0 +1,253 @@
+import { Meta, Canvas, Stories } from '@storybook/addon-docs/blocks';
+import * as TokensStories from './Tokens.stories';
+
+<Meta of={TokensStories} />
+
+# Design Tokens
+
+**Categoria:** Foundations
+
+Todos os componentes VueUI Nova consomem **CSS custom properties** (`--v-*`) emitidas a partir de `src/tokens/_tokens.scss`. A regra do sistema é simples: **tokens sempre, valores fixos nunca** — assim a lib inteira pode ser re-tematizada sobrescrevendo poucos tokens base.
+
+## Fonte da verdade
+
+| Camada | Arquivo | Uso |
+|---|---|---|
+| Build-time (SCSS) | `src/tokens/_tokens.scss` | Variáveis `$v-*` e mixin que emite `:root` |
+| Runtime (CSS) | `src/tokens/tokens.scss` | Import global da lib / Storybook |
+| Runtime (TS) | `src/tokens/live.ts` | `setToken`, `resetTokens`, `listTokens`, `KNOWN_TOKENS` |
+
+## Como usar em qualquer projecto
+
+Importe **só os tokens** (CSS vars + API runtime) sem puxar componentes Vue:
+
+```ts
+// CSS: emite :root com todos os --v-* (676 tokens)
+import 'vueui-nova-kit/tokens.css'
+
+// API runtime (Storybook, temas dinâmicos, testes)
+import { setToken, resetTokens, listTokens, KNOWN_TOKENS } from 'vueui-nova-kit/tokens'
+```
+
+Para a biblioteca completa (componentes + Tailwind base):
+
+```ts
+import 'vueui-nova-kit/style.css'
+import { VButton, setToken } from 'vueui-nova-kit'
+```
+
+Sobrescreva tokens no `:root` do seu app — flex, bordas, z-index, cores e tipografia propagam para componentes e utilities Tailwind.
+
+## Como customizar
+
+### 1. CSS global (`:root`)
+
+Ideal para white-label, temas por tenant ou dark mode manual:
+
+```css
+:root {
+  /* Brand */
+  --v-color-primary: #0d9488;
+  --v-color-primary-hover: #0f766e;
+  --v-color-focus: #14b8a6;
+
+  /* Forma */
+  --v-radius-pill: 9999px;
+  --v-radius-md: 10px;
+
+  /* Campos */
+  --v-field-height-md: 2.75rem;
+  --v-field-min-target: 2.75rem;
+
+  /* Motion */
+  --v-state-press-scale: 0.97;
+}
+```
+
+### 2. Escopo local (layout / página)
+
+Aplique tokens num container para isolar uma área sem afetar o resto:
+
+```css
+.checkout-theme {
+  --v-color-primary: #4338ca;
+  --v-button-radius: var(--v-radius-pill);
+}
+```
+
+### 3. Runtime (Storybook, testes, playground)
+
+```ts
+import { setToken, resetTokens, listTokens } from 'vueui-nova-kit/tokens'
+import 'vueui-nova-kit/tokens.css'
+
+setToken('--v-color-primary', '#be185d')
+// …
+resetTokens()
+```
+
+## Catálogo completo com busca
+
+Todos os **676 tokens** emitidos em `:root` — incluindo espaçamento, flex, z-index, radius, cor, tipografia, sombra, motion, form, feedback, navigation, grid e demais famílias. Use a busca por **nome** (`--v-space-4`, `radius-pill`) ou **valor** (`9999px`, `#6366f1`). Filtre por categoria ou clique num token para copiar.
+
+<Canvas of={TokensStories.Catalog} />
+
+Fonte: `listTokens()` lê os valores **computados** do tema activo. Para domínios específicos, use:
+
+- [Foundations / Layout](/?path=/docs/foundations-layout--docs)
+- [Foundations / Radius](/?path=/docs/foundations-radius--docs)
+- [Foundations / Spacing](/?path=/docs/foundations-spacing--docs)
+- [Foundations / Colors](/?path=/docs/foundations-colors--docs)
+- [Foundations / Border](/?path=/docs/foundations-border--docs)
+- [Foundations / Typography](/?path=/docs/foundations-typography--docs)
+- [Foundations / Shadow](/?path=/docs/foundations-shadow--docs)
+- [Foundations / Motion](/?path=/docs/foundations-motion--docs)
+
+## Raio: circle vs pill
+
+Este é o erro mais comum ao customizar chips:
+
+| Token | Valor default | Quando usar |
+|---|---|---|
+| `--v-radius-circle` | `50%` | Avatares, dots, loaders circulares, controles quadrados |
+| `--v-radius-pill` | `9999px` | Tags, badges removíveis, tabs pill, segmented control |
+| `--v-radius-full` | alias de `circle` | Legado — prefira os nomes acima |
+
+**Nunca** use `50%` num retângulo largo: vira **elipse oval**, não cápsula.
+
+<Canvas of={TokensStories.RadiusCircleVsPill} />
+
+## Tokens globais (prioridade alta)
+
+Estes tokens propagam para dezenas de componentes. Comece por eles ao criar um tema.
+
+### Cor e superfície
+
+| Token | Papel |
+|---|---|
+| `--v-color-primary`, `--v-color-primary-hover` | Ações, links, foco de marca |
+| `--v-color-text`, `--v-color-text-muted` | Texto principal e secundário |
+| `--v-color-surface`, `--v-color-surface-muted`, `--v-color-bg` | Fundos |
+| `--v-color-border`, `--v-border-width` | Contornos |
+| `--v-color-focus`, `--v-focus-ring-width`, `--v-focus-ring-offset` | Foco visível |
+| `--v-color-success-*`, `--v-color-error-*`, … | Semânticas soft/base/strong |
+
+### Espaço, tipo e motion
+
+| Família | Tokens (todos no catálogo) |
+|---|---|
+| Espaço | `--v-space-0` … `--v-space-24` |
+| Flex / stack | `--v-flex-gap-sm/md/lg/xl`, `--v-stack-gap-sm/md/lg` |
+| Z-index | `--v-z-index-dropdown`, `--v-z-index-modal`, `--v-z-index-toast`, `--v-z-index-tooltip`, … |
+| Raio | `--v-radius-0`, `--v-radius-4`, `--v-radius-8`, `--v-radius-12`, `--v-radius-16`, `--v-radius-24`, `--v-radius-sm/md/lg`, `--v-radius-circle`, `--v-radius-pill`, `--v-radius-full` |
+| Sombra | `--v-shadow-sm`, `--v-shadow-md`, `--v-shadow-lg`, `--v-shadow-xl` |
+| Motion | `--v-motion-fast`, `--v-motion-normal`, `--v-ease-out`, `--v-ease-spring` |
+| Estado | `--v-state-disabled-opacity`, `--v-state-press-scale`, `--v-state-enter-scale` |
+| A11y | `--v-sr-only-size`, `--v-field-min-target`, `--v-button-min-target` |
+
+### Breakpoints
+
+| Token | Default |
+|---|---|
+| `--v-breakpoint-sm` | `640px` |
+| `--v-breakpoint-md` | `768px` |
+| `--v-breakpoint-lg` | `1024px` |
+
+`var()` **não funciona** dentro de `@media` — use o valor literal equivalente ou mixin SCSS no build.
+
+## Famílias por domínio
+
+### Chip / Tag (`--v-chip-*`, `--v-tag-*`)
+
+Base compartilhada entre `VTag`, `VBadge` removível e tokens em `VTagInput`.
+
+| Token | Default | Componentes |
+|---|---|---|
+| `--v-radius-pill` | `9999px` | Tag, badge removível, tabs pill |
+| `--v-chip-height-md` | `28px` | Altura de chip |
+| `--v-chip-soft-bg-mix` | `12%` | Variante soft |
+| `--v-tag-height-sm/md` | `24px` / `28px` | `VTag` |
+| `--v-state-press-scale` | `0.98` | Press em chips interativos |
+
+<Canvas of={TokensStories.ChipAndTagTokens} />
+
+### Form controls (`--v-field-*` + prefixo por componente)
+
+Campos compartilham altura, alvo mínimo e borda forte:
+
+| Token | Default | Uso |
+|---|---|---|
+| `--v-field-height-sm/md/lg` | `36px` / `40px` / `48px` | Inputs, select, date picker |
+| `--v-field-min-target` | `44px` | Hit area (WCAG) |
+| `--v-field-border-width-strong` | `2px` | Bordas de destaque, OTP, file upload |
+| `--v-sr-only-size` | `1px` | Utilitário screen-reader-only |
+
+Prefixos por componente: `--v-text-input-*`, `--v-switch-*`, `--v-slider-*`, `--v-checkbox-*`, `--v-select-*`, `--v-date-picker-*`, `--v-tag-input-*`, `--v-file-upload-*`, `--v-color-picker-*`.
+
+### Feedback
+
+| Componente | Tokens principais |
+|---|---|
+| `VToast` | `--v-toast-height-*`, `--v-toast-progress-height` |
+| `VTooltip` | `--v-tooltip-max-width-*`, `--v-tooltip-arrow-size` |
+| `VSpinner` / `VProgress` | `--v-spinner-track-width-*`, `--v-progress-ring-width-*` |
+| `VSkeleton` | `--v-skeleton-bg`, `--v-skeleton-highlight`, `--v-skeleton-duration` |
+| `VNotificationCenter` | `--v-notification-badge-border-width`, `--v-notification-tab-indicator-width` |
+| `VThoughtLine` | `--v-thought-line-rail-height` |
+
+<Canvas of={TokensStories.FieldAndProgressTokens} />
+
+### Navigation e contenção
+
+| Componente | Tokens principais |
+|---|---|
+| `VToolbar` | `--v-toolbar-*`, `--v-toolbar-group-min-width` |
+| `VSwipeRow` | `--v-swipe-row-action-min-width` |
+| `VCard` | `--v-card-*`, `--v-card-accent-height`, `--v-card-flip-perspective` |
+| `VWindow` | `--v-window-sm/md/lg-width`, breakpoints |
+| `VResizablePanel` | `--v-resizable-*`, `--v-loader-*` |
+| `VSidebar` | `--v-sidebar-*` |
+
+### Table, grid e gallery
+
+| Componente | Tokens principais |
+|---|---|
+| `VTable` | `--v-table-checkbox-col-width`, `--v-table-expand-col-width`, `--v-table-badge-*`, `--v-table-action-min-size`, `--v-table-row-height-*` |
+| `VFilterBar` | `--v-filter-bar-chip-min-height` |
+| `VMasonryGrid` / `VAutoLayoutGrid` | `--v-grid-demo-*` (demos Storybook) |
+| `VDashboardWidgetGrid` | `--v-dashboard-widget-handle-radius`, `--v-grid-row-height` |
+| `VImageGallery` | `--v-gallery-nav-size`, `--v-gallery-lightbox-min-height`, `--v-gallery-filmstrip-*`, `--v-gallery-border-width` |
+| `VAppShell` | `--v-appshell-*`, `--v-widget-*` |
+
+## Matriz componente → família de tokens
+
+Use esta tabela para saber **onde** customizar sem caçar SCSS.
+
+| Área | Componentes | Prefixo / tokens base |
+|---|---|---|
+| Primitives | `VTag` | `--v-tag-*`, `--v-chip-*`, `--v-radius-pill` |
+| Feedback | `VBadge`, `VToast`, `VTooltip`, `VSpinner`, `VProgress`, `VSkeleton`, `VNotificationCenter`, `VThoughtLine`, `VStatusMark` | `--v-chip-*`, `--v-toast-*`, `--v-tooltip-*`, `--v-spinner-*`, `--v-progress-*`, `--v-skeleton-*`, `--v-notification-*`, `--v-thought-line-*` |
+| Form | `VButton`, `VTextInput`, `VSelect`, `VCheckbox`, `VSwitch`, `VSlider`, … | `--v-button-*`, `--v-field-*`, prefixo do componente |
+| Navigation | `VTabs`, `VSegmentedControl`, `VToolbar`, `VSidebar`, … | `--v-tabs-*`, `--v-toolbar-*`, `--v-sidebar-*` |
+| Containment | `VCard`, `VWindow`, `VResizablePanel`, `VPanel` | `--v-card-*`, `--v-window-*`, `--v-panel-*` |
+| Table | `VTable`, `VFilterBar` | `--v-table-*`, `--v-filter-bar-*` |
+| Grid | `VAutoLayoutGrid`, `VMasonryGrid`, `VDashboardWidgetGrid`, `VAppShell` | `--v-grid-*`, `--v-grid-demo-*`, `--v-appshell-*` |
+| Images | `VAvatar`, `VImageGallery` | `--v-gallery-*`, `--v-radius-circle` |
+
+## Exemplo de override ao vivo
+
+Sobrescrever tokens num wrapper afeta só os filhos — útil em Storybook e páginas de preview:
+
+<Canvas of={TokensStories.ThemeOverridePreview} />
+
+## Boas práticas
+
+1. **Prefira tokens base** (`--v-color-primary`, `--v-radius-pill`, `--v-field-height-md`) antes de tokens de componente.
+2. **Não use hex ou `px` literais** nos SCSS de componentes — adicione um token em `_tokens.scss` se faltar um.
+3. **Circle vs pill**: círculo = quadrado; cápsula = pill.
+4. **Motion**: use `--v-state-press-scale` / `--v-state-enter-scale` em vez de `scale(0.98)` fixo.
+5. **Consulte o catálogo com busca** acima ou `KNOWN_TOKENS` / `listTokens()` em `live.ts`.
+
+## Demos
+
+<Stories />

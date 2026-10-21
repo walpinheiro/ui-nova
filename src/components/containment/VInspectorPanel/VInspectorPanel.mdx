@@ -1,0 +1,96 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VInspectorPanelStories from './VInspectorPanel.stories';
+
+<Meta of={VInspectorPanelStories} />
+
+# VInspectorPanel
+
+**Categoria:** containment
+
+Painel lateral flexível para inspecionar e editar conteúdo, propriedades e definições do item selecionado. Organiza controlos com abas e secções colapsáveis.
+
+## Overview
+
+<Canvas of={VInspectorPanelStories.Default} />
+
+## Anatomy
+
+1. **Panel container** — invólucro principal (`aside`, `role="complementary"`).
+2. **Header** — título + ações + botão fechar.
+3. **Tabs** — alternância Properties / Styles / Interactions (ou Meta na variante `tabs`).
+4. **Section group** — grupos colapsáveis (General, Layout, Appearance, Advanced).
+5. **Field label** — etiqueta descritiva de cada campo.
+6. **Value / input** — controlos de edição no slot da secção.
+7. **Divider** — separação visual entre secções (`border-top`).
+8. **Close / collapse action** — `×` no header; chevron nas secções.
+
+## Variants
+
+<Stories />
+
+| Variante | Uso |
+|---|---|
+| `default` | Inspector completo com 3 tabs e secções padrão. |
+| `minimal` | Layout compacto com Properties + Styles. |
+| `tabs` | Três tabs incluindo Meta. |
+| `floating` | Painel destacado sem tabs, com ações no header. |
+
+## Sizes
+
+| Tamanho | Largura |
+|---|---|
+| `compact` | 320px |
+| `default` | 360px |
+| `wide` | 440px |
+
+## States
+
+Default · Hover row · Focus field · Collapsed group · Loading · Disabled
+
+## Props
+
+<Controls />
+
+## Events / Slots
+
+**Events:** `update:open`, `update:modelValue`, `update:activeTab`, `update:expandedSections`, `open-change`, `tab-change`, `section-toggle`, `close`, `dismiss`
+
+**Slots:** `header`, `actions`, `default`, slots dinâmicos por secção (`#general`, `#layout`, …)
+
+```vue
+<VInspectorPanel v-model:open="showInspector" title="Inspector">
+  <template #general>
+    <!-- campos da secção General -->
+  </template>
+</VInspectorPanel>
+```
+
+## Motion
+
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Slide in/out | transform, opacity | 300ms / 100ms | ease-out |
+| Tab switch | color, underline | 100ms | ease-out |
+| Section collapse | opacity | 160ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+
+## Accessibility
+
+- `role="complementary"` com `aria-label` ou `aria-labelledby`.
+- Navegação por teclado: Tab/Shift+Tab, setas nas tabs, Enter/Space nas secções.
+- `Esc` fecha o painel e devolve o foco ao elemento que o abriu.
+- Estados expostos via `aria-selected`, `aria-expanded`, `aria-busy`, `aria-disabled`.
+- Foco visível em todos os controlos interativos.
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VInspectorPanel } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VInspectorPanel size="default" variant="default" title="Inspector" open />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").

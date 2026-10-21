@@ -1,0 +1,66 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as IntroStories from './Introducao.stories';
+
+<Meta of={IntroStories} />
+
+# VueUI Nova Kit
+
+Biblioteca de componentes **Vue 3** com tokens de design (`--v-*`), tema **light/dark** e movimento respeitando `prefers-reduced-motion`. São **mais de 90 componentes** organizados por categoria: `containment`, `feedback`, `form`, `grid`, `images`, `navigation`, `primitives` e `table`, além de _Templates_ completos.
+
+## Instalação
+
+```bash
+npm install vueui-nova-kit
+# peer dependency
+npm install vue@^3
+```
+
+## Importar o CSS
+
+Os estilos e tokens são distribuídos em CSS. Importe **uma vez** na entrada da aplicação:
+
+```ts
+// main.ts
+import 'vueui-nova-kit/style.css'   // estilos dos componentes + tokens
+// opcional: somente os tokens
+// import 'vueui-nova-kit/tokens.css'
+```
+
+## Uso básico
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import { VButton, VTextInput, VAlert } from 'vueui-nova-kit'
+const email = ref('')
+</script>
+
+<template>
+  <VTextInput v-model="email" label="E-mail" />
+  <VButton variant="primary">Enviar</VButton>
+</template>
+```
+
+<Canvas of={IntroStories.UsoBasico} />
+
+## Tema e tokens
+
+- Ative o tema escuro com `<html data-theme="dark">` ou use o composable `useTheme()` — veja [Docs / Temas](/?path=/docs/docs-temas--docs).
+- Todos os valores visuais vêm de tokens CSS `--v-*`: cores, espaçamento, raio, sombra, tipografia, movimento. Consulte [Foundations / Tokens](/?path=/docs/foundations-tokens--docs) e altere ao vivo com `setToken()`.
+
+## Onde encontrar cada coisa
+
+| Quero… | Veja |
+|---|---|
+| Entender temas e `useTheme()` | [Docs / Temas](/?path=/docs/docs-temas--docs) |
+| Composables (`useReducedMotion`, `useSpringValue`…) | [Docs / Composables](/?path=/docs/docs-composables--docs) |
+| Utilitários de mola e gestos | [Docs / Motion API](/?path=/docs/docs-motion-api--docs) |
+| Telas completas prontas | [Docs / Templates](/?path=/docs/docs-templates--docs) |
+| Rastreabilidade e capturas de evidência | [Docs / Evidências](/?path=/docs/docs-evidências--docs) |
+| O que ainda não existe | [Docs / Lacunas](/?path=/docs/docs-lacunas--docs) |
+
+## Convenções do Storybook
+
+- Cada componente tem uma página de docs (descrição, exemplos, props, estados, motion, acessibilidade) e **uma story por variante/estado**.
+- Use a barra de ferramentas **Theme** para alternar light/dark; as páginas de docs acompanham o tema.
+- Exemplos com estado usam `v-model` real: interaja diretamente no canvas.

@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VToolbarStories from './VToolbar.stories';
+
+<Meta of={VToolbarStories} />
+# VToolbar
+**Categoria:** navigation  
+Barra de ações compacta para fluxos de produtividade — agrupa ícones, divisórias, spacer e ação primária (Save) conforme o pôster VueUI Nova.
+
+## Component
+<Canvas of={VToolbarStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VToolbar } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VToolbar size="md" variant="default" aria-label="Document actions" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## Anatomy
+Container (`VToolbar`) → Group (`VToolbarGroup`) → Icon actions (`VToolbarButton`) → Divider (`VToolbarDivider`) → Spacer (`VToolbarSpacer`) → Primary action → Overflow menu (`VToolbarButton` + `:menu`).
+## States
+Default · Hover (fade + slide-up 120ms) · Focus-visible · Pressed (scale 0.98, 100ms) · Active/toggle · Disabled · Loading no container.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 120ms | out |
+| Press | transform | 100ms | standard |
+| Focus | outline | 120ms | out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+`role="toolbar"` no container; `role="group"` nos grupos; `role="separator"` nas divisórias; `aria-label` em botões icon-only; ArrowLeft/Right/Home/End entre botões; Enter/Space ativam; overflow com `aria-expanded` + `role="menu"`.

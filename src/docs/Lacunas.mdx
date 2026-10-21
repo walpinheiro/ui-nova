@@ -1,0 +1,31 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Docs/Lacunas" />
+
+# Lacunas e backlog
+
+Fonte: `evidence/audit/SUMMARY.md`. Estas pastas existem em `src/components/**` com apenas testes/scaffold e **ainda não possuem implementação (`.vue`)**, portanto não têm stories — `npm run docs:coverage` as lista como "não implementado" (não é falha).
+
+## Componentes não implementados
+
+| Categoria | Componentes |
+|---|---|
+| form | VCombobox, VTag |
+| grid | VCanvasGrid, VDashboardColumn, VDashboardRow, VSnapGrid, VThumbnailGrid, VWidgetCell |
+| images | VAppIcon, VCoverImage, VGroupAvatar (a implementação real está em `VAvatar/VGroupAvatar.vue`), VImagePlaceholder, VLightbox, VMediaPreview, VThumbnail |
+| primitives | VCalendar, VChip, VCodeBlock, VDivider, VKbd, VScrollArea, VSpacer, VStack, VTimePicker |
+| table | VBulkActionsBar, VColumnPicker, VEmptyTableState, VInlineRowActions, VRowSelection, VSortableHeader (real em `VTable/internal`), VStatusCell, VTableToolbar |
+| template | VAuthScreen, VDashboardLayout, VEditorWorkspace, VEmptyWorkspace, VProjectOverview, VSettingsLayout, VSplitWorkspace |
+
+> `VTag` de `form/` está vazio; a implementação vigente é `primitives/VTag`.
+
+## Backlog de funcionalidades
+
+1. Componentes de gráfico: `LineChart` e `StepAreaChart` existem só em `src/templates/_charts` (candidatos a promoção). Já promovidos para `data/`: `VBarChart`, `VBarList`, `VFunnelChart`.
+2. ~~Sem componente KPI/Stat.~~ Resolvido com `data/VStatCard`.
+3. `VAvatar` sem prop de cor nem placeholder de foto.
+4. `VSearchField` sem formato pill.
+5. `VCard` não permite desligar a estrutura de header.
+6. Sem select-button apoiado em `VDropdownMenu`.
+7. Timeline vertical resolvida com `data/VTimeline` (etapas e feed de atividade); ainda **sem gantt** (a agenda do CareOps é feita à mão em `TimelineGrid.vue`).
+8. `VSidebar`: o rodapé padrão mostra o usuário demo "Alex Chen" a menos que `show-footer=false`; o padrão ignora pai com altura fixa em alguns hosts; `expanded-sections` precisa listar todos os ids de grupos abertos.

@@ -1,0 +1,109 @@
+.v-description-list {
+  --v-description-row-pad: var(--v-space-2);
+
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: var(--v-font-family-sans);
+  font-size: var(--v-font-size-text-small);
+  line-height: var(--v-line-height-text-small);
+  color: var(--v-color-text);
+
+  &--md {
+    --v-description-row-pad: var(--v-space-3);
+
+    font-size: var(--v-font-size-text-medium);
+    line-height: var(--v-line-height-text-medium);
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  &__row {
+    display: grid;
+    align-items: baseline;
+    gap: var(--v-space-3);
+    padding-block: var(--v-description-row-pad);
+  }
+
+  // Rows share one column grid (subgrid) so hints and values align across rows.
+  &--inline {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+
+    &:has(.v-description-list__hint) {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto;
+    }
+  }
+
+  &--inline &__row {
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+  }
+
+  &--inline &__value {
+    grid-column: -2 / -1;
+  }
+
+  &--dividers &__row + &__row {
+    border-top: 1px solid var(--v-color-border);
+  }
+
+  &--stacked &__row,
+  &--grid &__row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  &--grid {
+    display: grid;
+    grid-template-columns: repeat(var(--v-description-columns, 2), minmax(0, 1fr));
+    column-gap: var(--v-space-6);
+  }
+
+  &--grid.v-description-list--dividers &__row + &__row {
+    border-top: 0;
+  }
+
+  &__label {
+    color: var(--v-color-text-muted);
+  }
+
+  &--inline &__label {
+    color: var(--v-color-text);
+  }
+
+  &__hint {
+    font-size: var(--v-font-size-text-small);
+    color: var(--v-color-text-muted);
+  }
+
+  &__value {
+    font-weight: var(--v-font-weight-medium);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &--inline &__value {
+    text-align: right;
+  }
+
+  &--inline &__row:not(:has(.v-description-list__hint)) &__label {
+    color: var(--v-color-text-muted);
+  }
+
+  &__row--total {
+    margin-top: var(--v-space-1);
+    border-top: 1px solid var(--v-color-border-strong);
+
+    .v-description-list__label {
+      color: var(--v-color-text);
+      font-weight: var(--v-font-weight-medium);
+    }
+
+    .v-description-list__value {
+      font-size: var(--v-font-size-h4, 1.125rem);
+      font-weight: var(--v-font-weight-semibold);
+    }
+  }
+}

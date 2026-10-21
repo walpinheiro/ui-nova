@@ -1,0 +1,47 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VCardStories from './VCard.stories';
+
+<Meta of={VCardStories} />
+# Card
+**Categoria:** containment  
+Contentor flexível para agrupar conteúdo relacionado, ações e metadados de forma clara e escalável. Serve para apresentar informação (produto, métricas), navegar (cartão clicável) e conduzir ações (CTA) em todo o produto, com estrutura unificada e visual moderno.
+
+## Component
+<Canvas of={VCardStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VCard } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VCard size="md" variant="elevated" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover (lift + shadow, 150ms) · Focus-visible (anel 2px, 150ms) · Pressed/Active scale(.98, 100ms) · Selected (check + borda primary) · Disabled · Loading (skeleton). Comportamento interativo via variante `interactive` ou prop `interactive` (classe `v-card--actionable`).
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Default → Hover | box-shadow/transform lift | 150ms | ease-out |
+| Hover → Pressed | transform scale(.98) | 100ms | ease-out |
+| Focus | outline/box-shadow ring | 150ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+`<article>` para conteúdo autónomo; cartão interativo com `role="button"` + teclado Enter/Space, foco visível 2px, `aria-selected`/`aria-disabled`/`aria-busy`, imagem com `alt`, seleção nunca só por cor (check ✓).
+## Badge vs Tag no Card
+- Prop `badge` / slot `#badge` — **Tag overlay** (`VTag` variant `overlay`, não interativa). Ex.: “Product” sobre a mídia.
+- Slot `#header-trailing` — **Badge** de status. Ex.: “Ready”, “Completed”.
+- Ação compacta no conteúdo — **Tag** interativa. Ex.: “Add Goals” com ícone `plus`.
+
+Não recrie pílulas com `span` + CSS. Use `VTag` ou `VBadge`.
+
+## Anatomy
+Root → media (placement top/start/end/bottom + optional media-overlay) → badge/selected-check → content (icon, heading with optional header-trailing, title/description/slot) → footer (avatar-group/actions) → caption. Data-test-ids: `v-card` (root, `data-variant`/`data-size`/`data-state`/`data-media-placement`/`data-selected`), `v-card-media`, `v-card-media-overlay`, `v-card-badge`, `v-card-selected-check`, `v-card-icon`, `v-card-heading`, `v-card-header-trailing`, `v-card-title`, `v-card-description`, `v-card-avatar-group`, `v-card-actions`, `v-card-caption`.

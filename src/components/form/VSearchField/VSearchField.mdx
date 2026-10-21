@@ -1,0 +1,32 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VSearchFieldStories from './VSearchField.stories';
+
+<Meta of={VSearchFieldStories} />
+# Search Field
+**Categoria:** form  
+Campo de busca com ícone, clear, atalho ⌘K, sugestões e loading.
+
+## Component
+<Canvas of={VSearchFieldStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VSearchField } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VSearchField size="md" placeholder="Search products, docs, or anything..." clearable />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus · Typing · With value · Suggestions open · Loading · Disabled.
+## Motion
+Hover 120ms · focus ring 120ms · painel fade+slide 160ms · clear fade/scale 100ms.
+## Accessibility
+Nome acessível, `role="combobox"` + `listbox`, `aria-activedescendant`, clear com `aria-label`, foco visível.

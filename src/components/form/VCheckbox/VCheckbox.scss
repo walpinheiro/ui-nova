@@ -1,0 +1,267 @@
+@import '../_shared/field';
+.v-checkbox-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--v-space-1);
+  font-family: var(--v-font-family-sans);
+}
+
+.v-checkbox {
+  --v-checkbox-size: var(--v-checkbox-size-md);
+  --v-checkbox-focus-ring: 0 0 0 3px color-mix(in srgb, var(--v-color-primary) 25%, transparent);
+
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--v-checkbox-gap);
+  min-height: var(--v-checkbox-min-target);
+  min-width: var(--v-checkbox-min-target);
+  padding: calc((var(--v-checkbox-min-target) - var(--v-checkbox-size)) / 2) 0;
+  cursor: pointer;
+  box-sizing: border-box;
+  user-select: none;
+
+  &--sm {
+    --v-checkbox-size: var(--v-checkbox-size-sm);
+  }
+
+  &--md {
+    --v-checkbox-size: var(--v-checkbox-size-md);
+  }
+
+  &--lg {
+    --v-checkbox-size: var(--v-checkbox-size-lg);
+  }
+
+  &--disabled {
+    opacity: var(--v-state-disabled-opacity);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &__input {
+    outline: none;
+    position: absolute;
+    width: var(--v-sr-only-size);
+    height: var(--v-sr-only-size);
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  &__box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--v-checkbox-size);
+    height: var(--v-checkbox-size);
+    margin-top: var(--v-checkbox-align-offset);
+    border: var(--v-checkbox-border-width) solid var(--v-color-border-strong);
+    border-radius: var(--v-radius-sm, 4px);
+    background: var(--v-color-surface);
+    color: var(--v-color-on-primary);
+    transition:
+      background var(--v-motion-fast) var(--v-ease-out),
+      border-color var(--v-motion-fast) var(--v-ease-out),
+      box-shadow var(--v-motion-fast) var(--v-ease-out);
+  }
+
+  &:hover:not(&--disabled) &__box {
+    background: color-mix(in srgb, var(--v-color-primary) 8%, var(--v-color-surface));
+  }
+
+  &:active:not(&--disabled) &__box {
+    background: color-mix(in srgb, var(--v-color-primary) 16%, var(--v-color-surface));
+  }
+
+  &__input:focus-visible+&__box {
+    box-shadow: var(--v-checkbox-focus-ring);
+  }
+
+  &--checked &__box,
+  &--indeterminate &__box {
+    background: var(--v-color-primary);
+    border-color: transparent;
+  }
+
+  &--error &__box {
+    border-color: var(--v-color-error-base);
+  }
+
+  &--error &--checked &__box,
+  &--error &--indeterminate &__box {
+    background: var(--v-color-error-base);
+    border-color: transparent;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.5);
+    transition:
+      opacity var(--v-motion-fast) var(--v-ease-out),
+      transform var(--v-motion-fast) var(--v-ease-out);
+    line-height: 0;
+  }
+
+  &--checked &__icon,
+  &--indeterminate &__icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--v-space-1);
+    min-width: 0;
+    padding-top: var(--v-checkbox-align-offset);
+  }
+
+  &__label {
+    position: relative;
+    font-size: var(--v-font-size-text-medium);
+    line-height: var(--v-line-height-text-medium);
+    font-weight: var(--v-font-weight-medium, 500);
+    color: var(--v-color-text);
+  }
+
+  &--expressive &__box {
+    position: relative;
+    overflow: hidden;
+    background: var(--v-color-surface);
+    transition: border-color var(--v-motion-fast) var(--v-ease-out);
+  }
+
+  &--expressive &--checked &__box,
+  &--expressive &--indeterminate &__box {
+    background: var(--v-color-surface);
+    border-color: var(--v-color-primary);
+  }
+
+  // Indeterminate has no spring fill; keep the solid primary box visible in expressive mode.
+  &--expressive#{&}--indeterminate &__box {
+    background: var(--v-color-primary);
+    border-color: transparent;
+  }
+
+  &--expressive#{&}--indeterminate:not(.v-checkbox--checked) &__tick {
+    display: none;
+  }
+
+  &--expressive#{&}--indeterminate:not(.v-checkbox--checked) &__box::after {
+    content: '';
+    width: 55%;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--v-color-on-primary);
+  }
+
+  &__fill {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--v-color-primary);
+    transform-origin: center;
+    pointer-events: none;
+  }
+
+  &__tick {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    color: var(--v-color-on-primary);
+    line-height: 0;
+  }
+
+  &__tick-svg {
+    width: calc(var(--v-checkbox-size) * 0.65);
+    height: calc(var(--v-checkbox-size) * 0.65);
+  }
+
+  &__tick-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  &__rule {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: var(--v-checkbox-strike-height);
+    margin-top: -0.75px;
+    background: currentColor;
+    transform-origin: left center;
+    pointer-events: none;
+  }
+
+  &--strike-center &__rule {
+    transform-origin: center center;
+  }
+
+  &--strike-right &__rule {
+    transform-origin: right center;
+  }
+
+  &__description {
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+    color: var(--v-color-text-muted);
+  }
+
+  &__link {
+    color: var(--v-color-primary-text);
+    text-decoration: underline;
+    text-underline-offset: var(--v-checkbox-link-underline-offset);
+
+    &:hover {
+      color: color-mix(in srgb, var(--v-color-primary) 80%, var(--v-color-text));
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width, 2px) solid var(--v-color-focus);
+      outline-offset: var(--v-field-focus-outline-offset);
+      border-radius: var(--v-checkbox-link-focus-radius);
+    }
+  }
+
+  &__helper,
+  &__error {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--v-space-1);
+    margin: 0;
+    padding-inline-start: calc(var(--v-checkbox-size) + var(--v-checkbox-gap));
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+  }
+
+  &__helper {
+    color: var(--v-color-text-muted);
+  }
+
+  &__error {
+    color: var(--v-color-error-strong);
+  }
+
+  &__helper-icon,
+  &__error-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    line-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-checkbox__box,
+  .v-checkbox__icon {
+    transition: none;
+  }
+}

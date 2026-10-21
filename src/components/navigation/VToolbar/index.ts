@@ -1,0 +1,6 @@
+export { default as VToolbar } from './VToolbar.vue'
+export { default as VToolbarButton } from './VToolbarButton.vue'
+export { default as VToolbarGroup } from './VToolbarGroup.vue'
+export { default as VToolbarDivider } from './VToolbarDivider.vue'
+export { default as VToolbarSpacer } from './VToolbarSpacer.vue'
+export * from './VToolbar.types'

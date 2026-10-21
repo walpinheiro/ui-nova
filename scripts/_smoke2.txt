@@ -1,0 +1,16 @@
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+page.goto: net::ERR_ABORTED at http://localhost:6007/iframe.html?viewMode=story&id=containment-vresizablepanel--disabled
+Call log:
+[2m  - navigating to "http://localhost:6007/iframe.html?viewMode=story&id=containment-vresizablepanel--disabled", waiting until "load"[22m
+
+    at C:\Users\walder\Documents\UiNova\scripts\_sbsmoke.cjs:13:13 {
+  log: [
+    '  - navigating to "http://localhost:6007/iframe.html?viewMode=story&id=containment-vresizablepanel--disabled", waiting until "load"'
+  ],
+  name: 'Error'
+}
+
+Node.js v24.12.0

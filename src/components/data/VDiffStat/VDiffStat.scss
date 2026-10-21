@@ -1,0 +1,53 @@
+.v-diff-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--v-space-1);
+  font-family: var(--v-font-family-mono, var(--v-font-family-sans));
+  font-size: var(--v-font-size-text-small);
+  line-height: var(--v-line-height-text-small);
+  font-weight: var(--v-font-weight-medium);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+
+  &--sm {
+    font-size: var(--v-font-size-caption);
+    line-height: var(--v-line-height-caption);
+  }
+
+  &--lg {
+    font-size: var(--v-font-size-text-medium);
+    line-height: var(--v-line-height-text-medium);
+  }
+
+  &__add {
+    color: var(--v-color-success-base);
+  }
+
+  &__del {
+    color: var(--v-color-error-base);
+  }
+
+  &__blocks {
+    display: inline-flex;
+    gap: 2px;
+    margin-left: var(--v-space-1);
+  }
+
+  &__block {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 2px;
+
+    &--add {
+      background: var(--v-color-success-base);
+    }
+
+    &--del {
+      background: var(--v-color-error-base);
+    }
+
+    &--neutral {
+      background: var(--v-color-neutral-200);
+    }
+  }
+}

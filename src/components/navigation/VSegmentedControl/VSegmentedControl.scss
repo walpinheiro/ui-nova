@@ -1,0 +1,231 @@
+.v-segmented-control {
+  @apply inline-flex font-sans duration-fast ease-standard;
+  box-sizing: border-box;
+  display: inline-flex;
+  overflow: visible;
+  background: var(--v-segmented-bg);
+  border: var(--v-border-width) solid var(--v-segmented-border);
+  border-radius: var(--v-segmented-radius);
+  padding: var(--v-segmented-padding-y) var(--v-segmented-padding-x);
+  font-family: var(--v-font-family-sans);
+  transition: opacity var(--v-motion-fast) var(--v-ease-standard);
+
+  &--full-width {
+    display: flex;
+    width: 100%;
+  }
+
+  &--full-width &__track {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  &--full-width &__segment {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  &--pill {
+    border-radius: var(--v-radius-pill);
+  }
+
+  &--sm &__track {
+    min-height: var(--v-segmented-height-sm);
+  }
+
+  &--md &__track {
+    min-height: var(--v-segmented-height-md);
+  }
+
+  &--lg &__track {
+    min-height: var(--v-segmented-height-lg);
+  }
+
+  &--disabled,
+  &[aria-disabled='true'] {
+    opacity: var(--v-state-disabled-opacity);
+    pointer-events: none;
+  }
+
+  &__track {
+    position: relative;
+    display: inline-flex;
+    align-items: stretch;
+    gap: var(--v-segmented-gap);
+    overflow: visible;
+    // own stacking context: indicator (z 1) sits above segment backgrounds/dividers,
+    // labels/icons (z 2) sit above the indicator.
+    isolation: isolate;
+  }
+
+  // Pressing the selected segment darkens the (moving) indicator instead of painting the segment.
+  &__track:has(&__segment[aria-checked='true']:active:not([aria-disabled='true'])) &__indicator {
+    background: var(--v-color-primary-600);
+  }
+
+  &__indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    background: var(--v-color-primary-500);
+    border: 0;
+    border-radius: calc(var(--v-segmented-radius) - var(--v-space-1));
+    pointer-events: none;
+    will-change: transform;
+    transition:
+      background var(--v-motion-fast) var(--v-ease-standard),
+      transform var(--v-segmented-motion) var(--v-ease-in-out),
+      width var(--v-segmented-motion) var(--v-ease-in-out),
+      height var(--v-segmented-motion) var(--v-ease-in-out),
+      opacity var(--v-motion-fast) var(--v-ease-standard);
+  }
+
+  &--pill &__indicator {
+    border-radius: var(--v-radius-pill);
+  }
+
+  &--expressive &__indicator {
+    transition: none;
+    transform-origin: center center;
+  }
+
+  &__segment {
+    @apply relative inline-flex items-center justify-center font-sans font-regular text-text-small duration-fast ease-standard;
+    box-sizing: border-box;
+    position: relative;
+    z-index: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--v-space-2);
+    min-height: inherit;
+    padding: 0 var(--v-space-3);
+    border: var(--v-border-width) solid transparent;
+    border-radius: calc(var(--v-segmented-radius) - var(--v-space-1));
+    background: transparent;
+    color: var(--v-segmented-text);
+    font-family: var(--v-font-family-sans);
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+    font-weight: var(--v-font-weight-regular);
+    cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background var(--v-motion-fast) var(--v-ease-standard),
+      color var(--v-motion-fast) var(--v-ease-standard);
+
+    &+&::before {
+      content: '';
+      position: absolute;
+      top: 20%;
+      bottom: 20%;
+      left: 0;
+      width: var(--v-border-width);
+      background: var(--v-segmented-divider);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    &:hover:not([aria-checked='true']):not([aria-disabled='true']) {
+      background: var(--v-segmented-hover-bg);
+      color: var(--v-segmented-text-hover);
+    }
+
+    &:active:not([aria-checked='true']):not([aria-disabled='true']) {
+      background: var(--v-segmented-pressed-bg);
+      color: var(--v-segmented-text-hover);
+    }
+
+    // Press feedback on the content only: a transform on the segment would create a
+    // stacking context and hide the label under the indicator.
+    &:active:not([aria-disabled='true']) > * {
+      transform: scale(var(--v-state-press-scale));
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    // Selected: text always on the primary indicator, regardless of hover/active/focus.
+    &[aria-checked='true'],
+    &[aria-checked='true']:hover,
+    &[aria-checked='true']:active,
+    &[aria-checked='true']:focus,
+    &[aria-checked='true']:focus-visible {
+      background: transparent;
+      color: var(--v-segmented-text-active);
+      font-weight: var(--v-font-weight-semibold);
+    }
+
+    &[aria-disabled='true'],
+    &[aria-disabled='true']:hover,
+    &[aria-disabled='true']:active {
+      background: transparent;
+      color: var(--v-segmented-text-disabled);
+      cursor: not-allowed;
+    }
+
+    // keep the disabled-but-selected label readable on the indicator
+    &[aria-checked='true'][aria-disabled='true'] {
+      color: var(--v-segmented-text-active);
+    }
+
+    &--icon-only {
+      padding: 0 var(--v-space-2);
+      min-width: var(--v-segmented-height-md);
+    }
+  }
+
+  &--sm &__segment--icon-only {
+    min-width: var(--v-segmented-height-sm);
+  }
+
+  &--lg &__segment--icon-only {
+    min-width: var(--v-segmented-height-lg);
+  }
+
+  &--pill &__segment {
+    border-radius: var(--v-radius-pill);
+
+    &+& {
+      border-left: none;
+    }
+  }
+
+  &__icon,
+  &__label {
+    position: relative;
+    z-index: 2;
+    transition: transform var(--v-motion-press) var(--v-ease-standard);
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--v-font-size-text-medium);
+    line-height: 1;
+  }
+
+  &__label {
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-segmented-control,
+  .v-segmented-control__indicator,
+  .v-segmented-control__segment {
+    transition: none;
+  }
+}

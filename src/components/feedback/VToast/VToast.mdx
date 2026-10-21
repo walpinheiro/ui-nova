@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VToastStories from './VToast.stories';
+
+<Meta of={VToastStories} />
+# Toast
+**Categoria:** feedback  
+Mensagem transitória de feedback (transient feedback message) que informa ação, evento de sistema ou atualização de status de forma breve e não intrusiva. Aparece temporariamente, mantém o usuário informado e desaparece automaticamente. Promessa hero: "Deliver feedback without interruption.
+
+## Component
+<Canvas of={VToastStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VToast } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VToast message="New updates are available." size="md" variant="info" :duration="5000" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Enter/Exit | opacity/transform | 160ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa primeiro, foco visível, labels acessíveis e teclado conforme o padrão WAI-ARIA correspondente.
+## Anatomy
+Root → optional leading visual → content/slot → optional actions/feedback.

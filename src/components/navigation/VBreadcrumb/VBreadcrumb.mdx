@@ -1,0 +1,93 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks'
+import * as VBreadcrumbStories from './VBreadcrumb.stories'
+
+<Meta of={VBreadcrumbStories} />
+
+# Breadcrumb
+
+**Categoria:** navigation
+
+Trilha de navegação hierárquica que mostra onde o usuário está e permite voltar rapidamente aos níveis anteriores.
+
+## Overview
+
+Navigable · Compact · Clear
+
+## Component
+
+<Canvas of={VBreadcrumbStories.Default} />
+
+## Anatomy
+
+1. **Home icon (optional)** — ícone de casa antes do primeiro item (`default` / `overflow`).
+2. **Breadcrumb item (link)** — nível clicável com hover, focus e pressed.
+3. **Separator** — chevron `›` entre itens; customizável via slot `#separator`.
+4. **Current page** — último item em negrito, `aria-current="page"`, sem link.
+5. **Overflow** — botão `…` com menu dropdown para níveis ocultos.
+
+## Variants
+
+<Canvas of={VBreadcrumbStories.Compact} />
+<Canvas of={VBreadcrumbStories.WithIcons} />
+<Canvas of={VBreadcrumbStories.Overflow} />
+
+## Sizes
+
+<Canvas of={VBreadcrumbStories.Sizes} />
+
+## Props
+
+<Controls />
+
+## Events / Slots
+
+| Event | Payload | Descrição |
+|---|---|---|
+| `navigate` | `{ item, index }` | Disparado ao clicar num link habilitado |
+
+| Slot | Descrição |
+|---|---|
+| `#separator` | Separador customizado entre itens |
+
+## States
+
+Default · Hover · Focus-visible · Pressed · Current page · Disabled
+
+## Motion
+
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Item hover/focus | background/color | 100ms | ease-out |
+| Overflow open | opacity/transform | 160ms | ease-out |
+| Pressed | transform scale(0.98) | 80ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+
+## Accessibility
+
+- `<nav aria-label="Breadcrumb">` com lista ordenada interna
+- Foco visível em links e overflow
+- Teclado: Tab entre links, Enter ativa, Escape fecha overflow
+- Página atual com `aria-current="page"`
+
+## Do / Don't
+
+**Do** usar o último item sem `to`/`href` para a página atual.
+
+**Don't** usar breadcrumb como navegação primária em apps rasos.
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VBreadcrumb } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VBreadcrumb size="md" variant="default" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+
+<Stories />

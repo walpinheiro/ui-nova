@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VSliderStories from './VSlider.stories';
+
+<Meta of={VSliderStories} />
+# Slider
+**Categoria:** form  
+Controlo deslizante para selecionar valores numéricos ou intervalos, com suporte a marcos, orientação vertical e acessibilidade por teclado.
+
+## Component
+<Canvas of={VSliderStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VSlider } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VSlider :model-value="40" :min="0" :max="100" :step="1" size="md" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Dragging · Disabled.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Thumb hover/focus | box-shadow | 100ms | ease-out |
+| Tooltip | opacity/scale | 100ms | ease-out |
+| Drag | transform | 100ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+`role="slider"`, `aria-valuenow`/`aria-valuetext`, `aria-orientation`, suporte a Arrow/Home/End/PageUp/PageDown, área de acerto mínima 44×44px.
+## Anatomy
+Root (`v-slider`) → value label → track (fill, thumb(s), tooltip) → marks. Data-test-ids: `v-slider`, `v-slider-track`, `v-slider-fill`, `v-slider-thumb`, `v-slider-value`.

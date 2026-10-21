@@ -1,0 +1,165 @@
+.v-tag {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--v-tag-gap);
+  margin: 0;
+  appearance: none;
+  max-width: 100%;
+  border: var(--v-border-width) solid var(--v-color-border);
+  border-radius: var(--v-tag-radius);
+  background: var(--v-color-surface);
+  color: var(--v-color-text);
+  font-family: var(--v-font-family-sans);
+  font-size: var(--v-tag-font-size-sm);
+  font-weight: var(--v-font-weight-semibold);
+  line-height: var(--v-tag-line-height);
+  white-space: nowrap;
+  user-select: none;
+  vertical-align: middle;
+  transition:
+    background var(--v-motion-fast) var(--v-ease-out),
+    border-color var(--v-motion-fast) var(--v-ease-out),
+    box-shadow var(--v-motion-fast) var(--v-ease-out),
+    transform var(--v-motion-fast) var(--v-ease-out);
+
+  &--sm {
+    height: var(--v-tag-height-sm);
+    min-height: var(--v-tag-height-sm);
+    padding: 0 var(--v-tag-padding-inline-sm);
+    font-size: var(--v-tag-font-size-sm);
+  }
+
+  &--md {
+    height: var(--v-tag-height-md);
+    min-height: var(--v-tag-height-md);
+    padding: 0 var(--v-tag-padding-inline-md);
+    font-size: var(--v-tag-font-size-md);
+  }
+
+  &--default {
+    background: var(--v-color-surface);
+    border-color: var(--v-color-border);
+  }
+
+  &--outline {
+    background: transparent;
+    border-color: var(--v-color-border);
+  }
+
+  &--overlay {
+    height: var(--v-tag-overlay-height);
+    min-height: var(--v-tag-overlay-height);
+    padding: 0 var(--v-tag-overlay-padding-inline);
+    background: var(--v-color-surface);
+    border-color: transparent;
+    box-shadow: var(--v-shadow-sm);
+    font-size: var(--v-tag-font-size-sm);
+  }
+
+  &--soft {
+    background: color-mix(in srgb, var(--v-color-primary) var(--v-tag-soft-bg-mix), var(--v-color-surface));
+    border-color: transparent;
+  }
+
+  &--interactive {
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background: var(--v-color-neutral-100);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(var(--v-tag-press-scale));
+    }
+  }
+
+  &--removable {
+    justify-content: flex-start;
+    gap: 0;
+    padding-inline: var(--v-tag-padding-inline-md) var(--v-chip-padding-inline-end-removable);
+  }
+
+  &--removable.v-tag--sm {
+    padding-inline: var(--v-tag-padding-inline-sm) var(--v-chip-padding-inline-end-removable);
+  }
+
+  &--removable &__label {
+    line-height: var(--v-tag-line-height);
+  }
+
+  &--removable:not(.v-tag--interactive):hover {
+    background: var(--v-color-neutral-100);
+  }
+
+  &--soft.v-tag--removable:not(.v-tag--interactive):hover {
+    background: color-mix(in srgb, var(--v-color-primary) var(--v-tag-soft-hover-mix), var(--v-color-surface));
+  }
+
+  &--selected {
+    background: color-mix(in srgb, var(--v-color-primary) var(--v-tag-soft-bg-mix), var(--v-color-surface));
+    border-color: var(--v-color-primary);
+    color: var(--v-color-text);
+  }
+
+  &--disabled {
+    opacity: var(--v-state-disabled-opacity);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &--leaving {
+    opacity: 0;
+    transform: scale(var(--v-tag-leaving-scale));
+    transition:
+      opacity var(--v-tag-leaving-duration) var(--v-ease-out),
+      transform var(--v-tag-leaving-duration) var(--v-ease-out);
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline-start: var(--v-tag-gap);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    border-radius: var(--v-tag-remove-radius);
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-tag-focus-offset);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-tag {
+    transition: none;
+
+    &--interactive:active:not(:disabled) {
+      transform: none;
+    }
+  }
+}

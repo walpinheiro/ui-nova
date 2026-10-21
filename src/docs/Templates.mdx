@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Docs/Templates" />
+
+# Templates
+
+Composições completas de tela, montadas apenas com componentes da biblioteca (mais partes locais). Código em `src/templates/*`; gráficos locais em `src/templates/_charts`; alternador de tema compartilhado em `src/templates/_shared/ThemeToggle.vue` (baseado em `useTheme`). Todos suportam light e dark.
+
+| Template | Abrir | Docs |
+|---|---|---|
+| Insights Detail | [templates-insights-detail--default](/?path=/story/templates-insights-detail--default) | [docs](/?path=/docs/templates-insights-detail--docs) |
+| CareOps Schedule | [templates-careops-schedule--default](/?path=/story/templates-careops-schedule--default) | [docs](/?path=/docs/templates-careops-schedule--docs) |
+| Investment Dashboard | [templates-investment-dashboard--overview](/?path=/story/templates-investment-dashboard--overview) | [docs](/?path=/docs/templates-investment-dashboard--docs) |
+| Sales Overview | [templates-sales-overview--dashboard](/?path=/story/templates-sales-overview--dashboard) | [docs](/?path=/docs/templates-sales-overview--docs) |
+| Menu lateral (básico) | [templates-menu-lateral--basico](/?path=/story/templates-menu-lateral--basico) | [docs](/?path=/docs/templates-menu-lateral--docs) |
+| Menu lateral (altura compacta) | [templates-menu-lateral--altura-compacta](/?path=/story/templates-menu-lateral--altura-compacta) | |
+| Menu lateral multinível (acordeão) | [templates-menu-lateral--multinivel-acordeao](/?path=/story/templates-menu-lateral--multinivel-acordeao) | |
+| Menu lateral Reader (categorizado) | [templates-menu-lateral-reader--com-menu-categorizado](/?path=/story/templates-menu-lateral-reader--com-menu-categorizado) | [docs](/?path=/docs/templates-menu-lateral-reader--docs) |
+| Menu lateral Reader (árvore de documentação) | [templates-menu-lateral-reader--arvore-documentacao](/?path=/story/templates-menu-lateral-reader--arvore-documentacao) | |
+| Chat IA | [templates-chat-ia--conversa](/?path=/story/templates-chat-ia--conversa) | [docs](/?path=/docs/templates-chat-ia--docs) |
+| App Shell + Editor | [templates-app-shell-editor--editor](/?path=/story/templates-app-shell-editor--editor) | [docs](/?path=/docs/templates-app-shell-editor--docs) |
+| Workbench IDE | [templates-workbench-ide--tres-paineis](/?path=/story/templates-workbench-ide--tres-paineis) | [docs](/?path=/docs/templates-workbench-ide--docs) |
+| Reader com abas e canvas | [templates-reader-abas-canvas--com-canvas](/?path=/story/templates-reader-abas-canvas--com-canvas) | [docs](/?path=/docs/templates-reader-abas-canvas--docs) |
+| Product Shell (dashboard) | [templates-productshell--dashboard](/?path=/story/templates-productshell--dashboard) | |
+
+Para gerar capturas em ambos os temas: `node scripts/shot.cjs --filter "templates-" --theme both --full` (flags `--wait <ms>`, `--motion`). A rastreabilidade bloco-a-bloco (componente da biblioteca × parte local) está em [Docs / Evidências](/?path=/docs/docs-evidências--docs).

@@ -1,0 +1,26 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VFileUploadStories from './VFileUpload.stories';
+
+<Meta of={VFileUploadStories} />
+# File Upload
+**Categoria:** form  
+Upload de arquivos com dropzone, validação, progresso e lista de arquivos.
+
+## Component
+<Canvas of={VFileUploadStories.Dropzone} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VFileUpload } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VFileUpload size="md" multiple accept="image/*,.pdf" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />

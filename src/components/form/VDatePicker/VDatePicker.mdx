@@ -1,0 +1,26 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VDatePickerStories from './VDatePicker.stories';
+
+<Meta of={VDatePickerStories} />
+# Date Picker
+**Categoria:** form  
+Date picker flexível para data única ou intervalo, com calendário acessível e presets.
+
+## Component
+<Canvas of={VDatePickerStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VDatePicker } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VDatePicker size="md" placeholder="Select date" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />

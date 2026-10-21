@@ -1,0 +1,89 @@
+.v-swipe-row {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--v-radius-md);
+  clip-path: inset(0 round var(--v-radius-md));
+  background: var(--v-color-surface);
+  font-family: var(--v-font-family-sans);
+
+  &--disabled {
+    opacity: var(--v-state-disabled-opacity);
+    pointer-events: none;
+  }
+
+  &__actions {
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    display: flex;
+    align-items: stretch;
+    // Nothing of the action layer may be painted while the row is at rest
+    // (avoids anti-aliased colour fringes on the rounded corners).
+    visibility: hidden;
+    transition: visibility 0s linear var(--v-motion-normal);
+  }
+
+  &--open &__actions,
+  &--dragging &__actions {
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  &__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--v-swipe-row-action-min-width);
+    padding-inline: var(--v-space-3);
+    border: 0;
+    color: var(--v-color-text);
+    background: var(--v-color-neutral-200);
+    font-size: var(--v-font-size-text-small);
+    white-space: nowrap;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: calc(var(--v-focus-ring-width) * -1);
+    }
+
+    &--destructive {
+      color: var(--v-color-error-contrast);
+      background: var(--v-color-error-base);
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    border-radius: inherit;
+    background: var(--v-color-surface);
+    transition: transform var(--v-motion-normal) var(--v-ease-standard);
+    touch-action: pan-y;
+    will-change: transform;
+    outline: none;
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: calc(var(--v-focus-ring-width) * -1);
+    }
+  }
+
+  &--expressive &__content {
+    cursor: grab;
+    user-select: none;
+  }
+
+  &--dragging &__content {
+    cursor: grabbing;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-swipe-row__content,
+  .v-swipe-row__actions {
+    transition: none;
+  }
+}

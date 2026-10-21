@@ -1,0 +1,42 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VButtonStories from './VButton.stories';
+
+<Meta of={VButtonStories} />
+# Button
+**Categoria:** form  
+Disparador de ação versátil para ações primárias, secundárias e contextuais. É o controle de ação fundamental do sistema: confirma formulários ("Save changes"), cria recursos ("Create project"), cancela fluxos ("Cancel"), abre menus contextuais ("…") e sinaliza processamento (loading). Card lateral da doc resume a diretriz de uso: "Buttons help users take action and make progress. Keep labels clear and concise."
+
+## Component
+<Canvas of={VButtonStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VButton } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VButton size="md" variant="primary" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Appear | opacity/transform | 100ms | ease-out |
+| Hover | background/box-shadow | 100ms | ease-out |
+| Press | transform scale(.98) | 80ms | ease-out |
+| Loading | spinner rotate | 200ms | linear |
+| Focus | outline/box-shadow | 100ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa `<button>`, foco visível com anel `0 0 0 3px rgba(99,102,241,.3)`, `aria-label` obrigatório em icon buttons, target mínimo 44×44px, teclado Enter/Space conforme padrão nativo.
+## Anatomy
+Root → optional leading icon → label/slot → optional loading spinner. Focus ring externo. Data-test-ids: `v-button` (root, `data-variant`/`data-size`/`data-state`), `v-button-label`, `v-button-icon`, `v-button-spinner`.

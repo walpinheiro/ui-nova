@@ -1,0 +1,78 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VAlertStories from './VAlert.stories';
+
+<Meta of={VAlertStories} />
+
+# VAlert
+
+Mensagem **dentro do conteúdo** (formulário, card, seção): ocupa a largura do container, com ícone na cor da variante, fundo suave e borda leve. Cinco variantes semânticas, três tamanhos, fechamento opcional e uma transição curta.
+
+**VAlert × VBanner:** use o `VAlert` para algo sobre o conteúdo onde ele aparece. Para um aviso da página ou do app inteiro (manutenção, trial, anúncio), use o `VBanner`, que é uma faixa de ponta a ponta no topo.
+
+## Overview
+
+<Canvas of={VAlertStories.Default} />
+
+Use an alert for information that should be announced immediately. Keep the message concise and pair the icon with text so meaning is never conveyed by color alone.
+
+## Variants
+
+<Stories includePrimary={false} />
+
+`info` (`info`), `success` (`circle-check`), `warning` (`triangle-alert`), `danger` (`circle-alert`) e `neutral` (`info`). O fundo usa o token `*-soft`, a borda é o `*-base` suavizado e o ícone usa o `*-strong`.
+
+## Anatomy
+
+- Ícone: glifo de 18px (16px no `sm`, 20px no `lg`) na cor da variante, alinhado à primeira linha; substituível pelo slot `icon`.
+- Content: `title`, optional `description`, and optional default/message slot.
+- Action slot: optional inline action content.
+- Close button: native keyboard-accessible button when `dismissible` is true.
+- Container: superfície arredondada com borda leve e largura do container. A prop `layout` está obsoleta (o alerta sempre preenche o container).
+
+## Sizes and states
+
+`sm` (texto 12px, compacto), `md` (14px, padrão) e `lg` (mais respiro). `disabled` prevents dismissal and reduces emphasis; `loading` exposes `aria-busy` and replaces the icon with a spinner. Set `modelValue` to control visibility, or omit it for internal dismissal state.
+
+## Props
+
+<Controls />
+
+## Events and slots
+
+- `dismiss`: emitted after a dismissible alert is closed.
+- `update:modelValue`: emitted with `false` when an alert is dismissed.
+- `title`, `description`, `icon`, and `action` named slots customize anatomy; the default slot renders a message.
+
+## Motion
+
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Close / enter | `opacity`, `transform` | `--v-motion-normal` | `--v-ease-in` |
+| Close button hover | `background` | `--v-motion-normal` | `--v-ease-out` |
+| Close button press | `transform` | `--v-motion-press` | `--v-ease-out` |
+| Loading | `transform` | `--v-motion-spin-duration` | `linear` |
+
+`prefers-reduced-motion: reduce` removes transitions, transforms, and the loading animation.
+
+## Accessibility
+
+The root uses semantic `role="alert"` and `aria-atomic="true"`. The close control is a native button with an accessible label and supports Tab, Enter, and Space through native button behavior. Disabled and loading states expose `aria-disabled`/`aria-busy`, and the component uses icon plus text rather than color alone.
+
+## Do / Don’t
+
+- Do use short, actionable copy and the correct semantic variant.
+- Do keep a close button optional and label it when present.
+- Don’t use an alert as an overlay or a replacement for a dialog.
+- Don’t communicate meaning through color without text or an icon.
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VAlert } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VAlert variant="info" size="md" layout="inline" title="New update available!" description="Version 2.4 includes performance improvements." dismissible />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").

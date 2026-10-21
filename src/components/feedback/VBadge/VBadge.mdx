@@ -1,0 +1,118 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VBadgeStories from './VBadge.stories';
+
+<Meta of={VBadgeStories} />
+
+# Badge
+
+Badge é um rótulo compacto para **status**, contagens e indicadores. Não é um chip de ação.
+
+## Quando usar Badge vs Tag
+
+| Use **Badge** (`VBadge`) | Use **Tag** (`VTag`) |
+|---|---|
+| Status: Ready, Completed, Active, Warning, New | Ação compacta: “Add Goals”, “Filter” |
+| Contagem (`:count="12"`), dot de presença, “Pro” / “Beta” | Token removível (`VTagInput`) |
+| Indicador no header do card (`#header-trailing`) | Categoria overlay no card (`badge="Product"`) |
+
+Badge é um **sinal**. Tag é um **controle**. Não finja um botão de ação com Badge.
+
+Filtros com severidade colorida (success/warning/danger) podem continuar como Badge. Tokens sem semântica de status usam Tag.
+
+## Overview
+
+<Canvas of={VBadgeStories.Hero} />
+
+O tamanho `md` é o padrão. Use texto junto da cor para que a informação permaneça compreensível sem percepção de cor.
+
+## Anatomy
+
+1. **Container** — a pílula com fundo, borda e estados visuais.
+2. **Label** — o texto do slot padrão.
+3. **Optional leading visual** — ícone, dot de status ou contador.
+
+Cada parte relevante expõe um `data-test-id` estável: `badge`, `badge-label`, `badge-icon`, `badge-dot`, `badge-count` e `badge-loader`.
+
+## Variants
+
+<Canvas of={VBadgeStories.Variants} />
+
+`neutral`, `success`, `warning`, `danger`, `count`, `dot`, `outlined`, `purple` (como “Beta”) e `primary` (para destaque, como “Pro”). `default` e `subtle` continuam aceitos como aliases legados de `neutral`.
+
+## Sizes
+
+<Canvas of={VBadgeStories.Sizes} />
+
+`xs`, `sm`, `md` e `lg` usam a escala de tipografia e espaçamento existente do design system.
+
+## States
+
+<Canvas of={VBadgeStories.States} />
+
+Badges não-interativos são `span`s e não entram na ordem de tabulação. Com `interactive`, o componente usa um `button` nativo com hover, `:focus-visible`, pressed/selected, disabled e loading.
+
+## Props
+
+<Controls />
+
+| Prop | Tipo | Descrição |
+|---|---|---|
+| `variant` | `VBadgeVariant` | Visual semântico do badge. |
+| `size` | `xs \| sm \| md \| lg` | Densidade do badge. |
+| `count` | `string \| number` | Exibe uma pílula de contagem e ativa a variante `count` por padrão. |
+| `dot` | `boolean` | Exibe o indicador antes do label; a cor segue o tom do badge (danger, warning, primary, neutral; success/dot = verde). |
+| `dotColor` | `string` | Sobrescreve a cor do dot (qualquer cor CSS). |
+| `icon` | `string` | Ícone textual/nomeado; `crown`, `warning`, `info` e `check` têm glifos padrão. Use o slot `icon` para customizar. |
+| `interactive` | `boolean` | Renderiza um botão nativo navegável por teclado. |
+| `selected` | `boolean` | Estado selecionado controlado; sem a prop, o botão alterna internamente. |
+| `disabled` / `loading` | `boolean` | Impede interação; loading preserva o layout e indica busy. |
+| `ariaLabel` | `string` | Nome acessível explícito. |
+| `live` | `boolean` | Expõe `role="status"`; count e dot já são status por padrão. |
+
+## Events and slots
+
+- `click` — emitido após uma ativação interativa válida.
+- `select` — emitido quando o badge interativo é ativado.
+- `update:selected` — emite o próximo valor de seleção.
+- `default` — label do badge.
+- `icon` — visual opcional antes do label.
+
+## Motion
+
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Enter | `opacity`, `transform: scale()` | `--v-motion-normal` (160ms) | `--v-ease-out` |
+| Hover / pressed | `background-color`, `transform` | `--v-motion-fast` (100ms) | `--v-ease-standard` |
+| Loading | `transform: rotate()` | `--v-motion-spin-duration` | `linear` |
+
+`prefers-reduced-motion: reduce` remove animações e transições não essenciais.
+
+## Accessibility
+
+O estado não depende apenas de cor: o label permanece textual, count/dot usam conteúdo semântico, e os estados interativos usam `button`, `aria-pressed`, `aria-disabled`, `aria-busy` e foco visível. Use `ariaLabel` para labels que não estejam completos no slot.
+
+## Usage
+
+```vue
+<VBadge>New</VBadge>
+<VBadge variant="success">Active</VBadge>
+<VBadge :count="12" />
+<VBadge dot variant="success">Online</VBadge>
+<VBadge dot variant="danger">Offline</VBadge>
+<VBadge dot dotColor="#8b5cf6">Custom</VBadge>
+<VBadge variant="primary" icon="crown">Pro</VBadge>
+```
+
+Para ações compactas e tokens removíveis, use `VTag` — não `VBadge`.
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VBadge } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VBadge size="md" variant="neutral" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").

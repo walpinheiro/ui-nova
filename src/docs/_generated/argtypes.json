@@ -1,0 +1,3789 @@
+{
+  "VCard": {
+    "title": {
+      "description": "Título exibido."
+    },
+    "description": {
+      "description": "Texto descritivo secundário."
+    },
+    "badge": {
+      "description": "Overlay category tag rendered as `VTag` (not `VBadge`). Use `#header-trailing` + `VBadge` for status."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `elevated`, `outlined`, `filled`, `interactive`.",
+      "options": [
+        "elevated",
+        "outlined",
+        "filled",
+        "interactive"
+      ]
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "interactive": {
+      "description": "When true the card becomes keyboard-focusable/actionable (tabindex 0, Enter/Space)."
+    },
+    "selected": {
+      "description": "Controlled selected appearance (check + primary tint). Does not toggle on click;\nthe parent owns selection, matching existing interactive/click behavior."
+    },
+    "mediaPlacement": {
+      "description": "Where `#media` sits relative to title/body. Defaults to top (current anatomy). Valores: `top`, `start`, `end`, `bottom`.",
+      "options": [
+        "top",
+        "start",
+        "end",
+        "bottom"
+      ]
+    },
+    "refineFrame": {
+      "description": "Refine Frame stage for AI media generation without layout shift. Valores: `queued`, `generating`, `refining`, `complete`.",
+      "options": [
+        "queued",
+        "generating",
+        "refining",
+        "complete"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    }
+  },
+  "VInspectorPanel": {
+    "open": {
+      "description": "Controls visibility. `v-model:open` (primary) — `modelValue` accepted as alias."
+    },
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "title": {
+      "description": "Título exibido."
+    },
+    "tabs": {
+      "description": "Prop `tabs` (`VInspectorPanelTab[]`)."
+    },
+    "activeTab": {
+      "description": "Prop `activeTab` (`string`)."
+    },
+    "sections": {
+      "description": "Prop `sections` (`VInspectorPanelSection[]`)."
+    },
+    "expandedSections": {
+      "description": "Ids de grupos/itens abertos (controlado)."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `compact`, `default`, `wide`.",
+      "options": [
+        "compact",
+        "default",
+        "wide"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `minimal`, `tabs`, `floating`.",
+      "options": [
+        "default",
+        "minimal",
+        "tabs",
+        "floating"
+      ]
+    },
+    "showClose": {
+      "description": "Prop `showClose` (`boolean`)."
+    },
+    "dismissible": {
+      "description": "Escape closes the panel and returns focus to the opener."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VPanel": {
+    "title": {
+      "description": "Título exibido."
+    },
+    "description": {
+      "description": "Texto descritivo secundário."
+    },
+    "icon": {
+      "description": "Ícone (objeto Iconify)."
+    },
+    "headingLevel": {
+      "description": "Prop `headingLevel` (`VPanelHeadingLevel`). Valores: `2`, `3`.",
+      "options": [
+        "2",
+        "3"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `bordered`, `elevated`, `filled`.",
+      "options": [
+        "default",
+        "bordered",
+        "elevated",
+        "filled"
+      ]
+    },
+    "open": {
+      "description": "Controls visibility. `v-model:open` (primary) — `modelValue` accepted as alias."
+    },
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "interactive": {
+      "description": "When true the panel becomes keyboard-focusable (tabindex 0)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VResizablePanel": {
+    "size": {
+      "description": "v-model:size — largura (vertical) ou altura (horizontal) em px, ou preset sm|md|lg."
+    },
+    "orientation": {
+      "description": "vertical = sidebar (handle vertical); horizontal = bottom drawer (handle horizontal). Valores: `vertical`, `horizontal`.",
+      "options": [
+        "vertical",
+        "horizontal"
+      ]
+    },
+    "min": {
+      "description": "Tamanho mínimo permitido em px (spec §2 parte 4)."
+    },
+    "max": {
+      "description": "Tamanho máximo permitido em px (spec §2 parte 5)."
+    },
+    "collapsible": {
+      "description": "Exibe o trigger de colapso ‹/› (spec §2 parte 6)."
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `left`, `right`, `bottom`, `collapsible`.",
+      "options": [
+        "left",
+        "right",
+        "bottom",
+        "collapsible"
+      ]
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VSection": {
+    "title": {
+      "description": "Título exibido."
+    },
+    "description": {
+      "description": "Texto descritivo secundário."
+    },
+    "icon": {
+      "description": "Ícone (objeto Iconify)."
+    },
+    "headingLevel": {
+      "description": "Prop `headingLevel` (`VSectionHeadingLevel`). Valores: `2`, `3`.",
+      "options": [
+        "2",
+        "3"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `elevated`, `bordered`, `borderless`, `tinted`.",
+      "options": [
+        "default",
+        "elevated",
+        "bordered",
+        "borderless",
+        "tinted"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VSheet": {
+    "open": {
+      "description": "Controls visibility. `v-model:open` (primary) — `modelValue` accepted as alias."
+    },
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "side": {
+      "description": "Edge the sheet slides in from. Valores: `right`, `left`, `bottom`, `top`.",
+      "options": [
+        "right",
+        "left",
+        "bottom",
+        "top"
+      ]
+    },
+    "size": {
+      "description": "Width preset for side sheets (sm 320 / md 480 / lg 640 / xl 800). Valores: `sm`, `md`, `lg`, `xl`.",
+      "options": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "fullHeight": {
+      "description": "Immersive full-viewport height (bottom → 100vh; side sheets keep edge-to-edge height)."
+    },
+    "title": {
+      "description": "Título exibido."
+    },
+    "description": {
+      "description": "Texto descritivo secundário."
+    },
+    "showClose": {
+      "description": "Prop `showClose` (`boolean`)."
+    },
+    "closeLabel": {
+      "description": "Prop `closeLabel` (`string`)."
+    },
+    "dismissible": {
+      "description": "Backdrop click + Escape dismiss the sheet."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "ariaDescribedby": {
+      "description": "Prop `ariaDescribedby` (`string`)."
+    },
+    "rootClass": {
+      "description": "Optional root/surface class for composed surfaces (e.g. VDrawer)."
+    },
+    "surfaceClass": {
+      "description": "Prop `surfaceClass` (`string`)."
+    },
+    "testIds": {
+      "description": "Prop `testIds` (`VSheetTestIds`)."
+    },
+    "rootDataAttrs": {
+      "description": "Extra data-* attributes on the root wrapper (for composed surfaces like VDrawer)."
+    }
+  },
+  "VSplitView": {
+    "sizes": {
+      "description": "Pane sizes. Numbers > 24 are px, numbers <= 24 are flex units, strings accept px/%/fr."
+    },
+    "orientation": {
+      "description": "vertical = panes lado a lado (divisor vertical). horizontal = panes empilhados. Valores: `vertical`, `horizontal`.",
+      "options": [
+        "vertical",
+        "horizontal"
+      ]
+    },
+    "mode": {
+      "description": "fixed = sem resize; resizable = arrastar; collapsible = resizable + recolher. Default resizable. Valores: `fixed`, `resizable`, `collapsible`.",
+      "options": [
+        "fixed",
+        "resizable",
+        "collapsible"
+      ]
+    },
+    "collapsible": {
+      "description": "Mostra controle de recolher no divisor. Opt-in, default false."
+    },
+    "persistKey": {
+      "description": "Chave de persistencia: salva/restaura sizes em localStorage (Pro tip spec §2/§5)."
+    },
+    "defaultSize": {
+      "description": "Tamanho inicial(px) usado como referencia para panes flexiveis."
+    },
+    "minSize": {
+      "description": "Tamanho minimo(px) por pane."
+    },
+    "maxSize": {
+      "description": "Tamanho maximo(px) por pane."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VWindow": {
+    "title": {
+      "description": "Título exibido."
+    },
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "open": {
+      "description": "Controla a abertura (`v-model:open`)."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `minimal`, `borderless`, `modal`.",
+      "options": [
+        "default",
+        "minimal",
+        "borderless",
+        "modal"
+      ]
+    },
+    "active": {
+      "description": "Marca o item como ativo/selecionado."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "resizable": {
+      "description": "Prop `resizable` (`boolean`)."
+    },
+    "showActions": {
+      "description": "Prop `showActions` (`boolean`)."
+    },
+    "showTrafficLights": {
+      "description": "Prop `showTrafficLights` (`boolean`)."
+    },
+    "showAppIcon": {
+      "description": "Prop `showAppIcon` (`boolean`)."
+    },
+    "showMinimize": {
+      "description": "Prop `showMinimize` (`boolean`)."
+    },
+    "showSidebar": {
+      "description": "Prop `showSidebar` (`boolean`)."
+    },
+    "width": {
+      "description": "Largura do componente."
+    },
+    "height": {
+      "description": "Altura do componente."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VAccordion": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "multiple": {
+      "description": "Permite seleção múltipla."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `divided`, `bordered`, `leading-icon`.",
+      "options": [
+        "default",
+        "divided",
+        "bordered",
+        "leading-icon"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VAccordionItem": {
+    "id": {
+      "description": "Stable DOM/test slug. It also becomes the value when `value` is omitted."
+    },
+    "value": {
+      "description": "Valor do item."
+    },
+    "title": {
+      "description": "Título exibido."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VAgentChip": {
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "status": {
+      "description": "Indicador de status. Valores: `pending`, `success`, `error`.",
+      "options": [
+        "pending",
+        "success",
+        "error"
+      ]
+    },
+    "durationMs": {
+      "description": "Prop `durationMs` (`number`)."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "retryLabel": {
+      "description": "Prop `retryLabel` (`string`)."
+    }
+  },
+  "VAlert": {
+    "modelValue": {
+      "description": "Controls visibility when supplied. Without it, the alert is internally dismissible."
+    },
+    "title": {
+      "description": "Título exibido."
+    },
+    "description": {
+      "description": "Texto descritivo secundário."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "dismissible": {
+      "description": "Permite dispensar/fechar o componente."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `info`, `success`, `warning`, `danger`, `neutral`.",
+      "options": [
+        "info",
+        "success",
+        "warning",
+        "danger",
+        "neutral"
+      ]
+    },
+    "layout": {
+      "description": "Layout/disposição do componente. Valores: `inline`, `banner`.",
+      "options": [
+        "inline",
+        "banner"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "dismissLabel": {
+      "description": "Rótulo acessível do botão de fechar."
+    }
+  },
+  "VBadge": {
+    "size": {
+      "description": "Tamanho do componente. Valores: `xs`, `sm`, `md`, `lg`.",
+      "options": [
+        "xs",
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `neutral`, `default`, `primary`, `purple`, `success`, `warning`, `danger`, `count`, `dot`, `outlined`, `subtle`.",
+      "options": [
+        "neutral",
+        "default",
+        "primary",
+        "purple",
+        "success",
+        "warning",
+        "danger",
+        "count",
+        "dot",
+        "outlined",
+        "subtle"
+      ]
+    },
+    "count": {
+      "description": "Quantidade exibida."
+    },
+    "dot": {
+      "description": "Exibe um ponto indicador."
+    },
+    "dotColor": {
+      "description": "Overrides the dot color (any CSS color). Defaults to the badge tone."
+    },
+    "icon": {
+      "description": "Ícone (objeto Iconify)."
+    },
+    "interactive": {
+      "description": "Prop `interactive` (`boolean`)."
+    },
+    "removable": {
+      "description": "Prop `removable` (`boolean`)."
+    },
+    "leaving": {
+      "description": "Prop `leaving` (`boolean`)."
+    },
+    "selected": {
+      "description": "Prop `selected` (`boolean`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "removeLabel": {
+      "description": "Prop `removeLabel` (`string`)."
+    },
+    "live": {
+      "description": "Prop `live` (`boolean`)."
+    },
+    "dataTestId": {
+      "description": "Prop `dataTestId` (`string`)."
+    },
+    "removeTestId": {
+      "description": "Prop `removeTestId` (`string`)."
+    }
+  },
+  "VBanner": {
+    "modelValue": {
+      "description": "Controls visibility when the banner is used with v-model."
+    },
+    "title": {
+      "description": "Título exibido."
+    },
+    "description": {
+      "description": "Texto descritivo secundário."
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `info`, `success`, `warning`, `error`, `neutral`.",
+      "options": [
+        "info",
+        "success",
+        "warning",
+        "error",
+        "neutral"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "closable": {
+      "description": "Exibe o botão de fechar."
+    },
+    "closeOnEscape": {
+      "description": "Fecha ao pressionar Esc."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "dismissLabel": {
+      "description": "Rótulo acessível do botão de fechar."
+    },
+    "dismissedText": {
+      "description": "Prop `dismissedText` (`string`)."
+    }
+  },
+  "VDialog": {
+    "modelValue": {
+      "description": "Controlled visibility for the native `v-model` contract."
+    },
+    "open": {
+      "description": "`open` is an explicit alias for consumers that prefer `v-model:open`."
+    },
+    "title": {
+      "description": "Título exibido."
+    },
+    "description": {
+      "description": "Texto descritivo secundário."
+    },
+    "showClose": {
+      "description": "Prop `showClose` (`boolean`)."
+    },
+    "dismissible": {
+      "description": "Backdrop click and Escape dismiss the dialog when enabled."
+    },
+    "persistent": {
+      "description": "Prevents backdrop and Escape dismissal in confirmation mode."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `basic`, `confirmation`, `alert`, `form`, `fullscreen`.",
+      "options": [
+        "basic",
+        "confirmation",
+        "alert",
+        "form",
+        "fullscreen"
+      ]
+    },
+    "intent": {
+      "description": "Semantic intent for built-in confirmation actions. Valores: `neutral`, `destructive`, `success`.",
+      "options": [
+        "neutral",
+        "destructive",
+        "success"
+      ]
+    },
+    "cancelText": {
+      "description": "Prop `cancelText` (`string`)."
+    },
+    "confirmText": {
+      "description": "Prop `confirmText` (`string`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "ariaDescribedby": {
+      "description": "Prop `ariaDescribedby` (`string`)."
+    },
+    "closeLabel": {
+      "description": "Prop `closeLabel` (`string`)."
+    }
+  },
+  "VDrawer": {
+    "modelValue": {
+      "description": "Controlled visibility (`v-model`)."
+    },
+    "open": {
+      "description": "Alias for `modelValue` (`v-model:open`)."
+    },
+    "title": {
+      "description": "Título exibido."
+    },
+    "placement": {
+      "description": "Edge the drawer slides in from (design poster default: right). Valores: `right`, `left`, `top`, `bottom`.",
+      "options": [
+        "right",
+        "left",
+        "top",
+        "bottom"
+      ]
+    },
+    "side": {
+      "description": "Alias for `placement`. Valores: `right`, `left`, `top`, `bottom`.",
+      "options": [
+        "right",
+        "left",
+        "top",
+        "bottom"
+      ]
+    },
+    "size": {
+      "description": "Width preset for side drawers (sm 320 / md 480 / lg 640). Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "width": {
+      "description": "Alias for `size` from the design doc code snippet (`width=\"md\"`). Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "showClose": {
+      "description": "Prop `showClose` (`boolean`)."
+    },
+    "dismissible": {
+      "description": "Backdrop click and Escape dismiss the drawer."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "ariaDescribedby": {
+      "description": "Prop `ariaDescribedby` (`string`)."
+    },
+    "closeLabel": {
+      "description": "Prop `closeLabel` (`string`)."
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `primary`, `subtle`.",
+      "options": [
+        "default",
+        "primary",
+        "subtle"
+      ]
+    }
+  },
+  "VEmptyState": {
+    "title": {
+      "description": "Título exibido."
+    },
+    "description": {
+      "description": "Texto descritivo secundário."
+    },
+    "action": {
+      "description": "Prop `action` (`VEmptyStateAction`)."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `results`, `files`, `notifications`, `create`.",
+      "options": [
+        "default",
+        "results",
+        "files",
+        "notifications",
+        "create"
+      ]
+    },
+    "compact": {
+      "description": "Prop `compact` (`boolean`)."
+    },
+    "showIllustration": {
+      "description": "Prop `showIllustration` (`boolean`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "headingLevel": {
+      "description": "Prop `headingLevel` (`2 | 3 | 4`)."
+    }
+  },
+  "VNotificationCenter": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "notifications": {
+      "description": "Prop `notifications` (`VNotificationCenterItem[]`)."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `compact`, `grouped`, `feed`, `drawer`, `default`.",
+      "options": [
+        "compact",
+        "grouped",
+        "feed",
+        "drawer",
+        "default"
+      ]
+    },
+    "placement": {
+      "description": "Posição do overlay em relação ao gatilho. Valores: `bottom-end`, `bottom-start`, `top-end`, `top-start`.",
+      "options": [
+        "bottom-end",
+        "bottom-start",
+        "top-end",
+        "top-start"
+      ]
+    },
+    "activeTab": {
+      "description": "Prop `activeTab` (`VNotificationCenterTab`). Valores: `all`, `unread`, `mentions`, `updates`.",
+      "options": [
+        "all",
+        "unread",
+        "mentions",
+        "updates"
+      ]
+    },
+    "searchQuery": {
+      "description": "Prop `searchQuery` (`string`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "triggerLabel": {
+      "description": "Prop `triggerLabel` (`string`)."
+    },
+    "headerTitle": {
+      "description": "Prop `headerTitle` (`string`)."
+    },
+    "markAllLabel": {
+      "description": "Prop `markAllLabel` (`string`)."
+    },
+    "viewAllLabel": {
+      "description": "Prop `viewAllLabel` (`string`)."
+    },
+    "emptyLabel": {
+      "description": "Prop `emptyLabel` (`string`)."
+    },
+    "closeLabel": {
+      "description": "Prop `closeLabel` (`string`)."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    },
+    "expressiveLabel": {
+      "description": "Expressive pill label shown when the bell toggle is open."
+    }
+  },
+  "VNotificationItem": {
+    "avatar": {
+      "description": "Prop `avatar` (`string`)."
+    },
+    "avatarAlt": {
+      "description": "Prop `avatarAlt` (`string`)."
+    },
+    "title": {
+      "description": "Título exibido."
+    },
+    "preview": {
+      "description": "Prop `preview` (`string`)."
+    },
+    "time": {
+      "description": "Prop `time` (`string`)."
+    },
+    "unread": {
+      "description": "Prop `unread` (`boolean`)."
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `avatar`, `system`, `success`, `actionable`, `default`.",
+      "options": [
+        "avatar",
+        "system",
+        "success",
+        "actionable",
+        "default"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "dismissible": {
+      "description": "Permite dispensar/fechar o componente."
+    },
+    "showMenu": {
+      "description": "Prop `showMenu` (`boolean`)."
+    },
+    "actions": {
+      "description": "Prop `actions` (`VNotificationItemAction[]`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "dismissLabel": {
+      "description": "Rótulo acessível do botão de fechar."
+    },
+    "menuLabel": {
+      "description": "Prop `menuLabel` (`string`)."
+    }
+  },
+  "VProgress": {
+    "variant": {
+      "description": "Linear bar or circular ring display. Valores: `linear`, `circular`.",
+      "options": [
+        "linear",
+        "circular"
+      ]
+    },
+    "size": {
+      "description": "Visual density of the track and indicator. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "value": {
+      "description": "Completion percentage from 0 to 100."
+    },
+    "state": {
+      "description": "Visual and semantic progress state. Valores: `determinate`, `indeterminate`, `success`, `error`.",
+      "options": [
+        "determinate",
+        "indeterminate",
+        "success",
+        "error"
+      ]
+    },
+    "label": {
+      "description": "Visible label text, auto percentage, or hidden when `false`."
+    },
+    "ariaLabel": {
+      "description": "Accessible name override for the progressbar."
+    },
+    "dataTestId": {
+      "description": "Root anatomy test id override."
+    }
+  },
+  "VSkeleton": {
+    "variant": {
+      "description": "Content pattern rendered by the skeleton. Valores: `text`, `avatar`, `card`, `table-row`, `chart`.",
+      "options": [
+        "text",
+        "avatar",
+        "card",
+        "table-row",
+        "chart"
+      ]
+    },
+    "size": {
+      "description": "Scale of shapes within the selected variant. Valores: `xs`, `sm`, `md`, `lg`.",
+      "options": [
+        "xs",
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "lines": {
+      "description": "Number of text lines when `variant` is `text`."
+    },
+    "animated": {
+      "description": "Enables the shimmer animation while content is loading."
+    },
+    "paused": {
+      "description": "Freezes the shimmer while keeping the placeholder visible."
+    },
+    "disabled": {
+      "description": "Marks the placeholder unavailable and removes motion."
+    },
+    "ariaLabel": {
+      "description": "Accessible name announced to assistive technology."
+    }
+  },
+  "VSpinner": {
+    "variant": {
+      "description": "Visual style of the indicator. Valores: `circular`, `dots`, `ring`, `inline`, `lattice`.",
+      "options": [
+        "circular",
+        "dots",
+        "ring",
+        "inline",
+        "lattice"
+      ]
+    },
+    "color": {
+      "description": "Indicator color treatment. Valores: `default`, `primary`.",
+      "options": [
+        "default",
+        "primary"
+      ]
+    },
+    "size": {
+      "description": "Diameter of the spinner. Valores: `xs`, `sm`, `md`, `lg`, `xl`.",
+      "options": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "label": {
+      "description": "Accessible loading text announced to assistive technology."
+    },
+    "ariaLabel": {
+      "description": "Optional override for the accessible name."
+    },
+    "disabled": {
+      "description": "Freezes animation and marks the control unavailable."
+    },
+    "loading": {
+      "description": "Exposes a busy state for async contexts."
+    },
+    "paused": {
+      "description": "Pauses animation while keeping the indicator visible."
+    },
+    "latticeSize": {
+      "description": "Lattice Loader: grid dimension (3 or 4)."
+    },
+    "verb": {
+      "description": "Lattice Loader: status verb beside the grid."
+    },
+    "resolved": {
+      "description": "Lattice Loader: resolved state."
+    }
+  },
+  "VStatusMark": {
+    "state": {
+      "description": "Prop `state` (`VStatusMarkState`). Valores: `idle`, `running`, `success`, `error`.",
+      "options": [
+        "idle",
+        "running",
+        "success",
+        "error"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    }
+  },
+  "VThoughtLine": {
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "steps": {
+      "description": "Prop `steps` (`VThoughtLineStep[]`)."
+    },
+    "duration": {
+      "description": "Duração em milissegundos."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    },
+    "defaultExpanded": {
+      "description": "Prop `defaultExpanded` (`boolean`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VToast": {
+    "message": {
+      "description": "Prop `message` (`string`)."
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `success`, `info`, `warning`, `error`, `loading`.",
+      "options": [
+        "success",
+        "info",
+        "warning",
+        "error",
+        "loading"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "duration": {
+      "description": "Duração em milissegundos."
+    },
+    "closable": {
+      "description": "Exibe o botão de fechar."
+    },
+    "showProgress": {
+      "description": "Mostra a barra de progresso do tempo restante."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "dismissLabel": {
+      "description": "Rótulo acessível do botão de fechar."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    }
+  },
+  "VTooltip": {
+    "content": {
+      "description": "Prop `content` (`string`)."
+    },
+    "placement": {
+      "description": "Posição do overlay em relação ao gatilho. Valores: `top`, `bottom`, `left`, `right`.",
+      "options": [
+        "top",
+        "bottom",
+        "left",
+        "right"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`, `xl`.",
+      "options": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `with-icon`, `success`, `error`, `brand`, `light`.",
+      "options": [
+        "default",
+        "with-icon",
+        "success",
+        "error",
+        "brand",
+        "light"
+      ]
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "showArrow": {
+      "description": "Prop `showArrow` (`boolean`)."
+    },
+    "hideDelay": {
+      "description": "Prop `hideDelay` (`number`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    },
+    "warmGroup": {
+      "description": "Warm Tooltip: share open delay within a toolbar group."
+    }
+  },
+  "VButton": {
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "shape": {
+      "description": "`pill` is the fully rounded action used in dashboard headers. Valores: `default`, `pill`.",
+      "options": [
+        "default",
+        "pill"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `primary`, `secondary`, `ghost`, `outline`, `destructive`, `inverse`, `icon`, `loading`.",
+      "options": [
+        "primary",
+        "secondary",
+        "ghost",
+        "outline",
+        "destructive",
+        "inverse",
+        "icon",
+        "loading"
+      ]
+    },
+    "type": {
+      "description": "Native button behavior. Defaults to button to avoid accidental form submits. Valores: `button`, `submit`, `reset`.",
+      "options": [
+        "button",
+        "submit",
+        "reset"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    },
+    "microInteraction": {
+      "description": "Expressive micro-interaction pattern (Fuse, Hold, Pulse Heart). Valores: `default`, `fuse`, `hold`, `favorite`.",
+      "options": [
+        "default",
+        "fuse",
+        "hold",
+        "favorite"
+      ]
+    },
+    "undoWindow": {
+      "description": "Fuse Button: undo window in ms after action."
+    },
+    "holdDuration": {
+      "description": "Hold Button: ms to hold before confirm."
+    },
+    "favoriteCount": {
+      "description": "Pulse Heart: displayed count."
+    }
+  },
+  "VCheckbox": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "indeterminate": {
+      "description": "Estado indeterminado."
+    },
+    "motion": {
+      "description": "Micro-interaction intensity. `expressive` enables Spring Check animation. Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    },
+    "strikeThrough": {
+      "description": "Strike-through direction when checked (expressive mode)."
+    },
+    "doneOpacity": {
+      "description": "Label opacity when checked in expressive mode (0–1)."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "description": {
+      "description": "Texto descritivo secundário."
+    },
+    "helperText": {
+      "description": "Texto de apoio abaixo do campo."
+    },
+    "errorMessage": {
+      "description": "Mensagem de erro (ativa o estado inválido)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "name": {
+      "description": "Nome do campo (`name`)."
+    },
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "value": {
+      "description": "Valor do item."
+    },
+    "required": {
+      "description": "Marca o campo como obrigatório."
+    },
+    "linkHref": {
+      "description": "Prop `linkHref` (`string`)."
+    },
+    "linkLabel": {
+      "description": "Prop `linkLabel` (`string`)."
+    }
+  },
+  "VColorPicker": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `popover`, `inline`, `hex`, `opacity`, `preset`.",
+      "options": [
+        "popover",
+        "inline",
+        "hex",
+        "opacity",
+        "preset"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "showAlpha": {
+      "description": "Prop `showAlpha` (`boolean`)."
+    },
+    "presets": {
+      "description": "Prop `presets` (`string[]`)."
+    },
+    "recentColors": {
+      "description": "Prop `recentColors` (`string[]`)."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "inlineSwatches": {
+      "description": "Prop `inlineSwatches` (`string[]`)."
+    },
+    "selected": {
+      "description": "Prop `selected` (`boolean`)."
+    }
+  },
+  "VDatePicker": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "range": {
+      "description": "Prop `range` (`boolean`)."
+    },
+    "rangeValue": {
+      "description": "Prop `rangeValue` (`{ start: Date | null; end: Date | null }`)."
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `with-icon`, `with-preset`, `range`.",
+      "options": [
+        "default",
+        "with-icon",
+        "with-preset",
+        "range"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "placeholder": {
+      "description": "Texto de ajuda exibido quando vazio."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "format": {
+      "description": "Prop `format` (`string`)."
+    },
+    "showToday": {
+      "description": "Prop `showToday` (`boolean`)."
+    },
+    "showLeadingIcon": {
+      "description": "Prop `showLeadingIcon` (`boolean`)."
+    },
+    "clearable": {
+      "description": "Mostra um botão para limpar o valor."
+    },
+    "min": {
+      "description": "Valor mínimo."
+    },
+    "max": {
+      "description": "Valor máximo."
+    },
+    "disabledDates": {
+      "description": "Prop `disabledDates` (`Date[]`)."
+    },
+    "eventDates": {
+      "description": "Prop `eventDates` (`Date[]`)."
+    },
+    "preset": {
+      "description": "Prop `preset` (`string`)."
+    },
+    "presets": {
+      "description": "Prop `presets` (`VDatePickerPreset[]`)."
+    }
+  },
+  "VDateRangePicker": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `presets`, `inline`, `compact`, `with-time`.",
+      "options": [
+        "default",
+        "presets",
+        "inline",
+        "compact",
+        "with-time"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "placeholder": {
+      "description": "Texto de ajuda exibido quando vazio."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "format": {
+      "description": "Prop `format` (`string`)."
+    },
+    "compactFormat": {
+      "description": "Prop `compactFormat` (`string`)."
+    },
+    "enableTime": {
+      "description": "Prop `enableTime` (`boolean`)."
+    },
+    "presets": {
+      "description": "Prop `presets` (`VDateRangePickerPreset[]`)."
+    },
+    "min": {
+      "description": "Valor mínimo."
+    },
+    "max": {
+      "description": "Valor máximo."
+    },
+    "disabledDates": {
+      "description": "Prop `disabledDates` (`Date[]`)."
+    }
+  },
+  "VFileUpload": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `dropzone`, `button`, `compact`, `image`.",
+      "options": [
+        "dropzone",
+        "button",
+        "compact",
+        "image"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "accept": {
+      "description": "Prop `accept` (`string`)."
+    },
+    "multiple": {
+      "description": "Permite seleção múltipla."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "maxSize": {
+      "description": "Prop `maxSize` (`number`)."
+    },
+    "helperText": {
+      "description": "Texto de apoio abaixo do campo."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "buttonLabel": {
+      "description": "Prop `buttonLabel` (`string`)."
+    },
+    "dropzoneTitle": {
+      "description": "Prop `dropzoneTitle` (`string`)."
+    },
+    "dropzoneHint": {
+      "description": "Prop `dropzoneHint` (`string`)."
+    },
+    "autoUpload": {
+      "description": "Prop `autoUpload` (`boolean`)."
+    },
+    "simulateUpload": {
+      "description": "Prop `simulateUpload` (`boolean`)."
+    }
+  },
+  "VNumberInput": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "helperText": {
+      "description": "Texto de apoio abaixo do campo."
+    },
+    "errorMessage": {
+      "description": "Mensagem de erro (ativa o estado inválido)."
+    },
+    "placeholder": {
+      "description": "Texto de ajuda exibido quando vazio."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "readonly": {
+      "description": "Somente leitura: mostra o valor sem permitir edição."
+    },
+    "required": {
+      "description": "Marca o campo como obrigatório."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "min": {
+      "description": "Valor mínimo."
+    },
+    "max": {
+      "description": "Valor máximo."
+    },
+    "step": {
+      "description": "Incremento a cada passo."
+    },
+    "prefix": {
+      "description": "Prop `prefix` (`string`)."
+    },
+    "suffix": {
+      "description": "Prop `suffix` (`string`)."
+    },
+    "name": {
+      "description": "Nome do campo (`name`)."
+    },
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    },
+    "interaction": {
+      "description": "Scrub Field: drag horizontally to change value. Valores: `default`, `scrub`.",
+      "options": [
+        "default",
+        "scrub"
+      ]
+    }
+  },
+  "VOtpInput": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "length": {
+      "description": "Prop `length` (`number`)."
+    },
+    "masked": {
+      "description": "Prop `masked` (`boolean`)."
+    },
+    "autoSubmit": {
+      "description": "Prop `autoSubmit` (`boolean`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "errorMessage": {
+      "description": "Mensagem de erro (ativa o estado inválido)."
+    },
+    "success": {
+      "description": "Prop `success` (`boolean`)."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "separatorIndex": {
+      "description": "Prop `separatorIndex` (`number`)."
+    },
+    "helperText": {
+      "description": "Texto de apoio abaixo do campo."
+    },
+    "resendLabel": {
+      "description": "Prop `resendLabel` (`string`)."
+    },
+    "resendCooldown": {
+      "description": "Prop `resendCooldown` (`number`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    }
+  },
+  "VPasswordInput": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "helperText": {
+      "description": "Texto de apoio abaixo do campo."
+    },
+    "errorMessage": {
+      "description": "Mensagem de erro (ativa o estado inválido)."
+    },
+    "placeholder": {
+      "description": "Texto de ajuda exibido quando vazio."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "readonly": {
+      "description": "Somente leitura: mostra o valor sem permitir edição."
+    },
+    "required": {
+      "description": "Marca o campo como obrigatório."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "showStrength": {
+      "description": "Prop `showStrength` (`boolean`)."
+    },
+    "requirements": {
+      "description": "Prop `requirements` (`boolean`)."
+    },
+    "name": {
+      "description": "Nome do campo (`name`)."
+    },
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "autocomplete": {
+      "description": "Prop `autocomplete` (`string`)."
+    },
+    "revealLabel": {
+      "description": "Prop `revealLabel` (`string`)."
+    },
+    "maskLabel": {
+      "description": "Prop `maskLabel` (`string`)."
+    }
+  },
+  "VPromptBar": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "busy": {
+      "description": "Prop `busy` (`boolean`)."
+    },
+    "placeholder": {
+      "description": "Texto de ajuda exibido quando vazio."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "sendLabel": {
+      "description": "Prop `sendLabel` (`string`)."
+    },
+    "stopLabel": {
+      "description": "Prop `stopLabel` (`string`)."
+    },
+    "attachLabel": {
+      "description": "Prop `attachLabel` (`string`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "dictation": {
+      "description": "Voice Pill: show dictation mic control (on by default)."
+    },
+    "dictationLabel": {
+      "description": "Prop `dictationLabel` (`string`)."
+    },
+    "dictationLang": {
+      "description": "BCP-47 language for speech recognition."
+    }
+  },
+  "VRadioGroup": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "options": {
+      "description": "Lista de opções selecionáveis."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "description": {
+      "description": "Texto descritivo secundário."
+    },
+    "errorMessage": {
+      "description": "Mensagem de erro (ativa o estado inválido)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "layout": {
+      "description": "Layout/disposição do componente. Valores: `vertical`, `horizontal`, `card`.",
+      "options": [
+        "vertical",
+        "horizontal",
+        "card"
+      ]
+    },
+    "name": {
+      "description": "Nome do campo (`name`)."
+    },
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "required": {
+      "description": "Marca o campo como obrigatório."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    }
+  },
+  "VSearchField": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "placeholder": {
+      "description": "Texto de ajuda exibido quando vazio."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `standard`, `shortcut`, `command`.",
+      "options": [
+        "standard",
+        "shortcut",
+        "command"
+      ]
+    },
+    "shortcut": {
+      "description": "Prop `shortcut` (`boolean`)."
+    },
+    "shortcutKeys": {
+      "description": "Prop `shortcutKeys` (`string`)."
+    },
+    "clearable": {
+      "description": "Mostra um botão para limpar o valor."
+    },
+    "clearLabel": {
+      "description": "Rótulo acessível do botão de limpar."
+    },
+    "suggestions": {
+      "description": "Prop `suggestions` (`VSearchFieldSuggestion[]`)."
+    },
+    "name": {
+      "description": "Nome do campo (`name`)."
+    },
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "autocomplete": {
+      "description": "Prop `autocomplete` (`string`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VSelect": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "options": {
+      "description": "Lista de opções selecionáveis."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "placeholder": {
+      "description": "Texto de ajuda exibido quando vazio."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "errorMessage": {
+      "description": "Mensagem de erro (ativa o estado inválido)."
+    },
+    "leadingIcon": {
+      "description": "Prop `leadingIcon` (`string`)."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "clearable": {
+      "description": "Mostra um botão para limpar o valor."
+    },
+    "clearValue": {
+      "description": "Prop `clearValue` (`string`)."
+    },
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    }
+  },
+  "VSlider": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "min": {
+      "description": "Valor mínimo."
+    },
+    "max": {
+      "description": "Valor máximo."
+    },
+    "step": {
+      "description": "Incremento a cada passo."
+    },
+    "range": {
+      "description": "Prop `range` (`boolean`)."
+    },
+    "marks": {
+      "description": "Prop `marks` (`number[] | Record<number, string>`)."
+    },
+    "orientation": {
+      "description": "Orientação: horizontal ou vertical. Valores: `horizontal`, `vertical`.",
+      "options": [
+        "horizontal",
+        "vertical"
+      ]
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "showValue": {
+      "description": "Prop `showValue` (`boolean`)."
+    },
+    "showTooltip": {
+      "description": "Prop `showTooltip` (`boolean`)."
+    },
+    "snapToMarks": {
+      "description": "Prop `snapToMarks` (`boolean`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    }
+  },
+  "VSwitch": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "description": {
+      "description": "Texto descritivo secundário."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "name": {
+      "description": "Nome do campo (`name`)."
+    },
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "showIcon": {
+      "description": "Prop `showIcon` (`boolean`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    }
+  },
+  "VTagInput": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "suggestions": {
+      "description": "Prop `suggestions` (`string[]`)."
+    },
+    "placeholder": {
+      "description": "Texto de ajuda exibido quando vazio."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "readonly": {
+      "description": "Somente leitura: mostra o valor sem permitir edição."
+    },
+    "closable": {
+      "description": "Exibe o botão de fechar."
+    },
+    "multiline": {
+      "description": "Prop `multiline` (`boolean`)."
+    },
+    "maxTags": {
+      "description": "Prop `maxTags` (`number`)."
+    },
+    "delimiters": {
+      "description": "Prop `delimiters` (`VTagInputDelimiter[]`)."
+    },
+    "allowDuplicates": {
+      "description": "Prop `allowDuplicates` (`boolean`)."
+    },
+    "validateTag": {
+      "description": "Prop `validateTag` (`(tag: string) => boolean`)."
+    },
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "emptyText": {
+      "description": "Prop `emptyText` (`string`)."
+    }
+  },
+  "VTextarea": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "helperText": {
+      "description": "Texto de apoio abaixo do campo."
+    },
+    "errorMessage": {
+      "description": "Mensagem de erro (ativa o estado inválido)."
+    },
+    "placeholder": {
+      "description": "Texto de ajuda exibido quando vazio."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "readonly": {
+      "description": "Somente leitura: mostra o valor sem permitir edição."
+    },
+    "required": {
+      "description": "Marca o campo como obrigatório."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "counter": {
+      "description": "Prop `counter` (`number`)."
+    },
+    "autoResize": {
+      "description": "Prop `autoResize` (`boolean`)."
+    },
+    "rows": {
+      "description": "Linhas de dados."
+    },
+    "name": {
+      "description": "Nome do campo (`name`)."
+    },
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "spellcheck": {
+      "description": "Prop `spellcheck` (`boolean`)."
+    },
+    "resize": {
+      "description": "Prop `resize` (`'none' | 'both' | 'horizontal' | 'vertical'`). Valores: `none`, `both`, `horizontal`, `vertical`.",
+      "options": [
+        "none",
+        "both",
+        "horizontal",
+        "vertical"
+      ]
+    }
+  },
+  "VTextInput": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "helperText": {
+      "description": "Texto de apoio abaixo do campo."
+    },
+    "errorMessage": {
+      "description": "Mensagem de erro (ativa o estado inválido)."
+    },
+    "successMessage": {
+      "description": "Mensagem de sucesso (ativa o estado de sucesso)."
+    },
+    "placeholder": {
+      "description": "Texto de ajuda exibido quando vazio."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "readonly": {
+      "description": "Somente leitura: mostra o valor sem permitir edição."
+    },
+    "required": {
+      "description": "Marca o campo como obrigatório."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "clearable": {
+      "description": "Mostra um botão para limpar o valor."
+    },
+    "clearLabel": {
+      "description": "Rótulo acessível do botão de limpar."
+    },
+    "leadingIcon": {
+      "description": "Prop `leadingIcon` (`string`)."
+    },
+    "prefix": {
+      "description": "Prop `prefix` (`string`)."
+    },
+    "suffix": {
+      "description": "Prop `suffix` (`string`)."
+    },
+    "name": {
+      "description": "Nome do campo (`name`)."
+    },
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "autocomplete": {
+      "description": "Prop `autocomplete` (`string`)."
+    },
+    "type": {
+      "description": "Tipo do elemento/campo. Valores: `text`, `email`, `url`, `search`, `tel`.",
+      "options": [
+        "text",
+        "email",
+        "url",
+        "search",
+        "tel"
+      ]
+    },
+    "spellcheck": {
+      "description": "Prop `spellcheck` (`boolean`)."
+    },
+    "autocapitalize": {
+      "description": "Prop `autocapitalize` (`'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters'`). Valores: `off`, `none`, `on`, `sentences`, `words`, `characters`.",
+      "options": [
+        "off",
+        "none",
+        "on",
+        "sentences",
+        "words",
+        "characters"
+      ]
+    }
+  },
+  "VAppShell": {
+    "variant": {
+      "description": "Variante visual. Valores: `dashboard`, `editor`, `settings`, `content-management`.",
+      "options": [
+        "dashboard",
+        "editor",
+        "settings",
+        "content-management"
+      ]
+    },
+    "layoutMode": {
+      "description": "Prop `layoutMode` (`VAppShellLayoutMode`). Valores: `desktop`, `compact`, `tablet`.",
+      "options": [
+        "desktop",
+        "compact",
+        "tablet"
+      ]
+    },
+    "sidebarCollapsed": {
+      "description": "Prop `sidebarCollapsed` (`boolean`)."
+    },
+    "utilityOpen": {
+      "description": "Prop `utilityOpen` (`boolean`)."
+    },
+    "brandName": {
+      "description": "Prop `brandName` (`string`)."
+    },
+    "searchPlaceholder": {
+      "description": "Prop `searchPlaceholder` (`string`)."
+    },
+    "searchShortcut": {
+      "description": "Prop `searchShortcut` (`string`)."
+    },
+    "searchQuery": {
+      "description": "Prop `searchQuery` (`string`)."
+    },
+    "activeNavItem": {
+      "description": "Prop `activeNavItem` (`string`)."
+    },
+    "navItems": {
+      "description": "Prop `navItems` (`VAppShellNavItem[]`)."
+    },
+    "quickActions": {
+      "description": "Prop `quickActions` (`VAppShellQuickAction[]`)."
+    },
+    "shortcuts": {
+      "description": "Prop `shortcuts` (`VAppShellShortcut[]`)."
+    },
+    "userAvatar": {
+      "description": "Prop `userAvatar` (`string`)."
+    },
+    "showUtility": {
+      "description": "Prop `showUtility` (`boolean`)."
+    },
+    "showBuiltInTopBar": {
+      "description": "Prop `showBuiltInTopBar` (`boolean`)."
+    }
+  },
+  "VAutoLayoutGrid": {
+    "minItemWidth": {
+      "description": "Prop `minItemWidth` (`number`)."
+    },
+    "gap": {
+      "description": "Prop `gap` (`number`)."
+    },
+    "rowGap": {
+      "description": "Prop `rowGap` (`number`)."
+    },
+    "columnGap": {
+      "description": "Prop `columnGap` (`number`)."
+    },
+    "behavior": {
+      "description": "Prop `behavior` (`VAutoLayoutGridBehavior`). Valores: `auto-fit`, `auto-fill`, `dense`, `equal-height`.",
+      "options": [
+        "auto-fit",
+        "auto-fill",
+        "dense",
+        "equal-height"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `compact`, `medium`, `spacious`.",
+      "options": [
+        "compact",
+        "medium",
+        "spacious"
+      ]
+    },
+    "selectable": {
+      "description": "Prop `selectable` (`boolean`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VAutoLayoutGridItem": {
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "selected": {
+      "description": "Prop `selected` (`boolean`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "dragging": {
+      "description": "Prop `dragging` (`boolean`)."
+    },
+    "interactive": {
+      "description": "Prop `interactive` (`boolean`)."
+    }
+  },
+  "VCardGrid": {
+    "cols": {
+      "description": "Prop `cols` (`VGridCols`)."
+    },
+    "gap": {
+      "description": "Prop `gap` (`VCardGridGap`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VDashboardWidgetGrid": {
+    "cols": {
+      "description": "Prop `cols` (`number`)."
+    },
+    "rowHeight": {
+      "description": "Prop `rowHeight` (`number`)."
+    },
+    "gap": {
+      "description": "Prop `gap` (`number`)."
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `freeform`, `analytics`, `editorial`, `compact`.",
+      "options": [
+        "freeform",
+        "analytics",
+        "editorial",
+        "compact"
+      ]
+    },
+    "editMode": {
+      "description": "Prop `editMode` (`boolean`)."
+    },
+    "layout": {
+      "description": "Layout/disposição do componente."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VDashboardWidget": {
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "title": {
+      "description": "Título exibido."
+    },
+    "x": {
+      "description": "Prop `x` (`number`)."
+    },
+    "y": {
+      "description": "Prop `y` (`number`)."
+    },
+    "w": {
+      "description": "Prop `w` (`number`)."
+    },
+    "h": {
+      "description": "Prop `h` (`number`)."
+    },
+    "locked": {
+      "description": "Prop `locked` (`boolean`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "focused": {
+      "description": "Prop `focused` (`boolean`)."
+    },
+    "closable": {
+      "description": "Exibe o botão de fechar."
+    }
+  },
+  "VMasonryGrid": {
+    "cols": {
+      "description": "Prop `cols` (`VGridCols`)."
+    },
+    "gap": {
+      "description": "Prop `gap` (`number`)."
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `image-first`, `content-first`, `mixed-media`, `magazine`.",
+      "options": [
+        "default",
+        "image-first",
+        "content-first",
+        "mixed-media",
+        "magazine"
+      ]
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "empty": {
+      "description": "Prop `empty` (`boolean`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VMasonryItem": {
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "title": {
+      "description": "Título exibido."
+    },
+    "category": {
+      "description": "Prop `category` (`string`)."
+    },
+    "selected": {
+      "description": "Prop `selected` (`boolean`)."
+    },
+    "interactive": {
+      "description": "Prop `interactive` (`boolean`)."
+    },
+    "likes": {
+      "description": "Prop `likes` (`number`)."
+    }
+  },
+  "VAvatar": {
+    "src": {
+      "description": "URL da imagem."
+    },
+    "alt": {
+      "description": "Texto alternativo da imagem."
+    },
+    "initials": {
+      "description": "Iniciais exibidas quando não há imagem."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `xs`, `sm`, `md`, `lg`, `xl`.",
+      "options": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "shape": {
+      "description": "Formato do contorno (ex.: `pill`). Valores: `circle`, `square`.",
+      "options": [
+        "circle",
+        "square"
+      ]
+    },
+    "status": {
+      "description": "Indicador de status. Valores: `online`, `busy`, `offline`.",
+      "options": [
+        "online",
+        "busy",
+        "offline"
+      ]
+    },
+    "badge": {
+      "description": "Prop `badge` (`VAvatarBadge`). Valores: `pro`, `selected`, `check`.",
+      "options": [
+        "pro",
+        "selected",
+        "check"
+      ]
+    },
+    "selectable": {
+      "description": "Prop `selectable` (`boolean`)."
+    },
+    "selected": {
+      "description": "Prop `selected` (`boolean`)."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "decorative": {
+      "description": "Prop `decorative` (`boolean`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "dataTestId": {
+      "description": "Prop `dataTestId` (`string`)."
+    }
+  },
+  "VGroupAvatar": {
+    "members": {
+      "description": "Prop `members` (`VAvatarMember[]`)."
+    },
+    "max": {
+      "description": "Valor máximo."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `xs`, `sm`, `md`, `lg`, `xl`.",
+      "options": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "shape": {
+      "description": "Formato do contorno (ex.: `pill`). Valores: `circle`, `square`.",
+      "options": [
+        "circle",
+        "square"
+      ]
+    },
+    "dataTestId": {
+      "description": "Prop `dataTestId` (`string`)."
+    }
+  },
+  "VImageGallery": {
+    "images": {
+      "description": "Prop `images` (`VGalleryImage[]`)."
+    },
+    "layout": {
+      "description": "Layout/disposição do componente. Valores: `grid`, `masonry`, `carousel`.",
+      "options": [
+        "grid",
+        "masonry",
+        "carousel"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "selectable": {
+      "description": "Prop `selectable` (`boolean`)."
+    },
+    "multiple": {
+      "description": "Permite seleção múltipla."
+    },
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "columns": {
+      "description": "Definição das colunas."
+    },
+    "dataTestId": {
+      "description": "Prop `dataTestId` (`string`)."
+    }
+  },
+  "VBottomUtilityBar": {
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `primary`, `subtle`.",
+      "options": [
+        "default",
+        "primary",
+        "subtle"
+      ]
+    },
+    "fixed": {
+      "description": "Prop `fixed` (`boolean`)."
+    },
+    "safeArea": {
+      "description": "Prop `safeArea` (`boolean`)."
+    },
+    "bordered": {
+      "description": "Prop `bordered` (`boolean`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VBreadcrumb": {
+    "items": {
+      "description": "Lista de itens a renderizar."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `compact`, `icons`, `overflow`.",
+      "options": [
+        "default",
+        "compact",
+        "icons",
+        "overflow"
+      ]
+    },
+    "maxItems": {
+      "description": "Prop `maxItems` (`number`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VCommandItem": {
+    "id": {
+      "description": "Identificador do elemento (`id`)."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "icon": {
+      "description": "Ícone (objeto Iconify)."
+    },
+    "shortcut": {
+      "description": "Prop `shortcut` (`string`)."
+    },
+    "selected": {
+      "description": "Prop `selected` (`boolean`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `primary`, `subtle`.",
+      "options": [
+        "default",
+        "primary",
+        "subtle"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "dataTestId": {
+      "description": "Prop `dataTestId` (`string`)."
+    },
+    "domId": {
+      "description": "Prop `domId` (`string`)."
+    }
+  },
+  "VCommandPalette": {
+    "modelValue": {
+      "description": "Controlled visibility (`v-model`)."
+    },
+    "open": {
+      "description": "Alias for `v-model:open`."
+    },
+    "query": {
+      "description": "Search query (`v-model:query`)."
+    },
+    "placeholder": {
+      "description": "Texto de ajuda exibido quando vazio."
+    },
+    "items": {
+      "description": "Lista de itens a renderizar."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "dismissible": {
+      "description": "Permite dispensar/fechar o componente."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `global-search`, `quick-actions`, `file-switcher`, `settings-palette`.",
+      "options": [
+        "global-search",
+        "quick-actions",
+        "file-switcher",
+        "settings-palette"
+      ]
+    },
+    "shortcutLabel": {
+      "description": "Prop `shortcutLabel` (`string`)."
+    },
+    "emptyTitle": {
+      "description": "Prop `emptyTitle` (`string`)."
+    },
+    "emptyHint": {
+      "description": "Prop `emptyHint` (`string`)."
+    },
+    "searchLabel": {
+      "description": "Prop `searchLabel` (`string`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VContextMenu": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "x": {
+      "description": "Prop `x` (`number`)."
+    },
+    "y": {
+      "description": "Prop `y` (`number`)."
+    },
+    "items": {
+      "description": "Lista de itens a renderizar."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VDropdownMenu": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "value": {
+      "description": "Valor do item."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "icon": {
+      "description": "Ícone (objeto Iconify)."
+    },
+    "showTriggerIcon": {
+      "description": "Prop `showTriggerIcon` (`boolean`)."
+    },
+    "showChevron": {
+      "description": "Prop `showChevron` (`boolean`)."
+    },
+    "items": {
+      "description": "Lista de itens a renderizar."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual."
+    },
+    "triggerStyle": {
+      "description": "Prop `triggerStyle` (`VDropdownMenuTriggerStyle`). Valores: `default`, `field`, `icon`.",
+      "options": [
+        "default",
+        "field",
+        "icon"
+      ]
+    },
+    "menuAlign": {
+      "description": "Prop `menuAlign` (`VDropdownMenuMenuAlign`). Valores: `start`, `end`.",
+      "options": [
+        "start",
+        "end"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VMenuBar": {
+    "items": {
+      "description": "Lista de itens a renderizar."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `primary`, `subtle`.",
+      "options": [
+        "default",
+        "primary",
+        "subtle"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "openOnHover": {
+      "description": "Prop `openOnHover` (`boolean`)."
+    },
+    "hoverDelay": {
+      "description": "Prop `hoverDelay` (`number`)."
+    }
+  },
+  "VNavItem": {
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "value": {
+      "description": "Valor do item."
+    },
+    "href": {
+      "description": "URL de destino; renderiza como link."
+    },
+    "icon": {
+      "description": "Ícone (objeto Iconify)."
+    },
+    "badge": {
+      "description": "Prop `badge` (`string | number`)."
+    },
+    "badgeTone": {
+      "description": "`primary` renders the badge as a filled primary pill. Valores: `default`, `primary`.",
+      "options": [
+        "default",
+        "primary"
+      ]
+    },
+    "tag": {
+      "description": "Small muted pill after the label (e.g. \"Soon\")."
+    },
+    "iconColor": {
+      "description": "Renders the icon as a colored rounded square (any CSS color)."
+    },
+    "ariaControls": {
+      "description": "Id of the submenu this item controls (`aria-controls`)."
+    },
+    "active": {
+      "description": "Marca o item como ativo/selecionado."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "collapsed": {
+      "description": "Estado recolhido (somente ícones)."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `primary`, `subtle`, `soft`, `raised`.",
+      "options": [
+        "default",
+        "primary",
+        "subtle",
+        "soft",
+        "raised"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "dataTestId": {
+      "description": "Prop `dataTestId` (`string`)."
+    },
+    "expandable": {
+      "description": "Prop `expandable` (`boolean`)."
+    },
+    "expanded": {
+      "description": "Prop `expanded` (`boolean`)."
+    }
+  },
+  "VPagination": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "total": {
+      "description": "Total de itens."
+    },
+    "pageSize": {
+      "description": "Itens por página."
+    },
+    "pageCount": {
+      "description": "Prop `pageCount` (`number`)."
+    },
+    "siblingCount": {
+      "description": "Prop `siblingCount` (`number`)."
+    },
+    "boundaryCount": {
+      "description": "Prop `boundaryCount` (`number`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `compact`, `ellipsis`.",
+      "options": [
+        "default",
+        "compact",
+        "ellipsis"
+      ]
+    },
+    "showPageSize": {
+      "description": "Prop `showPageSize` (`boolean`)."
+    },
+    "showResultCount": {
+      "description": "Prop `showResultCount` (`boolean`)."
+    },
+    "pageSizeOptions": {
+      "description": "Prop `pageSizeOptions` (`number[]`)."
+    },
+    "prevLabel": {
+      "description": "Prop `prevLabel` (`string`)."
+    },
+    "nextLabel": {
+      "description": "Prop `nextLabel` (`string`)."
+    },
+    "pageSizeLabel": {
+      "description": "Prop `pageSizeLabel` (`string`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VPopover": {
+    "open": {
+      "description": "Controla a abertura (`v-model:open`)."
+    },
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "placement": {
+      "description": "Posição do overlay em relação ao gatilho. Valores: `top`, `bottom`, `left`, `right`.",
+      "options": [
+        "top",
+        "bottom",
+        "left",
+        "right"
+      ]
+    },
+    "trigger": {
+      "description": "Prop `trigger` (`VPopoverTrigger`). Valores: `click`, `hover`, `focus`.",
+      "options": [
+        "click",
+        "hover",
+        "focus"
+      ]
+    },
+    "closable": {
+      "description": "Exibe o botão de fechar."
+    },
+    "showArrow": {
+      "description": "Prop `showArrow` (`boolean`)."
+    },
+    "title": {
+      "description": "Título exibido."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "ariaLabelledby": {
+      "description": "Id do elemento que rotula o componente (`aria-labelledby`)."
+    },
+    "ariaDescribedby": {
+      "description": "Prop `ariaDescribedby` (`string`)."
+    }
+  },
+  "VSegmentedControl": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "options": {
+      "description": "Lista de opções selecionáveis."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `pill`.",
+      "options": [
+        "default",
+        "pill"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    }
+  },
+  "VSidebar": {
+    "collapsed": {
+      "description": "Controls collapsed (icon-only rail) state. `v-model:collapsed` (primary) — `modelValue` accepted as alias."
+    },
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "items": {
+      "description": "Lista de itens a renderizar."
+    },
+    "activeItem": {
+      "description": "Valor do item ativo (`v-model:active-item`)."
+    },
+    "expandedSections": {
+      "description": "Ids de grupos/itens abertos (controlado)."
+    },
+    "accordion": {
+      "description": "Opening an expandable item closes its open siblings. Default `true`."
+    },
+    "accordionGroups": {
+      "description": "Also apply accordion behaviour between sibling groups. Default `false`."
+    },
+    "filterOnSearch": {
+      "description": "Filter items by label while typing in the search field. Default `true`."
+    },
+    "brandName": {
+      "description": "Prop `brandName` (`string`)."
+    },
+    "brandIcon": {
+      "description": "Prop `brandIcon` (`string`)."
+    },
+    "searchPlaceholder": {
+      "description": "Prop `searchPlaceholder` (`string`)."
+    },
+    "showSearch": {
+      "description": "Prop `showSearch` (`boolean`)."
+    },
+    "searchShortcut": {
+      "description": "Prop `searchShortcut` (`string`)."
+    },
+    "userName": {
+      "description": "Prop `userName` (`string`)."
+    },
+    "userEmail": {
+      "description": "Prop `userEmail` (`string`)."
+    },
+    "userAvatar": {
+      "description": "Prop `userAvatar` (`string`)."
+    },
+    "heading": {
+      "description": "Title that stays visible in the floating chip and in the open sidebar."
+    },
+    "position": {
+      "description": "Where the user is. Stays visible when the floating sidebar is closed or open."
+    },
+    "locked": {
+      "description": "Pins the sidebar open. The floating chip cannot collapse it."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "width": {
+      "description": "Panel width. Number = px, string = any CSS length. Sets `--v-sidebar-width` on the root."
+    },
+    "groupChevron": {
+      "description": "Where the chevron of a collapsible group sits. Default `'end'`. Valores: `start`, `end`.",
+      "options": [
+        "start",
+        "end"
+      ]
+    },
+    "groupChevronOpen": {
+      "description": "Direction of the chevron of an open collapsible group. `'down'` (default) rotates -90deg when closed; `'up'` shows \"v\" closed and \"^\" open. Valores: `up`, `down`.",
+      "options": [
+        "up",
+        "down"
+      ]
+    },
+    "chevron": {
+      "description": "Chevron of expandable items. `'rotate'` (default) is \">\" rotating 90deg; `'updown'` is \"v\" closed and \"^\" open. Valores: `rotate`, `updown`.",
+      "options": [
+        "rotate",
+        "updown"
+      ]
+    },
+    "groupDividers": {
+      "description": "Hairline above every group except the first. Default `false`."
+    },
+    "variant": {
+      "description": "`card` is a soft menu. `workspace` raises the active item. `icons` is the small icon islands. `floating` is the compact card that opens downward. Valores: `default`, `card`, `workspace`, `icons`, `floating`.",
+      "options": [
+        "default",
+        "card",
+        "workspace",
+        "icons",
+        "floating"
+      ]
+    },
+    "showBrand": {
+      "description": "Prop `showBrand` (`boolean`)."
+    },
+    "showFooter": {
+      "description": "Exibe o rodapé padrão."
+    },
+    "showCollapseToggle": {
+      "description": "Shows the collapse/expand toggle (icons rail, collapsed rail, inline). Default `true`."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VStepper": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "steps": {
+      "description": "Prop `steps` (`VStepperStep[]`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `primary`, `subtle`.",
+      "options": [
+        "default",
+        "primary",
+        "subtle"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VSwipeRow": {
+    "actions": {
+      "description": "Prop `actions` (`VSwipeRowAction[]`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "motion": {
+      "description": "Nível de movimento: `default`, `expressive` ou `none` (respeita `prefers-reduced-motion`). Valores: `default`, `expressive`, `none`.",
+      "options": [
+        "default",
+        "expressive",
+        "none"
+      ]
+    }
+  },
+  "VTabs": {
+    "modelValue": {
+      "description": "Valor controlado (`v-model`)."
+    },
+    "items": {
+      "description": "Lista de itens a renderizar."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `underline`, `pill`, `icon`.",
+      "options": [
+        "underline",
+        "pill",
+        "icon"
+      ]
+    },
+    "dividers": {
+      "description": "Prop `dividers` (`boolean`)."
+    },
+    "panels": {
+      "description": "Renders the tabpanel area. Set `false` to use tabs as navigation (no tabpanel/aria-controls). Default `true`."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VToolbar": {
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `compact`, `floating`, `editor`, `segmented`.",
+      "options": [
+        "default",
+        "compact",
+        "floating",
+        "editor",
+        "segmented"
+      ]
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VToolbarButton": {
+    "icon": {
+      "description": "Ícone (objeto Iconify)."
+    },
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `primary`, `toggle`.",
+      "options": [
+        "default",
+        "primary",
+        "toggle"
+      ]
+    },
+    "active": {
+      "description": "Marca o item como ativo/selecionado."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "menu": {
+      "description": "Prop `menu` (`VToolbarMenuItem[]`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VTopBar": {
+    "title": {
+      "description": "Título exibido."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "bordered": {
+      "description": "Prop `bordered` (`boolean`)."
+    },
+    "sticky": {
+      "description": "Prop `sticky` (`boolean`)."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `primary`, `subtle`, `app`.",
+      "options": [
+        "default",
+        "primary",
+        "subtle",
+        "app"
+      ]
+    },
+    "items": {
+      "description": "Center navigation. The active item renders as a solid pill."
+    },
+    "activeItem": {
+      "description": "Valor do item ativo (`v-model:active-item`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VTreeNavigation": {
+    "active": {
+      "description": "Marca o item como ativo/selecionado."
+    },
+    "expandedKeys": {
+      "description": "Prop `expandedKeys` (`string[]`)."
+    },
+    "items": {
+      "description": "Lista de itens a renderizar."
+    },
+    "multiple": {
+      "description": "Permite seleção múltipla."
+    },
+    "showCounts": {
+      "description": "Prop `showCounts` (`boolean`)."
+    },
+    "iconField": {
+      "description": "Prop `iconField` (`string`)."
+    },
+    "lazy": {
+      "description": "Prop `lazy` (`boolean`)."
+    },
+    "loadChildren": {
+      "description": "Prop `loadChildren` (`(node: VTreeNavigationItem) => Promise<VTreeNavigationIte…`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    }
+  },
+  "VIcon": {
+    "icon": {
+      "description": "Ícone (objeto Iconify)."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    }
+  },
+  "VTag": {
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`.",
+      "options": [
+        "sm",
+        "md"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `outline`, `overlay`, `soft`.",
+      "options": [
+        "default",
+        "outline",
+        "overlay",
+        "soft"
+      ]
+    },
+    "interactive": {
+      "description": "Action tag: native button. Omit for auto — true unless `removable`."
+    },
+    "selected": {
+      "description": "Prop `selected` (`boolean`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "removable": {
+      "description": "Prop `removable` (`boolean`)."
+    },
+    "leaving": {
+      "description": "Prop `leaving` (`boolean`)."
+    },
+    "ariaLabel": {
+      "description": "Rótulo acessível (`aria-label`)."
+    },
+    "removeLabel": {
+      "description": "Prop `removeLabel` (`string`)."
+    },
+    "dataTestId": {
+      "description": "Prop `dataTestId` (`string`)."
+    },
+    "removeTestId": {
+      "description": "Prop `removeTestId` (`string`)."
+    }
+  },
+  "VFilterBar": {
+    "search": {
+      "description": "Prop `search` (`string`)."
+    },
+    "filters": {
+      "description": "Prop `filters` (`Record<string, string>`)."
+    },
+    "dateRange": {
+      "description": "Prop `dateRange` (`string`)."
+    },
+    "chips": {
+      "description": "Prop `chips` (`VFilterChip[]`)."
+    },
+    "selects": {
+      "description": "Prop `selects` (`VFilterSelect[]`)."
+    },
+    "resultsCount": {
+      "description": "Prop `resultsCount` (`number`)."
+    },
+    "totalCount": {
+      "description": "Prop `totalCount` (`number`)."
+    },
+    "activeCount": {
+      "description": "Prop `activeCount` (`number`)."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `basic`, `chips`, `advanced`, `sticky`.",
+      "options": [
+        "basic",
+        "chips",
+        "advanced",
+        "sticky"
+      ]
+    },
+    "sticky": {
+      "description": "Prop `sticky` (`boolean`)."
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "searchShortcut": {
+      "description": "Prop `searchShortcut` (`boolean`)."
+    },
+    "title": {
+      "description": "Título exibido."
+    },
+    "dataTestId": {
+      "description": "Prop `dataTestId` (`string`)."
+    }
+  },
+  "VSortableHeader": {
+    "label": {
+      "description": "Texto do rótulo."
+    },
+    "direction": {
+      "description": "Prop `direction` (`VSortDirection`)."
+    },
+    "sortPriority": {
+      "description": "Prop `sortPriority` (`number`)."
+    },
+    "disabled": {
+      "description": "Desativa a interação e aplica o estilo de desabilitado."
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `sm`, `md`, `lg`.",
+      "options": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "leadingIcon": {
+      "description": "Prop `leadingIcon` (`boolean`)."
+    },
+    "columnKey": {
+      "description": "Prop `columnKey` (`string`)."
+    },
+    "dataTestId": {
+      "description": "Prop `dataTestId` (`string`)."
+    }
+  },
+  "VTable": {
+    "columns": {
+      "description": "Definição das colunas."
+    },
+    "rows": {
+      "description": "Linhas de dados."
+    },
+    "variant": {
+      "description": "Variante visual. Valores: `default`, `bordered`, `striped`, `minimal`, `comparison`.",
+      "options": [
+        "default",
+        "bordered",
+        "striped",
+        "minimal",
+        "comparison"
+      ]
+    },
+    "size": {
+      "description": "Tamanho do componente. Valores: `compact`, `default`, `comfortable`.",
+      "options": [
+        "compact",
+        "default",
+        "comfortable"
+      ]
+    },
+    "loading": {
+      "description": "Exibe o estado de carregamento."
+    },
+    "selectable": {
+      "description": "Prop `selectable` (`boolean`)."
+    },
+    "multiple": {
+      "description": "Permite seleção múltipla."
+    },
+    "selected": {
+      "description": "Prop `selected` (`Array<string | number>`)."
+    },
+    "sort": {
+      "description": "Prop `sort` (`VTableSortState[]`)."
+    },
+    "search": {
+      "description": "Prop `search` (`string`)."
+    },
+    "showToolbar": {
+      "description": "Prop `showToolbar` (`boolean`)."
+    },
+    "showActions": {
+      "description": "Trailing row-actions column. Default true (always off for `comparison`)."
+    },
+    "showPagination": {
+      "description": "Pagination footer. Default true (always off for `comparison`)."
+    },
+    "page": {
+      "description": "Página atual (`v-model:page`)."
+    },
+    "pageSize": {
+      "description": "Itens por página."
+    },
+    "total": {
+      "description": "Total de itens."
+    },
+    "expandedRow": {
+      "description": "Prop `expandedRow` (`string | number | null`)."
+    },
+    "dataTestId": {
+      "description": "Prop `dataTestId` (`string`)."
+    }
+  }
+}

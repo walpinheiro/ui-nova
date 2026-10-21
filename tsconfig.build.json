@@ -1,0 +1,26 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmitOnError": false,
+    "declarationMap": true,
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "vueCompilerOptions": {
+    "strictTemplates": false
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts",
+    "src/**/*.stories.ts",
+    "src/**/_tests/**",
+    "src/templates/**",
+    "src/foundations/**"
+  ]
+}

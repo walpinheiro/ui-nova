@@ -1,0 +1,24 @@
+.v-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  fill: none;
+  stroke: currentColor;
+  vertical-align: middle;
+
+  &--sm {
+    width: var(--v-icon-size-sm);
+    height: var(--v-icon-size-sm);
+  }
+
+  &--md {
+    width: var(--v-icon-size-md);
+    height: var(--v-icon-size-md);
+  }
+
+  &--lg {
+    width: var(--v-icon-size-lg);
+    height: var(--v-icon-size-lg);
+  }
+}

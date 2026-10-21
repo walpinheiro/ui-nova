@@ -1,0 +1,24 @@
+# Pastas ocultas (dot directories)
+.*/
+
+evidence/
+.validation-queue.json
+
+node_modules/
+dist/
+storybook-static/
+test-results/
+coverage/
+*.log
+.DS_Store
+Thumbs.db
+
+.env
+.env.*
+!.env.example
+
+.npmrc.publish
+*.tgz
+
+vueui-nova.es.js
+vueui-nova-kit.css

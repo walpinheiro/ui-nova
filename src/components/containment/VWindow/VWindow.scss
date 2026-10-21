@@ -1,0 +1,400 @@
+.v-window {
+  @apply relative flex flex-col overflow-hidden bg-surface text-text rounded-md shadow-lg font-sans text-text-medium outline-none;
+  border: var(--v-border-width) solid var(--v-color-border);
+  transition:
+    border-color var(--v-motion-fast) var(--v-ease-standard),
+    box-shadow var(--v-motion-fast) var(--v-ease-standard),
+    opacity var(--v-motion-normal) var(--v-ease-out),
+    transform var(--v-motion-normal) var(--v-ease-out);
+  animation: v-window-enter var(--v-motion-normal) var(--v-ease-out);
+
+  &:focus-visible {
+    outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+    outline-offset: var(--v-focus-ring-offset);
+  }
+
+  // ---- Sizes (spec §3 presets exatos via tokens --v-window-*) ----
+  &--sm {
+    @apply max-w-window-sm;
+    max-width: var(--v-window-sm-width);
+    min-height: var(--v-window-sm-height);
+  }
+
+  &--md {
+    @apply max-w-window-md;
+    max-width: var(--v-window-md-width);
+    min-height: var(--v-window-md-height);
+  }
+
+  &--lg {
+    @apply max-w-window-lg;
+    max-width: var(--v-window-lg-width);
+    min-height: var(--v-window-lg-height);
+  }
+
+  // ---- Variants (spec: Default / Minimal / Borderless / Modal) ----
+  &--default {
+    @apply bg-surface;
+    background: var(--v-color-surface);
+  }
+
+  &--minimal {
+    @apply shadow-md;
+    background: var(--v-color-surface);
+
+    .v-window__titlebar {
+      border-bottom-color: transparent;
+    }
+  }
+
+  &--borderless {
+    border-color: transparent;
+    @apply shadow-md;
+    background: var(--v-color-surface);
+
+    .v-window__titlebar {
+      border-bottom-color: transparent;
+    }
+  }
+
+  &--modal {
+    @apply shadow-xl duration-normal ease-out;
+    margin-inline: auto;
+    background: var(--v-color-surface);
+    transition-property: opacity, transform;
+    transition-duration: var(--v-motion-normal);
+    transition-timing-function: var(--v-ease-out);
+  }
+
+  // ---- States (spec: Normal / Active / Inactive / Disabled) ----
+  &--active {
+    border-color: var(--v-color-focus);
+    box-shadow: var(--v-shadow-xl);
+
+    .v-window__titlebar {
+      background: color-mix(in srgb, var(--v-color-primary) var(--v-state-hover-mix), var(--v-color-surface));
+    }
+
+    .v-window__title {
+      color: var(--v-color-text);
+    }
+  }
+
+  &--inactive {
+    .v-window__titlebar {
+      background: color-mix(in srgb, var(--v-color-neutral-500) var(--v-state-hover-mix), var(--v-color-surface));
+    }
+
+    .v-window__title,
+    .v-window__action,
+    .v-window__glyph {
+      color: var(--v-color-text-muted);
+    }
+
+    .v-window__light {
+      background: var(--v-color-neutral-300);
+      border-color: var(--v-color-neutral-300);
+    }
+  }
+
+  &--disabled,
+  &[aria-disabled='true'] {
+    opacity: var(--v-state-disabled-opacity);
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  &--loading,
+  &[aria-busy='true'] {
+    opacity: var(--v-state-loading-opacity);
+
+    .v-window__body {
+      opacity: var(--v-state-loading-opacity);
+    }
+  }
+
+  &--resizable {
+    @apply overflow-auto;
+    overflow: auto;
+  }
+
+  // Abertura: ease-out (scale 0.98→1 + fade); fecho: ease-in (spec §6).
+  &--open {
+    @apply duration-normal ease-out;
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+    transition-property: opacity, transform;
+    transition-duration: var(--v-motion-normal);
+    transition-timing-function: var(--v-ease-out);
+  }
+
+  &--closed {
+    @apply hidden duration-fast ease-in;
+    transition-property: opacity, transform;
+    transition-duration: var(--v-motion-fast);
+    transition-timing-function: var(--v-ease-in);
+  }
+
+  &--moved {
+    @apply duration-fast ease-out;
+    transition-property: transform;
+    transition-duration: var(--v-motion-fast);
+    transition-timing-function: var(--v-ease-out);
+  }
+
+  // ---- Titlebar (anatomia: traffic-lights + app icon + title + window actions) ----
+  &__titlebar {
+    @apply flex shrink-0 select-none items-center gap-2 px-4 py-2 cursor-move;
+    background: var(--v-color-surface);
+    border-bottom: var(--v-border-width) solid var(--v-color-border);
+  }
+
+  &__traffic {
+    @apply inline-flex shrink-0 items-center gap-2;
+  }
+
+  &__light {
+    @apply inline-block rounded-full w-3 h-3;
+    width: var(--v-space-3);
+    height: var(--v-space-3);
+    border: var(--v-border-width) solid var(--v-color-border);
+
+    &--close {
+      background: var(--v-color-error-base);
+    }
+
+    &--minimize {
+      background: var(--v-color-warning-base);
+    }
+
+    &--maximize {
+      background: var(--v-color-success-base);
+    }
+  }
+
+  &__icon {
+    @apply inline-flex shrink-0 items-center justify-center w-4 h-4 rounded-4 text-primary;
+    color: var(--v-color-primary-text);
+    background: var(--v-color-primary-100);
+  }
+
+  &__glyph {
+    @apply text-text-small font-semibold;
+    line-height: var(--v-line-height-text-small);
+  }
+
+  &__title {
+    @apply min-w-0 flex-1 truncate text-text-medium font-semibold;
+    color: var(--v-color-text);
+    line-height: var(--v-line-height-text-medium);
+  }
+
+  &__actions {
+    @apply ml-auto inline-flex shrink-0 items-center gap-1;
+  }
+
+  &__action {
+    @apply inline-flex cursor-pointer items-center justify-center w-8 h-8 rounded-8 outline-none text-text-medium duration-fast ease-standard;
+    color: var(--v-color-text-muted);
+    background: transparent;
+    border: var(--v-border-width) solid transparent;
+    transition-property: background-color, color, transform;
+    transition-duration: var(--v-motion-fast);
+    transition-timing-function: var(--v-ease-standard);
+
+    &:hover {
+      background: color-mix(in srgb, var(--v-color-primary) var(--v-state-hover-mix), transparent);
+      color: var(--v-color-text);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    &:active {
+      transform: scale(var(--v-state-press-scale));
+      background: color-mix(in srgb, var(--v-color-neutral-900) var(--v-state-pressed-mix), var(--v-color-neutral-200));
+    }
+
+    &:disabled {
+      opacity: var(--v-state-disabled-opacity);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    &--close {
+      &:hover {
+        background: var(--v-color-error-soft);
+        color: var(--v-color-error-strong);
+      }
+    }
+  }
+
+  // ---- Main: sidebar + content (spec §2 hero Project Notes) ----
+  &__main {
+    @apply flex min-h-0 flex-1;
+  }
+
+  &__sidebar {
+    @apply flex shrink-0 flex-col gap-1 p-2;
+    background: var(--v-color-elevated);
+    border-right: var(--v-border-width) solid var(--v-color-border);
+    min-width: calc(var(--v-space-24) + var(--v-space-16));
+  }
+
+  &__nav {
+    @apply flex cursor-pointer items-center gap-2 rounded-8 px-3 py-2 text-left capitalize text-text-small duration-fast ease-standard;
+    color: var(--v-color-text-muted);
+    background: transparent;
+    border: var(--v-border-width) solid transparent;
+    transition-property: background-color, color;
+    transition-duration: var(--v-motion-fast);
+    transition-timing-function: var(--v-ease-standard);
+
+    &:hover {
+      background: color-mix(in srgb, var(--v-color-primary) var(--v-state-hover-mix), var(--v-color-elevated));
+      color: var(--v-color-text);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    &:disabled {
+      opacity: var(--v-state-disabled-opacity);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  // ---- Body ----
+  &__body {
+    @apply flex-1 p-4;
+    color: var(--v-color-text);
+  }
+
+  // ---- Backdrop (variante Modal sobre overlay escurecido, spec §4) ----
+  // Escopo de validação: dentro de .stage o backdrop fica contido e isolado.
+  .stage &__backdrop {
+    position: absolute;
+  }
+
+  &__backdrop {
+    @apply fixed inset-0 duration-normal ease-out;
+    background: var(--v-color-overlay);
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: var(--v-motion-normal);
+    transition-timing-function: var(--v-ease-out);
+
+    &--hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  // ---- Resize handle (anatomia: item 4/5) ----
+  &__resize {
+    @apply absolute bottom-0 right-0 inline-flex cursor-pointer items-center justify-center w-8 h-8 rounded-8 outline-none duration-fast ease-standard;
+    color: var(--v-color-text-muted);
+    background: transparent;
+    border: var(--v-border-width) solid transparent;
+    transition-property: background-color, color;
+    transition-duration: var(--v-motion-fast);
+    transition-timing-function: var(--v-ease-standard);
+
+    &:hover {
+      background: color-mix(in srgb, var(--v-color-primary) var(--v-state-hover-mix), transparent);
+      color: var(--v-color-primary-text);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    &:active {
+      transform: scale(var(--v-state-press-scale));
+      background: color-mix(in srgb, var(--v-color-neutral-900) var(--v-state-pressed-mix), transparent);
+    }
+
+    &:disabled {
+      opacity: var(--v-state-disabled-opacity);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  // ---- Loader ----
+  &__loader {
+    @apply inline-block rounded-full;
+    width: var(--v-loader-size);
+    height: var(--v-loader-size);
+    border: var(--v-loader-border-width) solid currentColor;
+    border-right-color: transparent;
+    margin-right: var(--v-space-2);
+    vertical-align: middle;
+    animation: v-spin var(--v-motion-spin-duration) linear infinite;
+  }
+
+  @media (min-width: 768px) {
+    // 768px equivale a var(--v-breakpoint-md); var() nao e valido em media queries.
+
+    &--modal {
+      @apply mx-auto;
+    }
+
+    &__body {
+      @apply p-6;
+    }
+  }
+}
+
+@keyframes v-window-enter {
+  from {
+    opacity: 0;
+    transform: scale(var(--v-state-press-scale));
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes v-window-exit {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(var(--v-state-press-scale));
+  }
+}
+
+@keyframes v-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.v-window--closed {
+  animation: v-window-exit var(--v-motion-fast) var(--v-ease-in);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-window,
+  .v-window__backdrop,
+  .v-window__action,
+  .v-window__resize,
+  .v-window__nav,
+  .v-window__loader {
+    transition: none;
+    animation: none;
+  }
+}

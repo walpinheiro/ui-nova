@@ -1,0 +1,242 @@
+.v-tree-navigation {
+  @apply flex flex-col font-sans text-text-medium;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: var(--v-tree-bg);
+  color: var(--v-tree-text-color);
+  border: var(--v-border-width) solid var(--v-color-border);
+  border-radius: var(--v-radius-md);
+  padding: var(--v-space-2);
+  font-family: var(--v-font-family-sans);
+  font-size: var(--v-font-size-text-medium);
+  line-height: var(--v-line-height-text-medium);
+  min-width: 0;
+
+  &--sm {
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+
+    .v-tree-navigation__node {
+      min-height: var(--v-tree-item-height-sm);
+    }
+  }
+
+  &--md {
+    .v-tree-navigation__node {
+      min-height: var(--v-tree-item-height-md);
+    }
+  }
+
+  &--lg {
+    font-size: var(--v-font-size-text-large);
+    line-height: var(--v-line-height-text-large);
+
+    .v-tree-navigation__node {
+      min-height: var(--v-tree-item-height-lg);
+    }
+  }
+
+  &--file {
+    .v-tree-navigation__icon {
+      color: var(--v-tree-icon-folder-color);
+    }
+
+    .v-tree-navigation__node--selected .v-tree-navigation__icon {
+      color: var(--v-color-primary-text);
+    }
+  }
+
+  &--settings {
+    .v-tree-navigation__icon {
+      color: var(--v-tree-icon-color);
+    }
+  }
+
+  &--documentation {
+    .v-tree-navigation__icon {
+      color: var(--v-tree-icon-doc-color);
+    }
+  }
+
+  &--simple {
+    .v-tree-navigation__icon {
+      color: var(--v-tree-icon-color);
+    }
+  }
+
+  &--loading {
+    opacity: var(--v-state-loading-opacity);
+  }
+
+  &[aria-disabled="true"] {
+    opacity: var(--v-state-disabled-opacity);
+    pointer-events: none;
+  }
+
+  &__loader {
+    display: inline-block;
+    width: var(--v-loader-size);
+    height: var(--v-loader-size);
+    border: var(--v-loader-border-width) solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--v-radius-circle);
+    animation: v-tree-navigation-spin var(--v-motion-spin-duration) linear infinite;
+    margin-bottom: var(--v-space-2);
+  }
+
+  &__node {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: var(--v-tree-node-gap);
+    min-height: var(--v-tree-item-height-md);
+    padding-inline-end: var(--v-tree-node-padding-x);
+    border-radius: var(--v-radius-sm);
+    border-inline-start: var(--v-tree-indicator-width) solid transparent;
+    cursor: pointer;
+    position: relative;
+    transition:
+      background var(--v-tree-transition) var(--v-ease-out),
+      color var(--v-tree-transition) var(--v-ease-out),
+      border-color var(--v-tree-transition) var(--v-ease-out);
+
+    &:hover {
+      background: var(--v-tree-item-hover-bg);
+    }
+
+    &:active {
+      background: var(--v-color-primary-50);
+    }
+
+    &:focus-visible {
+      outline: var(--v-tree-focus-ring-width) solid var(--v-color-primary-500);
+      outline-offset: var(--v-tree-focus-ring-offset);
+    }
+
+    &--selected {
+      background: var(--v-color-primary-50);
+      color: var(--v-color-primary-text);
+      border-inline-start-color: var(--v-color-primary-text);
+      font-weight: var(--v-font-weight-semibold);
+    }
+
+    &--disabled {
+      opacity: var(--v-tree-item-disabled-opacity);
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+  }
+
+  &__toggle {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--v-tree-toggle-size);
+    height: var(--v-tree-toggle-size);
+    min-width: var(--v-tree-toggle-size);
+    min-height: var(--v-tree-toggle-size);
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--v-tree-icon-color);
+    border-radius: var(--v-radius-sm);
+    cursor: pointer;
+    transition: transform var(--v-tree-transition) var(--v-ease-out);
+
+    &:focus-visible {
+      outline: var(--v-tree-focus-ring-width) solid var(--v-color-primary-500);
+      outline-offset: var(--v-tree-focus-ring-offset);
+    }
+
+    &--placeholder {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+  }
+
+  &__chevron {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--v-tree-icon-color);
+  }
+
+  &__icon {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--v-tree-icon-size);
+    height: var(--v-tree-icon-size);
+    font-size: var(--v-font-size-text-small);
+    line-height: 1;
+    color: var(--v-tree-icon-color);
+  }
+
+  &__label {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__count {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    min-width: var(--v-tree-count-min-width);
+    padding: var(--v-tree-count-padding-y) var(--v-tree-count-padding-x);
+    border-radius: var(--v-radius-pill);
+    background: var(--v-tree-count-bg);
+    color: var(--v-tree-count-color);
+    font-size: var(--v-font-size-caption);
+    line-height: var(--v-line-height-caption);
+    font-weight: var(--v-font-weight-semibold);
+    text-align: center;
+  }
+
+  &__node-loader {
+    display: inline-block;
+    width: var(--v-loader-size);
+    height: var(--v-loader-size);
+    border: var(--v-loader-border-width) solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--v-radius-circle);
+    animation: v-tree-navigation-spin var(--v-motion-spin-duration) linear infinite;
+    flex-shrink: 0;
+  }
+
+  &__empty {
+    box-sizing: border-box;
+    padding: var(--v-space-3);
+    color: var(--v-color-text-muted);
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+    text-align: center;
+  }
+}
+
+@keyframes v-tree-navigation-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-tree-navigation,
+  .v-tree-navigation__node,
+  .v-tree-navigation__toggle,
+  .v-tree-navigation__chevron,
+  .v-tree-navigation__loader,
+  .v-tree-navigation__node-loader {
+    transition: none;
+    animation: none;
+  }
+}

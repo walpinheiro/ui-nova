@@ -1,0 +1,401 @@
+@import '../../_shared/overlayPlacement.scss';
+
+.v-dropdown-menu {
+  @apply relative inline-flex font-sans text-text-medium;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  /* Keep the root as tall as the trigger so the panel anchors to it, even inside stretching flex/grid parents. */
+  height: fit-content;
+  align-self: flex-start;
+  font-family: var(--v-font-family-sans);
+  font-size: var(--v-font-size-text-medium);
+  line-height: var(--v-line-height-text-medium);
+  --v-dropdown-soft-text: color-mix(in srgb, var(--v-color-text) 78%, var(--v-color-surface));
+
+  &__trigger {
+    @apply inline-flex items-center duration-fast ease-out cursor-pointer select-none;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--v-space-2);
+    min-height: var(--v-dropdown-height-md);
+    padding: 0 var(--v-dropdown-trigger-padding-x);
+    color: var(--v-dropdown-soft-text);
+    background: var(--v-color-surface);
+    border: var(--v-border-width) solid var(--v-color-border);
+    border-radius: var(--v-dropdown-trigger-radius);
+    font-size: var(--v-font-size-text-medium);
+    line-height: var(--v-line-height-text-medium);
+    font-weight: 500;
+    font-family: var(--v-font-family-sans);
+    cursor: pointer;
+    transition:
+      background var(--v-dropdown-motion-hover) var(--v-ease-out),
+      transform var(--v-dropdown-motion-press) var(--v-ease-out),
+      color var(--v-dropdown-motion-hover) var(--v-ease-out),
+      border-color var(--v-dropdown-motion-hover) var(--v-ease-out);
+
+    &:hover {
+      background: var(--v-dropdown-hover-bg);
+      color: var(--v-color-text);
+    }
+
+    &:active {
+      transform: scale(var(--v-state-press-scale));
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    &[aria-disabled='true'] {
+      opacity: var(--v-state-disabled-opacity);
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+  }
+
+  &--sm &__trigger {
+    min-height: var(--v-dropdown-height-sm);
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+  }
+
+  &--md &__trigger {
+    min-height: var(--v-dropdown-height-md);
+  }
+
+  &--lg &__trigger {
+    min-height: var(--v-dropdown-height-lg);
+    font-size: var(--v-font-size-text-large);
+    line-height: var(--v-line-height-text-large);
+  }
+
+  &--primary &__trigger {
+    background: var(--v-color-primary);
+    color: var(--v-color-on-primary);
+    border-color: transparent;
+
+    &:hover {
+      background: var(--v-color-primary-hover);
+    }
+
+    &:active {
+      background: color-mix(in srgb, black var(--v-state-pressed-mix), var(--v-color-primary-hover));
+    }
+  }
+
+  &--secondary &__trigger {
+    background: var(--v-color-surface);
+    color: var(--v-dropdown-soft-text);
+    border-color: var(--v-color-border);
+  }
+
+  &--ghost &__trigger {
+    background: transparent;
+    color: var(--v-color-primary-text);
+    border-color: transparent;
+    box-shadow: none;
+
+    &:hover {
+      background: var(--v-color-primary-50);
+    }
+  }
+
+  &--destructive &__trigger {
+    background: var(--v-dropdown-destructive-bg);
+    color: var(--v-dropdown-destructive-text);
+    border-color: var(--v-dropdown-destructive-text);
+
+    &:hover {
+      background: color-mix(in srgb, var(--v-dropdown-destructive-text) 12%, var(--v-dropdown-destructive-bg));
+    }
+  }
+
+  &--open &__trigger {
+    background: var(--v-dropdown-hover-bg);
+  }
+
+  &--loading &__trigger {
+    cursor: progress;
+    opacity: var(--v-state-loading-opacity);
+  }
+
+  &__trigger-icon,
+  &__item-icon,
+  &__check,
+  &__chevron,
+  &__submenu-chevron {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__item-icon,
+  &__chevron {
+    color: var(--v-color-text-muted);
+  }
+
+  &__trigger-icon,
+  &__item-icon,
+  &__check {
+    width: var(--v-icon-size-sm);
+    height: var(--v-icon-size-sm);
+  }
+
+  &__label,
+  &__item-label {
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  &__chevron-wrap {
+    display: inline-flex;
+    margin-left: var(--v-space-1);
+    flex-shrink: 0;
+  }
+
+  &__chevron {
+    flex-shrink: 0;
+    transition: transform var(--v-dropdown-motion-open) var(--v-ease-out);
+
+    &--open:not(.v-dropdown-menu__chevron--up) {
+      transform: rotate(180deg);
+    }
+
+    &--up:not(.v-dropdown-menu__chevron--open) {
+      transform: rotate(180deg);
+    }
+
+    &--up.v-dropdown-menu__chevron--open {
+      transform: rotate(0deg);
+    }
+  }
+
+  &__submenu-chevron {
+    margin-left: auto;
+    color: var(--v-color-text-muted);
+    flex-shrink: 0;
+  }
+
+  &__menu {
+    @include anchored-overlay-panel(var(--v-space-1));
+    box-sizing: border-box;
+    min-width: var(--v-dropdown-menu-min-width);
+    padding: var(--v-space-1);
+    background: var(--v-popover-bg);
+    border: var(--v-border-width) solid var(--v-popover-border);
+    border-radius: var(--v-radius-12);
+    box-shadow: var(--v-dropdown-menu-shadow);
+    overflow: visible;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity var(--v-dropdown-motion-open) var(--v-ease-out),
+      transform var(--v-dropdown-motion-open) var(--v-ease-out);
+
+    &--bottom-start,
+    &--bottom-end {
+      transform: translateY(var(--v-space-1));
+    }
+
+    &--top-start,
+    &--top-end {
+      transform: translateY(calc(var(--v-space-1) * -1));
+    }
+
+    &--open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+
+  &--trigger-field {
+    width: 100%;
+
+    .v-dropdown-menu__trigger {
+      width: 100%;
+      min-height: auto;
+      padding: var(--v-space-1) var(--v-space-2);
+      font-size: var(--v-font-size-text-small);
+      line-height: var(--v-line-height-text-small);
+      font-weight: var(--v-font-weight-regular);
+      justify-content: space-between;
+      color: var(--v-dropdown-soft-text);
+      background: var(--v-color-surface);
+      border: var(--v-border-width) solid var(--v-color-border);
+      border-radius: var(--v-radius-8);
+
+      &:hover {
+        background: var(--v-color-surface);
+        border-color: var(--v-color-border);
+      }
+    }
+
+    &.v-dropdown-menu--open .v-dropdown-menu__trigger {
+      border-color: var(--v-color-primary);
+    }
+  }
+
+  &--trigger-icon {
+    .v-dropdown-menu__trigger {
+      min-height: auto;
+      width: var(--v-space-8);
+      height: var(--v-space-8);
+      padding: 0;
+      justify-content: center;
+      border-color: transparent;
+      background: transparent;
+      color: var(--v-color-text-muted);
+
+      &:hover {
+        background: var(--v-dropdown-hover-bg);
+        color: var(--v-color-text);
+      }
+    }
+  }
+
+  &__item-wrap {
+    position: relative;
+  }
+
+
+
+  &__item {
+    @apply flex items-center w-full text-left font-regular duration-fast ease-out cursor-pointer;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: var(--v-dropdown-item-gap);
+    width: 100%;
+    min-height: var(--v-dropdown-item-height);
+    padding: 0 var(--v-dropdown-item-padding-x);
+    color: var(--v-dropdown-soft-text);
+    background: transparent;
+    border: none;
+    border-radius: var(--v-radius-8);
+    font-weight: var(--v-font-weight-regular);
+    font-size: var(--v-font-size-text-medium);
+    line-height: var(--v-line-height-text-medium);
+    font-family: var(--v-font-family-sans);
+    cursor: pointer;
+    transition: background var(--v-dropdown-motion-hover) var(--v-ease-out);
+
+    &:hover {
+      background: var(--v-dropdown-hover-bg);
+      color: var(--v-color-text);
+
+      .v-dropdown-menu__item-icon {
+        color: var(--v-dropdown-soft-text);
+      }
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: calc(var(--v-focus-ring-offset) * -1);
+    }
+
+    &--selected,
+    &--selected:hover {
+      color: var(--v-color-primary-text);
+      background: var(--v-dropdown-item-selected-bg);
+      font-weight: 500;
+
+      .v-dropdown-menu__item-icon {
+        color: var(--v-color-primary-text);
+      }
+    }
+
+    &--destructive {
+      color: var(--v-dropdown-destructive-text);
+      background: transparent;
+
+      .v-dropdown-menu__item-icon,
+      &:hover {
+        color: var(--v-dropdown-destructive-text);
+      }
+
+      &:hover {
+        background: var(--v-dropdown-destructive-bg);
+      }
+    }
+
+    &--disabled,
+    &[aria-disabled='true'] {
+      opacity: var(--v-state-disabled-opacity);
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+  }
+
+  &__check {
+    color: var(--v-color-primary-text);
+  }
+
+  &__separator {
+    height: var(--v-dropdown-divider-width);
+    margin: var(--v-space-1) var(--v-space-2);
+    background: var(--v-color-border);
+  }
+
+  &__submenu {
+    position: absolute;
+    top: 0;
+    left: calc(100% + var(--v-space-1));
+    z-index: 1;
+    min-width: var(--v-dropdown-menu-min-width);
+    padding: var(--v-space-1);
+    background: var(--v-popover-bg);
+    border: var(--v-border-width) solid var(--v-popover-border);
+    border-radius: var(--v-radius-12);
+    box-shadow: var(--v-dropdown-menu-shadow);
+
+    &--left {
+      left: auto;
+      right: calc(100% + var(--v-space-1));
+    }
+  }
+
+  &__loader {
+    display: inline-block;
+    width: var(--v-loader-size);
+    height: var(--v-loader-size);
+    border: var(--v-loader-border-width) solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--v-radius-circle);
+    animation: v-dropdown-spin var(--v-motion-spin-duration) linear infinite;
+    margin-left: var(--v-space-2);
+  }
+}
+
+@keyframes v-dropdown-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-dropdown-menu,
+  .v-dropdown-menu__trigger,
+  .v-dropdown-menu__menu,
+  .v-dropdown-menu__item,
+  .v-dropdown-menu__chevron,
+  .v-dropdown-menu__loader {
+    transition: none;
+    animation: none;
+    transform: none;
+  }
+}

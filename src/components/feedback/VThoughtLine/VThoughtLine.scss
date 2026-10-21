@@ -1,0 +1,177 @@
+.v-thought-line {
+  --v-thought-line-rail: var(--v-icon-size-sm);
+
+  @apply flex w-full flex-col font-sans;
+  box-sizing: border-box;
+  color: var(--v-color-text);
+  font-family: var(--v-font-family-sans);
+
+  &__header {
+    display: grid;
+    grid-template-columns: var(--v-thought-line-rail) minmax(0, 1fr) auto auto;
+    align-items: center;
+    column-gap: var(--v-space-2);
+    width: 100%;
+    padding: var(--v-space-2) 0;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    text-align: left;
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+      border-radius: var(--v-radius-sm);
+    }
+  }
+
+  &__glyph {
+    @apply inline-flex shrink-0 items-center justify-center;
+    width: var(--v-thought-line-rail);
+    height: var(--v-thought-line-rail);
+    color: var(--v-color-primary-text);
+  }
+
+  &--thinking &__glyph,
+  &--expressive.v-thought-line--thinking &__glyph {
+    animation: v-thought-line-breathe 1.8s var(--v-ease-out) infinite;
+  }
+
+  &__label {
+    min-width: 0;
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+    font-weight: var(--v-font-weight-semibold);
+  }
+
+  &__timer {
+    font-variant-numeric: tabular-nums;
+    color: var(--v-color-text-muted);
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+    white-space: nowrap;
+  }
+
+  &__chevron {
+    @apply inline-flex shrink-0 items-center justify-center;
+    width: var(--v-thought-line-rail);
+    height: var(--v-thought-line-rail);
+    color: var(--v-color-text-muted);
+    transition: transform var(--v-motion-fast) var(--v-ease-out);
+  }
+
+  &--expanded &__chevron {
+    transform: rotate(180deg);
+  }
+
+  &__trace {
+    display: grid;
+    grid-template-columns: var(--v-thought-line-rail) minmax(0, 1fr);
+    column-gap: var(--v-space-2);
+    padding: 0 0 var(--v-space-2);
+    overflow: hidden;
+  }
+
+  &__step {
+    @apply relative;
+    grid-column: 2;
+    margin: 0;
+    padding-left: var(--v-space-3);
+    color: var(--v-color-text-muted);
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+    animation: v-thought-line-step-in var(--v-motion-normal) var(--v-ease-out) both;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: var(--v-space-2);
+      height: var(--v-thought-line-rail-height);
+      background: var(--v-color-neutral-300);
+      transform: translateY(-50%);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: calc((var(--v-thought-line-rail) + var(--v-space-2)) * -1 + (var(--v-thought-line-rail) - var(--v-space-1)) / 2);
+      top: 0.55em;
+      width: var(--v-space-1);
+      height: var(--v-space-1);
+      border-radius: var(--v-radius-circle);
+      background: var(--v-color-neutral-300);
+      transform: translateY(-50%);
+    }
+  }
+
+  &__trace::before {
+    content: '';
+    grid-column: 1;
+    grid-row: 1 / -1;
+    width: var(--v-thought-line-rail-height);
+    margin-inline: calc((var(--v-thought-line-rail) - var(--v-thought-line-rail-height)) / 2);
+    background: color-mix(in srgb, var(--v-color-neutral-300) 80%, transparent);
+  }
+}
+
+.v-thought-line-trace-enter-active,
+.v-thought-line-trace-leave-active {
+  transition:
+    opacity var(--v-motion-fast) var(--v-ease-out),
+    max-height var(--v-motion-normal) var(--v-ease-out);
+}
+
+.v-thought-line-trace-enter-from,
+.v-thought-line-trace-leave-to {
+  opacity: 0;
+  max-height: 0;
+}
+
+@keyframes v-thought-line-breathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.72;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes v-thought-line-step-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-thought-line {
+
+    &--thinking &__glyph,
+    &--expressive.v-thought-line--thinking &__glyph,
+    &__step {
+      animation: none;
+    }
+
+    &__chevron {
+      transition: none;
+    }
+  }
+
+  .v-thought-line-trace-enter-active,
+  .v-thought-line-trace-leave-active {
+    transition: none;
+  }
+}

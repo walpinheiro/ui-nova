@@ -1,0 +1,26 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as MotionStories from './Motion.stories';
+
+<Meta of={MotionStories} />
+
+# Motion
+
+**Categoria:** Foundations
+
+Durações (`--v-motion-*`), curvas (`--v-ease-*`) e tokens de estado (`--v-state-press-scale`, opacidades disabled/loading). Respeita `prefers-reduced-motion` via override automático em `:root`.
+
+## 1. Classes funcionais
+
+<Canvas of={MotionStories.FunctionalClasses} />
+
+## 2. Exemplos visuais
+
+<Canvas of={MotionStories.Examples} />
+
+## 3. Como customizar
+
+<Canvas of={MotionStories.Customize} />
+
+## 4. Tokens (busca)
+
+<Canvas of={MotionStories.TokenCatalogStory} />

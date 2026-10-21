@@ -1,0 +1,36 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as RadiusStories from './Radius.stories';
+
+<Meta of={RadiusStories} />
+
+# Radius
+
+**Categoria:** Foundations
+
+Tokens de canto arredondado. Toda forma na lib passa por `--v-radius-*` ou aliases de componente (`--v-chip-radius`, `--v-card-radius`).
+
+## 1. Classes funcionais
+
+Utilities Tailwind mapeadas em `tailwind.config.js` → `var(--v-radius-*)`. Chips e pills usam **`var(--v-radius-pill)`** directo (sem classe Tailwind dedicada).
+
+<Canvas of={RadiusStories.FunctionalClasses} />
+
+## 2. Exemplos visuais
+
+Escala sm→lg, comparação **circle vs pill**, e uso real em `VTag`, `VCard` e avatar.
+
+<Canvas of={RadiusStories.Examples} />
+
+## 3. Como customizar
+
+Altere tokens base; componentes que derivam (`--v-chip-radius`, `--v-tabs-pill-radius`) herdam automaticamente se apontarem para `--v-radius-pill`.
+
+<Canvas of={RadiusStories.Customize} />
+
+**Regra:** retângulos largos → `--v-radius-pill`. Quadrados → `--v-radius-circle`. Cards/panels → `--v-radius-md` ou `--v-card-radius`.
+
+## 4. Tokens (busca)
+
+Listagem filtrada de todos os tokens de radius com pesquisa e valores computados.
+
+<Canvas of={RadiusStories.TokenCatalogStory} />

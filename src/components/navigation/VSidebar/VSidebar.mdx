@@ -1,0 +1,120 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VSidebarStories from './VSidebar.stories';
+
+<Meta of={VSidebarStories} />
+# Sidebar
+**Categoria:** navigation  
+Painel de navegação persistente com brand, busca global (com filtro), menus multi-nível com acordeão, grupos colapsáveis e área de usuário. Segue tokens `--v-sidebar-*` e Light Mode como referência principal.
+
+## Component
+<Canvas of={VSidebarStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VSidebar } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VSidebar size="md" brand-name="VueUI Nova" user-name="Alex Chen" user-email="alex@nova.dev" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Icons rail
+Na variante `icons` o rail é plano: itens 40×40 com raio 12, sem borda nem fundo, e o ativo em tom suave do primário. Tokens: `--v-sidebar-icons-item-size`, `--v-sidebar-icons-item-radius`, `--v-sidebar-icons-gap`, `--v-sidebar-icons-active-bg`, `--v-sidebar-icons-active-fg`. Cada item expõe `title` e `aria-label` com seu label (tooltip). A animação de entrada da "ilha" só roda ao reexpandir a partir de colapsado (nunca na montagem) e é desligada com `prefers-reduced-motion`. Use `:show-collapse-toggle="false"` (padrão `true`) para esconder o botão de colapso.
+<Canvas of={VSidebarStories.IconsNoToggle} />
+
+## Multi-level, accordion & groups
+<Canvas of={VSidebarStories.MultiLevel} />
+
+- `items[].children` aceita **qualquer profundidade**; `type: 'heading'` cria categorias dentro de submenus; `type: 'group'` cria uma seção colapsável (`collapsible`, `defaultOpen`).
+- `accordion` (padrão `true`): abrir um item fecha seus irmãos abertos. Grupos são independentes, a menos que `accordionGroups`.
+- O ancestral do `activeItem` é aberto automaticamente (montagem e mudança) e rolado para dentro da vista.
+- `filterOnSearch` (padrão `true`): a busca filtra por label, mantém e expande os ancestrais dos resultados.
+- Extras por item: `badge` + `badgeTone: 'primary'`, `tag` ("Soon"), `iconColor`, `disabled`, `href`.
+
+```vue
+<VSidebar v-model:active-item="active" :items="items" accordion>
+  <template #header="{ toggle }">…workspace switcher…</template>
+  <template #after-nav>…promo card…</template>
+  <template #item-trailing="{ item }"><MyMenu :item="item" /></template>
+</VSidebar>
+```
+
+| Slot | Escopo | Uso |
+|---|---|---|
+| `header` | `{ collapsed, toggle }` | Substitui a marca (workspace switcher) |
+| `before-nav` | — | Abaixo da busca, fora do scroll |
+| `after-nav` | — | Card promocional acima do rodapé, fora do scroll |
+| `footer` | `{ collapsed }` | Área de usuário (no rail recolhido, mostre só o avatar/ícones) |
+| `item-trailing` | `{ item }` | Conteúdo à direita de cada item |
+
+| `group-actions` | `{ group }` | Ações à direita do cabeçalho do grupo (visíveis em hover/foco; sempre visíveis em touch). Cliques não alternam o grupo |
+
+### Layout & grupos (opt-in)
+| Prop | Padrão | Efeito |
+|---|---|---|
+| `width` | — | `string \| number` (número = px); define `--v-sidebar-width`. Refs Starline/Locally ≈ 216px. Rails colapsados mantêm a própria largura |
+| `groupChevron` | `'end'` | `'start'` põe o chevron à esquerda da legenda (gira -90° quando fechado) |
+| `groupDividers` | `false` | Linha `--v-sidebar-border` acima de cada grupo (exceto o primeiro bloco) |
+| `groupChevronOpen` | `'down'` | `'up'`: grupo mostra "v" fechado e "^" aberto (CareOps), sem rotação de -90° |
+| `chevron` | `'rotate'` | Chevron dos itens expansíveis. `'updown'`: "v" fechado, "^" aberto (Starline) |
+
+Tokens: `--v-sidebar-chevron-bg` (quadrado sutil atrás do chevron em hover/expandido), `--v-sidebar-disabled-opacity` (0.4), `--v-sidebar-group-divider-gap` (12px). No tema claro, cores do sidebar usam cinza neutro (zinc), sem alterar as neutras globais.
+
+Somente o `<nav>` rola (`data-scroll-top` / `data-scroll-bottom` expõem o estado). Defina uma altura no host (`height` ou flex stretch) para ativar o scroll.
+
+## Montagem do menu lateral, parte por parte
+Cada peça dos templates **Sales Overview** e **Insights Detail** isolada. Os exemplos usam **os mesmos dados** (`templates/SalesOverview/data.ts`) e **o mesmo CSS** (`templates/_shared/sidebarPatterns.scss`) dos templates, então o que aparece aqui é exatamente o que aparece lá. Copie o código em "Show code" e importe o `sidebarPatterns.scss`.
+
+| Classe | Onde vai | O que faz |
+|---|---|---|
+| `sp-app-rail` | `VSidebar variant="icons"` | Espaçamento e `sticky` do rail de apps (o visual plano já é o padrão da variante) |
+| `sp-side` | `<aside>` em volta do menu | Painel de 248px, altura da tela, bordas laterais |
+| `sp-side__nav` | `VSidebar` dentro do `sp-side` | Remove borda/raio/sombra/fundo para herdar o painel |
+| `sp-switcher` (+ `__mark`, `__name`) | botão no `#header` | Seletor de escopo/workspace |
+| `sp-rail` (+ `__head`, `__foot`) | `VSidebar` recolhível | Rail do Insights Detail (ícones ⇄ ícones + textos) |
+
+### 1. Rail de ícones
+<Canvas of={VSidebarStories.RecipeIconsOnlyRail} />
+
+### 2. Rail expansível (ícones ⇄ textos)
+O `#header` substitui a marca **e o toggle inline**: use `{ collapsed, toggle }` do slot para desenhar o botão de recolher. Recolhido, o `VSidebar` empilha o header abaixo do botão de expandir, centralizado no rail; o tema vira um único ícone para caber em 40px.
+<Canvas of={VSidebarStories.RecipeExpandableRail} />
+
+### 3. Menu com grupos e submenus
+<Canvas of={VSidebarStories.RecipeMenuOnly} />
+
+### 4. Seletor de workspace (header)
+<Canvas of={VSidebarStories.RecipeScopeHeader} />
+
+### 5. Menu lateral completo
+<Canvas of={VSidebarStories.RecipeFullComposition} />
+
+## Props
+<Controls />
+## Anatomy
+1. **Brand area** — logo + nome do app + toggle de collapse  
+2. **Search** — input global com atalho `⌘K` (filtra os itens)  
+3. **Navigation item** — ícone + label + badge/chevron opcional  
+4. **Nested section** — submenu recursivo com guia vertical; **Group** — cabeçalho de seção colapsável  
+5. **User area** — avatar, nome, e-mail e menu (`#footer` slot)
+
+## States
+Default · Hover · Focus-visible · Active · Expanded section · Collapsed rail · Disabled
+
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Collapse/expand | width, padding | 200ms | ease-out |
+| Item hover | background | 100ms | standard |
+| Chevron rotate | transform | 200ms | ease-out |
+| Submenu / group open | grid-template-rows, opacity | 200ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+
+Ícones por nome (`icon: 'pie-chart' | 'sliders' | 'receipt' | 'chart-line' | 'dollar-sign' | 'help-circle' | 'log-out' | 'sun' | 'moon' …`) são resolvidos via registry Keyline.
+## Accessibility
+`aside` semântico, `aria-current="page"` no item ativo, `aria-expanded` em seções, navegação por Tab/Enter/Space; ↑/↓ percorrem os itens visíveis, → abre/entra, ← fecha/volta ao pai, Home/End; `aria-controls` aponta para o submenu; foco visível.

@@ -1,0 +1,42 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VSelectStories from './VSelect.stories';
+
+<Meta of={VSelectStories} />
+# Select
+**Categoria:** form  
+Campo de seleção single-choice com label, placeholder, ícone opcional, validação e menu suspenso acessível.
+
+## Component
+<Canvas of={VSelectStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VSelect } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VSelect size="md" label="Product" placeholder="Select option" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus · Open · Selected · Error · Disabled.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | border-color/background | 120ms | ease-out |
+| Focus ring | box-shadow/transform | 120ms | ease-out |
+| Open | chevron rotate + panel fade/slide | 160ms | standard |
+| Option hover | background | 100ms | ease-out |
+| Check reveal | opacity/transform | 120ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Combobox/listbox com `aria-expanded`, `aria-controls`, `aria-selected`, `aria-invalid` e `aria-describedby` para erros. Teclado: Tab, ↑/↓, Enter, Esc. Label via `for`/`id` ou `aria-label`.
+## Anatomy
+Root (`v-select`) → label → control-shell → trigger (leading icon, value, chevron) → teleported panel (options + check) → error. Data-test-ids: `v-select`, `v-select-label`, `v-select-trigger`, `v-select-value`, `v-select-chevron`, `v-select-panel`, `v-select-option-{value}`, `v-select-check-{value}`, `v-select-error`.

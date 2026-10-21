@@ -1,0 +1,44 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VTabsStories from './VTabs.stories';
+
+<Meta of={VTabsStories} />
+# Tabs
+**Categoria:** navigation  
+Ajudar o utilizador a navegar entre conteúdos relacionados dentro do mesmo contexto, mantendo a informação organizada e acessível. É navegação contextual (não muda de página): alterna painéis de conteúdo relacionado (ex.: Overview/Features/Pricing/FAQ, General/Team/Billing/Integrations, Home/Analytics/Settings/Security).
+
+## Component
+<Canvas of={VTabsStories.Underline} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VTabs } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VTabs size="md" variant="underline" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Navigation mode & actions
+`panels={false}` remove o tabpanel (e o `aria-controls`), usando as tabs como navegação. O slot `#actions` renderiza no fim da barra de tabs.
+<Canvas of={VTabsStories.NavigationWithActions} />
+
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Enter/Exit | opacity/transform | 160ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa primeiro, foco visível, labels acessíveis e teclado conforme o padrão WAI-ARIA correspondente.
+## Anatomy
+Root → optional leading visual → content/slot → optional actions/feedback.

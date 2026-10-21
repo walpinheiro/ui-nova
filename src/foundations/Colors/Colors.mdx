@@ -1,0 +1,34 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as ColorsStories from './Colors.stories';
+
+<Meta of={ColorsStories} />
+
+# Cores
+
+**Categoria:** Foundations
+
+Paleta Tailwind v3 (slate, indigo, semânticas) exposta como `--v-color-*`. Classes `bg-*`, `text-*` e `border-*` consomem os mesmos tokens.
+
+## 1. Classes funcionais
+
+<Canvas of={ColorsStories.FunctionalClasses} />
+
+## 2. Paleta default
+
+Neutros, brand primary, semânticas e aliases de superfície (`bg`, `surface`, `text`, `border`).
+
+<Canvas of={ColorsStories.DefaultPalette} />
+
+Use o toggle **Paleta default / Paleta customizada** para comparar o tema base com um override de exemplo.
+
+## 3. Como customizar
+
+Comece pelos **aliases** (`--v-color-primary`, `--v-color-text`, `--v-color-surface`) antes de redefinir escalas 50–900 inteiras.
+
+<Canvas of={ColorsStories.Customize} />
+
+## 4. Tokens (busca)
+
+Todos os `--v-color-*` com amostra de cor e pesquisa.
+
+<Canvas of={ColorsStories.TokenCatalogStory} />

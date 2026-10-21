@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VEmptyStateStories from './VEmptyState.stories';
+
+<Meta of={VEmptyStateStories} />
+# Empty State
+**Categoria:** feedback  
+Estado vazio amigável para quando não há nada para mostrar: transforma momentos vazios em próximos passos úteis com ilustração, título, descrição e ação. Cobre cenários comuns (sem projetos, sem resultados, sem ficheiros, sem notificações, onboarding de criação).
+
+## Component
+<Canvas of={VEmptyStateStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VEmptyState } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VEmptyState size="md" variant="default" title="No projects yet" description="Get started by creating your first project." />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Enter/Exit | opacity/transform | 160ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa primeiro, foco visível, labels acessíveis e teclado conforme o padrão WAI-ARIA correspondente.
+## Anatomy
+Root → optional leading visual → content/slot → optional actions/feedback.

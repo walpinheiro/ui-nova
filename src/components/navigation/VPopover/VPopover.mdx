@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VPopoverStories from './VPopover.stories';
+
+<Meta of={VPopoverStories} />
+# Popover
+**Categoria:** navigation  
+Superfície flutuante contextual ancorada a um trigger — informação rápida, ações ou formulários sem sair da página.
+
+## Component
+<Canvas of={VPopoverStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VPopover } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VPopover size="md" placement="bottom" trigger="click" closable show-arrow title="Quick tip" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Closed · Hover trigger · Focus trigger · Open (chevron/trigger ativo + painel visível) · Pressed action · Disabled.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Open | opacity/scale | 160ms | ease-out |
+| Close | opacity/scale | 160ms | ease-out |
+| Trigger hover/focus | background/outline | 100ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+`role="dialog"` no painel; trigger com `aria-haspopup="dialog"` e `aria-expanded`; suporte a `aria-labelledby`/`aria-describedby`; Esc fecha; foco entra no painel e retorna ao trigger; click fora fecha.
+## Anatomy
+Trigger (`#trigger`) → arrow → container → header (title + close) → content → actions/footer. Data-test-ids: `v-popover`, `v-popover-trigger`, `v-popover-arrow`, `v-popover-container`, `v-popover-title`, `v-popover-close`, `v-popover-content`, `v-popover-actions`.

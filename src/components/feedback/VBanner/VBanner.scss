@@ -1,0 +1,205 @@
+// Page/app-level announcement bar: edge to edge, one compact row, no card chrome.
+// Inline messages inside content belong to VAlert.
+.v-banner {
+  --v-banner-accent: var(--v-color-info-strong);
+  --v-banner-bg: var(--v-color-info-soft);
+  --v-banner-icon-size: 16px;
+
+  @apply flex items-center font-sans;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  gap: var(--v-space-3);
+  padding: var(--v-space-2) var(--v-space-4);
+  color: var(--v-color-text);
+  background: var(--v-banner-bg);
+  border: 0;
+  border-bottom: var(--v-border-width) solid color-mix(in srgb, var(--v-banner-accent) 18%, transparent);
+  border-radius: 0;
+  font-size: var(--v-font-size-text-medium);
+  line-height: var(--v-line-height-text-medium);
+  transition: opacity var(--v-motion-normal) var(--v-ease-out), transform var(--v-motion-normal) var(--v-ease-out);
+
+  &--info {
+    --v-banner-accent: var(--v-color-info-strong);
+    --v-banner-bg: var(--v-color-info-soft);
+  }
+
+  &--success {
+    --v-banner-accent: var(--v-color-success-strong);
+    --v-banner-bg: var(--v-color-success-soft);
+  }
+
+  &--warning {
+    --v-banner-accent: var(--v-color-warning-strong);
+    --v-banner-bg: var(--v-color-warning-soft);
+  }
+
+  &--error {
+    --v-banner-accent: var(--v-color-error-strong);
+    --v-banner-bg: var(--v-color-error-soft);
+  }
+
+  // Product announcement: the app surface, not a status colour.
+  &--neutral {
+    --v-banner-accent: var(--v-color-primary-text);
+    --v-banner-bg: var(--v-color-surface-muted);
+  }
+
+  &--sm {
+    min-height: 36px;
+    padding-block: var(--v-space-1);
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+  }
+
+  &--lg {
+    min-height: 52px;
+    padding-block: var(--v-space-3);
+    --v-banner-icon-size: 18px;
+  }
+
+  &--disabled {
+    opacity: var(--v-state-disabled-opacity);
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  &--dismissed {
+    justify-content: center;
+    min-height: 36px;
+    color: var(--v-color-text-muted);
+    background: transparent;
+    border-bottom-style: dashed;
+    border-bottom-color: var(--v-color-border);
+  }
+
+  &:focus-visible {
+    outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+    outline-offset: calc(var(--v-focus-ring-width) * -1);
+  }
+
+  &__icon {
+    @apply inline-flex shrink-0 items-center justify-center;
+    color: var(--v-banner-accent);
+
+    .v-icon,
+    svg {
+      display: block;
+      width: var(--v-banner-icon-size);
+      height: var(--v-banner-icon-size);
+    }
+  }
+
+  // Title and description read as one sentence on a single row; they wrap only when needed.
+  &__content {
+    @apply flex min-w-0 flex-1 flex-wrap items-baseline;
+    column-gap: var(--v-space-2);
+    row-gap: 2px;
+  }
+
+  &__title,
+  &__body {
+    @apply font-semibold;
+    color: var(--v-color-text);
+  }
+
+  &__description {
+    color: var(--v-color-text-muted);
+  }
+
+  &__actions {
+    @apply flex flex-wrap items-center;
+    flex: 0 0 auto;
+    gap: var(--v-space-2);
+  }
+
+  &__dismiss {
+    @apply inline-flex shrink-0 items-center justify-center cursor-pointer select-none;
+    box-sizing: border-box;
+    width: 28px;
+    height: 28px;
+    margin-inline-end: -6px;
+    padding: 0;
+    color: var(--v-color-text-muted);
+    background: transparent;
+    border: 0;
+    border-radius: var(--v-radius-sm);
+    transition: background var(--v-motion-fast) var(--v-ease-out), color var(--v-motion-fast) var(--v-ease-out), transform var(--v-motion-press) var(--v-ease-out);
+
+    .v-icon,
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &:hover {
+      color: var(--v-color-text);
+      background: color-mix(in srgb, var(--v-color-text) 8%, transparent);
+    }
+
+    &:active {
+      transform: scale(var(--v-state-press-scale));
+      background: color-mix(in srgb, var(--v-color-text) 12%, transparent);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  &__loader {
+    @apply inline-block shrink-0;
+    width: var(--v-loader-size);
+    height: var(--v-loader-size);
+    border: var(--v-loader-border-width) solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--v-radius-circle);
+    animation: v-banner-spin var(--v-motion-spin-duration) linear infinite;
+  }
+
+  &__dismissed-text {
+    @apply font-semibold;
+    color: var(--v-color-text-muted);
+  }
+}
+
+.v-banner-enter-active {
+  transition: opacity var(--v-motion-normal) var(--v-ease-out), transform var(--v-motion-normal) var(--v-ease-out);
+}
+
+.v-banner-leave-active {
+  transition: opacity var(--v-motion-fast) var(--v-ease-in), transform var(--v-motion-fast) var(--v-ease-in);
+}
+
+.v-banner-enter-from,
+.v-banner-leave-to {
+  opacity: 0;
+  transform: translateY(calc(var(--v-space-1) * -1));
+}
+
+@keyframes v-banner-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-banner,
+  .v-banner-enter-active,
+  .v-banner-leave-active,
+  .v-banner__dismiss,
+  .v-banner__loader {
+    transition: none;
+    animation: none;
+  }
+
+  .v-banner-enter-from,
+  .v-banner-leave-to {
+    transform: none;
+  }
+}

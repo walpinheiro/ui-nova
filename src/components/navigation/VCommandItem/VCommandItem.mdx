@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VCommandItemStories from './VCommandItem.stories';
+
+<Meta of={VCommandItemStories} />
+# Command Item
+**Categoria:** navigation  
+Componente VueUI Nova para **command item**, seguindo tokens semânticos e Light Mode como referência principal.
+
+## Component
+<Canvas of={VCommandItemStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VCommandItem } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VCommandItem id="open-settings" label="Open settings" icon="settings" shortcut="⌘," size="md" variant="default" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Enter/Exit | opacity/transform | 160ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa primeiro, foco visível, labels acessíveis e teclado conforme o padrão WAI-ARIA correspondente.
+## Anatomy
+Root → optional leading visual → content/slot → optional actions/feedback.

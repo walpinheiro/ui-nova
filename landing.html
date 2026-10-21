@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VueUI Nova — Interfaces que fluem</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dist/vueui-nova-kit.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+
+body{
+  font-family:var(--v-font-family-sans,'Inter',system-ui,sans-serif);
+  background:var(--v-color-bg);
+  color:var(--v-color-text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ========== NAV ========== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  height:64px;display:flex;align-items:center;
+  padding:0 var(--v-space-6);
+  background:rgba(248,250,255,.78);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid rgba(var(--v-color-border),.5);
+}
+.nav-brand{display:flex;align-items:center;gap:var(--v-space-3);text-decoration:none;color:inherit}
+.nav-logo{
+  width:36px;height:36px;border-radius:var(--v-radius-md);
+  background:linear-gradient(135deg,var(--v-color-primary-500),var(--v-color-purple-base));
+  display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px;
+  box-shadow:0 4px 12px rgba(99,102,241,.3);
+}
+.nav-title{
+  font-size:var(--v-font-size-h5);font-weight:var(--v-font-weight-bold);
+  background:linear-gradient(135deg,var(--v-color-primary-500),var(--v-color-purple-base));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.nav-links{display:flex;gap:var(--v-space-1);margin-left:auto}
+.nav-link{
+  padding:var(--v-space-2) var(--v-space-4);
+  font-size:var(--v-font-size-text-medium);
+  color:var(--v-color-text-muted);
+  border-radius:var(--v-radius-sm);
+  cursor:pointer;transition:all var(--v-motion-fast) var(--v-ease-standard);
+  text-decoration:none;font-weight:var(--v-font-weight-semibold);
+  border:none;background:none;font-family:inherit;
+}
+.nav-link:hover{color:var(--v-color-text);background:var(--v-color-primary-50)}
+.nav-link.active{color:var(--v-color-primary-600);background:var(--v-color-primary-50)}
+
+/* ========== HERO ========== */
+.hero{
+  position:relative;
+  padding:140px var(--v-space-8) 100px;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%,rgba(99,102,241,.08) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 20%,rgba(168,85,247,.06) 0%,transparent 50%),
+    var(--v-color-bg);
+}
+.hero-inner{max-width:720px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:var(--v-space-2);
+  padding:var(--v-space-1) var(--v-space-4);
+  border-radius:var(--v-radius-full);
+  background:var(--v-color-surface);
+  border:1px solid var(--v-color-border);
+  font-size:var(--v-font-size-caption);
+  font-weight:var(--v-font-weight-semibold);
+  color:var(--v-color-primary-600);
+  margin-bottom:var(--v-space-6);
+  box-shadow:var(--v-shadow-sm);
+}
+.hero-badge .dot{width:6px;height:6px;border-radius:var(--v-radius-full);background:var(--v-color-success-base);animation:dot-pulse 2s ease infinite}
+@keyframes dot-pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{
+  font-size:clamp(40px,6vw,64px);
+  font-weight:var(--v-font-weight-bold);
+  line-height:1.1;letter-spacing:-.03em;
+  margin-bottom:var(--v-space-6);
+}
+.hero h1 .g{
+  background:linear-gradient(135deg,var(--v-color-primary-500) 0%,var(--v-color-purple-base) 50%,var(--v-color-pink-base) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:var(--v-font-size-text-large);
+  color:var(--v-color-text-muted);
+  max-width:540px;margin:0 auto var(--v-space-8);
+  line-height:1.7;
+}
+.hero-cta{display:flex;gap:var(--v-space-3);justify-content:center;flex-wrap:wrap}
+
+/* ========== SECTION ========== */
+.section{padding:80px var(--v-space-8)}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-head{margin-bottom:var(--v-space-8)}
+.section-eyebrow{
+  font-size:var(--v-font-size-caption);
+  font-weight:var(--v-font-weight-semibold);
+  text-transform:uppercase;letter-spacing:.1em;
+  color:var(--v-color-primary-500);
+  margin-bottom:var(--v-space-2);
+}
+.section-title{
+  font-size:var(--v-font-size-h1);
+  font-weight:var(--v-font-weight-bold);
+  letter-spacing:-.02em;
+  margin-bottom:var(--v-space-2);
+}
+.section-desc{
+  font-size:var(--v-font-size-text-large);
+  color:var(--v-color-text-muted);
+  max-width:520px;
+}
+
+/* ========== COLOR PALETTE ========== */
+.palette-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:var(--v-space-3)}
+.palette-swatch{
+  border-radius:var(--v-radius-md);overflow:hidden;
+  border:1px solid var(--v-color-border);
+  transition:transform var(--v-motion-fast) var(--v-ease-standard),box-shadow var(--v-motion-fast);
+  cursor:default;
+}
+.palette-swatch:hover{transform:translateY(-2px);box-shadow:var(--v-shadow-md)}
+.palette-color{height:72px}
+.palette-info{padding:var(--v-space-2) var(--v-space-3);background:var(--v-color-surface)}
+.palette-name{font-size:var(--v-font-size-caption);font-weight:var(--v-font-weight-semibold);color:var(--v-color-text)}
+.palette-hex{font-size:10px;color:var(--v-color-text-muted);font-family:'JetBrains Mono',monospace}
+
+/* ========== TYPOGRAPHY ========== */
+.type-row{
+  display:flex;align-items:baseline;gap:var(--v-space-6);
+  padding:var(--v-space-4) 0;
+  border-bottom:1px solid var(--v-color-border);
+}
+.type-label{
+  min-width:120px;
+  font-size:var(--v-font-size-caption);
+  font-weight:var(--v-font-weight-semibold);
+  color:var(--v-color-text-muted);
+  text-transform:uppercase;letter-spacing:.05em;
+}
+.type-spec{
+  min-width:200px;
+  font-size:var(--v-font-size-caption);
+  color:var(--v-color-primary-500);
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* ========== SPACING ========== */
+.spacing-row{display:flex;align-items:center;gap:var(--v-space-4);margin-bottom:var(--v-space-3)}
+.spacing-label{min-width:60px;font-size:var(--v-font-size-caption);font-weight:var(--v-font-weight-semibold);color:var(--v-color-text-muted);font-family:'JetBrains Mono',monospace}
+.spacing-bar{height:24px;border-radius:var(--v-radius-sm);background:linear-gradient(135deg,var(--v-color-primary-100),var(--v-color-primary-200));border:1px solid var(--v-color-primary-200);transition:width var(--v-motion-normal) var(--v-ease-standard)}
+.spacing-val{font-size:var(--v-font-size-caption);color:var(--v-color-text-muted);font-family:'JetBrains Mono',monospace}
+
+/* ========== RADIUS ========== */
+.radius-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:var(--v-space-4)}
+.radius-box{
+  width:80px;height:80px;
+  background:linear-gradient(135deg,var(--v-color-primary-50),var(--v-color-primary-100));
+  border:2px solid var(--v-color-primary-300);
+  margin:0 auto var(--v-space-2);
+}
+.radius-label{text-align:center;font-size:var(--v-font-size-caption);font-weight:var(--v-font-weight-semibold);color:var(--v-color-text)}
+.radius-val{text-align:center;font-size:10px;color:var(--v-color-text-muted);font-family:'JetBrains Mono',monospace}
+
+/* ========== SHADOWS ========== */
+.shadow-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--v-space-6)}
+.shadow-box{
+  height:100px;border-radius:var(--v-radius-md);
+  background:var(--v-color-surface);border:1px solid var(--v-color-border);
+  display:grid;place-items:center;
+  font-size:var(--v-font-size-caption);font-weight:var(--v-font-weight-semibold);color:var(--v-color-text-muted);
+}
+
+/* ========== COMPONENT DEMOS ========== */
+.demo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--v-space-5)}
+.demo-card{
+  background:var(--v-color-surface);
+  border:1px solid var(--v-color-border);
+  border-radius:var(--v-radius-lg);
+  overflow:hidden;
+  transition:all var(--v-motion-normal) var(--v-ease-standard);
+}
+.demo-card:hover{border-color:var(--v-color-primary-200);box-shadow:var(--v-shadow-lg);transform:translateY(-3px)}
+.demo-card-head{
+  padding:var(--v-space-4) var(--v-space-5);
+  border-bottom:1px solid var(--v-color-border);
+  background:var(--v-color-neutral-50);
+}
+.demo-card-name{font-size:var(--v-font-size-h5);font-weight:var(--v-font-weight-bold)}
+.demo-card-desc{font-size:var(--v-font-size-text-small);color:var(--v-color-text-muted);margin-top:var(--v-space-1)}
+.demo-card-tags{display:flex;gap:var(--v-space-1);margin-top:var(--v-space-2);flex-wrap:wrap}
+.demo-tag{
+  font-size:10px;padding:2px 8px;border-radius:var(--v-radius-sm);
+  font-weight:var(--v-font-weight-semibold);
+}
+.demo-tag.v{background:var(--v-color-purple-light);color:#7e22ce}
+.demo-tag.s{background:var(--v-color-teal-light);color:#0f766e}
+.demo-card-body{
+  padding:var(--v-space-6) var(--v-space-5);
+  display:flex;align-items:center;justify-content:center;
+  gap:var(--v-space-3);flex-wrap:wrap;min-height:100px;
+  background:
+    radial-gradient(circle at 30% 40%,rgba(99,102,241,.03),transparent 50%),
+    var(--v-color-surface);
+}
+.demo-card-foot{
+  padding:var(--v-space-3) var(--v-space-5);
+  border-top:1px solid var(--v-color-border);
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--v-color-neutral-50);
+}
+.demo-card-foot span{font-size:var(--v-font-size-caption);color:var(--v-color-text-muted)}
+.demo-card-btn{
+  font-size:var(--v-font-size-caption);
+  font-weight:var(--v-font-weight-semibold);
+  color:var(--v-color-primary-500);
+  cursor:pointer;background:none;border:none;font-family:inherit;
+  padding:var(--v-space-1) var(--v-space-2);
+  border-radius:var(--v-radius-sm);
+  transition:background var(--v-motion-fast);
+}
+.demo-card-btn:hover{background:var(--v-color-primary-50)}
+
+/* ========== MODAL ========== */
+.modal-bg{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(15,23,42,.45);
+  backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;
+  padding:var(--v-space-6);
+  animation:modal-bg-in .2s ease;
+}
+@keyframes modal-bg-in{from{opacity:0}to{opacity:1}}
+.modal{
+  background:var(--v-color-surface);
+  border-radius:var(--v-radius-lg);
+  max-width:880px;width:100%;max-height:82vh;
+  overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:var(--v-shadow-xl);
+  animation:modal-in .3s cubic-bezier(.16,1,.3,1);
+}
+@keyframes modal-in{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal-top{
+  padding:var(--v-space-5) var(--v-space-6);
+  border-bottom:1px solid var(--v-color-border);
+  display:flex;justify-content:space-between;align-items:flex-start;
+}
+.modal-top h3{font-size:var(--v-font-size-h3);font-weight:var(--v-font-weight-bold)}
+.modal-top p{font-size:var(--v-font-size-text-medium);color:var(--v-color-text-muted);margin-top:var(--v-space-1);max-width:500px}
+.modal-x{
+  width:36px;height:36px;border-radius:var(--v-radius-sm);
+  border:1px solid var(--v-color-border);background:var(--v-color-surface);
+  cursor:pointer;display:grid;place-items:center;
+  font-size:18px;color:var(--v-color-text-muted);
+  transition:all var(--v-motion-fast);flex-shrink:0;
+}
+.modal-x:hover{background:var(--v-color-error-soft);border-color:var(--v-color-error-base);color:var(--v-color-error-base)}
+.modal-body{flex:1;overflow-y:auto;padding:var(--v-space-6)}
+.modal-sec{margin-bottom:var(--v-space-6)}
+.modal-sec:last-child{margin-bottom:0}
+.modal-sec-label{
+  font-size:var(--v-font-size-caption);
+  font-weight:var(--v-font-weight-semibold);
+  text-transform:uppercase;letter-spacing:.08em;
+  color:var(--v-color-text-muted);
+  margin-bottom:var(--v-space-3);
+  display:flex;align-items:center;gap:var(--v-space-2);
+}
+.modal-sec-label::after{content:'';flex:1;height:1px;background:var(--v-color-border)}
+.modal-demo{
+  padding:var(--v-space-6);
+  border-radius:var(--v-radius-md);
+  border:1px solid var(--v-color-border);
+  display:flex;align-items:center;justify-content:center;
+  gap:var(--v-space-3);flex-wrap:wrap;min-height:60px;
+  background:var(--v-color-neutral-50);
+}
+.modal-chips{display:flex;flex-wrap:wrap;gap:var(--v-space-2)}
+.modal-chip{
+  padding:var(--v-space-2) var(--v-space-4);
+  border-radius:var(--v-radius-sm);
+  font-size:var(--v-font-size-text-small);
+  font-weight:var(--v-font-weight-semibold);
+  border:1px solid var(--v-color-border);
+  background:var(--v-color-surface);
+  color:var(--v-color-text);
+  transition:all var(--v-motion-fast);
+}
+.modal-chip:hover{border-color:var(--v-color-primary-300);color:var(--v-color-primary-600)}
+.modal-tbl{width:100%;border-collapse:collapse;font-size:var(--v-font-size-text-small)}
+.modal-tbl th{
+  text-align:left;padding:var(--v-space-2) var(--v-space-4);
+  font-weight:var(--v-font-weight-semibold);
+  font-size:var(--v-font-size-caption);
+  text-transform:uppercase;letter-spacing:.05em;
+  color:var(--v-color-text-muted);
+  border-bottom:2px solid var(--v-color-border);
+  background:var(--v-color-neutral-50);
+}
+.modal-tbl td{padding:var(--v-space-2) var(--v-space-4);border-bottom:1px solid var(--v-color-border);vertical-align:top}
+.modal-tbl td:first-child{font-family:'JetBrains Mono',monospace;color:var(--v-color-primary-600);font-weight:var(--v-font-weight-semibold);font-size:var(--v-font-size-caption)}
+.modal-tbl td:nth-child(2){color:var(--v-color-text-muted)}
+.modal-tbl td:nth-child(3){font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--v-color-purple-base)}
+.modal-code{
+  background:var(--v-color-neutral-900);
+  color:var(--v-color-neutral-200);
+  padding:var(--v-space-4) var(--v-space-5);
+  border-radius:var(--v-radius-md);
+  font-size:var(--v-font-size-text-small);
+  font-family:'JetBrains Mono','Fira Code',monospace;
+  line-height:1.7;overflow-x:auto;white-space:pre;
+}
+.modal-code .t{color:var(--v-color-pink-base)}
+.modal-code .a{color:#fbbf24}
+.modal-code .s{color:var(--v-color-success-base)}
+
+/* ========== FOOTER ========== */
+.footer{
+  padding:var(--v-space-8) var(--v-space-6);
+  border-top:1px solid var(--v-color-border);
+  text-align:center;
+  font-size:var(--v-font-size-text-small);
+  color:var(--v-color-text-muted);
+}
+.footer a{color:var(--v-color-primary-500);text-decoration:none}
+
+/* ========== SCROLL TOP ========== */
+.scroll-btn{
+  position:fixed;bottom:var(--v-space-5);right:var(--v-space-5);
+  width:44px;height:44px;border-radius:var(--v-radius-md);
+  background:var(--v-color-text);color:var(--v-color-surface);
+  border:none;cursor:pointer;font-size:18px;
+  display:grid;place-items:center;
+  box-shadow:var(--v-shadow-lg);
+  transition:all var(--v-motion-normal) var(--v-ease-standard);
+  z-index:50;opacity:0;transform:translateY(8px);pointer-events:none;
+}
+.scroll-btn.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.scroll-btn:hover{transform:translateY(-2px);box-shadow:var(--v-shadow-xl)}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hero{padding:100px var(--v-space-4) 60px}
+  .section{padding:48px var(--v-space-4)}
+  .demo-grid{grid-template-columns:1fr}
+  .type-row{flex-direction:column;gap:var(--v-space-2)}
+  .type-spec{min-width:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-brand" href="#">
+    <div class="nav-logo">N</div>
+    <span class="nav-title">VueUI Nova</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" :class="{active:sec==='tokens'}" @click="go('tokens')">Tokens</a>
+    <a class="nav-link" :class="{active:sec==='components'}" @click="go('components')">Componentes</a>
+    <a class="nav-link" :class="{active:sec==='typography'}" @click="go('typography')">Tipografia</a>
+    <a class="nav-link" :class="{active:sec==='spacing'}" @click="go('spacing')">Espaco</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span>Design System v1.0.0</div>
+    <h1>Interfaces que <span class="g">fluem.</span></h1>
+    <p class="hero-sub">Clareza. Foco. Liberdade. Design para o que importa. 72 componentes, 145 tokens, acessibilidade nativa.</p>
+    <div class="hero-cta">
+      <v-button variant="primary" size="lg" @click="go('components')">Explorar Componentes</v-button>
+      <v-button variant="outline" size="lg" @click="go('tokens')">Ver Tokens</v-button>
+    </div>
+  </div>
+</section>
+
+<!-- COLORS -->
+<section class="section" id="tokens">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-eyebrow">01 — Cores</div>
+      <h2 class="section-title">Paleta semantica</h2>
+      <p class="section-desc">Neutros, brand, semânticas e tons especiais. Cada cor e um token CSS que pode ser editado em runtime.</p>
+    </div>
+    <h3 style="font-size:var(--v-font-size-h5);margin-bottom:var(--v-space-4)">Neutros</h3>
+    <div class="palette-grid" style="margin-bottom:var(--v-space-8)">
+      <div class="palette-swatch" v-for="n in neutrals" :key="n.name">
+        <div class="palette-color" :style="{background:n.hex}"></div>
+        <div class="palette-info"><div class="palette-name">{{ n.name }}</div><div class="palette-hex">{{ n.hex }}</div></div>
+      </div>
+    </div>
+    <h3 style="font-size:var(--v-font-size-h5);margin-bottom:var(--v-space-4)">Primary</h3>
+    <div class="palette-grid" style="margin-bottom:var(--v-space-8)">
+      <div class="palette-swatch" v-for="p in primaries" :key="p.name">
+        <div class="palette-color" :style="{background:p.hex}"></div>
+        <div class="palette-info"><div class="palette-name">{{ p.name }}</div><div class="palette-hex">{{ p.hex }}</div></div>
+      </div>
+    </div>
+    <h3 style="font-size:var(--v-font-size-h5);margin-bottom:var(--v-space-4)">Semânticas</h3>
+    <div class="palette-grid">
+      <div class="palette-swatch" v-for="s in semantics" :key="s.name">
+        <div class="palette-color" :style="{background:s.hex}"></div>
+        <div class="palette-info"><div class="palette-name">{{ s.name }}</div><div class="palette-hex">{{ s.hex }}</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section class="section" id="typography" style="background:var(--v-color-surface)">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-eyebrow">02 — Tipografia</div>
+      <h2 class="section-title">Hierarquia clara</h2>
+      <p class="section-desc">Inter como familia principal. Escalas fluidas com clamp para responsividade perfeita.</p>
+    </div>
+    <div class="type-row" v-for="t in typeScale" :key="t.name">
+      <div class="type-label">{{ t.name }}</div>
+      <div class="type-spec">{{ t.spec }}</div>
+      <div :style="t.style">{{ t.sample }}</div>
+    </div>
+  </div>
+</section>
+
+<!-- SPACING -->
+<section class="section" id="spacing">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-eyebrow">03 — Espaçamento</div>
+      <h2 class="section-title">Escala base 4px</h2>
+      <p class="section-desc">Espaçamento previsivel e consistente. Cada passo e um multiplDe de 4px.</p>
+    </div>
+    <div class="spacing-row" v-for="s in spacingScale" :key="s.token">
+      <div class="spacing-label">{{ s.token }}</div>
+      <div class="spacing-bar" :style="{width:s.px+'px'}"></div>
+      <div class="spacing-val">{{ s.px }}px</div>
+    </div>
+  </div>
+</section>
+
+<!-- RADIUS -->
+<section class="section" id="radius" style="background:var(--v-color-surface)">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-eyebrow">04 — Raios</div>
+      <h2 class="section-title">Suave e moderno</h2>
+      <p class="section-desc">Raios que definem a personalidade visual — do sutil ao arredondado.</p>
+    </div>
+    <div class="radius-grid">
+      <div v-for="r in radiusScale" :key="r.token" style="text-align:center">
+        <div class="radius-box" :style="{borderRadius:r.px+'px'}"></div>
+        <div class="radius-label">{{ r.token }}</div>
+        <div class="radius-val">{{ r.px }}px</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHADOWS -->
+<section class="section" id="shadows">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-eyebrow">05 — Sombras</div>
+      <h2 class="section-title">Profundidade sutil</h2>
+      <p class="section-desc">Camadas de elevacao que guiam o olhar sem competir com o conteudo.</p>
+    </div>
+    <div class="shadow-grid">
+      <div class="shadow-box" v-for="sh in shadows" :key="sh.name" :style="{boxShadow:sh.value}">
+        {{ sh.name }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENTS -->
+<section class="section" id="components" style="background:var(--v-color-surface)">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="section-eyebrow">06 — Componentes</div>
+      <h2 class="section-title">Construido com os proprios tokens</h2>
+      <p class="section-desc">Cada componente herda os tokens do sistema. Troque uma variavel CSS e tudo muda.</p>
+    </div>
+    <div class="demo-grid">
+      <div class="demo-card" v-for="c in components" :key="c.id">
+        <div class="demo-card-head">
+          <div class="demo-card-name">{{ c.name }}</div>
+          <div class="demo-card-desc">{{ c.desc }}</div>
+          <div class="demo-card-tags">
+            <span v-for="v in (c.variants||[]).slice(0,4)" :key="v" class="demo-tag v">{{ v }}</span>
+            <span v-for="s in (c.sizes||[]).slice(0,3)" :key="s" class="demo-tag s">{{ s }}</span>
+          </div>
+        </div>
+        <div class="demo-card-body" v-html="c.demo"></div>
+        <div class="demo-card-foot">
+          <span>{{ c.props?.length||0 }} props</span>
+          <button class="demo-card-btn" @click="openDetail(c)">Detalhes →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>VueUI Nova — Design System · <a href="#">GitHub</a> · <a href="#">NPM</a> · <a href="#">Storybook</a></p>
+  <p style="margin-top:var(--v-space-2)">Interfaces que fluem. Para ideias que vao alem.</p>
+</footer>
+
+<!-- MODAL -->
+<div v-if="detail" class="modal-bg" @click.self="detail=null">
+  <div class="modal">
+    <div class="modal-top">
+      <div><h3>{{ detail.name }}</h3><p>{{ detail.desc }}</p></div>
+      <button class="modal-x" @click="detail=null">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-sec">
+        <div class="modal-sec-label">Demo ao vivo</div>
+        <div class="modal-demo" v-html="detail.demo"></div>
+      </div>
+      <div v-if="detail.variants?.length" class="modal-sec">
+        <div class="modal-sec-label">Variantes</div>
+        <div class="modal-chips"><div v-for="v in detail.variants" :key="v" class="modal-chip">{{ v }}</div></div>
+      </div>
+      <div v-if="detail.sizes?.length" class="modal-sec">
+        <div class="modal-sec-label">Tamanhos</div>
+        <div class="modal-chips"><div v-for="s in detail.sizes" :key="s" class="modal-chip">{{ s }}</div></div>
+      </div>
+      <div v-if="detail.props?.length" class="modal-sec">
+        <div class="modal-sec-label">Props</div>
+        <table class="modal-tbl"><thead><tr><th>Prop</th><th>Descricao</th><th>Tipo</th></tr></thead>
+        <tbody><tr v-for="p in detail.props" :key="p[0]"><td>{{ p[0] }}</td><td>{{ p[1] }}</td><td>{{ p[2] }}</td></tr></tbody></table>
+      </div>
+      <div v-if="detail.events?.length" class="modal-sec">
+        <div class="modal-sec-label">Eventos</div>
+        <table class="modal-tbl"><thead><tr><th>Evento</th><th>Payload</th><th>Descricao</th></tr></thead>
+        <tbody><tr v-for="e in detail.events" :key="e[0]"><td>{{ e[0] }}</td><td>{{ e[1] }}</td><td>{{ e[2] }}</td></tr></tbody></table>
+      </div>
+      <div v-if="detail.code" class="modal-sec">
+        <div class="modal-sec-label">Exemplo</div>
+        <div class="modal-code" v-html="detail.code"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="scroll-btn" :class="{show:atTop}" @click="scrollTo({top:0,behavior:'smooth'})">
+  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 13V3M3 7l5-5 5 5"/></svg>
+</button>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="dist/vueui-nova.umd.js"></script>
+<script>
+const{createApp,ref,onMounted,onUnmounted,nextTick}=Vue;
+const app=createApp({
+setup(){
+const sec=ref(''),detail=ref(null),atTop=ref(false);
+
+function go(id){sec.value=id;nextTick(()=>{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'})})}
+function openDetail(c){detail.value=c}
+function onScroll(){atTop.value=window.scrollY>500}
+onMounted(()=>{window.addEventListener('scroll',onScroll);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&detail.value)detail.value=null})});
+onUnmounted(()=>window.removeEventListener('scroll',onScroll));
+
+const neutrals=[{name:'50',hex:'#f8fafc'},{name:'100',hex:'#f1f5f9'},{name:'200',hex:'#e2e8f0'},{name:'300',hex:'#cbd5e1'},{name:'400',hex:'#94a3b8'},{name:'500',hex:'#64748b'},{name:'600',hex:'#475569'},{name:'700',hex:'#334155'},{name:'800',hex:'#1e293b'},{name:'900',hex:'#0f172a'}];
+const primaries=[{name:'50',hex:'#eef2ff'},{name:'100',hex:'#e0e7ff'},{name:'200',hex:'#c7d2fe'},{name:'300',hex:'#a5b4fc'},{name:'400',hex:'#818cf8'},{name:'500',hex:'#6366f1'},{name:'600',hex:'#4f46e5'},{name:'700',hex:'#4338ca'},{name:'800',hex:'#3730a3'},{name:'900',hex:'#312e81'}];
+const semantics=[{name:'Success',hex:'#10b981'},{name:'Success Soft',hex:'#d1fae5'},{name:'Info',hex:'#3b82f6'},{name:'Info Soft',hex:'#dbeafe'},{name:'Warning',hex:'#f59e0b'},{name:'Warning Soft',hex:'#fef3c7'},{name:'Error',hex:'#ef4444'},{name:'Error Soft',hex:'#fee2e2'},{name:'Purple',hex:'#a855f7'},{name:'Pink',hex:'#ec4899'},{name:'Teal',hex:'#14b8a6'},{name:'Orange',hex:'#f97316'}];
+
+const typeScale=[
+{name:'Display 1',spec:'clamp(2.5rem,1.5rem+5vw,3.75rem) · 700',sample:'Interfaces fluem',style:{fontSize:'clamp(2.5rem,1.5rem+5vw,3.75rem)',fontWeight:700,lineHeight:1.2}},
+{name:'Display 2',spec:'clamp(2rem,1.25rem+3.75vw,3rem) · 700',sample:'Design System',style:{fontSize:'clamp(2rem,1.25rem+3.75vw,3rem)',fontWeight:700,lineHeight:1.25}},
+{name:'H1',spec:'clamp(1.625rem,1.25rem+1.875vw,2.125rem) · 700',sample:'Titulos que guiam',style:{fontSize:'clamp(1.625rem,1.25rem+1.875vw,2.125rem)',fontWeight:700,lineHeight:1.3}},
+{name:'H2',spec:'clamp(1.25rem,1.125rem+.625vw,1.5rem) · 700',sample:'Subtitulos claros',style:{fontSize:'clamp(1.25rem,1.125rem+.625vw,1.5rem)',fontWeight:700,lineHeight:1.33}},
+{name:'H3',spec:'clamp(1.125rem,1rem+.625vw,1.25rem) · 600',sample:'Secoes organizadas',style:{fontSize:'clamp(1.125rem,1rem+.625vw,1.25rem)',fontWeight:600,lineHeight:1.4}},
+{name:'Text Large',spec:'1rem / 1.5 · 400',sample:'Texto para leitura confortavel em blocos longos.',style:{fontSize:'1rem',fontWeight:400,lineHeight:1.5}},
+{name:'Text Medium',spec:'0.875rem / 1.43 · 400',sample:'O tamanho mais usado em interfaces. Equilibrio perfeito.',style:{fontSize:'.875rem',fontWeight:400,lineHeight:1.43}},
+{name:'Text Small',spec:'0.75rem / 1.33 · 400',sample:'Legendas, metadados e informacoes secundarias.',style:{fontSize:'.75rem',fontWeight:400,lineHeight:1.33}},
+{name:'Caption',spec:'0.6875rem / 1.45 · 400',sample:'Rotulos e timestamps.',style:{fontSize:'.6875rem',fontWeight:400,lineHeight:1.45}},
+];
+
+const spacingScale=[
+{token:'--v-space-0',px:0},{token:'--v-space-1',px:4},{token:'--v-space-2',px:8},{token:'--v-space-3',px:12},
+{token:'--v-space-4',px:16},{token:'--v-space-6',px:24},{token:'--v-space-8',px:32},
+{token:'--v-space-12',px:48},{token:'--v-space-16',px:64},{token:'--v-space-24',px:96},
+];
+
+const radiusScale=[
+{token:'0',px:0},{token:'sm',px:8},{token:'md',px:12},{token:'lg',px:16},{token:'24',px:24},{token:'full',px:9999},
+];
+
+const shadows=[
+{name:'sm',value:'var(--v-shadow-sm)'},{name:'md',value:'var(--v-shadow-md)'},
+{name:'lg',value:'var(--v-shadow-lg)'},{name:'xl',value:'var(--v-shadow-xl)'},
+];
+
+const components=[
+{id:'v-button',name:'VButton',desc:'Botao de acao com micro-interacoes Fuse, Hold e Favorite.',variants:['primary','secondary','ghost','outline','destructive'],sizes:['sm','md','lg'],props:[['variant','Estilo visual',"'primary'|'secondary'|'ghost'|'outline'|'destructive'"],['size','Tamanho',"'sm'|'md'|'lg'"],['disabled','Desabilitado','boolean'],['loading','Carregando','boolean'],['microInteraction','Interacao',"'default'|'fuse'|'hold'|'favorite'"]],events:[['click','MouseEvent','Clique'],['undo','void','Desfazer (fuse)'],['confirmed','void','Confirmado (hold)']],code:'<span class="t">&lt;VButton</span> <span class="a">variant</span>=<span class="s">"primary"</span> <span class="a">size</span>=<span class="s">"md"</span><span class="t">&gt;</span>Enviar<span class="t">&lt;/VButton&gt;</span>',demo:'<v-button variant="primary">Primario</v-button><v-button variant="secondary">Secundario</v-button><v-button variant="ghost">Ghost</v-button><v-button variant="outline">Outline</v-button><v-button variant="destructive">Deletar</v-button>'},
+{id:'v-card',name:'VCard',desc:'Cartao com variantes elevated, outlined, filled e interactive.',variants:['elevated','outlined','filled','interactive'],sizes:['sm','md','lg'],props:[['variant','Estilo',"'elevated'|'outlined'|'filled'|'interactive'"],['size','Tamanho',"'sm'|'md'|'lg'"],['title','Titulo','string'],['loading','Carregando','boolean'],['refineFrame','Estagio IA',"'queued'|'generating'|'refining'|'complete'"]],events:[['click','MouseEvent','Clique']],code:'<span class="t">&lt;VCard</span> <span class="a">variant</span>=<span class="s">"elevated"</span> <span class="a">title</span>=<span class="s">"Titulo"</span><span class="t">&gt;</span>Conteudo<span class="t">&lt;/VCard&gt;</span>',demo:'<v-card variant="elevated" title="Elevated" style="width:180px"><span style="font-size:12px;color:var(--v-color-text-muted)">Com sombra</span></v-card><v-card variant="outlined" title="Outlined" style="width:180px"><span style="font-size:12px;color:var(--v-color-text-muted)">Com borda</span></v-card>'},
+{id:'v-alert',name:'VAlert',desc:'Mensagem inline ou banner com variantes info, success, warning, danger.',variants:['info','success','warning','danger','neutral'],sizes:['sm','md','lg'],props:[['variant','Tipo',"'info'|'success'|'warning'|'danger'|'neutral'"],['title','Titulo','string'],['description','Descricao','string'],['dismissible','Dispensavel','boolean']],events:[['dismiss','void','Dispensado']],code:'<span class="t">&lt;VAlert</span> <span class="a">variant</span>=<span class="s">"success"</span> <span class="a">title</span>=<span class="s">"Sucesso"</span> <span class="t">/&gt;</span>',demo:'<v-alert variant="info" title="Info" description="Atualizacao disponivel." style="max-width:280px"/><v-alert variant="success" title="Sucesso" description="Dados salvos!" style="max-width:280px"/><v-alert variant="warning" title="Atencao" description="Armazenamento cheio." style="max-width:280px"/><v-alert variant="danger" title="Erro" description="Falha na conexao." style="max-width:280px"/>'},
+{id:'v-badge',name:'VBadge',desc:'Status, contagem ou ponto com variante interativa.',variants:['neutral','primary','success','warning','danger','count','dot'],sizes:['xs','sm','md','lg'],props:[['variant','Estilo','string'],['count','Numero','number'],['dot','Ponto','boolean'],['removable','Removivel','boolean']],events:[['remove','void','Removido']],code:'<span class="t">&lt;VBadge</span> <span class="a">variant</span>=<span class="s">"success"</span><span class="t">&gt;</span>Ativo<span class="t">&lt;/VBadge&gt;</span>',demo:'<v-badge variant="neutral">Padrao</v-badge><v-badge variant="primary">Primario</v-badge><v-badge variant="success">Sucesso</v-badge><v-badge variant="warning">Aviso</v-badge><v-badge variant="danger">Erro</v-badge><v-badge variant="count" :count="42" />'},
+{id:'v-switch',name:'VSwitch',desc:'Toggle com label, icone e animacao spring.',sizes:['sm','md','lg'],props:[['modelValue','Estado','boolean'],['label','Rotulo','string'],['showIcon','Mostra icone','boolean'],['disabled','Desabilitado','boolean']],events:[['update:modelValue','boolean','Toggle']],code:'<span class="t">&lt;VSwitch</span> <span class="a">v-model</span>=<span class="s">"on"</span> <span class="a">label</span>=<span class="s">"Ativar"</span> <span class="t">/&gt;</span>',demo:'<v-switch :model-value="true" label="Notificacoes"/><v-switch :model-value="false" label="Modo escuro"/>'},
+{id:'v-checkbox',name:'VCheckbox',desc:'Checkbox com indeterminate, strike-through e spring.',sizes:['sm','md','lg'],props:[['modelValue','Estado','boolean'],['indeterminate','Indeterminado','boolean'],['label','Rotulo','string'],['strikeThrough','Riscar','boolean']],events:[['update:modelValue','boolean','Toggle']],code:'<span class="t">&lt;VCheckbox</span> <span class="a">v-model</span>=<span class="s">"ok"</span> <span class="a">label</span>=<span class="s">"Aceito"</span> <span class="t">/&gt;</span>',demo:'<v-checkbox :model-value="true" label="Concluido"/><v-checkbox :model-value="false" label="Pendente"/><v-checkbox :model-value="true" label="Strike" strike-through />'},
+{id:'v-avatar',name:'VAvatar',desc:'Avatar com status dot, badge e agrupamento em grupo.',variants:['circle','square'],sizes:['xs','sm','md','lg','xl'],props:[['size','Tamanho',"'xs'|'sm'|'md'|'lg'|'xl'"],['shape','Formato',"'circle'|'square'"],['status','Status',"'online'|'busy'|'offline'"],['initials','Iniciais','string']],code:'<span class="t">&lt;VAvatar</span> <span class="a">size</span>=<span class="s">"lg"</span> <span class="a">initials</span>=<span class="s">"JD"</span> <span class="a">status</span>=<span class="s">"online"</span> <span class="t">/&gt;</span>',demo:'<v-avatar size="xs" initials="AB"/><v-avatar size="sm" initials="CD"/><v-avatar size="md" initials="EF"/><v-avatar size="lg" initials="GH" status="online"/><v-avatar size="xl" initials="XY" status="busy"/>'},
+{id:'v-spinner',name:'VSpinner',desc:'Indicador de carregamento em multiplos estilos.',variants:['circular','dots','ring','inline','lattice'],sizes:['xs','sm','md','lg','xl'],props:[['variant','Estilo','string'],['size','Tamanho',"'xs'|'sm'|'md'|'lg'|'xl'"]],code:'<span class="t">&lt;VSpinner</span> <span class="a">variant</span>=<span class="s">"dots"</span> <span class="t">/&gt;</span>',demo:'<v-spinner size="sm"/><v-spinner size="md"/><v-spinner size="lg"/><v-spinner variant="dots" size="md"/><v-spinner variant="ring" size="md"/>'},
+{id:'v-progress',name:'VProgress',desc:'Barra ou anel de progresso com estados determinado e indeterminado.',variants:['linear','circular'],sizes:['sm','md','lg'],props:[['variant','Formato',"'linear'|'circular'"],['value','Progresso 0-100','number'],['state','Estado',"'determinate'|'indeterminate'|'success'|'error'"]],code:'<span class="t">&lt;VProgress</span> <span class="a">:value</span>=<span class="s">"72"</span> <span class="t">/&gt;</span>',demo:'<v-progress :value="72" label="Carregando" style="width:240px"/><v-progress :value="100" state="success" label="Completo" style="width:240px"/>'},
+{id:'v-tabs',name:'VTabs',desc:'Navegacao por abas com variantes underline, pill e icon.',variants:['underline','pill','icon'],sizes:['sm','md','lg'],props:[['variant','Estilo',"'underline'|'pill'|'icon'"],['items','Itens','Array<{value,label}>'],['modelValue','Ativa','string']],events:[['update:modelValue','string','Mudanca']],code:'<span class="t">&lt;VTabs</span> <span class="a">:items</span>=<span class="s">"tabs"</span> <span class="a">v-model</span>=<span class="s">"active"</span> <span class="t">/&gt;</span>',demo:'<v-tabs :items="[{value:\'g\',label:\'Geral\'},{value:\'d\',label:\'Design\'},{value:\'c\',label:\'Codigo\'}]" model-value="g" />'},
+{id:'v-stepper',name:'VStepper',desc:'Assistente multi-etapa com estados concluido/atual/proximo.',variants:['default','primary','subtle'],sizes:['sm','md','lg'],props:[['steps','Passos','Array<{value,label}>'],['modelValue','Atual','string|number']],events:[['update:modelValue','string|number','Passo'],['step-click','string','Clique']],code:'<span class="t">&lt;VStepper</span> <span class="a">:steps</span>=<span class="s">"steps"</span> <span class="a">v-model</span>=<span class="s">"step"</span> <span class="t">/&gt;</span>',demo:'<v-stepper :steps="[{value:\'1\',label:\'Conta\'},{value:\'2\',label:\'Perfil\'},{value:\'3\',label:\'Confirmar\'}]" model-value="2" />'},
+{id:'v-pagination',name:'VPagination',desc:'Paginacao com seletor de pagina e contagem.',variants:['default','compact','ellipsis'],sizes:['sm','md','lg'],props:[['modelValue','Pagina','number'],['total','Total','number'],['pageSize','Itens/pagina','number']],events:[['update:modelValue','number','Pagina']],code:'<span class="t">&lt;VPagination</span> <span class="a">v-model</span>=<span class="s">"page"</span> <span class="a">:total</span>=<span class="s">"100"</span> <span class="t">/&gt;</span>',demo:'<v-pagination :total="100" :page-size="10" model-value="1" />'},
+{id:'v-segmented-control',name:'VSegmentedControl',desc:'Controle segmentado estilo iOS com indicador deslizante.',variants:['default','pill'],sizes:['sm','md','lg'],props:[['options','Opcoes','Array<{value,label}>'],['modelValue','Valor','string']],events:[['update:modelValue','string','Mudanca']],code:'<span class="t">&lt;VSegmentedControl</span> <span class="a">:options</span>=<span class="s">"opts"</span> <span class="a">v-model</span>=<span class="s">"val"</span> <span class="t">/&gt;</span>',demo:'<v-segmented-control :options="[{value:\'d\',label:\'Dia\'},{value:\'w\',label:\'Semana\'},{value:\'m\',label:\'Mes\'}]" model-value="d" />'},
+{id:'v-slider',name:'VSlider',desc:'Range slider com uma ou duas alavancas.',variants:['single','range','marks','vertical'],sizes:['sm','md','lg'],props:[['modelValue','Valor','number|[n,n]'],['min','Min','number'],['max','Max','number'],['step','Passo','number'],['range','Range','boolean'],['showValue','Mostra valor','boolean']],events:[['update:modelValue','number|[n,n]','Valor']],code:'<span class="t">&lt;VSlider</span> <span class="a">v-model</span>=<span class="s">"vol"</span> <span class="a">:min</span>=<span class="s">"0"</span> <span class="a">:max</span>=<span class="s">"100"</span> <span class="t">/&gt;</span>',demo:'<v-slider :model-value="60" :min="0" :max="100" show-value style="width:260px"/>'},
+{id:'v-text-input',name:'VTextInput',desc:'Input com label, prefixo/sufixo e validacao.',variants:['default','error','success'],sizes:['sm','md','lg'],props:[['modelValue','Valor','string'],['label','Rotulo','string'],['errorMessage','Erro','string'],['successMessage','Sucesso','string'],['clearable','Limpar','boolean'],['type','Tipo',"'text'|'email'|'url'|'search'|'tel'"]],events:[['update:modelValue','string','Valor']],code:'<span class="t">&lt;VTextInput</span> <span class="a">v-model</span>=<span class="s">"email"</span> <span class="a">label</span>=<span class="s">"Email"</span> <span class="t">/&gt;</span>',demo:'<v-text-input label="Email" placeholder="seu@email.com" style="width:240px"/><v-text-input label="Erro" error-message="Invalido" model-value="x" style="width:240px"/>'},
+];
+
+return{sec,detail,atTop,neutrals,primaries,semantics,typeScale,spacingScale,radiusScale,shadows,components,go,openDetail};
+}
+});
+
+const NV=window.VueUiNova;
+if(NV){for(const n of Object.keys(NV)){const c=NV[n];if(c&&(c.setup||c.render||c.template||c.__name||c.name)){try{app.component(n,c)}catch(e){}}}}
+app.mount('body');
+</script>
+</body>
+</html>

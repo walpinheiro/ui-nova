@@ -1,0 +1,112 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks'
+import * as VDialogStories from './VDialog.stories'
+
+<Meta of={VDialogStories} />
+
+# Dialog
+
+Superfície modal temporária para informação crítica, decisões e tarefas focadas. O backdrop reduz a distração e o container mantém o conteúdo, descrição e ações organizados.
+
+## Overview
+
+<Canvas of={VDialogStories.Default} />
+
+O contrato principal é `v-model`. O componente também aceita `open`/`update:open` como alias para integrações que preferem `v-model:open`.
+
+## Anatomy
+
+- `dialog-backdrop`: overlay com escurecimento e blur.
+- `dialog-container`: superfície central com borda, raio e sombra modal.
+- `dialog-icon`: slot opcional para o visual de contexto.
+- `dialog-title` e `dialog-description`: heading e texto ligados à semântica ARIA.
+- `dialog-content`: slot principal para texto, formulários ou conteúdo customizado.
+- `dialog-actions`: slot de ações primária e secundária.
+- `dialog-close-button`: dismiss opcional no canto superior direito.
+
+## Variants
+
+<Canvas of={VDialogStories.Confirmation} />
+
+Use `basic`, `confirmation`, `alert`, `form` ou `fullscreen` de acordo com a intenção do fluxo. `sm`, `md` e `lg` definem larguras máximas de 320px, 480px e 640px.
+
+<Stories />
+
+## States
+
+<Stories />
+
+Estados cobertos: closed, open, hover/focus/pressed nos controles de ação fornecidos pelo slot, disabled e loading. Ações devem usar `VButton` para receber os tokens e estados do sistema.
+
+## Props
+
+<Controls />
+
+| Prop | Tipo | Padrão | Descrição |
+|---|---|---|---|
+| `modelValue` | `boolean` | `true` | Controla a visibilidade via `v-model`. |
+| `open` | `boolean` | — | Alias explícito para `v-model:open`. |
+| `title` | `string` | — | Título ligado via `aria-labelledby`. |
+| `description` | `string` | — | Descrição ligada via `aria-describedby`. |
+| `size` | `sm \| md \| lg` | `md` | Largura máxima de 320/480/640px. |
+| `variant` | `basic \| confirmation \| alert \| form \| fullscreen` | `basic` | Intenção visual e estrutural do diálogo. |
+| `showClose` | `boolean` | `true` | Exibe o botão de fechar. |
+| `dismissible` | `boolean` | `true` | Permite fechar por Escape e clique no backdrop. |
+| `disabled` | `boolean` | `false` | Bloqueia fechamento e interação do container. |
+| `loading` | `boolean` | `false` | Expõe `aria-busy` e indicador de atividade. |
+| `ariaLabel` | `string` | — | Nome acessível alternativo quando não há título. |
+| `ariaDescribedby` | `string` | — | Referência ARIA customizada para descrição. |
+| `closeLabel` | `string` | `Close dialog` | Label acessível do botão de fechar. |
+
+## Events and slots
+
+Events: `update:modelValue`, `update:open`, `open-change`, `close` e `dismiss`.
+
+Slots: `default`, `title`, `description`, `icon`, `actions` e `footer`.
+
+```vue
+<VDialog v-model="isOpen" title="Turn on notifications?" description="Get notified about product updates, new features, and important activity.">
+  <p>Supporting content goes here.</p>
+  <template #actions>
+    <VButton variant="ghost" @click="isOpen = false">Not now</VButton>
+    <VButton @click="enableNotifications">Enable notifications</VButton>
+  </template>
+</VDialog>
+```
+
+## Motion
+
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Open/close backdrop | `opacity` | `--v-motion-normal` (160ms) | `--v-ease-out` |
+| Open/close container | `opacity`, `transform` | `--v-motion-normal` (160ms) | `--v-ease-out` |
+| Close button hover/press | `background-color`, `color`, `transform` | `--v-motion-fast` / `--v-motion-press` | `--v-ease-standard` |
+| Loading indicator | `transform` | `--v-motion-spin-duration` | `linear` |
+
+`prefers-reduced-motion: reduce` removes transitions and the loading animation while preserving the centered layout.
+
+## Accessibility
+
+- Usa `role="dialog"` e `aria-modal="true"`.
+- Liga título e descrição ao container com `aria-labelledby` e `aria-describedby`.
+- Move o foco para o primeiro controle ao abrir, prende Tab/Shift+Tab e devolve o foco ao trigger ao fechar.
+- Escape e backdrop respeitam `dismissible`; o botão de fechar tem label configurável.
+- O conteúdo de ação deve manter contraste AA e usar controles nativos ou `VButton`.
+
+## Do / Don't
+
+- Do: sempre forneça `title` ou `ariaLabel` e ações com labels claros.
+- Do: use `loading` para bloquear fechamento durante uma operação assíncrona.
+- Don't: use o diálogo para mensagens persistentes ou conteúdo que não exige foco modal.
+- Don't: use texto/CSS como seletor E2E; prefira os `data-test-id` estáveis do componente.
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VDialog } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VDialog :model-value="false" title="Dialog title" description="Supporting description goes here." size="md" variant="basic" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").

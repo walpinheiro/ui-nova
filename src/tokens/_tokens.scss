@@ -1,0 +1,1803 @@
+// Fonte única dos tokens VueUI Nova (SCSS).
+// As variáveis $v-* são a verdade de build-time; o mixin v-tokens
+// emite as CSS vars --v-* em :root para live editing em runtime (live.ts).
+//
+// CASCATA (3 camadas — mude a primária num sítio, desce para tudo):
+//   1. Primitivos (:root): --v-color-primary-50…900, --v-space-*, --v-radius-*
+//   2. Semânticos (:root): --v-color-primary → var(--v-color-primary-600), etc.
+//   3. Componentes (SCSS): consomem primitivos/semânticos directamente
+//      (ex.: var(--v-color-primary-500), var(--v-space-4)).
+// Tokens --v-button-* / --v-sidebar-* no mixin são aliases documentados;
+// estilos de componente NÃO devem depender deles para cor de marca —
+// usam var(--v-color-primary-*) no ponto de uso para cascata em subtree.
+//
+// ESCOLHA DE PALETA (documentada):
+// Base = Tailwind CSS v3. O indigo do Tailwind bate EXATO nas âncoras do
+// pôster (500 #6366F1, 600 #4F46E5 — seção 16 do DESIGN.md), por isso o
+// brand primary 50–900 usa o indigo Tailwind v3 sem adaptação. Neutros usam
+// o slate Tailwind v3; semânticas usam emerald/blue/amber/red Tailwind v3;
+// tons especiais usam purple/pink/indigo/teal/orange/lime Tailwind v3.
+// Aliases legados (--v-color-primary, --v-color-border etc.) são mantidos
+// com os valores originais para não quebrar os 103 componentes.
+
+// ---------- Neutros 50–900 (slate Tailwind v3) ----------
+$v-color-neutral-50: #f8fafc;
+$v-color-neutral-100: #f1f5f9;
+$v-color-neutral-200: #e2e8f0;
+$v-color-neutral-300: #cbd5e1;
+$v-color-neutral-400: #94a3b8;
+$v-color-neutral-500: #64748b;
+$v-color-neutral-600: #475569;
+$v-color-neutral-700: #334155;
+$v-color-neutral-800: #1e293b;
+$v-color-neutral-900: #0f172a;
+
+// ---------- Brand primary 50–900 (indigo Tailwind v3; âncoras exatas do pôster) ----------
+$v-color-primary-50: #eef2ff;
+$v-color-primary-100: #e0e7ff;
+$v-color-primary-200: #c7d2fe;
+$v-color-primary-300: #a5b4fc;
+$v-color-primary-400: #818cf8;
+$v-color-primary-500: #6366f1;
+$v-color-primary-600: #4f46e5;
+$v-color-primary-700: #4338ca;
+$v-color-primary-800: #3730a3;
+$v-color-primary-900: #312e81;
+
+// ---------- Semânticas (soft/base/strong/contrast) ----------
+$v-color-success-soft: #d1fae5;
+$v-color-success-base: #10b981;
+$v-color-success-strong: #047857;
+$v-color-success-contrast: #ffffff;
+$v-color-info-soft: #dbeafe;
+$v-color-info-base: #3b82f6;
+$v-color-info-strong: #1d4ed8;
+$v-color-info-contrast: #ffffff;
+$v-color-warning-soft: #fef3c7;
+$v-color-warning-base: #f59e0b;
+$v-color-warning-strong: #b45309;
+$v-color-warning-contrast: #111827;
+$v-color-error-soft: #fee2e2;
+$v-color-error-base: #ef4444;
+$v-color-error-strong: #b91c1c;
+$v-color-error-contrast: #ffffff;
+
+// ---------- Tons especiais (light/base/dark) ----------
+$v-color-purple-light: #e9d5ff;
+$v-color-purple-base: #a855f7;
+$v-color-purple-dark: #7e22ce;
+$v-color-pink-light: #fbcfe8;
+$v-color-pink-base: #ec4899;
+$v-color-pink-dark: #be185d;
+$v-color-indigo-light: #c7d2fe;
+$v-color-indigo-base: #6366f1;
+$v-color-indigo-dark: #3730a3;
+$v-color-teal-light: #99f6e4;
+$v-color-teal-base: #14b8a6;
+$v-color-teal-dark: #0f766e;
+$v-color-orange-light: #fed7aa;
+$v-color-orange-base: #f97316;
+$v-color-orange-dark: #c2410c;
+$v-color-lime-light: #d9f99d;
+$v-color-lime-base: #84cc16;
+$v-color-lime-dark: #4d7c0f;
+
+// ---------- Aliases legados (não quebram os 103 componentes) ----------
+$v-color-bg: #f8faff;
+$v-color-surface: #ffffff;
+$v-color-text: #111827;
+$v-color-text-muted: #64748b;
+$v-color-primary: $v-color-primary-600;
+$v-color-primary-hover: $v-color-primary-700;
+$v-color-border: #d5dde9;
+$v-color-border-strong: $v-color-neutral-400;
+$v-color-focus: $v-color-primary-500;
+$v-color-on-primary: #ffffff;
+$v-color-surface-muted: $v-color-neutral-50;
+
+// ---------- Superfícies ----------
+$v-color-elevated: #f8fafc;
+$v-color-overlay: rgba(15, 23, 42, 0.45);
+
+// ---------- Tipografia fluida (Inter + clamp; textos fixos) ----------
+$v-font-family-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+$v-font-size-display-1: clamp(2.5rem, 1.5rem + 5vw, 3.75rem);
+$v-line-height-display-1: 1.2;
+$v-font-size-display-2: clamp(2rem, 1.25rem + 3.75vw, 3rem);
+$v-line-height-display-2: 1.25;
+$v-font-size-h1: clamp(1.625rem, 1.25rem + 1.875vw, 2.125rem);
+$v-line-height-h1: 1.294;
+$v-font-size-h2: clamp(1.25rem, 1.125rem + 0.625vw, 1.5rem);
+$v-line-height-h2: 1.333;
+$v-font-size-h3: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+$v-line-height-h3: 1.4;
+$v-font-size-h4: clamp(1rem, 0.9375rem + 0.3125vw, 1.125rem);
+$v-line-height-h4: 1.444;
+$v-font-size-h5: clamp(0.9375rem, 0.875rem + 0.3125vw, 1rem);
+$v-line-height-h5: 1.5;
+$v-font-size-text-large: 1rem;
+$v-line-height-text-large: 1.5;
+$v-font-size-text-medium: 0.875rem;
+$v-line-height-text-medium: 1.4286;
+$v-font-size-text-small: 0.75rem;
+$v-line-height-text-small: 1.333;
+$v-font-size-caption: 0.6875rem;
+$v-line-height-caption: 1.4545;
+$v-font-weight-regular: 400;
+$v-font-weight-medium: 500;
+$v-font-weight-semibold: 600;
+$v-font-weight-bold: 700;
+
+// ---------- Espaçamento 0–96 (número = múltiplo de 4px) ----------
+$v-space-0: 0;
+$v-space-1: 4px;
+$v-space-2: 8px;
+$v-space-3: 12px;
+$v-space-4: 16px;
+$v-space-6: 24px;
+$v-space-8: 32px;
+$v-space-12: 48px;
+$v-space-16: 64px;
+$v-space-24: 96px;
+
+// ---------- Flex / stack (layout gaps) ----------
+$v-flex-gap-sm: $v-space-2;
+$v-flex-gap-md: $v-space-4;
+$v-flex-gap-lg: $v-space-6;
+$v-flex-gap-xl: $v-space-8;
+$v-stack-gap-sm: $v-space-2;
+$v-stack-gap-md: $v-space-4;
+$v-stack-gap-lg: $v-space-6;
+
+// ---------- Z-index scale ----------
+$v-z-index-base: 0;
+$v-z-index-sticky: 100;
+$v-z-index-dropdown: 1000;
+$v-z-index-popover: 1000;
+$v-z-index-drawer: 1100;
+$v-z-index-modal: 1200;
+$v-z-index-toast: 1300;
+$v-z-index-tooltip: 1400;
+
+// ---------- Raios 0–24 ----------
+$v-radius-0: 0;
+$v-radius-4: 4px;
+$v-radius-8: 8px;
+$v-radius-12: 12px;
+$v-radius-16: 16px;
+$v-radius-24: 24px;
+$v-radius-sm: $v-radius-8;
+$v-radius-md: $v-radius-12;
+$v-radius-lg: $v-radius-16;
+$v-radius-xl: 20px;
+// Círculo perfeito (avatar, thumb, radio). Em retângulos, 50% vira elipse — não use em chips.
+$v-radius-circle: 50%;
+$v-radius-full: $v-radius-circle;
+// Capsula/pílula (tag, badge removível, tabs pill). Raio fixo grande, não percentual.
+$v-radius-pill: 9999px;
+
+// ---------- Chip (VTag, VBadge removable) ----------
+$v-chip-radius: $v-radius-pill;
+$v-chip-line-height: 1;
+$v-chip-height-xs: 22px;
+$v-chip-height-sm: 24px;
+$v-chip-height-md: 28px;
+$v-chip-height-lg: 32px;
+$v-chip-font-size-xs: $v-font-size-caption;
+$v-chip-font-size-sm: $v-font-size-text-small;
+$v-chip-font-size-md: $v-chip-font-size-sm;
+$v-chip-font-size-lg: $v-font-size-text-medium;
+$v-chip-padding-inline-sm: $v-space-2;
+$v-chip-padding-inline-md: $v-space-3;
+$v-chip-padding-inline-lg: $v-space-4;
+$v-chip-padding-inline-end-removable: $v-space-1;
+$v-chip-padding-inline-end-removable-lg: $v-space-2;
+$v-chip-gap: $v-space-1;
+$v-chip-remove-size: 16px;
+$v-chip-soft-bg-mix: 12%;
+$v-chip-soft-hover-mix: 18%;
+$v-chip-leaving-scale: 0.9;
+$v-chip-leaving-duration: 120ms;
+$v-state-press-scale: 0.98;
+$v-state-press-scale-spring: 0.96;
+$v-state-enter-scale: 0.98;
+$v-chip-press-scale: $v-state-press-scale;
+$v-chip-focus-offset: 1px;
+
+// ---------- Tag (primitives/VTag) ----------
+$v-tag-radius: $v-chip-radius;
+$v-tag-height-sm: $v-chip-height-sm;
+$v-tag-height-md: $v-chip-height-md;
+$v-tag-line-height: $v-chip-line-height;
+$v-tag-font-size-sm: $v-chip-font-size-sm;
+$v-tag-font-size-md: $v-chip-font-size-md;
+$v-tag-padding-inline-sm: $v-chip-padding-inline-sm;
+$v-tag-padding-inline-md: $v-chip-padding-inline-md;
+$v-tag-gap: $v-chip-gap;
+$v-tag-remove-radius: $v-chip-radius;
+$v-tag-overlay-height: $v-chip-height-sm;
+$v-tag-overlay-padding-inline: $v-chip-padding-inline-md;
+$v-tag-soft-bg-mix: $v-chip-soft-bg-mix;
+$v-tag-soft-hover-mix: $v-chip-soft-hover-mix;
+$v-tag-leaving-scale: $v-chip-leaving-scale;
+$v-tag-leaving-duration: $v-chip-leaving-duration;
+$v-tag-press-scale: $v-state-press-scale;
+$v-tag-focus-offset: $v-chip-focus-offset;
+
+// ---------- Sombras sutis ----------
+$v-shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+$v-shadow-md: 0 4px 8px -2px rgba(16, 24, 40, 0.1), 0 2px 4px -2px rgba(16, 24, 40, 0.06);
+$v-shadow-lg: 0 12px 24px -4px rgba(16, 24, 40, 0.12);
+$v-shadow-xl: 0 24px 48px -8px rgba(16, 24, 40, 0.16);
+
+// ---------- Bordas ----------
+$v-border-width: 1px;
+$v-border-width-focus: 2px;
+$v-color-border-disabled: #e2e8f0;
+$v-focus-ring-width: 2px;
+$v-focus-ring-offset: 2px;
+
+// ---------- Motion + easings ----------
+$v-motion-fast: 100ms;
+$v-motion-card-hover: 150ms;
+$v-motion-normal: 160ms;
+$v-motion-press: 80ms;
+$v-motion-slow: 300ms;
+$v-motion-spin-duration: 0.7s;
+$v-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+$v-ease-out: cubic-bezier(0, 0, 0.2, 1);
+$v-ease-in: cubic-bezier(0.4, 0, 1, 1);
+$v-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$v-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+$v-motion-spring-duration: 200ms;
+$v-motion-spring-bounce: 0.2;
+$v-gesture-swipe-threshold: 80px;
+$v-gesture-flick-velocity: 0.5;
+$v-tooltip-warm-delay: 400ms;
+$v-tooltip-warm-cooldown: 300ms;
+
+// ---------- Split (poster SplitView doc/Ui/VSplitView.png: --split-transition-duration 120ms) ----------
+$v-split-transition-duration: 120ms;
+
+// ---------- Estados ----------
+$v-state-disabled-opacity: 0.5;
+$v-state-hover-mix: 6%;
+$v-state-pressed-mix: 12%;
+$v-state-loading-opacity: 0.7;
+$v-loader-size: 1em;
+$v-loader-border-width: 2px;
+
+// ---------- Skeleton ----------
+$v-skeleton-bg: $v-color-neutral-100;
+$v-skeleton-highlight: $v-color-surface;
+$v-skeleton-duration: 800ms;
+
+// ---------- Targets (WCAG hit area — consumido por field, checkbox, button) ----------
+$v-button-min-target: 44px;
+
+// ---------- Form controls (checkbox, switch, radio) ----------
+$v-checkbox-size-sm: 16px;
+$v-checkbox-size-md: 20px;
+$v-checkbox-size-lg: 24px;
+$v-checkbox-gap: 10px;
+$v-checkbox-min-target: $v-button-min-target;
+$v-checkbox-border-width: 1.5px;
+$v-checkbox-align-offset: 1px;
+$v-checkbox-strike-height: 1.5px;
+$v-checkbox-link-underline-offset: 2px;
+$v-checkbox-link-focus-radius: 2px;
+
+// ---------- Form field (shared heights / focus) ----------
+$v-field-height-sm: 32px;
+$v-field-height-md: 40px;
+$v-field-height-lg: 48px;
+$v-field-focus-spread: 3px;
+$v-field-focus-outline-width: 2px;
+$v-field-focus-outline-offset: 2px;
+$v-field-min-target: $v-button-min-target;
+$v-sr-only-size: 1px;
+$v-field-border-width-strong: 2px;
+$v-field-gap-tight: 2px;
+
+// Switch
+$v-switch-track-width-sm: 36px;
+$v-switch-track-width-md: 52px;
+$v-switch-track-width-lg: 64px;
+$v-switch-track-height-sm: 20px;
+$v-switch-track-height-md: 28px;
+$v-switch-track-height-lg: 36px;
+$v-switch-thumb-size-sm: 16px;
+$v-switch-thumb-size-md: 24px;
+$v-switch-thumb-size-lg: 30px;
+$v-switch-padding: calc(#{$v-space-1} / 2);
+$v-switch-icon-size: 16px;
+$v-switch-label-offset: calc(#{$v-space-1} / 2);
+
+// Slider
+$v-slider-track-size-sm: 4px;
+$v-slider-track-size-md: 6px;
+$v-slider-track-size-lg: 8px;
+$v-slider-thumb-size-sm: 16px;
+$v-slider-thumb-size-md: 20px;
+$v-slider-thumb-size-lg: 24px;
+$v-slider-mark-size: 4px;
+$v-slider-vertical-height: 180px;
+$v-slider-vertical-min-height: 200px;
+$v-slider-thumb-hit-size: $v-field-min-target;
+$v-slider-focus-ring-width: $v-field-border-width-strong;
+$v-slider-wake-bar-width: 3px;
+
+// Radio group
+$v-radiogroup-control-size-sm: 20px;
+$v-radiogroup-control-size-md: 24px;
+$v-radiogroup-control-size-lg: 28px;
+$v-radiogroup-dot-size-sm: 8px;
+$v-radiogroup-dot-size-md: 10px;
+$v-radiogroup-dot-size-lg: 12px;
+$v-radiogroup-label-size-sm: 14px;
+$v-radiogroup-label-size-md: 16px;
+$v-radiogroup-label-size-lg: 18px;
+$v-radiogroup-border-width: $v-field-border-width-strong;
+
+// Textarea
+$v-textarea-min-height-sm: 72px;
+$v-textarea-min-height-md: 96px;
+$v-textarea-min-height-lg: 128px;
+
+// Number input
+$v-number-input-stepper-size-sm: 28px;
+$v-number-input-stepper-size-md: 32px;
+$v-number-input-stepper-size-lg: 36px;
+
+// OTP
+$v-otp-slot-size-sm: 40px;
+$v-otp-slot-size-md: 48px;
+$v-otp-slot-size-lg: 56px;
+
+// Select
+$v-select-panel-max-height: 256px;
+
+// Search field
+$v-searchfield-suggestion-min-height: 24px;
+$v-searchfield-panel-min-height: $v-field-height-md;
+
+// Password meter
+$v-password-meter-segment-height: 4px;
+
+// Date picker
+$v-date-picker-max-width: 420px;
+$v-date-picker-nav-size: 28px;
+$v-date-picker-day-size: 32px;
+$v-date-picker-panel-width: 320px;
+$v-date-picker-dot-size: 4px;
+$v-date-picker-dot-offset: 4px;
+
+// Date range picker
+$v-date-range-picker-max-width: 480px;
+$v-date-range-picker-preset-min-width: 140px;
+
+// Tag input
+$v-tag-input-min-height-sm: $v-field-height-sm;
+$v-tag-input-min-height-md: $v-field-height-md;
+$v-tag-input-min-height-lg: $v-field-height-lg;
+$v-tag-input-field-min-width: 80px;
+$v-tag-input-chip-min-height: 36px;
+$v-tag-input-action-size: 28px;
+
+// File upload
+$v-file-upload-drop-min-height: 160px;
+$v-file-upload-drop-min-height-compact: 120px;
+$v-file-upload-drop-min-height-large: 200px;
+$v-file-upload-progress-height: 6px;
+$v-file-upload-thumb-size: 96px;
+$v-file-upload-action-size: 28px;
+$v-file-upload-border-width: $v-field-border-width-strong;
+
+// Color picker
+$v-color-picker-swatch-size-sm: 24px;
+$v-color-picker-swatch-size-md: 32px;
+$v-color-picker-swatch-size-lg: 40px;
+$v-color-picker-handle-size: 16px;
+$v-color-picker-hue-track-height: 8px;
+$v-color-picker-preview-size: 28px;
+$v-color-picker-input-min-width: 96px;
+$v-color-picker-input-height: $v-field-height-sm;
+$v-color-picker-panel-width: 280px;
+$v-color-picker-surface-height: 160px;
+$v-color-picker-chip-size: 32px;
+$v-color-picker-chip-size-sm: 24px;
+
+// Prompt bar
+$v-prompt-bar-wave-bar-width: 3px;
+$v-prompt-bar-wave-height: 14px;
+
+// ---------- Toast ----------
+$v-toast-height-sm: $v-field-height-md;
+$v-toast-height-md: $v-field-height-lg;
+$v-toast-height-lg: 56px;
+$v-toast-progress-height: calc(#{$v-space-1} / 2);
+
+// ---------- Tooltip ----------
+$v-tooltip-max-width-sm: 160px;
+$v-tooltip-max-width-md: 200px;
+$v-tooltip-max-width-lg: 240px;
+$v-tooltip-max-width-xl: 320px;
+$v-tooltip-arrow-size: calc(#{$v-space-2} - (#{$v-space-1} / 2));
+
+// ---------- Spinner / Progress ----------
+$v-spinner-track-width-sm: calc(#{$v-space-1} / 2);
+$v-spinner-track-width-md: 3px;
+$v-spinner-track-width-lg: $v-space-1;
+$v-progress-ring-width-sm: $v-spinner-track-width-sm;
+$v-progress-ring-width-md: $v-spinner-track-width-md;
+$v-progress-ring-width-lg: $v-spinner-track-width-lg;
+
+// ---------- Confirm dialog ----------
+
+// ---------- Notification center ----------
+$v-notification-badge-border-width: $v-field-border-width-strong;
+$v-notification-tab-indicator-width: $v-field-border-width-strong;
+
+// ---------- Card (anatomia extra) ----------
+$v-card-accent-height: 3px;
+$v-card-flip-perspective: 1000px;
+
+// ---------- Navigation (layout) ----------
+$v-toolbar-group-min-width: 160px;
+$v-swipe-row-action-min-width: calc(#{$v-space-16} + #{$v-space-2});
+
+// ---------- Grid demos ----------
+$v-grid-demo-card-min-height: calc(#{$v-space-24} + #{$v-space-12});
+$v-grid-demo-masonry-min-height: $v-file-upload-drop-min-height;
+$v-grid-demo-masonry-skeleton-height: $v-slider-vertical-height;
+$v-grid-demo-border-width: $v-field-border-width-strong;
+$v-dashboard-widget-handle-radius: calc(#{$v-space-1} / 2);
+
+// ---------- Table ----------
+$v-table-search-min-width: 200px;
+$v-table-grid-min-width: 720px;
+$v-table-checkbox-col-width: $v-field-min-target;
+$v-table-expand-col-width: calc(#{$v-space-12} + #{$v-space-2});
+$v-table-badge-min-width: 18px;
+$v-table-badge-height: 18px;
+$v-table-action-min-size: $v-field-height-sm;
+
+// ---------- Filter bar ----------
+$v-filter-bar-chip-min-height: 28px;
+
+// ---------- Gallery (extra) ----------
+$v-gallery-nav-size: 28px;
+$v-gallery-lightbox-min-height: 320px;
+$v-gallery-filmstrip-width: $v-space-16;
+$v-gallery-filmstrip-height: calc(#{$v-space-12} + #{$v-space-1});
+$v-gallery-border-width: $v-field-border-width-strong;
+
+// ---------- Thought line ----------
+$v-thought-line-rail-height: 1px;
+
+// ---------- App shell / dashboard grid ----------
+$v-appshell-search-max-width: 480px;
+$v-appshell-sidebar-width-collapsed: 72px;
+$v-appshell-rail-width: 320px;
+$v-appshell-rail-width-sm: 280px;
+$v-widget-bg: $v-color-surface;
+$v-widget-border: $v-color-border;
+
+// ---------- Color picker (superfície do gradiente) ----------
+$v-color-picker-white: #ffffff;
+$v-color-picker-black: #000000;
+$v-color-picker-thumb-border: $v-color-surface;
+$v-color-picker-hue-spectrum: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+
+// ---------- Button (poster doc/Ui/VButton.png: --button-* transcritos) ----------
+$v-button-bg: $v-color-primary-500;
+$v-button-text: $v-color-on-primary;
+$v-button-radius: $v-radius-12;
+$v-button-padding-x: $v-space-4;
+$v-button-padding-y: $v-space-2;
+$v-button-shadow: 0 var(--v-space-1) var(--v-space-2) color-mix(in srgb, var(--v-color-primary-500) 25%, transparent);
+$v-button-focus-ring: 0 0 0 var(--v-space-1) color-mix(in srgb, var(--v-color-primary-500) 30%, transparent);
+$v-button-disabled-opacity: 0.5;
+$v-button-loader-duration: 200ms;
+$v-button-fuse-height: calc(#{$v-space-1} / 2);
+
+// ---------- Card (poster doc/Ui/VCard.png: tokens da pagina) ----------
+$v-card-bg: $v-color-surface;
+$v-card-border: $v-color-border;
+$v-card-radius: $v-radius-16;
+$v-card-shadow: 0 var(--v-space-1) var(--v-space-6) rgba(16, 24, 40, 0.08);
+$v-card-shadow-hover: 0 var(--v-space-2) var(--v-space-8) rgba(16, 24, 40, 0.12);
+$v-card-padding: $v-space-6;
+$v-card-gap: $v-space-3;
+
+// ---------- Panel (poster doc/ui/VPanel.png: tokens da pagina) ----------
+$v-panel-bg: #ffffff;
+$v-panel-surface: #ffffff;
+$v-panel-border: $v-color-border;
+$v-panel-radius: 12px;
+$v-panel-shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+$v-panel-padding-sm: 8px;
+$v-panel-padding-md: 16px;
+$v-panel-padding-lg: 24px;
+$v-panel-title-color: $v-color-text;
+$v-panel-text-color: $v-color-text-muted;
+$v-panel-footer-bg: transparent;
+$v-panel-divider: #e5e7f0;
+$v-panel-header-gap: 12px;
+$v-panel-hover-bg: #f8fafc;
+$v-panel-filled-bg: $v-color-elevated;
+$v-panel-motion-enter: $v-motion-normal;
+$v-panel-motion-exit: $v-motion-fast;
+
+// ---------- Segmented control (doc/ui/VSegmentedControl.png) ----------
+$v-segmented-bg: #f8fafc;
+$v-segmented-border: $v-color-border;
+$v-segmented-indicator-bg: $v-color-primary-500;
+$v-segmented-indicator-border: transparent;
+$v-segmented-text: #64748b;
+$v-segmented-text-active: #ffffff;
+$v-segmented-text-hover: #334155;
+$v-segmented-text-disabled: #94a3b8;
+$v-segmented-hover-bg: $v-color-primary-50;
+$v-segmented-pressed-bg: $v-color-primary-100;
+$v-segmented-divider: #e2e8f0;
+$v-segmented-radius: 12px;
+$v-segmented-gap: 0;
+$v-segmented-padding-x: 4px;
+$v-segmented-padding-y: 4px;
+$v-segmented-height-sm: 28px;
+$v-segmented-height-md: 36px;
+$v-segmented-height-lg: 44px;
+$v-segmented-motion: 200ms;
+
+// ---------- Section (doc/Ui/VSection.png: tokens da pagina) ----------
+$v-section-bg: #ffffff;
+$v-section-bg-tinted: $v-color-primary-50;
+$v-section-border: #e5e7f0;
+$v-section-shadow: 0 4px 16px rgba(16, 24, 40, 0.08);
+$v-section-radius: 16px;
+$v-section-header-gap: 16px;
+$v-section-padding: 24px;
+$v-section-padding-sm: 12px;
+$v-section-padding-lg: 32px;
+$v-section-footer-border: #e5e7f0;
+$v-section-hover-bg: #f8fafc;
+$v-section-transition: 150ms;
+
+// ---------- Toolbar (doc/ui/VToolbar.png: tokens da pagina) ----------
+$v-toolbar-bg: #ffffff;
+$v-toolbar-border: $v-color-border;
+$v-toolbar-divider: #e5e7f0;
+$v-toolbar-radius: 8px;
+$v-toolbar-shadow: 0 4px 16px rgba(16, 24, 40, 0.1);
+$v-toolbar-gap: 4px;
+$v-toolbar-gap-compact: 2px;
+$v-toolbar-padding-x: 8px;
+$v-toolbar-padding-x-compact: 4px;
+$v-toolbar-height-sm: 32px;
+$v-toolbar-height-md: 40px;
+$v-toolbar-height-lg: 48px;
+$v-toolbar-icon: #64748b;
+$v-toolbar-icon-hover-bg: $v-color-primary-50;
+$v-toolbar-icon-active-bg: $v-color-primary-500;
+$v-toolbar-icon-active-color: $v-color-on-primary;
+$v-toolbar-icon-disabled: #94a3b8;
+$v-toolbar-primary-bg: $v-color-primary-500;
+$v-toolbar-primary-hover: $v-color-primary-600;
+$v-toolbar-primary-text: $v-color-on-primary;
+$v-toolbar-button-radius: 8px;
+$v-toolbar-motion-hover: 120ms;
+$v-toolbar-motion-press: 100ms;
+
+// ---------- Breadcrumb (poster doc/ui/VBreadcrumb.png) ----------
+$v-breadcrumb-gap: 8px;
+$v-breadcrumb-gap-sm: 4px;
+$v-breadcrumb-gap-lg: 12px;
+$v-breadcrumb-separator-color: $v-color-text-muted;
+$v-breadcrumb-item-color: $v-color-text-muted;
+$v-breadcrumb-item-hover-color: $v-color-text;
+$v-breadcrumb-item-active-color: $v-color-primary;
+$v-breadcrumb-current-color: $v-color-primary;
+$v-breadcrumb-icon-size: 1em;
+$v-breadcrumb-font-size-sm: $v-font-size-text-small;
+$v-breadcrumb-font-size-md: $v-font-size-text-medium;
+$v-breadcrumb-font-size-lg: $v-font-size-text-large;
+$v-breadcrumb-item-radius: $v-radius-sm;
+$v-breadcrumb-item-padding-x: $v-space-2;
+$v-breadcrumb-item-padding-y: $v-space-1;
+$v-breadcrumb-item-hover-bg: $v-color-neutral-100;
+$v-breadcrumb-item-pressed-bg: $v-color-neutral-200;
+$v-breadcrumb-label-max-width: 12rem;
+$v-breadcrumb-overflow-bg: $v-color-surface;
+$v-breadcrumb-overflow-border: $v-color-border;
+$v-breadcrumb-overflow-shadow: $v-shadow-md;
+$v-breadcrumb-overflow-min-width: 10rem;
+$v-breadcrumb-motion: $v-motion-normal;
+
+// ---------- Icon primitive (Keyline Icons via VIcon) ----------
+$v-icon-size-sm: 16px;
+$v-icon-size-md: 20px;
+$v-icon-size-lg: 24px;
+
+// ---------- Window presets (DESIGN-SPEC §3: sm 640×480 / md 960×640 / lg 1280×800) ----------
+$v-window-sm-width: 640px;
+$v-window-sm-height: 480px;
+$v-window-md-width: 960px;
+$v-window-md-height: 640px;
+$v-window-lg-width: 1280px;
+$v-window-lg-height: 800px;
+
+// ---------- Dropdown (doc/ui/VDropdownMenu.png: tokens da pagina) ----------
+$v-dropdown-trigger-radius: 12px;
+$v-dropdown-trigger-padding-x: 16px;
+$v-dropdown-height-sm: 32px;
+$v-dropdown-height-md: 40px;
+$v-dropdown-height-lg: 48px;
+$v-dropdown-menu-min-width: 200px;
+$v-dropdown-menu-radius: 12px;
+$v-dropdown-menu-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+$v-dropdown-item-height: 36px;
+$v-dropdown-item-padding-x: 16px;
+$v-dropdown-item-icon-size: 16px;
+$v-dropdown-item-gap: 12px;
+$v-dropdown-divider-width: 1px;
+$v-dropdown-hover-bg: $v-color-neutral-100;
+$v-dropdown-item-selected-bg: $v-color-primary-50;
+$v-dropdown-destructive-bg: #fee2e2;
+$v-dropdown-destructive-text: #b91c1c;
+$v-dropdown-motion-hover: 120ms;
+$v-dropdown-motion-open: 120ms;
+$v-dropdown-motion-close: 100ms;
+$v-dropdown-motion-press: 70ms;
+
+// ---------- Popover (doc/ui/VPopover.png: tokens da pagina) ----------
+$v-popover-bg: #ffffff;
+$v-popover-border: $v-color-border;
+$v-popover-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
+$v-popover-radius: 12px;
+$v-popover-arrow-size: 8px;
+$v-popover-z-index: $v-z-index-popover;
+$v-popover-padding-sm: 12px;
+$v-popover-padding-md: 16px;
+$v-popover-padding-lg: 20px;
+$v-popover-max-width-sm: 200px;
+$v-popover-max-width-md: 280px;
+$v-popover-max-width-lg: 360px;
+$v-popover-gap: 8px;
+$v-popover-transition: $v-motion-normal;
+
+// ---------- Tabs (poster doc/ui/VTabs.png: tokens da pagina) ----------
+$v-tabs-height-sm: 32px;
+$v-tabs-height-md: 40px;
+$v-tabs-height-lg: 48px;
+$v-tabs-padding-x: 16px;
+$v-tabs-icon-size: 16px;
+$v-tabs-label-size: 14px;
+$v-tabs-label-weight: 600;
+$v-tabs-indicator-height: 2px;
+$v-tabs-divider-width: 1px;
+$v-tabs-item-gap: 8px;
+$v-tabs-hit-min-width: 44px;
+$v-tabs-hit-min-height: 32px;
+$v-tabs-pill-radius: $v-radius-pill;
+$v-tabs-hover-bg: $v-color-primary-50;
+$v-tabs-motion-hover: 100ms;
+$v-tabs-motion-focus: 120ms;
+$v-tabs-motion-indicator: 180ms;
+$v-tabs-motion-panel: 120ms;
+$v-tabs-motion-overflow: 140ms;
+$v-tabs-indicator-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+// ---------- Sidebar (poster doc/ui/VSidebar.png) ----------
+$v-sidebar-width-rail: 64px;
+$v-sidebar-width-md: 240px;
+$v-sidebar-width-lg: 320px;
+$v-sidebar-bg: #ffffff;
+$v-sidebar-border: #e4e4e7;
+$v-sidebar-brand-gap: 12px;
+$v-sidebar-padding-x: 12px;
+$v-sidebar-padding-y: 16px;
+$v-sidebar-section-spacing: 8px;
+$v-sidebar-item-height: 30px;
+$v-sidebar-item-gap: 2px;
+$v-sidebar-item-padding-x: 8px;
+$v-sidebar-item-icon-gap: 10px;
+$v-sidebar-label-line-height: 20px;
+$v-sidebar-caption-size: 10px;
+$v-sidebar-caption-weight: 600;
+$v-sidebar-caption-tracking: 0.06em;
+$v-sidebar-caption-line-height: 16px;
+$v-sidebar-caption-gap-above: 20px;
+$v-sidebar-count-size: 12px;
+$v-sidebar-tag-size: 10px;
+$v-sidebar-brand-size: 13px;
+$v-sidebar-brand-logo-size: 20px;
+$v-sidebar-avatar-size: 24px;
+$v-sidebar-kbd-size: 10px;
+$v-sidebar-item-radius: 8px;
+$v-sidebar-item-hover-bg: $v-color-neutral-100;
+$v-sidebar-item-active-bg: $v-color-primary-50;
+$v-sidebar-item-active-color: $v-color-primary-600;
+$v-sidebar-item-nested-indent: 28px;
+$v-sidebar-search-height: 30px;
+$v-sidebar-user-border: #e4e4e7;
+$v-sidebar-icon-size: 16px;
+$v-sidebar-label-size: 13px;
+$v-sidebar-fade-size: 20px;
+$v-sidebar-label-weight: 500;
+$v-sidebar-motion-collapse: 200ms;
+$v-sidebar-disabled-opacity: 0.4;
+$v-sidebar-group-divider-gap: 12px;
+
+// ---------- Tree navigation (doc/ui/VTreeNavigation.png) ----------
+$v-tree-bg: #ffffff;
+$v-tree-text-color: $v-color-text;
+$v-tree-item-hover-bg: #f8fafc;
+$v-tree-item-active-bg: $v-color-primary-50;
+$v-tree-item-selected-bg: $v-color-primary-50;
+$v-tree-icon-color: #64748b;
+$v-tree-icon-folder-color: $v-color-neutral-500;
+$v-tree-icon-doc-color: #94a3b8;
+$v-tree-indicator-color: $v-color-primary-600;
+$v-tree-indicator-width: 3px;
+$v-tree-indent-size: 16px;
+$v-tree-transition: 200ms;
+$v-tree-focus-ring-width: 2px;
+$v-tree-focus-ring-color: $v-color-primary-500;
+$v-tree-focus-ring-offset: 0px;
+$v-tree-item-disabled-opacity: 0.5;
+$v-tree-item-height-sm: 28px;
+$v-tree-item-height-md: 36px;
+$v-tree-item-height-lg: 44px;
+$v-tree-node-gap: 8px;
+$v-tree-node-padding-x: 8px;
+$v-tree-toggle-size: 20px;
+$v-tree-chevron-size: 6px;
+$v-tree-icon-size: 18px;
+$v-tree-count-bg: #f1f5f9;
+$v-tree-count-color: #64748b;
+$v-tree-count-min-width: 24px;
+$v-tree-count-padding-x: 8px;
+$v-tree-count-padding-y: 2px;
+
+// ---------- Inspector panel (poster doc/Ui/VInspectorPanel.png) ----------
+$v-inspector-width-compact: 320px;
+$v-inspector-width-default: 360px;
+$v-inspector-width-wide: 440px;
+$v-inspector-header-height: 56px;
+$v-inspector-tab-height: 40px;
+$v-inspector-bg: #ffffff;
+$v-inspector-border: #e5e7eb;
+$v-inspector-divider: #eef2f7;
+$v-inspector-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+$v-inspector-text: #0f172a;
+$v-inspector-muted: #64748b;
+$v-inspector-accent: $v-color-primary-500;
+$v-color-divider: #eef2f7;
+
+// ---------- Avatar (poster doc/Ui/documentação_vueui_nova_componente_avatar.png) ----------
+$v-avatar-size-xs: 24px;
+$v-avatar-size-sm: 32px;
+$v-avatar-size-md: 40px;
+$v-avatar-size-lg: 48px;
+$v-avatar-size-xl: 64px;
+$v-avatar-status-dot-md: 10px;
+$v-avatar-status-dot-sm: 8px;
+$v-avatar-badge-md: 16px;
+$v-avatar-badge-sm: 12px;
+$v-avatar-border: $v-color-border;
+$v-avatar-initials-bg: $v-color-purple-light;
+$v-avatar-initials-color: $v-color-purple-dark;
+$v-avatar-icon-bg: $v-color-neutral-100;
+$v-avatar-fallback-bg: $v-color-neutral-200;
+
+// ---------- Image gallery (poster doc/Ui/VImageGallery.png) ----------
+$v-gallery-gap: $v-space-2;
+$v-gallery-radius: $v-radius-8;
+$v-gallery-overlay-bg: rgba(17, 24, 39, 0.55);
+$v-gallery-overlay-color: #ffffff;
+$v-gallery-focus-ring: $v-color-focus;
+$v-gallery-selected-border: $v-color-primary-600;
+$v-gallery-selected-bg: $v-color-primary-50;
+$v-gallery-transition: opacity $v-motion-normal $v-ease-out, transform $v-motion-normal $v-ease-out;
+$v-gallery-thumb-sm: 80px;
+$v-gallery-thumb-md: 120px;
+$v-gallery-thumb-lg: 160px;
+$v-gallery-lightbox-bg: rgba(15, 23, 42, 0.92);
+
+// ---------- Table (poster doc/Ui/documentação_do_componente_tabela.png) ----------
+$v-table-header-height-sm: 32px;
+$v-table-header-height-md: 40px;
+$v-table-header-height-lg: 48px;
+$v-table-row-height-sm: 32px;
+$v-table-row-height-md: 40px;
+$v-table-row-height-lg: 48px;
+$v-table-cell-padding-x: $v-space-4;
+$v-table-cell-padding-y: $v-space-3;
+$v-table-sort-hover-bg: $v-color-neutral-50;
+$v-table-sort-active-color: $v-color-primary;
+$v-table-sort-focus-ring: $v-color-focus;
+$v-table-sort-disabled-color: $v-color-neutral-400;
+$v-table-row-hover-bg: $v-color-neutral-50;
+$v-table-row-selected-bg: $v-color-primary-50;
+$v-table-border: $v-color-border;
+$v-table-radius: $v-radius-8;
+$v-table-sorted-column-bg: $v-color-primary-50;
+
+// ---------- Filter bar (poster doc/Ui/guia_de_design_do_filter_bar.png) ----------
+$vf-bg: $v-color-surface;
+$vf-surface: $v-color-surface;
+$vf-border: $v-color-border;
+$vf-input-bg: $v-color-surface;
+$vf-primary: $v-color-primary;
+$vf-primary-hover: $v-color-primary-hover;
+$vf-chip-bg: $v-color-primary-50;
+$vf-chip-text: $v-color-primary-600;
+$vf-text: $v-color-text;
+$vf-text-primary: $v-color-text;
+$vf-text-muted: $v-color-text-muted;
+$vf-focus-ring: $v-color-focus;
+$vf-disabled-bg: $v-color-neutral-100;
+$vf-success: $v-color-success-base;
+$vf-warning: $v-color-warning-base;
+$vf-danger: $v-color-error-base;
+$vf-height-sm: 32px;
+$vf-height-md: 40px;
+$vf-height-lg: 48px;
+
+// ---------- Breakpoints + grid (pôster seções 11–12) ----------
+$v-breakpoint-xs: 0;
+$v-breakpoint-sm: 640px;
+$v-breakpoint-md: 768px;
+$v-breakpoint-lg: 1024px;
+$v-breakpoint-xl: 1280px;
+$v-breakpoint-2xl: 1536px;
+$v-grid-columns: 12;
+$v-grid-gutter: 24px;
+$v-grid-margins: 24px;
+$v-grid-max-width: 1440px;
+
+@mixin v-tokens {
+  --v-color-neutral-50: #{$v-color-neutral-50};
+  --v-color-neutral-100: #{$v-color-neutral-100};
+  --v-color-neutral-200: #{$v-color-neutral-200};
+  --v-color-neutral-300: #{$v-color-neutral-300};
+  --v-color-neutral-400: #{$v-color-neutral-400};
+  --v-color-neutral-500: #{$v-color-neutral-500};
+  --v-color-neutral-600: #{$v-color-neutral-600};
+  --v-color-neutral-700: #{$v-color-neutral-700};
+  --v-color-neutral-800: #{$v-color-neutral-800};
+  --v-color-neutral-900: #{$v-color-neutral-900};
+  --v-color-primary-50: #{$v-color-primary-50};
+  --v-color-primary-100: #{$v-color-primary-100};
+  --v-color-primary-200: #{$v-color-primary-200};
+  --v-color-primary-300: #{$v-color-primary-300};
+  --v-color-primary-400: #{$v-color-primary-400};
+  --v-color-primary-500: #{$v-color-primary-500};
+  --v-color-primary-600: #{$v-color-primary-600};
+  --v-color-primary-700: #{$v-color-primary-700};
+  --v-color-primary-800: #{$v-color-primary-800};
+  --v-color-primary-900: #{$v-color-primary-900};
+  --v-color-success-soft: #{$v-color-success-soft};
+  --v-color-success-base: #{$v-color-success-base};
+  --v-color-success-strong: #{$v-color-success-strong};
+  --v-color-success-contrast: #{$v-color-success-contrast};
+  --v-color-info-soft: #{$v-color-info-soft};
+  --v-color-info-base: #{$v-color-info-base};
+  --v-color-info-strong: #{$v-color-info-strong};
+  --v-color-info-contrast: #{$v-color-info-contrast};
+  --v-color-warning-soft: #{$v-color-warning-soft};
+  --v-color-warning-base: #{$v-color-warning-base};
+  --v-color-warning-strong: #{$v-color-warning-strong};
+  --v-color-warning-contrast: #{$v-color-warning-contrast};
+  --v-color-error-soft: #{$v-color-error-soft};
+  --v-color-error-base: #{$v-color-error-base};
+  --v-color-error-strong: #{$v-color-error-strong};
+  --v-color-error-contrast: #{$v-color-error-contrast};
+  --v-color-purple-light: #{$v-color-purple-light};
+  --v-color-purple-base: #{$v-color-purple-base};
+  --v-color-purple-dark: #{$v-color-purple-dark};
+  --v-color-pink-light: #{$v-color-pink-light};
+  --v-color-pink-base: #{$v-color-pink-base};
+  --v-color-pink-dark: #{$v-color-pink-dark};
+  --v-color-indigo-light: #{$v-color-indigo-light};
+  --v-color-indigo-base: #{$v-color-indigo-base};
+  --v-color-indigo-dark: #{$v-color-indigo-dark};
+  --v-color-teal-light: #{$v-color-teal-light};
+  --v-color-teal-base: #{$v-color-teal-base};
+  --v-color-teal-dark: #{$v-color-teal-dark};
+  --v-color-orange-light: #{$v-color-orange-light};
+  --v-color-orange-base: #{$v-color-orange-base};
+  --v-color-orange-dark: #{$v-color-orange-dark};
+  --v-color-lime-light: #{$v-color-lime-light};
+  --v-color-lime-base: #{$v-color-lime-base};
+  --v-color-lime-dark: #{$v-color-lime-dark};
+  --v-color-bg: #{$v-color-bg};
+  --v-color-surface: #{$v-color-surface};
+  --v-color-text: #{$v-color-text};
+  --v-color-text-muted: #{$v-color-text-muted};
+  --v-color-primary: var(--v-color-primary-600);
+  --v-color-primary-hover: var(--v-color-primary-700);
+  --v-color-primary-text: var(--v-color-primary-600);
+  --v-color-border: #{$v-color-border};
+  --v-color-border-strong: #{$v-color-border-strong};
+  --v-color-focus: var(--v-color-primary-500);
+  --v-color-on-primary: #{$v-color-on-primary};
+  --v-color-surface-muted: #{$v-color-surface-muted};
+  --v-color-elevated: #{$v-color-elevated};
+  --v-color-overlay: rgba(15, 23, 42, 0.45);
+  --v-font-family-sans: #{$v-font-family-sans};
+  --v-font-size-display-1: #{$v-font-size-display-1};
+  --v-line-height-display-1: #{$v-line-height-display-1};
+  --v-font-size-display-2: #{$v-font-size-display-2};
+  --v-line-height-display-2: #{$v-line-height-display-2};
+  --v-font-size-h1: #{$v-font-size-h1};
+  --v-line-height-h1: #{$v-line-height-h1};
+  --v-font-size-h2: #{$v-font-size-h2};
+  --v-line-height-h2: #{$v-line-height-h2};
+  --v-font-size-h3: #{$v-font-size-h3};
+  --v-line-height-h3: #{$v-line-height-h3};
+  --v-font-size-h4: #{$v-font-size-h4};
+  --v-line-height-h4: #{$v-line-height-h4};
+  --v-font-size-h5: #{$v-font-size-h5};
+  --v-line-height-h5: #{$v-line-height-h5};
+  --v-font-size-text-large: #{$v-font-size-text-large};
+  --v-line-height-text-large: #{$v-line-height-text-large};
+  --v-font-size-text-medium: #{$v-font-size-text-medium};
+  --v-line-height-text-medium: #{$v-line-height-text-medium};
+  --v-font-size-text-small: #{$v-font-size-text-small};
+  --v-line-height-text-small: #{$v-line-height-text-small};
+  --v-font-size-caption: #{$v-font-size-caption};
+  --v-line-height-caption: #{$v-line-height-caption};
+  --v-font-weight-regular: #{$v-font-weight-regular};
+  --v-font-weight-medium: #{$v-font-weight-medium};
+  --v-font-weight-semibold: #{$v-font-weight-semibold};
+  --v-font-weight-bold: #{$v-font-weight-bold};
+  --v-space-0: #{$v-space-0};
+  --v-space-1: #{$v-space-1};
+  --v-space-2: #{$v-space-2};
+  --v-space-3: #{$v-space-3};
+  --v-space-4: #{$v-space-4};
+  --v-space-6: #{$v-space-6};
+  --v-space-8: #{$v-space-8};
+  --v-space-12: #{$v-space-12};
+  --v-space-16: #{$v-space-16};
+  --v-space-24: #{$v-space-24};
+  --v-flex-gap-sm: #{$v-flex-gap-sm};
+  --v-flex-gap-md: #{$v-flex-gap-md};
+  --v-flex-gap-lg: #{$v-flex-gap-lg};
+  --v-flex-gap-xl: #{$v-flex-gap-xl};
+  --v-stack-gap-sm: #{$v-stack-gap-sm};
+  --v-stack-gap-md: #{$v-stack-gap-md};
+  --v-stack-gap-lg: #{$v-stack-gap-lg};
+  --v-z-index-base: #{$v-z-index-base};
+  --v-z-index-sticky: #{$v-z-index-sticky};
+  --v-z-index-dropdown: #{$v-z-index-dropdown};
+  --v-z-index-popover: #{$v-z-index-popover};
+  --v-z-index-drawer: #{$v-z-index-drawer};
+  --v-z-index-modal: #{$v-z-index-modal};
+  --v-z-index-toast: #{$v-z-index-toast};
+  --v-z-index-tooltip: #{$v-z-index-tooltip};
+  --v-radius-0: #{$v-radius-0};
+  --v-radius-4: #{$v-radius-4};
+  --v-radius-8: #{$v-radius-8};
+  --v-radius-12: #{$v-radius-12};
+  --v-radius-16: #{$v-radius-16};
+  --v-radius-24: #{$v-radius-24};
+  --v-radius-xl: #{$v-radius-xl};
+  --v-avatar-group-ring: var(--v-color-bg);
+  --v-radius-sm: #{$v-radius-sm};
+  --v-radius-md: #{$v-radius-md};
+  --v-radius-lg: #{$v-radius-lg};
+  --v-radius-circle: #{$v-radius-circle};
+  --v-radius-full: #{$v-radius-full};
+  --v-radius-pill: #{$v-radius-pill};
+  --v-chip-radius: #{$v-chip-radius};
+  --v-chip-line-height: #{$v-chip-line-height};
+  --v-chip-height-xs: #{$v-chip-height-xs};
+  --v-chip-height-sm: #{$v-chip-height-sm};
+  --v-chip-height-md: #{$v-chip-height-md};
+  --v-chip-height-lg: #{$v-chip-height-lg};
+  --v-chip-font-size-xs: #{$v-chip-font-size-xs};
+  --v-chip-font-size-sm: #{$v-chip-font-size-sm};
+  --v-chip-font-size-md: #{$v-chip-font-size-md};
+  --v-chip-font-size-lg: #{$v-chip-font-size-lg};
+  --v-chip-padding-inline-sm: #{$v-chip-padding-inline-sm};
+  --v-chip-padding-inline-md: #{$v-chip-padding-inline-md};
+  --v-chip-padding-inline-lg: #{$v-chip-padding-inline-lg};
+  --v-chip-padding-inline-end-removable: #{$v-chip-padding-inline-end-removable};
+  --v-chip-padding-inline-end-removable-lg: #{$v-chip-padding-inline-end-removable-lg};
+  --v-chip-gap: #{$v-chip-gap};
+  --v-chip-remove-size: #{$v-chip-remove-size};
+  --v-chip-soft-bg-mix: #{$v-chip-soft-bg-mix};
+  --v-chip-soft-hover-mix: #{$v-chip-soft-hover-mix};
+  --v-chip-leaving-scale: #{$v-chip-leaving-scale};
+  --v-chip-leaving-duration: #{$v-chip-leaving-duration};
+  --v-chip-press-scale: #{$v-chip-press-scale};
+  --v-chip-focus-offset: #{$v-chip-focus-offset};
+  --v-tag-radius: #{$v-tag-radius};
+  --v-tag-height-sm: #{$v-tag-height-sm};
+  --v-tag-height-md: #{$v-tag-height-md};
+  --v-tag-line-height: #{$v-tag-line-height};
+  --v-tag-font-size-sm: #{$v-tag-font-size-sm};
+  --v-tag-font-size-md: #{$v-tag-font-size-md};
+  --v-tag-padding-inline-sm: #{$v-tag-padding-inline-sm};
+  --v-tag-padding-inline-md: #{$v-tag-padding-inline-md};
+  --v-tag-gap: #{$v-tag-gap};
+  --v-tag-remove-radius: #{$v-tag-remove-radius};
+  --v-tag-overlay-height: #{$v-tag-overlay-height};
+  --v-tag-overlay-padding-inline: #{$v-tag-overlay-padding-inline};
+  --v-tag-soft-bg-mix: #{$v-tag-soft-bg-mix};
+  --v-tag-soft-hover-mix: #{$v-tag-soft-hover-mix};
+  --v-tag-leaving-scale: #{$v-tag-leaving-scale};
+  --v-tag-leaving-duration: #{$v-tag-leaving-duration};
+  --v-tag-press-scale: #{$v-tag-press-scale};
+  --v-tag-focus-offset: #{$v-tag-focus-offset};
+  --v-shadow-sm: #{$v-shadow-sm};
+  --v-shadow-md: #{$v-shadow-md};
+  --v-shadow-lg: #{$v-shadow-lg};
+  --v-shadow-xl: #{$v-shadow-xl};
+  --v-border-width: #{$v-border-width};
+  --v-border-width-focus: #{$v-border-width-focus};
+  --v-color-border-disabled: #{$v-color-border-disabled};
+  --v-focus-ring-width: #{$v-focus-ring-width};
+  --v-focus-ring-offset: #{$v-focus-ring-offset};
+  --v-motion-fast: #{$v-motion-fast};
+  --v-motion-card-hover: #{$v-motion-card-hover};
+  --v-motion-normal: #{$v-motion-normal};
+  --v-motion-press: #{$v-motion-press};
+  --v-motion-slow: #{$v-motion-slow};
+  --v-motion-spin-duration: #{$v-motion-spin-duration};
+  --v-ease-standard: #{$v-ease-standard};
+  --v-ease-out: #{$v-ease-out};
+  --v-ease-in: #{$v-ease-in};
+  --v-ease-in-out: #{$v-ease-in-out};
+  --v-ease-spring: #{$v-ease-spring};
+  --v-motion-spring-duration: #{$v-motion-spring-duration};
+  --v-motion-spring-bounce: #{$v-motion-spring-bounce};
+  --v-gesture-swipe-threshold: #{$v-gesture-swipe-threshold};
+  --v-gesture-flick-velocity: #{$v-gesture-flick-velocity};
+  --v-tooltip-warm-delay: #{$v-tooltip-warm-delay};
+  --v-tooltip-warm-cooldown: #{$v-tooltip-warm-cooldown};
+  --v-state-disabled-opacity: #{$v-state-disabled-opacity};
+  --v-state-hover-mix: #{$v-state-hover-mix};
+  --v-state-pressed-mix: #{$v-state-pressed-mix};
+  --v-state-loading-opacity: #{$v-state-loading-opacity};
+  --v-state-press-scale: #{$v-state-press-scale};
+  --v-state-press-scale-spring: #{$v-state-press-scale-spring};
+  --v-state-enter-scale: #{$v-state-enter-scale};
+  --v-skeleton-bg: #{$v-skeleton-bg};
+  --v-skeleton-highlight: #{$v-skeleton-highlight};
+  --v-skeleton-duration: #{$v-skeleton-duration};
+  --v-checkbox-size-sm: #{$v-checkbox-size-sm};
+  --v-checkbox-size-md: #{$v-checkbox-size-md};
+  --v-checkbox-size-lg: #{$v-checkbox-size-lg};
+  --v-checkbox-gap: #{$v-checkbox-gap};
+  --v-checkbox-min-target: #{$v-checkbox-min-target};
+  --v-checkbox-border-width: #{$v-checkbox-border-width};
+  --v-checkbox-align-offset: #{$v-checkbox-align-offset};
+  --v-checkbox-strike-height: #{$v-checkbox-strike-height};
+  --v-checkbox-link-underline-offset: #{$v-checkbox-link-underline-offset};
+  --v-checkbox-link-focus-radius: #{$v-checkbox-link-focus-radius};
+  --v-field-height-sm: #{$v-field-height-sm};
+  --v-field-height-md: #{$v-field-height-md};
+  --v-field-height-lg: #{$v-field-height-lg};
+  --v-field-focus-spread: #{$v-field-focus-spread};
+  --v-field-focus-outline-width: #{$v-field-focus-outline-width};
+  --v-field-focus-outline-offset: #{$v-field-focus-outline-offset};
+  --v-field-min-target: #{$v-field-min-target};
+  --v-sr-only-size: #{$v-sr-only-size};
+  --v-field-border-width-strong: #{$v-field-border-width-strong};
+  --v-field-gap-tight: #{$v-field-gap-tight};
+  --v-switch-track-width-sm: #{$v-switch-track-width-sm};
+  --v-switch-track-width-md: #{$v-switch-track-width-md};
+  --v-switch-track-width-lg: #{$v-switch-track-width-lg};
+  --v-switch-track-height-sm: #{$v-switch-track-height-sm};
+  --v-switch-track-height-md: #{$v-switch-track-height-md};
+  --v-switch-track-height-lg: #{$v-switch-track-height-lg};
+  --v-switch-thumb-size-sm: #{$v-switch-thumb-size-sm};
+  --v-switch-thumb-size-md: #{$v-switch-thumb-size-md};
+  --v-switch-thumb-size-lg: #{$v-switch-thumb-size-lg};
+  --v-switch-padding: #{$v-switch-padding};
+  --v-switch-icon-size: #{$v-switch-icon-size};
+  --v-switch-label-offset: #{$v-switch-label-offset};
+  --v-slider-track-size-sm: #{$v-slider-track-size-sm};
+  --v-slider-track-size-md: #{$v-slider-track-size-md};
+  --v-slider-track-size-lg: #{$v-slider-track-size-lg};
+  --v-slider-thumb-size-sm: #{$v-slider-thumb-size-sm};
+  --v-slider-thumb-size-md: #{$v-slider-thumb-size-md};
+  --v-slider-thumb-size-lg: #{$v-slider-thumb-size-lg};
+  --v-slider-mark-size: #{$v-slider-mark-size};
+  --v-slider-vertical-height: #{$v-slider-vertical-height};
+  --v-slider-vertical-min-height: #{$v-slider-vertical-min-height};
+  --v-slider-thumb-hit-size: #{$v-slider-thumb-hit-size};
+  --v-slider-focus-ring-width: #{$v-slider-focus-ring-width};
+  --v-slider-wake-bar-width: #{$v-slider-wake-bar-width};
+  --v-radiogroup-control-size-sm: #{$v-radiogroup-control-size-sm};
+  --v-radiogroup-control-size-md: #{$v-radiogroup-control-size-md};
+  --v-radiogroup-control-size-lg: #{$v-radiogroup-control-size-lg};
+  --v-radiogroup-dot-size-sm: #{$v-radiogroup-dot-size-sm};
+  --v-radiogroup-dot-size-md: #{$v-radiogroup-dot-size-md};
+  --v-radiogroup-dot-size-lg: #{$v-radiogroup-dot-size-lg};
+  --v-radiogroup-label-size-sm: #{$v-radiogroup-label-size-sm};
+  --v-radiogroup-label-size-md: #{$v-radiogroup-label-size-md};
+  --v-radiogroup-label-size-lg: #{$v-radiogroup-label-size-lg};
+  --v-radiogroup-border-width: #{$v-radiogroup-border-width};
+  --v-text-input-height-sm: #{$v-field-height-sm};
+  --v-text-input-height-md: #{$v-field-height-md};
+  --v-text-input-height-lg: #{$v-field-height-lg};
+  --v-text-input-focus-spread: #{$v-field-focus-spread};
+  --v-textarea-min-height-sm: #{$v-textarea-min-height-sm};
+  --v-textarea-min-height-md: #{$v-textarea-min-height-md};
+  --v-textarea-min-height-lg: #{$v-textarea-min-height-lg};
+  --v-textarea-focus-spread: #{$v-field-focus-spread};
+  --v-number-input-height-sm: #{$v-field-height-sm};
+  --v-number-input-height-md: #{$v-field-height-md};
+  --v-number-input-height-lg: #{$v-field-height-lg};
+  --v-number-input-stepper-size-sm: #{$v-number-input-stepper-size-sm};
+  --v-number-input-stepper-size-md: #{$v-number-input-stepper-size-md};
+  --v-number-input-stepper-size-lg: #{$v-number-input-stepper-size-lg};
+  --v-number-input-focus-spread: #{$v-field-focus-spread};
+  --v-otp-slot-size-sm: #{$v-otp-slot-size-sm};
+  --v-otp-slot-size-md: #{$v-otp-slot-size-md};
+  --v-otp-slot-size-lg: #{$v-otp-slot-size-lg};
+  --v-select-panel-max-height: #{$v-select-panel-max-height};
+  --v-select-focus-spread: #{$v-field-focus-spread};
+  --v-searchfield-height-sm: #{$v-field-height-sm};
+  --v-searchfield-height-md: #{$v-field-height-md};
+  --v-searchfield-height-lg: #{$v-field-height-lg};
+  --v-searchfield-focus-spread: #{$v-field-focus-spread};
+  --v-searchfield-suggestion-min-height: #{$v-searchfield-suggestion-min-height};
+  --v-searchfield-panel-min-height: #{$v-searchfield-panel-min-height};
+  --v-password-input-height-sm: #{$v-field-height-sm};
+  --v-password-input-height-md: #{$v-field-height-md};
+  --v-password-input-height-lg: #{$v-field-height-lg};
+  --v-password-input-focus-spread: #{$v-field-focus-spread};
+  --v-password-meter-segment-height: #{$v-password-meter-segment-height};
+  --v-date-picker-max-width: #{$v-date-picker-max-width};
+  --v-date-picker-height-sm: #{$v-field-height-sm};
+  --v-date-picker-height-md: #{$v-field-height-md};
+  --v-date-picker-height-lg: #{$v-field-height-lg};
+  --v-date-picker-nav-size: #{$v-date-picker-nav-size};
+  --v-date-picker-day-size: #{$v-date-picker-day-size};
+  --v-date-picker-panel-width: #{$v-date-picker-panel-width};
+  --v-date-picker-dot-size: #{$v-date-picker-dot-size};
+  --v-date-picker-dot-offset: #{$v-date-picker-dot-offset};
+  --v-date-range-picker-max-width: #{$v-date-range-picker-max-width};
+  --v-date-range-picker-preset-min-width: #{$v-date-range-picker-preset-min-width};
+  --v-tag-input-min-height-sm: #{$v-tag-input-min-height-sm};
+  --v-tag-input-min-height-md: #{$v-tag-input-min-height-md};
+  --v-tag-input-min-height-lg: #{$v-tag-input-min-height-lg};
+  --v-tag-input-field-min-width: #{$v-tag-input-field-min-width};
+  --v-tag-input-chip-min-height: #{$v-tag-input-chip-min-height};
+  --v-tag-input-action-size: #{$v-tag-input-action-size};
+  --v-file-upload-drop-min-height: #{$v-file-upload-drop-min-height};
+  --v-file-upload-drop-min-height-compact: #{$v-file-upload-drop-min-height-compact};
+  --v-file-upload-drop-min-height-large: #{$v-file-upload-drop-min-height-large};
+  --v-file-upload-progress-height: #{$v-file-upload-progress-height};
+  --v-file-upload-thumb-size: #{$v-file-upload-thumb-size};
+  --v-file-upload-action-size: #{$v-file-upload-action-size};
+  --v-file-upload-border-width: #{$v-file-upload-border-width};
+  --v-color-picker-swatch-size-sm: #{$v-color-picker-swatch-size-sm};
+  --v-color-picker-swatch-size-md: #{$v-color-picker-swatch-size-md};
+  --v-color-picker-swatch-size-lg: #{$v-color-picker-swatch-size-lg};
+  --v-color-picker-handle-size: #{$v-color-picker-handle-size};
+  --v-color-picker-hue-track-height: #{$v-color-picker-hue-track-height};
+  --v-color-picker-preview-size: #{$v-color-picker-preview-size};
+  --v-color-picker-input-min-width: #{$v-color-picker-input-min-width};
+  --v-color-picker-input-height: #{$v-color-picker-input-height};
+  --v-color-picker-panel-width: #{$v-color-picker-panel-width};
+  --v-color-picker-surface-height: #{$v-color-picker-surface-height};
+  --v-color-picker-chip-size: #{$v-color-picker-chip-size};
+  --v-color-picker-chip-size-sm: #{$v-color-picker-chip-size-sm};
+  --v-prompt-bar-wave-bar-width: #{$v-prompt-bar-wave-bar-width};
+  --v-prompt-bar-wave-height: #{$v-prompt-bar-wave-height};
+  --v-toast-height-sm: #{$v-toast-height-sm};
+  --v-toast-height-md: #{$v-toast-height-md};
+  --v-toast-height-lg: #{$v-toast-height-lg};
+  --v-toast-progress-height: #{$v-toast-progress-height};
+  --v-tooltip-max-width-sm: #{$v-tooltip-max-width-sm};
+  --v-tooltip-max-width-md: #{$v-tooltip-max-width-md};
+  --v-tooltip-max-width-lg: #{$v-tooltip-max-width-lg};
+  --v-tooltip-max-width-xl: #{$v-tooltip-max-width-xl};
+  --v-tooltip-arrow-size: #{$v-tooltip-arrow-size};
+  --v-spinner-track-width-sm: #{$v-spinner-track-width-sm};
+  --v-spinner-track-width-md: #{$v-spinner-track-width-md};
+  --v-spinner-track-width-lg: #{$v-spinner-track-width-lg};
+  --v-progress-ring-width-sm: #{$v-progress-ring-width-sm};
+  --v-progress-ring-width-md: #{$v-progress-ring-width-md};
+  --v-progress-ring-width-lg: #{$v-progress-ring-width-lg};
+  --v-notification-badge-border-width: #{$v-notification-badge-border-width};
+  --v-notification-tab-indicator-width: #{$v-notification-tab-indicator-width};
+  --v-card-accent-height: #{$v-card-accent-height};
+  --v-card-flip-perspective: #{$v-card-flip-perspective};
+  --v-toolbar-group-min-width: #{$v-toolbar-group-min-width};
+  --v-swipe-row-action-min-width: #{$v-swipe-row-action-min-width};
+  --v-grid-demo-card-min-height: #{$v-grid-demo-card-min-height};
+  --v-grid-demo-masonry-min-height: #{$v-grid-demo-masonry-min-height};
+  --v-grid-demo-masonry-skeleton-height: #{$v-grid-demo-masonry-skeleton-height};
+  --v-grid-demo-border-width: #{$v-grid-demo-border-width};
+  --v-dashboard-widget-handle-radius: #{$v-dashboard-widget-handle-radius};
+  --v-table-search-min-width: #{$v-table-search-min-width};
+  --v-table-grid-min-width: #{$v-table-grid-min-width};
+  --v-table-checkbox-col-width: #{$v-table-checkbox-col-width};
+  --v-table-expand-col-width: #{$v-table-expand-col-width};
+  --v-table-badge-min-width: #{$v-table-badge-min-width};
+  --v-table-badge-height: #{$v-table-badge-height};
+  --v-table-action-min-size: #{$v-table-action-min-size};
+  --v-filter-bar-chip-min-height: #{$v-filter-bar-chip-min-height};
+  --v-gallery-nav-size: #{$v-gallery-nav-size};
+  --v-gallery-lightbox-min-height: #{$v-gallery-lightbox-min-height};
+  --v-gallery-filmstrip-width: #{$v-gallery-filmstrip-width};
+  --v-gallery-filmstrip-height: #{$v-gallery-filmstrip-height};
+  --v-gallery-border-width: #{$v-gallery-border-width};
+  --v-thought-line-rail-height: #{$v-thought-line-rail-height};
+  --v-appshell-search-max-width: #{$v-appshell-search-max-width};
+  --v-appshell-sidebar-width-collapsed: #{$v-appshell-sidebar-width-collapsed};
+  --v-appshell-rail-width: #{$v-appshell-rail-width};
+  --v-appshell-rail-width-sm: #{$v-appshell-rail-width-sm};
+  --v-widget-bg: #{$v-widget-bg};
+  --v-widget-border: #{$v-widget-border};
+  --v-color-picker-white: #{$v-color-picker-white};
+  --v-color-picker-black: #{$v-color-picker-black};
+  --v-color-picker-thumb-border: #{$v-color-picker-thumb-border};
+  --v-color-picker-hue-spectrum: #{$v-color-picker-hue-spectrum};
+  --v-split-transition-duration: #{$v-split-transition-duration};
+  --v-loader-size: #{$v-loader-size};
+  --v-loader-border-width: #{$v-loader-border-width};
+  --v-button-bg: var(--v-color-primary-500);
+  --v-button-text: #{$v-button-text};
+  --v-button-radius: #{$v-button-radius};
+  --v-button-padding-x: #{$v-button-padding-x};
+  --v-button-padding-y: #{$v-button-padding-y};
+  --v-button-shadow: 0 var(--v-space-1) var(--v-space-2) color-mix(in srgb, var(--v-color-primary-500) 25%, transparent);
+  --v-button-focus-ring: 0 0 0 var(--v-space-1) color-mix(in srgb, var(--v-color-primary-500) 30%, transparent);
+  --v-button-disabled-opacity: #{$v-button-disabled-opacity};
+  --v-button-loader-duration: #{$v-button-loader-duration};
+  --v-button-min-target: #{$v-button-min-target};
+  --v-button-fuse-height: #{$v-button-fuse-height};
+  --v-card-bg: #{$v-card-bg};
+  --v-card-border: #{$v-card-border};
+  --v-card-radius: #{$v-card-radius};
+  --v-card-shadow: #{$v-card-shadow};
+  --v-card-shadow-hover: #{$v-card-shadow-hover};
+  --v-card-padding: #{$v-card-padding};
+  --v-card-gap: #{$v-card-gap};
+  --v-panel-bg: #{$v-panel-bg};
+  --v-panel-surface: #{$v-panel-surface};
+  --v-panel-border: #{$v-panel-border};
+  --v-panel-radius: #{$v-panel-radius};
+  --v-panel-shadow: #{$v-panel-shadow};
+  --v-panel-padding-sm: #{$v-panel-padding-sm};
+  --v-panel-padding-md: #{$v-panel-padding-md};
+  --v-panel-padding-lg: #{$v-panel-padding-lg};
+  --v-panel-title-color: #{$v-panel-title-color};
+  --v-panel-text-color: #{$v-panel-text-color};
+  --v-panel-footer-bg: #{$v-panel-footer-bg};
+  --v-panel-divider: #{$v-panel-divider};
+  --v-panel-header-gap: #{$v-panel-header-gap};
+  --v-panel-hover-bg: #{$v-panel-hover-bg};
+  --v-panel-filled-bg: #{$v-panel-filled-bg};
+  --v-panel-motion-enter: #{$v-panel-motion-enter};
+  --v-panel-motion-exit: #{$v-panel-motion-exit};
+  --v-segmented-bg: #{$v-segmented-bg};
+  --v-segmented-border: #{$v-segmented-border};
+  --v-segmented-indicator-bg: var(--v-color-primary-500);
+  --v-segmented-indicator-border: #{$v-segmented-indicator-border};
+  --v-segmented-text: #{$v-segmented-text};
+  --v-segmented-text-active: #{$v-segmented-text-active};
+  --v-segmented-text-hover: #{$v-segmented-text-hover};
+  --v-segmented-text-disabled: #{$v-segmented-text-disabled};
+  --v-segmented-hover-bg: var(--v-color-primary-50);
+  --v-segmented-pressed-bg: var(--v-color-primary-100);
+  --v-segmented-divider: #{$v-segmented-divider};
+  --v-segmented-radius: #{$v-segmented-radius};
+  --v-segmented-gap: #{$v-segmented-gap};
+  --v-segmented-padding-x: #{$v-segmented-padding-x};
+  --v-segmented-padding-y: #{$v-segmented-padding-y};
+  --v-segmented-height-sm: #{$v-segmented-height-sm};
+  --v-segmented-height-md: #{$v-segmented-height-md};
+  --v-segmented-height-lg: #{$v-segmented-height-lg};
+  --v-segmented-motion: #{$v-segmented-motion};
+  --v-section-bg: #{$v-section-bg};
+  --v-section-bg-tinted: var(--v-color-primary-50);
+  --v-section-border: #{$v-section-border};
+  --v-section-shadow: #{$v-section-shadow};
+  --v-section-radius: #{$v-section-radius};
+  --v-section-header-gap: #{$v-section-header-gap};
+  --v-section-padding: #{$v-section-padding};
+  --v-section-padding-sm: #{$v-section-padding-sm};
+  --v-section-padding-lg: #{$v-section-padding-lg};
+  --v-section-footer-border: #{$v-section-footer-border};
+  --v-section-hover-bg: #{$v-section-hover-bg};
+  --v-section-transition: #{$v-section-transition};
+  --v-toolbar-bg: #{$v-toolbar-bg};
+  --v-toolbar-border: #{$v-toolbar-border};
+  --v-toolbar-divider: #{$v-toolbar-divider};
+  --v-toolbar-radius: #{$v-toolbar-radius};
+  --v-toolbar-shadow: #{$v-toolbar-shadow};
+  --v-toolbar-gap: #{$v-toolbar-gap};
+  --v-toolbar-gap-compact: #{$v-toolbar-gap-compact};
+  --v-toolbar-padding-x: #{$v-toolbar-padding-x};
+  --v-toolbar-padding-x-compact: #{$v-toolbar-padding-x-compact};
+  --v-toolbar-height-sm: #{$v-toolbar-height-sm};
+  --v-toolbar-height-md: #{$v-toolbar-height-md};
+  --v-toolbar-height-lg: #{$v-toolbar-height-lg};
+  --v-toolbar-icon: #{$v-toolbar-icon};
+  --v-toolbar-icon-hover-bg: var(--v-color-primary-50);
+  --v-toolbar-icon-active-bg: var(--v-color-primary-500);
+  --v-toolbar-icon-active-color: var(--v-color-on-primary);
+  --v-toolbar-icon-disabled: #{$v-toolbar-icon-disabled};
+  --v-toolbar-primary-bg: var(--v-color-primary-500);
+  --v-toolbar-primary-hover: var(--v-color-primary-600);
+  --v-toolbar-primary-text: var(--v-color-on-primary);
+  --v-toolbar-button-radius: #{$v-toolbar-button-radius};
+  --v-toolbar-motion-hover: #{$v-toolbar-motion-hover};
+  --v-toolbar-motion-press: #{$v-toolbar-motion-press};
+  --v-breadcrumb-gap: #{$v-breadcrumb-gap};
+  --v-breadcrumb-gap-sm: #{$v-breadcrumb-gap-sm};
+  --v-breadcrumb-gap-lg: #{$v-breadcrumb-gap-lg};
+  --v-breadcrumb-separator-color: #{$v-breadcrumb-separator-color};
+  --v-breadcrumb-item-color: #{$v-breadcrumb-item-color};
+  --v-breadcrumb-item-hover-color: #{$v-breadcrumb-item-hover-color};
+  --v-breadcrumb-item-active-color: var(--v-color-primary-text);
+  --v-breadcrumb-current-color: var(--v-color-primary-text);
+  --v-breadcrumb-icon-size: #{$v-breadcrumb-icon-size};
+  --v-breadcrumb-font-size-sm: #{$v-breadcrumb-font-size-sm};
+  --v-breadcrumb-font-size-md: #{$v-breadcrumb-font-size-md};
+  --v-breadcrumb-font-size-lg: #{$v-breadcrumb-font-size-lg};
+  --v-breadcrumb-item-radius: #{$v-breadcrumb-item-radius};
+  --v-breadcrumb-item-padding-x: #{$v-breadcrumb-item-padding-x};
+  --v-breadcrumb-item-padding-y: #{$v-breadcrumb-item-padding-y};
+  --v-breadcrumb-item-hover-bg: #{$v-breadcrumb-item-hover-bg};
+  --v-breadcrumb-item-pressed-bg: #{$v-breadcrumb-item-pressed-bg};
+  --v-breadcrumb-label-max-width: #{$v-breadcrumb-label-max-width};
+  --v-breadcrumb-overflow-bg: #{$v-breadcrumb-overflow-bg};
+  --v-breadcrumb-overflow-border: #{$v-breadcrumb-overflow-border};
+  --v-breadcrumb-overflow-shadow: #{$v-breadcrumb-overflow-shadow};
+  --v-breadcrumb-overflow-min-width: #{$v-breadcrumb-overflow-min-width};
+  --v-breadcrumb-motion: #{$v-breadcrumb-motion};
+  --v-icon-size-sm: #{$v-icon-size-sm};
+  --v-icon-size-md: #{$v-icon-size-md};
+  --v-icon-size-lg: #{$v-icon-size-lg};
+  --v-tabs-height-sm: #{$v-tabs-height-sm};
+  --v-tabs-height-md: #{$v-tabs-height-md};
+  --v-tabs-height-lg: #{$v-tabs-height-lg};
+  --v-tabs-padding-x: #{$v-tabs-padding-x};
+  --v-tabs-icon-size: #{$v-tabs-icon-size};
+  --v-tabs-label-size: #{$v-tabs-label-size};
+  --v-tabs-label-weight: #{$v-tabs-label-weight};
+  --v-tabs-indicator-height: #{$v-tabs-indicator-height};
+  --v-tabs-divider-width: #{$v-tabs-divider-width};
+  --v-tabs-item-gap: #{$v-tabs-item-gap};
+  --v-tabs-hit-min-width: #{$v-tabs-hit-min-width};
+  --v-tabs-hit-min-height: #{$v-tabs-hit-min-height};
+  --v-tabs-pill-radius: #{$v-tabs-pill-radius};
+  --v-tabs-hover-bg: var(--v-color-primary-50);
+  --v-tabs-motion-hover: #{$v-tabs-motion-hover};
+  --v-tabs-motion-focus: #{$v-tabs-motion-focus};
+  --v-tabs-motion-indicator: #{$v-tabs-motion-indicator};
+  --v-tabs-motion-panel: #{$v-tabs-motion-panel};
+  --v-tabs-motion-overflow: #{$v-tabs-motion-overflow};
+  --v-tabs-indicator-ease: #{$v-tabs-indicator-ease};
+  --v-dropdown-trigger-radius: #{$v-dropdown-trigger-radius};
+  --v-dropdown-trigger-padding-x: #{$v-dropdown-trigger-padding-x};
+  --v-dropdown-height-sm: #{$v-dropdown-height-sm};
+  --v-dropdown-height-md: #{$v-dropdown-height-md};
+  --v-dropdown-height-lg: #{$v-dropdown-height-lg};
+  --v-dropdown-menu-min-width: #{$v-dropdown-menu-min-width};
+  --v-dropdown-menu-radius: #{$v-dropdown-menu-radius};
+  --v-dropdown-menu-shadow: #{$v-dropdown-menu-shadow};
+  --v-dropdown-item-height: #{$v-dropdown-item-height};
+  --v-dropdown-item-padding-x: #{$v-dropdown-item-padding-x};
+  --v-dropdown-item-icon-size: #{$v-dropdown-item-icon-size};
+  --v-dropdown-item-gap: #{$v-dropdown-item-gap};
+  --v-dropdown-divider-width: #{$v-dropdown-divider-width};
+  --v-dropdown-hover-bg: var(--v-color-neutral-100);
+  --v-dropdown-item-selected-bg: var(--v-color-primary-50);
+  --v-dropdown-destructive-bg: #{$v-dropdown-destructive-bg};
+  --v-dropdown-destructive-text: #{$v-dropdown-destructive-text};
+  --v-dropdown-motion-hover: #{$v-dropdown-motion-hover};
+  --v-dropdown-motion-open: #{$v-dropdown-motion-open};
+  --v-dropdown-motion-close: #{$v-dropdown-motion-close};
+  --v-dropdown-motion-press: #{$v-dropdown-motion-press};
+  --v-tree-bg: #{$v-tree-bg};
+  --v-tree-text-color: #{$v-tree-text-color};
+  --v-tree-item-hover-bg: #{$v-tree-item-hover-bg};
+  --v-tree-item-active-bg: var(--v-color-primary-50);
+  --v-tree-item-selected-bg: var(--v-color-primary-50);
+  --v-tree-icon-color: #{$v-tree-icon-color};
+  --v-tree-icon-folder-color: var(--v-color-neutral-500);
+  --v-tree-icon-doc-color: #{$v-tree-icon-doc-color};
+  --v-tree-indicator-color: var(--v-color-primary-600);
+  --v-tree-indicator-width: #{$v-tree-indicator-width};
+  --v-tree-indent-size: #{$v-tree-indent-size};
+  --v-tree-transition: #{$v-tree-transition};
+  --v-tree-focus-ring-width: #{$v-tree-focus-ring-width};
+  --v-tree-focus-ring-color: var(--v-color-primary-500);
+  --v-tree-focus-ring-offset: #{$v-tree-focus-ring-offset};
+  --v-tree-item-disabled-opacity: #{$v-tree-item-disabled-opacity};
+  --v-tree-item-height-sm: #{$v-tree-item-height-sm};
+  --v-tree-item-height-md: #{$v-tree-item-height-md};
+  --v-tree-item-height-lg: #{$v-tree-item-height-lg};
+  --v-tree-node-gap: #{$v-tree-node-gap};
+  --v-tree-node-padding-x: #{$v-tree-node-padding-x};
+  --v-tree-toggle-size: #{$v-tree-toggle-size};
+  --v-tree-chevron-size: #{$v-tree-chevron-size};
+  --v-tree-icon-size: #{$v-tree-icon-size};
+  --v-tree-count-bg: #{$v-tree-count-bg};
+  --v-tree-count-color: #{$v-tree-count-color};
+  --v-tree-count-min-width: #{$v-tree-count-min-width};
+  --v-tree-count-padding-x: #{$v-tree-count-padding-x};
+  --v-tree-count-padding-y: #{$v-tree-count-padding-y};
+  --v-popover-bg: #{$v-popover-bg};
+  --v-popover-border: #{$v-popover-border};
+  --v-popover-shadow: #{$v-popover-shadow};
+  --v-popover-radius: #{$v-popover-radius};
+  --v-popover-arrow-size: #{$v-popover-arrow-size};
+  --v-popover-z-index: #{$v-popover-z-index};
+  --v-popover-padding-sm: #{$v-popover-padding-sm};
+  --v-popover-padding-md: #{$v-popover-padding-md};
+  --v-popover-padding-lg: #{$v-popover-padding-lg};
+  --v-popover-max-width-sm: #{$v-popover-max-width-sm};
+  --v-popover-max-width-md: #{$v-popover-max-width-md};
+  --v-popover-max-width-lg: #{$v-popover-max-width-lg};
+  --v-popover-gap: #{$v-popover-gap};
+  --v-popover-transition: #{$v-popover-transition};
+  --v-breakpoint-xs: #{$v-breakpoint-xs};
+  --v-breakpoint-sm: #{$v-breakpoint-sm};
+  --v-breakpoint-md: #{$v-breakpoint-md};
+  --v-breakpoint-lg: #{$v-breakpoint-lg};
+  --v-breakpoint-xl: #{$v-breakpoint-xl};
+  --v-breakpoint-2xl: #{$v-breakpoint-2xl};
+  --v-grid-columns: #{$v-grid-columns};
+  --v-grid-gutter: #{$v-grid-gutter};
+  --v-grid-margins: #{$v-grid-margins};
+  --v-grid-max-width: #{$v-grid-max-width};
+  --v-window-sm-width: #{$v-window-sm-width};
+  --v-window-sm-height: #{$v-window-sm-height};
+  --v-window-md-width: #{$v-window-md-width};
+  --v-window-md-height: #{$v-window-md-height};
+  --v-window-lg-width: #{$v-window-lg-width};
+  --v-window-lg-height: #{$v-window-lg-height};
+  --v-sidebar-width-rail: #{$v-sidebar-width-rail};
+  --v-sidebar-width-md: #{$v-sidebar-width-md};
+  --v-sidebar-width-lg: #{$v-sidebar-width-lg};
+  --v-sidebar-bg: #{$v-sidebar-bg};
+  --v-sidebar-border: #{$v-sidebar-border};
+  --v-sidebar-brand-gap: #{$v-sidebar-brand-gap};
+  --v-sidebar-padding-x: #{$v-sidebar-padding-x};
+  --v-sidebar-padding-y: #{$v-sidebar-padding-y};
+  --v-sidebar-section-spacing: #{$v-sidebar-section-spacing};
+  --v-sidebar-item-height: #{$v-sidebar-item-height};
+  --v-sidebar-item-gap: #{$v-sidebar-item-gap};
+  --v-sidebar-item-padding-x: #{$v-sidebar-item-padding-x};
+  --v-sidebar-item-icon-gap: #{$v-sidebar-item-icon-gap};
+  --v-sidebar-label-line-height: #{$v-sidebar-label-line-height};
+  --v-sidebar-caption-size: #{$v-sidebar-caption-size};
+  --v-sidebar-caption-weight: #{$v-sidebar-caption-weight};
+  --v-sidebar-caption-tracking: #{$v-sidebar-caption-tracking};
+  --v-sidebar-caption-line-height: #{$v-sidebar-caption-line-height};
+  --v-sidebar-caption-gap-above: #{$v-sidebar-caption-gap-above};
+  --v-sidebar-count-size: #{$v-sidebar-count-size};
+  --v-sidebar-tag-size: #{$v-sidebar-tag-size};
+  --v-sidebar-brand-size: #{$v-sidebar-brand-size};
+  --v-sidebar-brand-logo-size: #{$v-sidebar-brand-logo-size};
+  --v-sidebar-avatar-size: #{$v-sidebar-avatar-size};
+  --v-sidebar-kbd-size: #{$v-sidebar-kbd-size};
+  --v-sidebar-item-radius: #{$v-sidebar-item-radius};
+  --v-sidebar-item-hover-bg: var(--v-sidebar-neutral-100, #f4f4f5);
+  --v-sidebar-item-active-bg: var(--v-color-primary-50);
+  --v-sidebar-item-active-color: var(--v-color-primary-600);
+  --v-sidebar-accent: var(--v-color-primary-600);
+  --v-sidebar-guide: var(--v-color-border);
+  // Pure-grey (zinc) in light so the panel reads neutral, not slate-tinted (Locally ref).
+  --v-sidebar-neutral-100: #f4f4f5;
+  --v-sidebar-caption-color: #a1a1aa;
+  --v-sidebar-item-color: #52525b;
+  --v-sidebar-icon-color: #71717a;
+  --v-sidebar-search-bg: #fafafa;
+  --v-sidebar-scrollbar-thumb: #d4d4d8;
+  --v-sidebar-chevron-bg: rgba(24, 24, 27, 0.06);
+  --v-sidebar-disabled-opacity: #{$v-sidebar-disabled-opacity};
+  --v-sidebar-group-divider-gap: #{$v-sidebar-group-divider-gap};
+  --v-sidebar-fade-size: #{$v-sidebar-fade-size};
+  --v-sidebar-item-nested-indent: #{$v-sidebar-item-nested-indent};
+  --v-sidebar-search-height: #{$v-sidebar-search-height};
+  --v-sidebar-user-border: #{$v-sidebar-user-border};
+  --v-sidebar-icon-size: #{$v-sidebar-icon-size};
+  --v-sidebar-label-size: #{$v-sidebar-label-size};
+  --v-sidebar-label-weight: #{$v-sidebar-label-weight};
+  --v-sidebar-motion-collapse: #{$v-sidebar-motion-collapse};
+  --v-inspector-width-compact: #{$v-inspector-width-compact};
+  --v-inspector-width-default: #{$v-inspector-width-default};
+  --v-inspector-width-wide: #{$v-inspector-width-wide};
+  --v-inspector-header-height: #{$v-inspector-header-height};
+  --v-inspector-tab-height: #{$v-inspector-tab-height};
+  --v-inspector-bg: #{$v-inspector-bg};
+  --v-inspector-border: #{$v-inspector-border};
+  --v-inspector-divider: #{$v-inspector-divider};
+  --v-inspector-shadow: #{$v-inspector-shadow};
+  --v-inspector-text: #{$v-inspector-text};
+  --v-inspector-muted: #{$v-inspector-muted};
+  --v-inspector-accent: var(--v-color-primary);
+  --v-color-divider: #{$v-color-divider};
+  --v-avatar-size-xs: #{$v-avatar-size-xs};
+  --v-avatar-size-sm: #{$v-avatar-size-sm};
+  --v-avatar-size-md: #{$v-avatar-size-md};
+  --v-avatar-size-lg: #{$v-avatar-size-lg};
+  --v-avatar-size-xl: #{$v-avatar-size-xl};
+  --v-avatar-status-dot-md: #{$v-avatar-status-dot-md};
+  --v-avatar-status-dot-sm: #{$v-avatar-status-dot-sm};
+  --v-avatar-badge-md: #{$v-avatar-badge-md};
+  --v-avatar-badge-sm: #{$v-avatar-badge-sm};
+  --v-avatar-border: #{$v-avatar-border};
+  --v-avatar-initials-bg: #{$v-avatar-initials-bg};
+  --v-avatar-initials-color: #{$v-avatar-initials-color};
+  --v-avatar-icon-bg: #{$v-avatar-icon-bg};
+  --v-avatar-fallback-bg: #{$v-avatar-fallback-bg};
+  --v-gallery-gap: #{$v-gallery-gap};
+  --v-gallery-radius: #{$v-gallery-radius};
+  --v-gallery-overlay-bg: #{$v-gallery-overlay-bg};
+  --v-gallery-overlay-color: #{$v-gallery-overlay-color};
+  --v-gallery-focus-ring: #{$v-gallery-focus-ring};
+  --v-gallery-selected-border: var(--v-color-primary-600);
+  --v-gallery-selected-bg: var(--v-color-primary-50);
+  --v-gallery-transition: #{$v-gallery-transition};
+  --v-gallery-thumb-sm: #{$v-gallery-thumb-sm};
+  --v-gallery-thumb-md: #{$v-gallery-thumb-md};
+  --v-gallery-thumb-lg: #{$v-gallery-thumb-lg};
+  --v-gallery-lightbox-bg: #{$v-gallery-lightbox-bg};
+  --v-table-header-height-sm: #{$v-table-header-height-sm};
+  --v-table-header-height-md: #{$v-table-header-height-md};
+  --v-table-header-height-lg: #{$v-table-header-height-lg};
+  --v-table-row-height-sm: #{$v-table-row-height-sm};
+  --v-table-row-height-md: #{$v-table-row-height-md};
+  --v-table-row-height-lg: #{$v-table-row-height-lg};
+  --v-table-cell-padding-x: #{$v-table-cell-padding-x};
+  --v-table-cell-padding-y: #{$v-table-cell-padding-y};
+  --v-table-sort-hover-bg: #{$v-table-sort-hover-bg};
+  --v-table-sort-active-color: var(--v-color-primary-text);
+  --v-table-sort-focus-ring: var(--v-color-focus);
+  --v-table-sort-disabled-color: #{$v-table-sort-disabled-color};
+  --v-table-row-hover-bg: #{$v-table-row-hover-bg};
+  --v-table-row-selected-bg: var(--v-color-primary-50);
+  --v-table-border: #{$v-table-border};
+  --v-table-radius: #{$v-table-radius};
+  --v-table-sorted-column-bg: var(--v-color-primary-50);
+  --vf-bg: #{$vf-bg};
+  --vf-surface: #{$vf-surface};
+  --vf-border: #{$vf-border};
+  --vf-input-bg: #{$vf-input-bg};
+  --vf-primary: var(--v-color-primary);
+  --vf-primary-hover: var(--v-color-primary-hover);
+  --vf-chip-bg: var(--v-color-primary-50);
+  --vf-chip-text: var(--v-color-primary-text);
+  --vf-text: #{$vf-text};
+  --vf-text-primary: #{$vf-text-primary};
+  --vf-text-muted: #{$vf-text-muted};
+  --vf-focus-ring: var(--v-color-focus);
+  --vf-disabled-bg: #{$vf-disabled-bg};
+  --vf-success: #{$vf-success};
+  --vf-warning: #{$vf-warning};
+  --vf-danger: #{$vf-danger};
+  --vf-height-sm: #{$vf-height-sm};
+  --vf-height-md: #{$vf-height-md};
+  --vf-height-lg: #{$vf-height-lg};
+}
+
+// ---------- Dark theme ----------
+// Estratégia: escala neutra invertida (zinc), tints de primária derivados de
+// --v-color-primary-500 via color-mix (live editing continua a cascatear) e
+// tokens de componente com valor literal reapontados para semânticos.
+// Overlays "neutral-900 x%" (hover/press) passam a clarear — correto no escuro.
+$v-dark-bg: #09090b;
+$v-dark-surface: #111113;
+$v-dark-surface-muted: #18181b;
+$v-dark-border: #27272a;
+$v-dark-divider: #1f1f23;
+
+@mixin v-tokens-dark {
+  color-scheme: dark;
+
+  --v-color-neutral-50: #{$v-dark-surface-muted};
+  --v-color-neutral-100: #1f1f23;
+  --v-color-neutral-200: #{$v-dark-border};
+  --v-color-neutral-300: #3f3f46;
+  --v-color-neutral-400: #52525b;
+  --v-color-neutral-500: #8b8b94;
+  --v-color-neutral-600: #a1a1aa;
+  --v-color-neutral-700: #d4d4d8;
+  --v-color-neutral-800: #e4e4e7;
+  --v-color-neutral-900: #fafafa;
+
+  --v-color-primary-50: color-mix(in srgb, var(--v-color-primary-500) 16%, #{$v-dark-surface});
+  --v-color-primary-100: color-mix(in srgb, var(--v-color-primary-500) 26%, #{$v-dark-surface});
+  --v-color-primary-200: color-mix(in srgb, var(--v-color-primary-500) 38%, #{$v-dark-surface});
+  --v-color-primary-800: #{$v-color-primary-200};
+  --v-color-primary-900: #{$v-color-primary-100};
+
+  --v-color-success-soft: color-mix(in srgb, var(--v-color-success-base) 16%, #{$v-dark-surface});
+  --v-color-success-strong: #34d399;
+  --v-color-info-soft: color-mix(in srgb, var(--v-color-info-base) 16%, #{$v-dark-surface});
+  --v-color-info-strong: #60a5fa;
+  --v-color-warning-soft: color-mix(in srgb, var(--v-color-warning-base) 16%, #{$v-dark-surface});
+  --v-color-warning-strong: #fbbf24;
+  --v-color-error-soft: color-mix(in srgb, var(--v-color-error-base) 16%, #{$v-dark-surface});
+  --v-color-error-strong: #f87171;
+
+  --v-color-purple-light: color-mix(in srgb, #{$v-color-purple-base} 24%, #{$v-dark-surface});
+  --v-color-purple-dark: #d8b4fe;
+  --v-color-pink-light: color-mix(in srgb, #{$v-color-pink-base} 24%, #{$v-dark-surface});
+  --v-color-pink-dark: #f9a8d4;
+  --v-color-indigo-light: color-mix(in srgb, #{$v-color-indigo-base} 24%, #{$v-dark-surface});
+  --v-color-indigo-dark: #a5b4fc;
+  --v-color-teal-light: color-mix(in srgb, #{$v-color-teal-base} 24%, #{$v-dark-surface});
+  --v-color-teal-dark: #5eead4;
+  --v-color-orange-light: color-mix(in srgb, #{$v-color-orange-base} 24%, #{$v-dark-surface});
+  --v-color-orange-dark: #fdba74;
+  --v-color-lime-light: color-mix(in srgb, #{$v-color-lime-base} 24%, #{$v-dark-surface});
+  --v-color-lime-dark: #bef264;
+
+  --v-color-bg: #{$v-dark-bg};
+  --v-color-surface: #{$v-dark-surface};
+  --v-color-surface-muted: #{$v-dark-surface-muted};
+  --v-color-elevated: #{$v-dark-surface-muted};
+  --v-color-text: #fafafa;
+  --v-color-text-muted: #a1a1aa;
+  --v-color-primary-text: #{$v-color-primary-300};
+  --v-color-border: #2f2f35;
+  --v-color-border-strong: #52525b;
+  --v-color-border-disabled: #{$v-dark-divider};
+  --v-color-divider: #232328;
+  --v-color-overlay: rgba(0, 0, 0, 0.6);
+
+  --v-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --v-shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.55), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+  --v-shadow-lg: 0 12px 28px -4px rgba(0, 0, 0, 0.6);
+  --v-shadow-xl: 0 24px 56px -8px rgba(0, 0, 0, 0.7);
+
+  --v-skeleton-bg: #27272a;
+  --v-skeleton-highlight: #323238;
+  --v-widget-bg: var(--v-color-surface);
+  --v-widget-border: var(--v-color-border);
+  --v-color-picker-thumb-border: var(--v-color-surface);
+
+  --v-card-bg: var(--v-color-surface);
+  --v-card-border: var(--v-color-border);
+  --v-card-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 8px 24px -8px rgba(0, 0, 0, 0.6);
+  --v-card-shadow-hover: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 12px 32px -8px rgba(0, 0, 0, 0.7);
+  --v-panel-bg: var(--v-color-surface);
+  --v-panel-surface: var(--v-color-surface);
+  --v-panel-border: var(--v-color-border);
+  --v-panel-title-color: var(--v-color-text);
+  --v-panel-text-color: var(--v-color-text-muted);
+  --v-panel-divider: var(--v-color-divider);
+  --v-panel-hover-bg: var(--v-color-neutral-50);
+  --v-panel-filled-bg: var(--v-color-elevated);
+  --v-panel-shadow: var(--v-shadow-sm);
+  --v-segmented-bg: var(--v-color-neutral-50);
+  --v-segmented-border: var(--v-color-border);
+  --v-segmented-text: var(--v-color-text-muted);
+  --v-segmented-text-hover: var(--v-color-text);
+  --v-segmented-text-disabled: var(--v-color-neutral-400);
+  --v-segmented-divider: var(--v-color-border);
+  --v-section-bg: var(--v-color-surface);
+  --v-section-border: var(--v-color-border);
+  --v-section-footer-border: var(--v-color-divider);
+  --v-section-hover-bg: var(--v-color-neutral-50);
+  --v-section-shadow: var(--v-shadow-md);
+  --v-toolbar-bg: var(--v-color-surface);
+  --v-toolbar-border: var(--v-color-border);
+  --v-toolbar-divider: var(--v-color-divider);
+  --v-toolbar-icon: var(--v-color-text-muted);
+  --v-toolbar-icon-disabled: var(--v-color-neutral-400);
+  --v-toolbar-shadow: var(--v-shadow-lg);
+  --v-breadcrumb-separator-color: var(--v-color-neutral-500);
+  --v-breadcrumb-item-color: var(--v-color-text-muted);
+  --v-breadcrumb-item-hover-color: var(--v-color-text);
+  --v-breadcrumb-item-hover-bg: var(--v-color-neutral-100);
+  --v-breadcrumb-item-pressed-bg: var(--v-color-neutral-200);
+  --v-breadcrumb-item-active-color: var(--v-color-primary-text);
+  --v-breadcrumb-current-color: var(--v-color-primary-text);
+  --v-breadcrumb-overflow-bg: var(--v-color-surface);
+  --v-breadcrumb-overflow-border: var(--v-color-border);
+  --v-dropdown-destructive-bg: var(--v-color-error-soft);
+  --v-dropdown-destructive-text: var(--v-color-error-strong);
+  --v-dropdown-menu-shadow: var(--v-shadow-lg);
+  --v-tree-bg: var(--v-color-surface);
+  --v-tree-text-color: var(--v-color-text);
+  --v-tree-item-hover-bg: var(--v-color-neutral-50);
+  --v-tree-icon-color: var(--v-color-text-muted);
+  --v-tree-icon-doc-color: var(--v-color-neutral-500);
+  --v-tree-indicator-color: var(--v-color-primary-400);
+  --v-tree-count-bg: var(--v-color-neutral-100);
+  --v-tree-count-color: var(--v-color-text-muted);
+  --v-popover-bg: var(--v-color-elevated);
+  --v-popover-border: var(--v-color-border);
+  --v-popover-shadow: var(--v-shadow-lg);
+  --v-sidebar-bg: #{$v-dark-surface};
+  --v-sidebar-border: var(--v-color-divider);
+  --v-sidebar-user-border: var(--v-color-divider);
+  --v-sidebar-item-hover-bg: rgba(255, 255, 255, 0.05);
+  --v-sidebar-item-active-bg: rgba(255, 255, 255, 0.08);
+  --v-sidebar-item-active-color: var(--v-color-text);
+  --v-sidebar-accent: var(--v-color-primary-400);
+  --v-sidebar-guide: var(--v-color-divider);
+  --v-sidebar-caption-color: color-mix(in srgb, var(--v-color-text) 52%, transparent);
+  --v-sidebar-item-color: color-mix(in srgb, var(--v-color-text) 78%, transparent);
+  --v-sidebar-icon-color: color-mix(in srgb, var(--v-color-text) 66%, transparent);
+  --v-sidebar-search-bg: rgba(255, 255, 255, 0.04);
+  --v-sidebar-scrollbar-thumb: rgba(255, 255, 255, 0.18);
+  --v-sidebar-chevron-bg: rgba(255, 255, 255, 0.08);
+  --v-inspector-bg: var(--v-color-surface);
+  --v-inspector-border: var(--v-color-border);
+  --v-inspector-divider: var(--v-color-divider);
+  --v-inspector-text: var(--v-color-text);
+  --v-inspector-muted: var(--v-color-text-muted);
+  --v-inspector-shadow: var(--v-shadow-lg);
+  --v-avatar-border: var(--v-color-border);
+  --v-avatar-initials-bg: var(--v-color-purple-light);
+  --v-avatar-initials-color: var(--v-color-purple-dark);
+  --v-avatar-icon-bg: var(--v-color-neutral-100);
+  --v-avatar-fallback-bg: var(--v-color-neutral-200);
+  --v-gallery-overlay-bg: rgba(0, 0, 0, 0.6);
+  --v-gallery-lightbox-bg: rgba(0, 0, 0, 0.92);
+  --v-table-sort-hover-bg: var(--v-color-neutral-50);
+  --v-table-sort-disabled-color: var(--v-color-neutral-400);
+  --v-table-row-hover-bg: color-mix(in srgb, #ffffff 3%, var(--v-color-surface));
+  --v-table-border: var(--v-color-border);
+  --vf-bg: var(--v-color-surface);
+  --vf-surface: var(--v-color-surface);
+  --vf-border: var(--v-color-border);
+  --vf-input-bg: var(--v-color-surface);
+  --vf-text: var(--v-color-text);
+  --vf-text-primary: var(--v-color-text);
+  --vf-text-muted: var(--v-color-text-muted);
+  --vf-disabled-bg: var(--v-color-neutral-100);
+  --vf-chip-text: var(--v-color-primary-text);
+}
+
+:root {
+  @include v-tokens;
+}
+
+// Tema por subárvore ou documento:
+//   <html data-theme="dark">  ·  <div class="v-theme-dark">  ·  data-theme="system"
+// O mixin base é re-emitido no escopo para que aliases var() re-resolvam
+// localmente (custom properties são computadas onde são declaradas).
+[data-theme='dark'],
+.v-theme-dark {
+  @include v-tokens;
+  @include v-tokens-dark;
+  color: var(--v-color-text);
+  background-color: var(--v-color-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-theme='system'] {
+    @include v-tokens;
+    @include v-tokens-dark;
+    color: var(--v-color-text);
+    background-color: var(--v-color-bg);
+  }
+}
+
+[data-theme='light'],
+.v-theme-light {
+  @include v-tokens;
+  color-scheme: light;
+  color: var(--v-color-text);
+  background-color: var(--v-color-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --v-motion-fast: 0ms;
+    --v-motion-normal: 0ms;
+    --v-motion-slow: 0ms;
+    --v-motion-spin-duration: 0ms;
+    --v-split-transition-duration: 0ms;
+    --v-segmented-motion: 0ms;
+  }
+}

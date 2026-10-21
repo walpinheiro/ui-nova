@@ -1,0 +1,77 @@
+.v-date-tile {
+  --v-date-tile-size: 2.5rem;
+  --v-date-tile-accent: var(--v-color-text-muted);
+
+  display: inline-flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--v-date-tile-size);
+  height: var(--v-date-tile-size);
+  border: 1px solid var(--v-color-border);
+  border-radius: var(--v-radius-md);
+  font-family: var(--v-font-family-sans);
+  color: var(--v-color-text);
+  background: var(--v-color-surface);
+
+  &--sm {
+    --v-date-tile-size: 2rem;
+
+    border-radius: var(--v-radius-sm);
+  }
+
+  &--lg {
+    --v-date-tile-size: 3.25rem;
+  }
+
+  &--primary {
+    --v-date-tile-accent: var(--v-color-primary);
+
+    border-color: var(--v-color-primary-200);
+    background: var(--v-color-primary-50);
+  }
+
+  &--warning {
+    --v-date-tile-accent: var(--v-color-warning-strong);
+
+    border-color: transparent;
+    background: var(--v-color-warning-soft);
+  }
+
+  &--danger {
+    --v-date-tile-accent: var(--v-color-error-strong);
+
+    border-color: transparent;
+    background: var(--v-color-error-soft);
+  }
+
+  &__month {
+    font-size: 0.5625rem;
+    line-height: 1;
+    font-weight: var(--v-font-weight-semibold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--v-date-tile-accent);
+  }
+
+  &__day {
+    margin-top: 2px;
+    font-size: var(--v-font-size-text-medium);
+    line-height: 1;
+    font-weight: var(--v-font-weight-semibold);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &--sm &__day {
+    font-size: var(--v-font-size-text-small);
+  }
+
+  &--lg &__month {
+    font-size: var(--v-font-size-caption);
+  }
+
+  &--lg &__day {
+    font-size: var(--v-font-size-h4, 1.125rem);
+  }
+}

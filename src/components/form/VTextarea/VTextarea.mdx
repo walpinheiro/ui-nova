@@ -1,0 +1,32 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VTextareaStories from './VTextarea.stories';
+
+<Meta of={VTextareaStories} />
+# Textarea
+**Categoria:** form  
+Campo multilinha com auto-resize, contador de caracteres, helper e erro.
+
+## Component
+<Canvas of={VTextareaStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VTextarea } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VTextarea size="md" placeholder="Enter your text..." label="Your message" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Empty · Hover · Focus · Typing · Filled · Invalid · Disabled · Read-only.
+## Motion
+Auto-resize com transição suave de altura; hover/focus em 100ms ease-out.
+## Accessibility
+`aria-labelledby`, `aria-describedby`, erro com `role="alert"`, resize por teclado, estados `required` e `read-only`.

@@ -1,0 +1,249 @@
+.v-notification-item {
+  @apply relative flex items-start font-sans;
+  box-sizing: border-box;
+  gap: var(--v-space-3);
+  width: 100%;
+  padding: var(--v-space-4);
+  color: var(--v-color-text);
+  background: var(--v-color-surface);
+  border: var(--v-border-width) solid var(--v-color-border);
+  border-radius: var(--v-radius-md);
+  font-family: var(--v-font-family-sans);
+  cursor: pointer;
+  transition:
+    background 80ms var(--v-ease-out),
+    transform 60ms var(--v-ease-out),
+    opacity 120ms var(--v-ease-out);
+
+  &--unread {
+    background: var(--v-color-info-bg);
+  }
+
+  &--sm {
+    padding: var(--v-space-2) var(--v-space-3);
+    gap: var(--v-space-2);
+
+    .v-notification-item__title,
+    .v-notification-item__preview,
+    .v-notification-item__time {
+      font-size: var(--v-font-size-text-small);
+      line-height: var(--v-line-height-text-small);
+    }
+  }
+
+  &--lg {
+    padding: var(--v-space-5);
+    gap: var(--v-space-4);
+
+    .v-notification-item__title {
+      font-size: var(--v-font-size-text-large);
+      line-height: var(--v-line-height-text-large);
+    }
+  }
+
+  &--disabled {
+    opacity: var(--v-state-disabled-opacity);
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(&--disabled) {
+    background: color-mix(in srgb, var(--v-color-primary) 6%, var(--v-color-surface));
+  }
+
+  &:active:not(&--disabled) {
+    transform: scale(0.99);
+  }
+
+  &:focus-visible {
+    outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+    outline-offset: var(--v-focus-ring-offset);
+  }
+
+  &__unread-dot {
+    @apply shrink-0;
+    width: var(--v-space-2);
+    height: var(--v-space-2);
+    background: var(--v-color-primary);
+    border-radius: var(--v-radius-circle);
+  }
+
+  &__leading {
+    @apply shrink-0;
+  }
+
+  &__avatar-image,
+  &__avatar-icon {
+    @apply inline-flex items-center justify-center overflow-hidden;
+    width: calc(var(--v-space-4) + var(--v-space-3));
+    height: calc(var(--v-space-4) + var(--v-space-3));
+    border-radius: var(--v-radius-circle);
+  }
+
+  &__avatar-image {
+    object-fit: cover;
+  }
+
+  &__avatar-icon {
+    color: var(--v-color-on-primary);
+    background: var(--v-color-primary);
+
+    &--success {
+      background: var(--v-color-success);
+    }
+
+    &--system {
+      background: var(--v-color-info-base, var(--v-color-primary));
+    }
+
+    &--actionable {
+      background: var(--v-color-neutral-200);
+      color: var(--v-color-text);
+    }
+  }
+
+  &__content {
+    @apply flex min-w-0 flex-1 flex-col;
+    gap: var(--v-space-1);
+  }
+
+  &__header {
+    @apply flex items-start justify-between gap-3;
+  }
+
+  &__meta {
+    @apply flex shrink-0 items-center;
+    gap: var(--v-space-2);
+  }
+
+  &__title {
+    @apply min-w-0 flex-1 font-semibold;
+    margin: 0;
+    color: var(--v-color-text);
+    font-size: var(--v-font-size-text-medium);
+    line-height: var(--v-line-height-text-medium);
+  }
+
+  &__preview {
+    margin: 0;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: var(--v-color-text-muted);
+    font-size: var(--v-font-size-text-medium);
+    line-height: var(--v-line-height-text-medium);
+  }
+
+  &__time {
+    @apply shrink-0 whitespace-nowrap;
+    color: var(--v-color-text-muted);
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+  }
+
+  &__inline-actions {
+    @apply flex flex-wrap items-center;
+    gap: var(--v-space-2);
+    margin-top: var(--v-space-1);
+  }
+
+  &__inline-action {
+    @apply inline-flex items-center justify-center cursor-pointer select-none;
+    min-height: calc(var(--v-button-min-target) - var(--v-space-2));
+    padding: var(--v-space-1) var(--v-space-3);
+    border: var(--v-border-width) solid var(--v-color-border);
+    border-radius: var(--v-radius-sm);
+    font-family: var(--v-font-family-sans);
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+    transition: background var(--v-motion-fast) var(--v-ease-out);
+
+    &--primary {
+      color: var(--v-color-on-primary);
+      background: var(--v-color-primary);
+      border-color: transparent;
+    }
+
+    &--secondary {
+      color: var(--v-color-text);
+      background: var(--v-color-surface);
+    }
+
+    &--ghost {
+      color: var(--v-color-text-muted);
+      background: transparent;
+      border-color: transparent;
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+  }
+
+  &__trailing {
+    @apply flex shrink-0 items-start;
+    gap: var(--v-space-1);
+  }
+
+  &__dismiss,
+  &__menu {
+    @apply inline-flex shrink-0 items-center justify-center cursor-pointer select-none;
+    box-sizing: border-box;
+    width: calc(var(--v-icon-size-md) + var(--v-space-2));
+    height: calc(var(--v-icon-size-md) + var(--v-space-2));
+    padding: 0;
+    color: var(--v-color-text-muted);
+    background: transparent;
+    border: var(--v-border-width) solid transparent;
+    border-radius: var(--v-radius-sm);
+    transition: background var(--v-motion-fast) var(--v-ease-out), transform 60ms var(--v-ease-out);
+
+    &:hover:not(:disabled) {
+      color: var(--v-color-text);
+      background: color-mix(in srgb, var(--v-color-neutral-900) var(--v-state-hover-mix), transparent);
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.99);
+      background: color-mix(in srgb, var(--v-color-neutral-900) var(--v-state-pressed-mix), transparent);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+  }
+
+  &__loader {
+    @apply absolute inline-block;
+    right: var(--v-space-3);
+    bottom: var(--v-space-3);
+    width: var(--v-loader-size);
+    height: var(--v-loader-size);
+    border: var(--v-loader-border-width) solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--v-radius-circle);
+    animation: v-notification-item-spin var(--v-motion-spin-duration) linear infinite;
+  }
+}
+
+@keyframes v-notification-item-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-notification-item,
+  .v-notification-item__dismiss,
+  .v-notification-item__menu,
+  .v-notification-item__loader {
+    transition: none;
+    animation: none;
+  }
+
+  .v-notification-item:active {
+    transform: none;
+  }
+}

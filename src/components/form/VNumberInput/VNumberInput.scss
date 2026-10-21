@@ -1,0 +1,269 @@
+@import '../_shared/field';
+.v-number-input {
+  @apply flex flex-col gap-1 font-sans;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--v-space-1);
+  width: 100%;
+  font-family: var(--v-font-family-sans);
+
+  --v-number-input-height: var(--v-number-input-height-md);
+  --v-number-input-padding-x: var(--v-space-3);
+  --v-number-input-stepper-size: var(--v-number-input-stepper-size-md);
+  --v-number-input-focus-spread: var(--v-field-focus-spread);
+  --v-number-input-focus-shell-padding: calc(var(--v-number-input-focus-spread) + var(--v-space-1));
+  --v-number-input-focus-ring: 0 0 0 var(--v-number-input-focus-spread) color-mix(in srgb, var(--v-color-primary) 30%, transparent);
+  --v-number-input-focus-ring-error: 0 0 0 var(--v-number-input-focus-spread) color-mix(in srgb, var(--v-color-error-base) 25%, transparent);
+
+  &--sm {
+    --v-number-input-height: var(--v-number-input-height-sm);
+    --v-number-input-stepper-size: var(--v-number-input-stepper-size-sm);
+
+    .v-number-input__input {
+      font-size: var(--v-font-size-text-small);
+      line-height: var(--v-line-height-text-small);
+    }
+
+    .v-number-input__stepper-btn .v-icon {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  &--md {
+    --v-number-input-height: var(--v-number-input-height-md);
+    --v-number-input-stepper-size: var(--v-number-input-stepper-size-md);
+  }
+
+  &--lg {
+    --v-number-input-height: var(--v-number-input-height-lg);
+    --v-number-input-stepper-size: var(--v-number-input-stepper-size-lg);
+  }
+
+  &__label {
+    @include field-label(var(--v-number-input-focus-shell-padding));
+  }
+
+  &__required {
+    color: var(--v-color-error-base);
+  }
+
+  &__scrub-hint {
+    margin-inline-start: var(--v-space-2);
+    font-size: var(--v-font-size-text-small);
+    font-weight: var(--v-font-weight-normal);
+    color: var(--v-color-text-muted);
+  }
+
+  &--scrub &__control {
+    cursor: ew-resize;
+  }
+
+  &--scrubbing &__control {
+    border-color: var(--v-color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--v-color-primary) 16%, transparent);
+    background: color-mix(in srgb, var(--v-color-primary) 4%, var(--v-color-surface));
+  }
+
+  &__control-shell {
+    box-sizing: border-box;
+    width: 100%;
+    padding: var(--v-number-input-focus-shell-padding);
+    overflow: visible;
+  }
+
+  &__control {
+    @apply relative inline-flex duration-fast ease-out;
+    box-sizing: border-box;
+    position: relative;
+    display: inline-flex;
+    align-items: stretch;
+    width: 100%;
+    height: var(--v-number-input-height);
+    min-height: var(--v-number-input-height);
+    padding-inline: var(--v-number-input-padding-x);
+    gap: var(--v-space-2);
+    overflow: hidden;
+    color: var(--v-color-text);
+    background: var(--v-color-surface);
+    border: var(--v-border-width) solid var(--v-color-border);
+    border-radius: var(--v-radius-md);
+    box-shadow: var(--v-shadow-sm);
+    transition:
+      border-color var(--v-motion-fast) var(--v-ease-out),
+      box-shadow var(--v-motion-fast) var(--v-ease-out),
+      background var(--v-motion-fast) var(--v-ease-out);
+
+    &:hover {
+      border-color: var(--v-color-neutral-300);
+      background: color-mix(in srgb, var(--v-color-neutral-100) 35%, var(--v-color-surface));
+    }
+
+    &:focus-within {
+      border-color: var(--v-color-primary);
+      box-shadow: var(--v-number-input-focus-ring);
+    }
+  }
+
+  &--error &__control {
+    border-color: var(--v-color-error-base);
+
+    &:focus-within {
+      border-color: var(--v-color-error-base);
+      box-shadow: var(--v-number-input-focus-ring-error);
+    }
+  }
+
+  &--disabled &__control {
+    opacity: var(--v-state-disabled-opacity);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &--readonly &__control {
+    background: var(--v-color-neutral-100);
+    cursor: default;
+  }
+
+  &__prefix,
+  &__suffix {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: var(--v-font-size-text-medium);
+    line-height: var(--v-line-height-text-medium);
+    font-weight: var(--v-font-weight-medium, 500);
+    color: var(--v-color-text-muted);
+  }
+
+  &__input {
+    @apply flex-1 min-w-0 bg-transparent border-0 outline-none text-text-medium;
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    min-height: calc(var(--v-number-input-height) - 2px);
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: var(--v-color-text);
+    font-size: var(--v-font-size-text-medium);
+    line-height: var(--v-line-height-text-medium);
+    font-family: var(--v-font-family-sans);
+    cursor: text;
+
+    &::placeholder {
+      color: var(--v-color-text-muted);
+      opacity: 1;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  &__stepper {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    flex-shrink: 0;
+    align-self: stretch;
+    width: var(--v-number-input-stepper-size);
+    margin-inline-start: calc(var(--v-space-2) * -1);
+    margin-inline-end: calc(var(--v-number-input-padding-x) * -1);
+    border-inline-start: var(--v-border-width) solid var(--v-color-border);
+    overflow: hidden;
+    border-radius: 0 var(--v-radius-md) var(--v-radius-md) 0;
+  }
+
+  &__stepper-btn {
+    @apply inline-flex items-center justify-center duration-fast ease-out;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--v-color-text-muted);
+    cursor: pointer;
+    line-height: 0;
+    transition:
+      background var(--v-motion-fast) var(--v-ease-out),
+      color var(--v-motion-fast) var(--v-ease-out);
+
+    .v-icon {
+      flex-shrink: 0;
+    }
+
+    &:hover:not(:disabled) {
+      background: color-mix(in srgb, var(--v-color-primary) 8%, var(--v-color-surface));
+      color: var(--v-color-text);
+    }
+
+    &:active:not(:disabled) {
+      background: color-mix(in srgb, var(--v-color-primary) 14%, var(--v-color-surface));
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: -2px;
+      z-index: 1;
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    &--increment {
+      border-bottom: var(--v-border-width) solid var(--v-color-border);
+    }
+  }
+
+  &__helper,
+  &__error {
+    @apply text-text-small;
+    margin: 0;
+    padding-inline: var(--v-number-input-focus-shell-padding);
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+  }
+
+  &__helper {
+    color: var(--v-color-text-muted);
+  }
+
+  &__error {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--v-space-1);
+    color: var(--v-color-error-strong);
+  }
+
+  &__error-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--v-icon-size-sm);
+    height: var(--v-icon-size-sm);
+    line-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-number-input__control,
+  .v-number-input__stepper-btn {
+    transition: none;
+  }
+}

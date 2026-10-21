@@ -1,0 +1,1264 @@
+.v-sidebar {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: var(--v-sidebar-width-md);
+  // Fill the host and never outgrow it: only the nav scrolls. min/max (instead of
+  // `height: 100%`) keeps flex `align-self: stretch` working in hosts whose height
+  // is indefinite (e.g. `min-height: 100vh` shells).
+  min-height: 100%;
+  max-height: 100%;
+  background: var(--v-sidebar-bg);
+  color: var(--v-color-text);
+  border-right: var(--v-border-width) solid var(--v-sidebar-border);
+  padding: var(--v-sidebar-padding-y) var(--v-sidebar-padding-x);
+  position: relative;
+  font-family: var(--v-font-family-sans);
+  transition:
+    width var(--v-sidebar-motion-collapse) var(--v-ease-out),
+    padding var(--v-sidebar-motion-collapse) var(--v-ease-out),
+    border-radius var(--v-sidebar-motion-collapse) var(--v-ease-out),
+    box-shadow var(--v-sidebar-motion-collapse) var(--v-ease-out);
+
+  // Density scale (sm = compact, md = Starline/Locally refs, lg = CareOps-like).
+  &--sm {
+    --v-sidebar-item-height: 28px;
+    --v-sidebar-label-size: 12px;
+    --v-sidebar-label-line-height: 18px;
+    --v-sidebar-icon-size: 14px;
+    --v-sidebar-search-height: 28px;
+    --v-sidebar-caption-size: 9px;
+    --v-sidebar-count-size: 11px;
+    --v-sidebar-brand-logo-size: 18px;
+  }
+
+  &--lg {
+    --v-sidebar-item-height: 37px;
+    --v-sidebar-item-radius: 12px;
+    --v-sidebar-item-padding-x: 12px;
+    --v-sidebar-label-size: 15px;
+    --v-sidebar-label-line-height: 20px;
+    --v-sidebar-icon-size: 18px;
+    --v-sidebar-search-height: 36px;
+    --v-sidebar-caption-size: 11px;
+    --v-sidebar-caption-tracking: 0.08em;
+    --v-sidebar-caption-color: var(--v-color-text);
+    --v-sidebar-count-size: 12px;
+    --v-sidebar-brand-size: 15px;
+    --v-sidebar-brand-logo-size: 28px;
+    --v-sidebar-avatar-size: 32px;
+  }
+
+  // lg (CareOps): the current page reads bolder.
+  &--lg .v-nav-item.v-nav-item--active {
+    font-weight: 600;
+  }
+
+  &--collapsed:not(&--icons):not(&--floating) {
+    width: var(--v-sidebar-width-rail);
+  }
+
+  &--lg:not(&--collapsed) {
+    width: var(--v-sidebar-width-lg);
+  }
+
+  // Explicit `width` prop (inline `--v-sidebar-width`); rails keep their own width.
+  &--has-width:not(&--collapsed):not(&--icons) {
+    width: var(--v-sidebar-width);
+  }
+
+  &--disabled {
+    opacity: var(--v-state-disabled-opacity);
+    pointer-events: none;
+  }
+
+  &--card,
+  &--workspace {
+    width: var(--v-sidebar-width-md);
+    background: var(--v-sidebar-bg);
+    border-right: var(--v-border-width) solid var(--v-sidebar-border);
+    border-radius: 0;
+    box-shadow: none;
+    padding: var(--v-sidebar-padding-y) var(--v-sidebar-padding-x);
+  }
+
+  &--card#{&}--collapsed,
+  &--workspace#{&}--collapsed {
+    width: var(--v-sidebar-width-rail);
+  }
+
+  &--floating {
+    width: var(--v-sidebar-width-md);
+    min-height: 0;
+    height: auto;
+    align-self: flex-start;
+    padding: var(--v-sidebar-padding-y) var(--v-sidebar-padding-x);
+    gap: var(--v-sidebar-section-spacing);
+    border: var(--v-border-width) solid var(--v-sidebar-border);
+    border-radius: var(--v-radius-24);
+    box-shadow: var(--v-shadow-md);
+    overflow: hidden;
+    transition:
+      gap var(--v-sidebar-motion-collapse) var(--v-ease-out),
+      border-radius var(--v-sidebar-motion-collapse) var(--v-ease-out),
+      box-shadow var(--v-sidebar-motion-collapse) var(--v-ease-out);
+  }
+
+  &--floating &__nav,
+  &--floating &__search,
+  &--floating &__user {
+    max-height: 40rem;
+    opacity: 1;
+    overflow: hidden;
+    transition:
+      max-height var(--v-sidebar-motion-collapse) var(--v-ease-out),
+      opacity var(--v-sidebar-motion-collapse) var(--v-ease-out);
+  }
+
+  &--floating#{&}--collapsed {
+    gap: 0;
+  }
+
+  &--floating#{&}--collapsed &__nav,
+  &--floating#{&}--collapsed &__search,
+  &--floating#{&}--collapsed &__user {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    pointer-events: none;
+  }
+
+  &--floating &__brand,
+  &--floating#{&}--collapsed &__brand {
+    margin: 0;
+    min-height: var(--v-sidebar-item-height);
+    gap: var(--v-sidebar-brand-gap);
+    background: transparent;
+  }
+
+  &--floating#{&}--collapsed &__brand {
+    cursor: pointer;
+  }
+
+  &--floating#{&}--locked {
+    width: var(--v-sidebar-width-md);
+    height: 100%;
+    align-self: stretch;
+    border: 0;
+    border-right: var(--v-border-width) solid var(--v-sidebar-border);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  &--locked &__collapse-toggle {
+    display: none;
+  }
+
+  &--locked &__collapse-toggle--inline {
+    display: inline-flex;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  &--icons {
+    width: var(--v-sidebar-width-rail);
+    min-height: 0;
+    height: auto;
+    align-self: flex-start;
+    align-items: center;
+    gap: var(--v-space-4);
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--v-sidebar-brand-gap);
+    margin-bottom: var(--v-sidebar-section-spacing);
+    min-height: var(--v-sidebar-item-height);
+    padding-right: 0;
+  }
+
+  // Rail: the expand toggle takes the brand slot (it is positioned over it).
+  &--collapsed:not(&--icons):not(&--floating) &__brand {
+    padding-right: 0;
+    visibility: hidden;
+  }
+
+  &__brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--v-sidebar-brand-logo-size);
+    height: var(--v-sidebar-brand-logo-size);
+    background: transparent;
+    color: var(--v-color-primary-600);
+    font-size: var(--v-sidebar-icon-size);
+    flex-shrink: 0;
+  }
+
+  &__brand-name {
+    flex: 1;
+    font-size: var(--v-sidebar-brand-size);
+    font-weight: 600;
+    line-height: var(--v-sidebar-label-line-height);
+    color: var(--v-color-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__identity {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  &__heading-label {
+    font-size: var(--v-sidebar-brand-size);
+    font-weight: 600;
+    line-height: var(--v-sidebar-label-line-height);
+    color: var(--v-color-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__position {
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+    color: var(--v-color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__brand-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  &__brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--v-radius-8, 8px);
+    background: var(--v-color-primary-500);
+    color: var(--v-color-on-primary);
+    flex-shrink: 0;
+
+    .v-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__lock,
+  &__collapse-toggle--inline {
+    position: static;
+    width: 28px;
+    height: 28px;
+    border: 0;
+    border-radius: var(--v-radius-8, 8px);
+    background: transparent;
+    box-shadow: none;
+    color: var(--v-color-text-muted);
+  }
+
+  &__lock[aria-pressed='true'] {
+    color: var(--v-color-primary-600);
+    background: var(--v-color-primary-50);
+  }
+
+  &--floating &__heading-label {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 16px;
+  }
+
+  &--floating &__position {
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 14px;
+  }
+
+  &__lock {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--v-radius-8);
+    background: transparent;
+    color: var(--v-color-text-muted);
+    cursor: pointer;
+
+    .v-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    &[aria-pressed='true'] {
+      color: var(--v-color-primary-600);
+      background: var(--v-color-primary-50);
+    }
+  }
+
+  // Collapsed rail: the expand toggle sits on the rail's centre axis, like the items.
+  &__collapse-toggle {
+    position: absolute;
+    top: var(--v-sidebar-padding-y);
+    left: 50%;
+    translate: -50% 0;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--v-sidebar-item-height);
+    height: var(--v-sidebar-item-height);
+    border: var(--v-border-width) solid var(--v-sidebar-border);
+    border-radius: var(--v-radius-pill);
+    background: var(--v-sidebar-bg);
+    box-shadow: var(--v-shadow-sm);
+    color: var(--v-color-text-muted);
+    cursor: pointer;
+    transition:
+      background var(--v-motion-fast) var(--v-ease-standard),
+      transform var(--v-sidebar-motion-collapse) var(--v-ease-out);
+
+    &:hover {
+      background: var(--v-color-primary-50);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+  }
+
+  &__collapse-toggle--inline {
+    position: static;
+    top: auto;
+    left: auto;
+    translate: none;
+    z-index: auto;
+    width: 28px;
+    height: 28px;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  &--icons &__brand {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    width: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  // Brand mark: plain icon on the rail, same footprint as the items (no filled disc).
+  &--icons &__brand {
+    min-height: var(--v-sidebar-icons-item-size, 40px);
+  }
+
+  &--icons &__brand-icon {
+    margin: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 0;
+    background: transparent;
+    color: var(--v-color-primary-text);
+    box-shadow: none;
+  }
+
+  &--icons &__search,
+  &--icons &__user {
+    display: none;
+  }
+
+  &--icons &__collapse-toggle {
+    position: static;
+    translate: none;
+    margin: 0;
+  }
+
+  // ── search ────────────────────────────────────────────────────────────────
+  &__search {
+    display: flex;
+    align-items: center;
+    flex: none;
+    min-height: var(--v-sidebar-search-height);
+    margin-bottom: var(--v-sidebar-section-spacing);
+
+    &--collapsed {
+      justify-content: center;
+    }
+  }
+
+  &__search-field {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: var(--v-sidebar-item-icon-gap);
+    min-width: 0;
+    height: var(--v-sidebar-search-height);
+    padding: 0 var(--v-space-2) 0 var(--v-sidebar-item-padding-x);
+    border: var(--v-border-width) solid var(--v-sidebar-border);
+    border-radius: var(--v-sidebar-item-radius);
+    background: var(--v-sidebar-search-bg);
+    color: var(--v-color-text-muted);
+    cursor: text;
+    transition:
+      border-color var(--v-motion-fast) var(--v-ease-standard),
+      box-shadow var(--v-motion-fast) var(--v-ease-standard);
+
+    &:hover {
+      border-color: var(--v-color-neutral-300);
+    }
+
+    &:focus-within {
+      border-color: var(--v-color-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--v-color-primary-500) 22%, transparent);
+    }
+  }
+
+  &__search-icon {
+    flex-shrink: 0;
+    width: var(--v-sidebar-icon-size);
+    height: var(--v-sidebar-icon-size);
+    color: var(--v-color-text-muted);
+  }
+
+  &__search-input {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: var(--v-color-text);
+    font: inherit;
+    font-size: var(--v-sidebar-label-size);
+
+    &::placeholder {
+      color: var(--v-color-text-muted);
+    }
+  }
+
+  &__search-kbd,
+  &__search-clear {
+    flex-shrink: 0;
+  }
+
+  &__search-kbd {
+    padding: 0 5px;
+    border: var(--v-border-width) solid var(--v-sidebar-border);
+    border-radius: var(--v-radius-4);
+    background: var(--v-color-surface);
+    color: var(--v-color-text-muted);
+    font-family: var(--v-font-family-sans);
+    font-size: var(--v-sidebar-kbd-size);
+    font-weight: 500;
+    line-height: 16px;
+  }
+
+  &__search-clear,
+  &__search-icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--v-color-text-muted);
+    cursor: pointer;
+  }
+
+  &__search-clear {
+    width: 20px;
+    height: 20px;
+    border-radius: var(--v-radius-4);
+
+    &:hover {
+      background: var(--v-sidebar-item-hover-bg);
+      color: var(--v-color-text);
+    }
+  }
+
+  &__search-icon-button {
+    width: 100%;
+    height: var(--v-sidebar-search-height);
+    border: var(--v-border-width) solid var(--v-sidebar-border);
+    border-radius: var(--v-sidebar-item-radius);
+    background: var(--v-sidebar-search-bg);
+
+    &:hover:not(:disabled) {
+      color: var(--v-color-text);
+    }
+  }
+
+  &__search-clear:focus-visible,
+  &__search-icon-button:focus-visible,
+  &__group-header:focus-visible,
+  .v-nav-item:focus-visible {
+    outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+    outline-offset: -2px;
+  }
+
+  &__header-slot {
+    display: flex;
+    align-items: center;
+    flex: none;
+    gap: var(--v-space-2);
+    min-height: var(--v-sidebar-item-height);
+    margin-bottom: var(--v-sidebar-section-spacing);
+  }
+
+  // Collapsed rail: the custom header stacks under the expand toggle, centred on the rail.
+  &--collapsed:not(&--icons):not(&--floating) &__header-slot {
+    flex-direction: column;
+    justify-content: center;
+    padding-top: calc(var(--v-sidebar-item-height) + var(--v-space-2));
+  }
+
+  // Collapsed rail: footer content (avatar or custom slot) centred on the rail.
+  &--collapsed:not(&--icons):not(&--floating) &__user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &--collapsed:not(&--icons):not(&--floating) &__user-default {
+    justify-content: center;
+  }
+
+  &__before-nav,
+  &__after-nav {
+    flex: none;
+    min-width: 0;
+  }
+
+  &__before-nav {
+    margin-bottom: var(--v-sidebar-section-spacing);
+  }
+
+  &__after-nav {
+    padding-top: var(--v-sidebar-section-spacing);
+    margin-bottom: var(--v-sidebar-section-spacing);
+  }
+
+  &--collapsed &__after-nav,
+  &--collapsed &__before-nav,
+  &--icons &__after-nav,
+  &--icons &__before-nav {
+    display: none;
+  }
+
+  // ── scroll container ──────────────────────────────────────────────────────
+  // Header / search / footer stay fixed: ONLY the nav scrolls.
+  &__nav {
+    --_fade-top: 0px;
+    --_fade-bottom: 0px;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    // Pull the scrollbar to the sidebar edge while keeping items inset.
+    margin-inline: calc(-1 * var(--v-sidebar-padding-x));
+    padding-inline: var(--v-sidebar-padding-x) calc(var(--v-sidebar-padding-x) - 6px);
+    // Top / bottom fades only while there is content beyond the edge.
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0,
+      black var(--_fade-top),
+      black calc(100% - var(--_fade-bottom)),
+      transparent 100%
+    );
+    transition:
+      --_fade-top var(--v-motion-fast) var(--v-ease-standard),
+      --_fade-bottom var(--v-motion-fast) var(--v-ease-standard);
+
+    &[data-scroll-top='false'] {
+      --_fade-top: var(--v-sidebar-fade-size);
+    }
+
+    &[data-scroll-bottom='false'] {
+      --_fade-bottom: var(--v-sidebar-fade-size);
+    }
+
+    &:hover,
+    &:focus-within,
+    &[data-scrolling='true'] {
+      scrollbar-color: var(--v-sidebar-scrollbar-thumb) transparent;
+    }
+  }
+
+  &--collapsed &__nav {
+    scrollbar-gutter: auto;
+    padding-inline: var(--v-sidebar-padding-x);
+  }
+
+  &__list,
+  &__sublist {
+    display: flex;
+    flex-direction: column;
+    gap: var(--v-sidebar-item-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__list {
+    padding-block: 2px;
+  }
+
+  // ── captions: flat headings + group headers ───────────────────────────────
+  &__heading {
+    margin: var(--v-sidebar-caption-gap-above) 0 var(--v-space-2);
+    padding: 0 var(--v-sidebar-item-padding-x);
+    color: var(--v-sidebar-caption-color);
+    font-size: var(--v-sidebar-caption-size);
+    line-height: var(--v-sidebar-caption-line-height);
+    font-weight: var(--v-sidebar-caption-weight);
+    letter-spacing: var(--v-sidebar-caption-tracking);
+    text-transform: uppercase;
+    list-style: none;
+
+    &:first-child {
+      margin-top: var(--v-space-1);
+    }
+  }
+
+  &__group {
+    list-style: none;
+
+    & + &,
+    .v-sidebar__item + & {
+      margin-top: var(--v-sidebar-caption-gap-above);
+    }
+  }
+
+  // Hairline above every group except the first block (Starline sections).
+  &--group-dividers &__group + &__group,
+  &--group-dividers &__item + &__group {
+    margin-top: var(--v-sidebar-group-divider-gap);
+    padding-top: var(--v-sidebar-group-divider-gap);
+    border-top: var(--v-border-width) solid var(--v-sidebar-border);
+  }
+
+  // Group header row: toggle button + optional hover actions (slot `group-actions`).
+  &__group-head {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+
+    > .v-sidebar__group-header {
+      flex: 1;
+      min-width: 0;
+      width: auto;
+    }
+  }
+
+  &__group-actions {
+    position: absolute;
+    top: 0;
+    right: var(--v-space-1);
+    bottom: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--v-motion-fast) var(--v-ease-standard);
+
+    @media (hover: none) {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  &__group-head:hover &__group-actions,
+  &__group-head:focus-within &__group-actions {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  // When actions exist, the end chevron makes room for them on hover.
+  &:not(&--chevron-start) &__group-head--has-actions:hover > .v-sidebar__group-header .v-sidebar__group-chevron,
+  &:not(&--chevron-start) &__group-head--has-actions:focus-within > .v-sidebar__group-header .v-sidebar__group-chevron {
+    opacity: 0;
+  }
+
+  &__group-header {
+    display: flex;
+    align-items: center;
+    gap: var(--v-space-2);
+    box-sizing: border-box;
+    width: 100%;
+    height: 28px;
+    padding: 0 var(--v-sidebar-item-padding-x);
+    border: 0;
+    border-radius: var(--v-sidebar-item-radius);
+    background: transparent;
+    color: var(--v-sidebar-caption-color);
+    font-family: var(--v-font-family-sans);
+    font-size: var(--v-sidebar-caption-size);
+    line-height: var(--v-sidebar-caption-line-height);
+    font-weight: var(--v-sidebar-caption-weight);
+    letter-spacing: var(--v-sidebar-caption-tracking);
+    text-align: left;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color var(--v-motion-fast) var(--v-ease-standard);
+
+    &:hover:not(:disabled):not(.v-sidebar__group-header--static) {
+      color: var(--v-color-text);
+    }
+
+    &--static {
+      cursor: default;
+    }
+  }
+
+  &__group-label {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__group-chevron {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    transition: transform var(--v-sidebar-motion-collapse) var(--v-ease-out);
+  }
+
+  &__group--collapsible:not(.v-sidebar__group--open) &__group-chevron {
+    transform: rotate(-90deg);
+  }
+
+  // groupChevronOpen="up": "v" when closed, "^" when open (no -90deg rotation).
+  &--group-open-up &__group--collapsible:not(.v-sidebar__group--open) &__group-chevron {
+    transform: none;
+  }
+
+  &--group-open-up &__group--collapsible.v-sidebar__group--open &__group-chevron {
+    transform: rotate(180deg);
+  }
+
+  &__mark {
+    padding: 0 1px;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--v-color-primary-500) 22%, transparent);
+    color: inherit;
+  }
+
+  // groupChevron="start": chevron left of the caption ("⌄ WORKSPACE").
+  &--chevron-start &__group-header {
+    gap: var(--v-space-1);
+    padding-left: calc(var(--v-sidebar-item-padding-x) - 2px);
+  }
+
+  &--chevron-start &__group-chevron {
+    order: -1;
+    width: 12px;
+    height: 12px;
+  }
+
+  &__divider {
+    width: 24px;
+    height: 1px;
+    margin: var(--v-space-2) auto;
+    background: var(--v-sidebar-border);
+    list-style: none;
+  }
+
+  &__empty {
+    padding: var(--v-space-3) var(--v-sidebar-item-padding-x);
+    color: var(--v-color-text-muted);
+    font-size: var(--v-sidebar-label-size);
+    list-style: none;
+  }
+
+  // ── items ─────────────────────────────────────────────────────────────────
+  &__item {
+    position: relative;
+    list-style: none;
+
+    &--disabled > .v-nav-item {
+      opacity: var(--v-sidebar-disabled-opacity);
+    }
+  }
+
+  .v-nav-item {
+    box-sizing: border-box;
+    gap: var(--v-sidebar-item-icon-gap);
+    min-height: var(--v-sidebar-item-height);
+    height: var(--v-sidebar-item-height);
+    padding: 0 var(--v-sidebar-item-padding-x);
+    border-radius: var(--v-sidebar-item-radius);
+    font-size: var(--v-sidebar-label-size);
+    line-height: var(--v-sidebar-label-line-height);
+    font-weight: var(--v-sidebar-label-weight);
+    color: var(--v-sidebar-item-color);
+
+    &::before {
+      content: none;
+    }
+
+    .v-icon,
+    .v-nav-item__icon {
+      width: var(--v-sidebar-icon-size);
+      height: var(--v-sidebar-icon-size);
+      color: var(--v-sidebar-icon-color);
+      transition: color var(--v-motion-fast) var(--v-ease-standard);
+    }
+
+    .v-nav-item__icon--swatch {
+      width: 14px;
+      height: 14px;
+      margin-inline: 1px;
+      border-radius: var(--v-radius-4);
+      color: var(--v-color-on-primary);
+
+      .v-icon {
+        width: 10px;
+        height: 10px;
+        color: inherit;
+      }
+    }
+
+    &:hover:not(.v-nav-item--disabled):not(.v-nav-item--active) {
+      background: var(--v-sidebar-item-hover-bg);
+      color: var(--v-color-text);
+    }
+
+    &.v-nav-item--active,
+    &.v-nav-item--active:hover {
+      background: var(--v-sidebar-item-active-bg);
+      color: var(--v-sidebar-item-active-color);
+      box-shadow: none;
+
+      .v-icon,
+      .v-nav-item__icon:not(.v-nav-item__icon--swatch) {
+        color: var(--v-sidebar-accent);
+      }
+    }
+  }
+
+  // Parents of the active item read as "current" without a background.
+  &__item--contains-active > .v-nav-item:not(.v-nav-item--active) {
+    color: var(--v-color-text);
+
+    .v-nav-item__icon:not(.v-nav-item__icon--swatch) {
+      color: var(--v-color-text);
+    }
+  }
+
+  // Right-hand extras: counts are quiet text, `badgeTone: 'primary'` is a filled pill.
+  .v-nav-item__badge {
+    min-width: 0;
+    height: auto;
+    padding: 0;
+    border: 0;
+    border-radius: var(--v-radius-pill);
+    background: transparent;
+    color: var(--v-color-text-muted);
+    font-size: var(--v-sidebar-count-size);
+    line-height: 16px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .v-nav-item--active .v-nav-item__badge:not(.v-nav-item__badge--primary) {
+    background: transparent;
+    color: var(--v-color-text-muted);
+  }
+
+  .v-nav-item__badge.v-nav-item__badge--primary {
+    min-width: 22px;
+    height: 22px;
+    padding: 0 5px;
+    background: var(--v-color-primary);
+    color: var(--v-color-on-primary);
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 600;
+  }
+
+  // Tags ("Soon"): quiet inline text, no pill (Locally ref).
+  .v-nav-item__tag {
+    height: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--v-color-text-muted);
+    font-size: var(--v-sidebar-tag-size);
+    line-height: 14px;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+
+  &__item-chevron {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    color: var(--v-color-text-muted);
+    opacity: 0.8;
+    transition: transform var(--v-sidebar-motion-collapse) var(--v-ease-out);
+  }
+
+  .v-nav-item[aria-expanded='true'] &__item-chevron:not(.v-sidebar__item-chevron--updown) {
+    transform: rotate(90deg);
+  }
+
+  // Subtle square behind the chevron of an expandable item on hover / expanded (Starline).
+  &__item-chevron {
+    box-sizing: content-box;
+    padding: 2px;
+    margin-right: -2px;
+    border-radius: 4px;
+    background: transparent;
+  }
+
+  .v-nav-item:hover &__item-chevron,
+  .v-nav-item:focus-visible &__item-chevron,
+  .v-nav-item[aria-expanded='true'] &__item-chevron {
+    background: var(--v-sidebar-chevron-bg);
+  }
+
+  // ── nested menus: grid-rows expand/collapse + guide line ──────────────────
+  &__sub {
+    display: grid;
+    grid-template-rows: 1fr;
+  }
+
+  &__sub-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  &__sublist {
+    position: relative;
+    // guide line sits under the parent icon centre; depth indent comes from nesting
+    // Starline ref: children align with the parent label, no guide line.
+    margin: var(--v-sidebar-item-gap) 0 0;
+    padding-left: 0;
+    border-left: 0;
+
+    &--group {
+      margin: 2px 0 0;
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+
+  &__item--child > .v-nav-item {
+    padding-left: calc(
+      var(--v-sidebar-item-padding-x) + (var(--v-sidebar-icon-size) + var(--v-sidebar-item-icon-gap)) * var(--v-sidebar-depth, 1)
+    );
+  }
+
+  // ── variants ──────────────────────────────────────────────────────────────
+  &--floating .v-nav-item {
+    font-size: 13px;
+    font-weight: 500;
+
+    .v-icon,
+    .v-nav-item__icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &--floating &__heading {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  &--floating &__nav {
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow-y: auto;
+  }
+
+  &--floating#{&}--collapsed &__nav {
+    overflow: hidden;
+  }
+
+  &--icons &__heading,
+  &--collapsed &__heading {
+    display: none;
+  }
+
+  &--collapsed &__item-chevron,
+  &--collapsed &__search-field {
+    display: none;
+  }
+
+  &--collapsed .v-nav-item {
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+  }
+
+  &--icons &__nav {
+    width: max-content;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    mask-image: none;
+    scrollbar-gutter: auto;
+  }
+
+  &__nav--island-enter {
+    animation: v-sidebar-island-down var(--v-sidebar-motion-collapse) var(--v-ease-out);
+  }
+
+  // Icons rail: flat column, no island. Active item is a soft primary tint.
+  // Themable: --v-sidebar-icons-item-size / -radius / -gap, --v-sidebar-icons-active-bg / -fg.
+  &--icons &__list {
+    align-items: center;
+    gap: var(--v-sidebar-icons-gap, 8px);
+    width: max-content;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  &--icons &__collapse-toggle {
+    width: var(--v-sidebar-icons-item-size, 40px);
+    height: var(--v-sidebar-icons-item-size, 40px);
+    margin-inline: auto;
+    padding: 0;
+    border: 0;
+    border-radius: var(--v-sidebar-icons-item-radius, 12px);
+    background: transparent;
+    box-shadow: none;
+
+    &:hover {
+      background: var(--v-color-surface-muted);
+    }
+  }
+
+  &--icons .v-nav-item {
+    width: var(--v-sidebar-icons-item-size, 40px);
+    height: var(--v-sidebar-icons-item-size, 40px);
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    border: none;
+    border-radius: var(--v-sidebar-icons-item-radius, 12px);
+    background: transparent;
+    box-shadow: none;
+    color: var(--v-color-text-muted);
+
+    .v-icon,
+    .v-nav-item__icon {
+      color: var(--v-color-text-muted);
+    }
+  }
+
+  &--icons .v-nav-item:hover:not(.v-nav-item--active) {
+    background: var(--v-color-surface-muted);
+
+    .v-icon,
+    .v-nav-item__icon {
+      color: var(--v-color-text);
+    }
+  }
+
+  &--icons .v-nav-item.v-nav-item--active {
+    background: var(--v-sidebar-icons-active-bg, color-mix(in srgb, var(--v-color-primary) 14%, transparent));
+    border-color: transparent;
+    color: var(--v-sidebar-icons-active-fg, var(--v-color-primary-text));
+    box-shadow: none;
+
+    .v-icon,
+    .v-nav-item__icon {
+      color: var(--v-sidebar-icons-active-fg, var(--v-color-primary-text));
+    }
+  }
+
+  &--workspace .v-nav-item.v-nav-item--active {
+    background: var(--v-color-surface);
+    box-shadow: var(--v-shadow-sm);
+  }
+
+  &__user {
+    flex: none;
+    border-top: var(--v-border-width) solid var(--v-sidebar-user-border);
+    padding-top: var(--v-sidebar-section-spacing);
+  }
+
+  &__user-default {
+    display: flex;
+    align-items: center;
+    gap: var(--v-space-2);
+    min-height: var(--v-sidebar-item-height);
+  }
+
+  &__user-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--v-sidebar-avatar-size);
+    height: var(--v-sidebar-avatar-size);
+    border-radius: var(--v-radius-circle);
+    background: var(--v-color-primary-50);
+    color: var(--v-color-primary-600);
+    font-size: var(--v-font-size-text-small);
+    font-weight: var(--v-sidebar-label-weight);
+    flex-shrink: 0;
+  }
+
+  &__user-meta {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__user-name {
+    line-height: var(--v-sidebar-label-line-height);
+    font-size: var(--v-sidebar-label-size);
+    font-weight: var(--v-sidebar-label-weight);
+    color: var(--v-color-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__user-email {
+    font-size: var(--v-font-size-text-small);
+    color: var(--v-color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__user-menu-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--v-sidebar-item-height);
+    height: var(--v-sidebar-item-height);
+    border: none;
+    border-radius: var(--v-sidebar-item-radius);
+    background: transparent;
+    color: var(--v-color-text-muted);
+    cursor: pointer;
+
+    &:hover {
+      background: var(--v-color-primary-50);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+  }
+}
+
+@keyframes v-sidebar-island-down {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  to {
+    max-height: 32rem;
+    opacity: 1;
+  }
+}
+
+// Expand / collapse of submenus and groups (grid 0fr -> 1fr technique).
+.v-sidebar-collapse-enter-active,
+.v-sidebar-collapse-leave-active {
+  transition:
+    grid-template-rows var(--v-sidebar-motion-collapse) var(--v-ease-out),
+    opacity var(--v-sidebar-motion-collapse) var(--v-ease-out);
+}
+
+.v-sidebar-collapse-enter-from,
+.v-sidebar-collapse-leave-to {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+// Registered so the scroll fades can animate in / out.
+@property --_fade-top {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --_fade-bottom {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+// Webkit fallback for the thin auto-hiding scrollbar.
+@supports not (scrollbar-color: auto) {
+  .v-sidebar__nav {
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: var(--v-radius-pill);
+      background: transparent;
+    }
+
+    &:hover::-webkit-scrollbar-thumb,
+    &[data-scrolling='true']::-webkit-scrollbar-thumb {
+      background: var(--v-sidebar-scrollbar-thumb);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-sidebar,
+  .v-sidebar__nav,
+  .v-sidebar__nav--island-enter,
+  .v-sidebar__group-chevron,
+  .v-sidebar__item-chevron,
+  .v-sidebar__collapse-toggle,
+  .v-sidebar-collapse-enter-active,
+  .v-sidebar-collapse-leave-active {
+    transition: none;
+    animation: none;
+  }
+}

@@ -1,0 +1,172 @@
+.v-section {
+  @apply flex flex-col text-text font-sans text-text-medium duration-normal ease-out;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: var(--v-section-bg);
+  color: var(--v-color-text);
+  border: var(--v-border-width) solid var(--v-section-border);
+  border-radius: var(--v-section-radius);
+  padding: var(--v-section-padding);
+  box-shadow: none;
+  font-family: var(--v-font-family-sans);
+  font-size: var(--v-font-size-text-medium);
+  line-height: var(--v-line-height-text-medium);
+  transition:
+    background var(--v-section-transition) var(--v-ease-out),
+    box-shadow var(--v-section-transition) var(--v-ease-out);
+
+  &:focus-visible {
+    outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+    outline-offset: var(--v-focus-ring-offset);
+  }
+
+  &--default {
+    background: var(--v-section-bg);
+    border-color: var(--v-section-border);
+    box-shadow: none;
+  }
+
+  &--elevated {
+    background: var(--v-section-bg);
+    border-color: transparent;
+    box-shadow: var(--v-section-shadow);
+  }
+
+  &--bordered {
+    background: var(--v-section-bg);
+    border-color: var(--v-section-border);
+    box-shadow: none;
+  }
+
+  &--borderless {
+    background: var(--v-section-bg);
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  &--tinted {
+    background: var(--v-section-bg-tinted);
+    border-color: var(--v-section-border);
+    box-shadow: none;
+  }
+
+  :root[data-theme='dark'] &--elevated {
+    border-color: var(--v-section-border);
+  }
+
+  &--sm {
+    padding: var(--v-section-padding-sm);
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+
+    .v-section__heading {
+      font-size: var(--v-font-size-text-medium);
+      line-height: var(--v-line-height-text-medium);
+    }
+  }
+
+  &--md {
+    padding: var(--v-section-padding);
+    font-size: var(--v-font-size-text-medium);
+    line-height: var(--v-line-height-text-medium);
+  }
+
+  &--lg {
+    padding: var(--v-section-padding-lg);
+    font-size: var(--v-font-size-text-large);
+    line-height: var(--v-line-height-text-large);
+
+    .v-section__heading {
+      font-size: var(--v-font-size-h2);
+      line-height: var(--v-line-height-h2);
+    }
+  }
+
+  &__header {
+    @apply flex items-start;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--v-section-header-gap);
+    margin-bottom: var(--v-section-header-gap);
+  }
+
+  &__icon {
+    @apply inline-flex items-center justify-center rounded-8 bg-primary-50 text-primary;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--v-space-8);
+    height: var(--v-space-8);
+    background: var(--v-color-primary-50);
+    color: var(--v-color-primary-text);
+    border-radius: var(--v-radius-8);
+    font-size: var(--v-font-size-text-small);
+    font-weight: var(--v-font-weight-semibold);
+  }
+
+  &__titles {
+    @apply flex flex-col gap-1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--v-space-1);
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  &__heading {
+    @apply font-semibold text-text;
+    margin: 0;
+    color: var(--v-color-text);
+    font-size: var(--v-font-size-h3);
+    line-height: var(--v-line-height-h3);
+    font-weight: var(--v-font-weight-semibold);
+  }
+
+  &__description {
+    @apply text-text-small text-muted;
+    margin: 0;
+    color: var(--v-color-text-muted);
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+  }
+
+  &__actions {
+    @apply inline-flex items-center gap-2;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--v-space-2);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  &__content {
+    @apply flex flex-col gap-4;
+    display: flex;
+    flex-direction: column;
+    gap: var(--v-space-4);
+    min-width: 0;
+  }
+
+  &__footer {
+    @apply flex items-center gap-2;
+    display: flex;
+    align-items: center;
+    gap: var(--v-space-2);
+    margin-top: var(--v-section-header-gap);
+    padding-top: var(--v-section-header-gap);
+    border-top: var(--v-border-width) solid var(--v-section-footer-border);
+    color: var(--v-color-text-muted);
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+  }
+
+  &:hover {
+    background: var(--v-section-hover-bg);
+  }
+
+  &--tinted:hover {
+    background: color-mix(in srgb, var(--v-color-primary-50) 40%, var(--v-section-bg-tinted));
+  }
+}

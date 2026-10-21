@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VDropdownMenuStories from './VDropdownMenu.stories';
+
+<Meta of={VDropdownMenuStories} />
+# Dropdown Menu
+**Categoria:** navigation  
+Lista de ações e navegação compacta ("Action list and compact navigation"): acesso a ações/links a partir de um único gatilho, mantendo a interface limpa e focada. Título do hero: "PRIMARY EXAMPLE — Small menu. Fast actions. Everything you need, right where you need it." Atributos: **Flexible** (ações, links e menus aninhados), **Accessible** (keyboard friendly, screen reader ready), **Modern** (limpo, consistente).
+
+## Component
+<Canvas of={VDropdownMenuStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VDropdownMenu } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VDropdownMenu size="md" variant="secondary" label="More options" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Enter/Exit | opacity/transform | 160ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa primeiro, foco visível, labels acessíveis e teclado conforme o padrão WAI-ARIA correspondente.
+## Anatomy
+Root → optional leading visual → content/slot → optional actions/feedback.

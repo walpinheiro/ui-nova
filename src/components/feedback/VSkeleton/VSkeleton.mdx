@@ -1,0 +1,57 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VSkeletonStories from './VSkeleton.stories';
+
+<Meta of={VSkeletonStories} />
+# Skeleton
+**Categoria:** feedback  
+Placeholder de carregamento flexível para conteúdo que está a caminho: melhora a velocidade percebida e mantém o utilizador envolvido enquanto dashboard, cartões, tabelas e gráficos carregam. O skeleton deve espelhar forma e layout do conteúdo real para uma transição coesa (Pro tip: "Use VSkeleton to match the shape and layout of your real content for a smoother, more cohesive loading experience.").
+
+## Component
+<Canvas of={VSkeletonStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VSkeleton } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VSkeleton size="md" variant="text" :lines="3" animated />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Enter/Exit | opacity/transform | 160ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa primeiro, foco visível, labels acessíveis e teclado conforme o padrão WAI-ARIA correspondente.
+## Anatomy
+Root → optional leading visual → content/slot → optional actions/feedback.
+
+## Tokens
+
+| Token | Uso |
+|---|---|
+| `--v-skeleton-bg` | Fundo do placeholder |
+| `--v-skeleton-highlight` | Brilho da animação shimmer |
+| `--v-skeleton-duration` | Duração do pulse |
+| `--v-radius-circle` | Variantes avatar / dot circulares |
+| `--v-radius-md` | Retângulos e linhas de texto |
+
+```css
+:root {
+  --v-skeleton-bg: var(--v-color-neutral-200);
+  --v-skeleton-duration: 1.2s;
+}
+```

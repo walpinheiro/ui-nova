@@ -1,0 +1,62 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VProgressStories from './VProgress.stories';
+
+<Meta of={VProgressStories} />
+# Progress
+**Categoria:** feedback  
+Indicador de progresso linear e circular que comunica claramente o status de conclusão de uma tarefa ou processo. Usar para atividade contínua, fluxos multi-step ou resultado de ações concluídas. Anotação hero: "Clear progress at every step". Pilares: Informative (clearly communicates current status), Responsive (works across different sizes and contexts), Reassuring (builds trust with clear visual feedback).
+
+## Component
+<Canvas of={VProgressStories.Linear} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VProgress } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VProgress variant="linear" size="md" :value="72" state="determinate" label />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Enter/Exit | opacity/transform | 160ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa primeiro, foco visível, labels acessíveis e teclado conforme o padrão WAI-ARIA correspondente.
+## Anatomy
+Root → optional leading visual → content/slot → optional actions/feedback.
+
+## Tokens
+
+| Token | Uso |
+|---|---|
+| `--v-progress-track-bg` | Trilho linear / anel |
+| `--v-progress-fill-bg` | Preenchimento (primary por default) |
+| `--v-progress-fill-success` / `--v-progress-fill-error` | Variantes semânticas |
+| `--v-progress-size-sm/md/lg` | Altura do trilho linear |
+| `--v-progress-ring-width-sm/md/lg` | Espessura do anel circular |
+| `--v-focus-ring-width`, `--v-focus-ring-offset` | Foco no track / circular |
+
+Customização típica:
+
+```css
+:root {
+  --v-progress-ring-width-md: 4px;
+  --v-progress-fill-bg: var(--v-color-info-base);
+}
+```
+
+Ver também [Foundations / Tokens](/?path=/docs/foundations-tokens--docs).

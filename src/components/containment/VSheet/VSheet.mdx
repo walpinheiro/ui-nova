@@ -1,0 +1,41 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VSheetStories from './VSheet.stories';
+
+<Meta of={VSheetStories} />
+# Sheet
+**Categoria:** containment  
+Superfície edge-attached que desliza da borda para tarefas focadas (settings, details, creation flows), sem tirar o usuário do contexto. Light Mode como referência principal.
+
+## Component
+<Canvas of={VSheetStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VSheet } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VSheet open side="right" size="md" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+`data-state` expõe o ciclo **closed → opening → open → closing** durante transições Vue (`v-sheet-surface`). Interativos internos seguem hover/focus/pressed do sistema. Estados adicionais: **disabled**, **loading**.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Slide in (open) | `transform`/`opacity` | `--v-motion-normal` (≈200ms) | `--v-ease-out` |
+| Slide out (close) | `transform`/`opacity` | `--v-motion-card-hover` (150ms) | `--v-ease-in` |
+| Backdrop fade | `opacity` | `--v-motion-normal` | `--v-ease-out` |
+| Close button focus | `outline` | `--v-motion-fast` | `--v-ease-standard` |
+
+Respeitar `prefers-reduced-motion` (slide/transições neutralizados).
+## Accessibility
+Segue o padrão dialog WAI-ARIA: `role="dialog"` + `aria-modal="true"`, título como heading (`h2`) ligado via `aria-labelledby` (+ `aria-describedby` via `description`; `ariaLabel`/`ariaDescribedby` como override), focus-trap dialog padrão (Tab/Shift+Tab circulam presos, foco inicial no primeiro focável), Escape + backdrop dispensável fecham (`dismissible`), retorno de foco ao fechar, backdrop acessível com fechamento por clique.
+## Anatomy
+Container (backdrop + panel) → Header (title, actions, close) → Content area → Footer.

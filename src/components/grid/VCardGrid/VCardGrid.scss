@@ -1,0 +1,20 @@
+.v-cardgrid {
+  display: grid;
+  width: 100%;
+  gap: var(--v-cardgrid-gap, var(--v-space-6));
+  grid-template-columns: repeat(var(--v-cardgrid-cols, 3), minmax(0, 1fr));
+  transition: gap var(--v-motion-normal) var(--v-ease-standard);
+
+  > * {
+    min-width: 0;
+    transition:
+      transform var(--v-motion-normal) var(--v-ease-standard),
+      opacity var(--v-motion-normal) var(--v-ease-standard);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    > * {
+      transition: none;
+    }
+  }
+}

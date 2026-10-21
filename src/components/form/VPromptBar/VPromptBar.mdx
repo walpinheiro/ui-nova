@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VPromptBarStories from './VPromptBar.stories';
+
+<Meta of={VPromptBarStories} />
+# Prompt Bar
+**Categoria:** form  
+Barra de prompt para superfícies de IA com anexo, dictation (Voice Pill) e ação send/stop.
+
+## Component
+<Canvas of={VPromptBarStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VPromptBar } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VPromptBar />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Idle · Ready to send · Busy (stop) · Dictation recording · Disabled.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Voice expand | min-width/background | spring | ease-spring |
+| Busy morph | border-radius/scale | spring | ease-spring |
+| EQ bars | scaleY | 600ms | ease-in-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Textarea com `aria-label`, botões com labels dedicados, `aria-pressed` no mic, `aria-busy` quando ocupado.
+## Anatomy
+Attach → textarea → voice pill (opcional) → send/stop action.

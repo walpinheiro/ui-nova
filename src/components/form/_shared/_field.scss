@@ -1,0 +1,51 @@
+// Shared form-field typography + focus standard.
+// Label: 14px / medium weight / --v-color-text (same as VCheckbox label).
+// Helper / error text: 12px, muted / error-strong.
+// Native focus outline is always suppressed on inner native controls; the field
+// wrapper shows the library focus style (:focus-within border + ring) instead.
+
+@mixin field-label($padding-inline: null) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--v-space-1);
+  @if $padding-inline {
+    padding-inline: $padding-inline;
+  }
+  font-size: var(--v-font-size-text-medium);
+  line-height: var(--v-line-height-text-medium);
+  font-weight: var(--v-font-weight-medium, 500);
+  color: var(--v-color-text);
+}
+
+@mixin field-helper-text {
+  font-size: var(--v-font-size-text-small);
+  line-height: var(--v-line-height-text-small);
+  color: var(--v-color-text-muted);
+}
+
+@mixin field-error-text {
+  font-size: var(--v-font-size-text-small);
+  line-height: var(--v-line-height-text-small);
+  color: var(--v-color-error-strong);
+}
+
+// Native input/textarea/select inside a styled wrapper: never show the browser ring.
+@mixin field-native-reset {
+  outline: none;
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+// Library focus indicator for buttons / interactive bits inside a field.
+@mixin field-focus-outline($offset: var(--v-focus-ring-offset)) {
+  &:focus {
+    outline: none;
+  }
+  &:focus-visible {
+    outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+    outline-offset: $offset;
+  }
+}

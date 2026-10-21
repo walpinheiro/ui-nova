@@ -1,0 +1,113 @@
+.v-status-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--v-space-2);
+  font-family: var(--v-font-family-sans);
+  color: var(--v-color-text);
+
+  &__glyph {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: var(--v-radius-circle);
+    background: var(--v-color-neutral-100);
+  }
+
+  &--sm &__glyph {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  &--lg &__glyph {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  &--idle &__glyph {
+    color: var(--v-color-text-muted);
+  }
+
+  &--running &__glyph {
+    color: var(--v-color-info-base);
+  }
+
+  &--success &__glyph {
+    color: var(--v-color-success-base);
+    background: var(--v-color-success-soft);
+  }
+
+  &--error &__glyph {
+    color: var(--v-color-error-base);
+    background: var(--v-color-error-soft);
+  }
+
+  &__ring {
+    position: absolute;
+    inset: calc(var(--v-spinner-track-width-md) * -1);
+    border: var(--v-spinner-track-width-md) solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--v-radius-circle);
+    animation: v-status-mark-spin var(--v-motion-spin-duration) linear infinite;
+  }
+
+  &--expressive.v-status-mark--success &__glyph {
+    animation: v-status-mark-pop 420ms cubic-bezier(0.22, 1.2, 0.36, 1);
+  }
+
+  &--expressive.v-status-mark--error &__glyph {
+    animation: v-status-mark-shake 320ms var(--v-ease-out);
+  }
+
+  &__label {
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+  }
+}
+
+@keyframes v-status-mark-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes v-status-mark-pop {
+  0% {
+    transform: scale(0.7);
+  }
+
+  60% {
+    transform: scale(1.12);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes v-status-mark-shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(calc(var(--v-spinner-track-width-md) * -1));
+  }
+
+  75% {
+    transform: translateX(var(--v-spinner-track-width-md));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-status-mark__ring,
+  .v-status-mark--expressive.v-status-mark--success .v-status-mark__glyph,
+  .v-status-mark--expressive.v-status-mark--error .v-status-mark__glyph {
+    animation: none;
+  }
+}

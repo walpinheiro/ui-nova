@@ -1,0 +1,56 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VTopBarStories from './VTopBar.stories';
+
+<Meta of={VTopBarStories} />
+
+# VTopBar
+
+**Categoria:** navigation
+
+Chrome global do app: logo, navegação principal e ações globais no topo da aplicação.
+
+## Overview
+
+<Canvas of={VTopBarStories.Default} />
+
+## Anatomy
+
+- **Leading** — logo/marca (`#leading`)
+- **Content** — navegação ou título (`default` slot / prop `title`)
+- **Actions** — busca, notificações, perfil (`#actions`)
+
+## Variants
+
+A navegação em pills rola horizontalmente (sem scrollbar) com fade nas bordas quando excede a largura; o item ativo é rolado para a vista ao montar.
+
+<Canvas of={VTopBarStories.NarrowOverflow} />
+
+<Canvas of={VTopBarStories.Primary} />
+<Canvas of={VTopBarStories.Subtle} />
+<Canvas of={VTopBarStories.Sticky} />
+
+## Props
+
+<Controls />
+
+## Accessibility
+
+- `<header role="banner">` como root
+- Título principal via `<h1>` quando usa prop `title`
+- Estados `disabled` e `loading` com `aria-disabled` / `aria-busy`
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VTopBar } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VTopBar size="md" variant="default" bordered aria-label="Application header" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+
+<Stories />

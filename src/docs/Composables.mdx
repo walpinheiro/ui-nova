@@ -1,0 +1,31 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as ComposablesStories from './Composables.stories';
+
+<Meta of={ComposablesStories} />
+
+# Composables
+
+Funções reativas exportadas por `vueui-nova-kit` e usadas pelos próprios componentes.
+
+| Composable | Para quê |
+|---|---|
+| `useTheme(options?)` | Tema light/dark/system — ver também [Docs / Temas](/?path=/docs/docs-temas--docs) |
+| `useReducedMotion()` | `Ref<boolean>` de `prefers-reduced-motion: reduce` |
+| `useSpringValue(target, opts?)` | Anima um número com mola amortecida |
+| `usePointerDrag(elRef, opts?)` | Arraste por ponteiro com rubber band e velocidade |
+| `useWarmTooltipGroup()` | Tooltips "aquecidos": sem atraso ao trocar de item |
+
+## useTheme
+<Canvas of={ComposablesStories.UseThemeStory} />
+
+## useReducedMotion
+<Canvas of={ComposablesStories.UseReducedMotionStory} />
+
+## useSpringValue
+<Canvas of={ComposablesStories.UseSpringValueStory} />
+
+## usePointerDrag
+<Canvas of={ComposablesStories.UsePointerDragStory} />
+
+## useWarmTooltipGroup
+<Canvas of={ComposablesStories.UseWarmTooltipGroupStory} />

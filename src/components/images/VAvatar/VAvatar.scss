@@ -1,0 +1,255 @@
+.v-avatar {
+  @apply relative inline-flex shrink-0 border-0 bg-transparent p-0 align-middle;
+  outline: none;
+  transition:
+    transform var(--v-motion-fast) var(--v-ease-out),
+    box-shadow var(--v-motion-fast) var(--v-ease-out);
+
+  &--xs {
+    --v-avatar-current-size: var(--v-avatar-size-xs);
+  }
+
+  &--sm {
+    --v-avatar-current-size: var(--v-avatar-size-sm);
+  }
+
+  &--md {
+    --v-avatar-current-size: var(--v-avatar-size-md);
+  }
+
+  &--lg {
+    --v-avatar-current-size: var(--v-avatar-size-lg);
+  }
+
+  &--xl {
+    --v-avatar-current-size: var(--v-avatar-size-xl);
+  }
+
+  &--interactive {
+    @apply cursor-pointer;
+
+    &:hover {
+      transform: translateY(-1px) scale(1.05);
+      box-shadow: var(--v-shadow-md);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    &:active {
+      transform: scale(var(--v-state-press-scale));
+    }
+  }
+
+  &--selected .v-avatar__container {
+    outline: var(--v-focus-ring-width) solid var(--v-color-primary);
+    outline-offset: var(--v-field-focus-outline-offset);
+  }
+
+  &__container {
+    @apply relative inline-flex items-center justify-center overflow-hidden;
+    width: var(--v-avatar-current-size);
+    height: var(--v-avatar-current-size);
+    border: var(--v-border-width) solid var(--v-avatar-border);
+    border-radius: var(--v-radius-circle);
+    background: var(--v-avatar-fallback-bg);
+    box-sizing: border-box;
+
+    &--square {
+      border-radius: var(--v-radius-8);
+    }
+  }
+
+  &--square &__container {
+    border-radius: var(--v-radius-8);
+  }
+
+  &__image {
+    @apply block h-full w-full object-cover;
+  }
+
+  &__initials {
+    @apply inline-flex items-center justify-center font-sans font-semibold uppercase;
+    width: 100%;
+    height: 100%;
+    background: var(--v-avatar-initials-bg);
+    color: var(--v-avatar-initials-color);
+    font-size: calc(var(--v-avatar-current-size) * 0.36);
+    line-height: 1;
+  }
+
+  &__icon {
+    @apply inline-flex items-center justify-center;
+    width: 100%;
+    height: 100%;
+    background: var(--v-avatar-icon-bg);
+    color: var(--v-color-neutral-500);
+  }
+
+  &__loader {
+    @apply absolute inset-0 rounded-full;
+    background: var(--v-avatar-fallback-bg);
+    animation: v-avatar-pulse var(--v-motion-spin-duration) var(--v-ease-in-out) infinite;
+
+    &::after {
+      content: '';
+      @apply absolute left-1/2 top-1/2 block rounded-full;
+      width: calc(var(--v-avatar-current-size) * 0.45);
+      height: calc(var(--v-avatar-current-size) * 0.45);
+      margin: calc(var(--v-avatar-current-size) * -0.225) 0 0 calc(var(--v-avatar-current-size) * -0.225);
+      border: var(--v-loader-border-width) solid var(--v-color-neutral-400);
+      border-right-color: transparent;
+      animation: v-avatar-spin var(--v-motion-spin-duration) linear infinite;
+    }
+  }
+
+  &__selected-mark {
+    @apply absolute right-0 top-0 inline-flex items-center justify-center rounded-full bg-primary text-on-primary;
+    width: var(--v-avatar-badge-md);
+    height: var(--v-avatar-badge-md);
+    transform: translate(20%, -20%);
+    animation: v-avatar-badge-in var(--v-motion-normal) var(--v-ease-out) both;
+  }
+
+  &__status {
+    @apply absolute rounded-full border-2 border-surface;
+    width: var(--v-avatar-status-dot-md);
+    height: var(--v-avatar-status-dot-md);
+    right: 0;
+    bottom: 0;
+    transform: translate(15%, 15%);
+    animation: v-avatar-status-in var(--v-motion-slow) var(--v-ease-out) both;
+
+    &--sm {
+      width: var(--v-avatar-status-dot-sm);
+      height: var(--v-avatar-status-dot-sm);
+    }
+
+    &--online {
+      background: var(--v-color-success-base);
+    }
+
+    &--busy {
+      background: var(--v-color-warning-base);
+    }
+
+    &--offline {
+      background: var(--v-color-neutral-400);
+    }
+  }
+
+  &__badge {
+    @apply absolute inline-flex items-center justify-center rounded-full;
+    width: var(--v-avatar-badge-md);
+    height: var(--v-avatar-badge-md);
+    right: 0;
+    top: 0;
+    transform: translate(20%, -20%);
+    background: var(--v-color-warning-base);
+    color: var(--v-color-on-primary);
+    animation: v-avatar-badge-in var(--v-motion-normal) var(--v-ease-out) both;
+
+    &--sm {
+      width: var(--v-avatar-badge-sm);
+      height: var(--v-avatar-badge-sm);
+    }
+
+    .v-avatar--selected &,
+    .v-avatar__badge:has(+ .v-avatar__status) {
+      background: var(--v-color-info-base);
+    }
+  }
+
+  &--selected &__badge {
+    background: var(--v-color-info-base);
+  }
+}
+
+.v-avatar-group {
+  @apply inline-flex items-center;
+
+  &__item {
+    @apply relative;
+    margin-left: calc(var(--v-space-2) * -1);
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    /* Ring separates stacked avatars in both themes. */
+    .v-avatar__container {
+      box-shadow: 0 0 0 var(--v-focus-ring-width) var(--v-avatar-group-ring, var(--v-color-bg));
+    }
+  }
+
+  &__overflow {
+    box-shadow: 0 0 0 var(--v-focus-ring-width) var(--v-avatar-group-ring, var(--v-color-bg));
+    @apply inline-flex items-center justify-center rounded-full border font-sans text-caption font-semibold;
+    margin-left: calc(var(--v-space-2) * -1);
+    min-width: var(--v-avatar-size-md);
+    height: var(--v-avatar-size-md);
+    padding: 0 var(--v-space-2);
+    background: var(--v-color-neutral-100);
+    border-color: var(--v-avatar-border);
+    color: var(--v-color-neutral-700);
+  }
+}
+
+@keyframes v-avatar-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes v-avatar-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.65;
+  }
+}
+
+@keyframes v-avatar-status-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes v-avatar-badge-in {
+  from {
+    opacity: 0;
+    transform: translate(20%, -20%) scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(20%, -20%) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-avatar,
+  .v-avatar__loader,
+  .v-avatar__loader::after,
+  .v-avatar__status,
+  .v-avatar__badge,
+  .v-avatar__selected-mark {
+    transition: none;
+    animation: none;
+  }
+
+  .v-avatar--interactive:hover {
+    transform: none;
+  }
+}

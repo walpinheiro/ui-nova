@@ -1,0 +1,65 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as TemasStories from './Temas.stories';
+
+<Meta of={TemasStories} />
+
+# Temas (light / dark / system)
+
+Os tokens `--v-*` têm valores **light** (padrão) e **dark**. O tema é escolhido por atributo no elemento raiz:
+
+```html
+<html data-theme="dark">   <!-- força dark -->
+<html data-theme="light">  <!-- força light -->
+<html data-theme="system"> <!-- segue prefers-color-scheme -->
+```
+
+Para tematizar **apenas uma subárvore**, use `.v-theme-dark` / `.v-theme-light` no elemento raiz dela:
+
+<Canvas of={TemasStories.SubtreeThemes} />
+
+## `useTheme()`
+
+```ts
+import { useTheme } from 'vueui-nova-kit'
+
+const { theme, resolvedTheme, setTheme, toggleTheme } = useTheme({
+  // target: elemento que recebe data-theme (default: <html>)
+  // storageKey: 'v-theme' (false desativa a persistência)
+  // default: 'system'
+})
+
+setTheme('dark')  // 'light' | 'dark' | 'system' — persiste em localStorage
+toggleTheme()     // alterna com base em resolvedTheme
+```
+
+| Retorno | Tipo | Descrição |
+|---|---|---|
+| `theme` | `Ref<'light' \| 'dark' \| 'system'>` | Escolha do usuário (inclui `system`) |
+| `resolvedTheme` | `ComputedRef<'light' \| 'dark'>` | Tema efetivo (resolve `system` via `prefers-color-scheme`) |
+| `setTheme(t)` | função | Aplica `data-theme` no `target` e persiste em `localStorage` |
+| `toggleTheme()` | função | Alterna light/dark a partir de `resolvedTheme` |
+
+<Canvas of={TemasStories.UseThemeDemo} />
+
+## Tokens semânticos
+
+A tabela abaixo é gerada **ao vivo** a partir das CSS vars, em cada escopo de tema:
+
+<Canvas of={TemasStories.SemanticTokens} />
+
+Principais: `--v-color-bg`, `--v-color-surface`, `--v-color-text`, `--v-color-text-muted`, `--v-color-border`, `--v-color-border-strong`, `--v-color-primary-text`. O catálogo completo está em [Foundations / Tokens](/?path=/docs/foundations-tokens--docs).
+
+## Alterar tokens em tempo de execução
+
+`setToken`, `resetTokens`, `listTokens` e `KNOWN_TOKENS` (de `vueui-nova-kit/tokens`) permitem customizar o tema sem recompilar CSS:
+
+<Canvas of={TemasStories.TokenApi} />
+
+## Para autores de componentes
+
+- Nunca use hex/rgb literais: sempre tokens `--v-*` (ou `color-mix()` sobre eles).
+- Texto sobre fundo tintado (primary-50, badges, ícones em chips) usa `--v-color-primary-text`, nunca `--v-color-primary` / `primary-600`.
+- A escala neutra **inverte** no dark: `neutral-900` em overlays/hover clareia no dark; prefira tokens semânticos (`surface`, `text`, `border`).
+- Valide sempre os dois temas: `node scripts/shot.cjs --filter <story> --theme both`.
+
+> No Storybook, o seletor **Theme** da barra de ferramentas define `data-theme` no `<html>`; as páginas de docs também acompanham o tema.

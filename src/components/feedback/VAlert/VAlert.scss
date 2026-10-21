@@ -1,0 +1,207 @@
+// Inline, contextual message inside page content (forms, cards, sections).
+// Page-wide announcements belong to VBanner.
+.v-alert {
+  --v-alert-icon-size: 18px;
+  --v-alert-close-icon-size: 16px;
+  --v-alert-close-hit-size: 28px;
+  --v-alert-accent: var(--v-color-info-strong);
+  --v-alert-bg: var(--v-color-info-soft);
+  --v-alert-border: color-mix(in srgb, var(--v-color-info-base) 28%, transparent);
+
+  @apply items-start font-sans;
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  gap: var(--v-space-3);
+  padding: var(--v-space-3) var(--v-space-4);
+  color: var(--v-color-text);
+  background: var(--v-alert-bg);
+  border: var(--v-border-width) solid var(--v-alert-border);
+  border-radius: var(--v-radius-md);
+  font-size: var(--v-font-size-text-medium);
+  line-height: var(--v-line-height-text-medium);
+  transition: opacity var(--v-motion-normal) var(--v-ease-in), transform var(--v-motion-normal) var(--v-ease-in);
+
+  // Sizes change density and type, not only padding.
+  &--sm {
+    --v-alert-icon-size: 16px;
+    gap: var(--v-space-2);
+    padding: var(--v-space-2) var(--v-space-3);
+    font-size: var(--v-font-size-text-small);
+    line-height: var(--v-line-height-text-small);
+  }
+
+  &--md { padding: var(--v-space-3) var(--v-space-4); }
+
+  &--lg {
+    --v-alert-icon-size: 20px;
+    padding: var(--v-space-4) var(--v-space-5, 20px);
+  }
+
+  &--info {
+    --v-alert-accent: var(--v-color-info-strong);
+    --v-alert-bg: var(--v-color-info-soft);
+    --v-alert-border: color-mix(in srgb, var(--v-color-info-base) 28%, transparent);
+  }
+
+  &--success {
+    --v-alert-accent: var(--v-color-success-strong);
+    --v-alert-bg: var(--v-color-success-soft);
+    --v-alert-border: color-mix(in srgb, var(--v-color-success-base) 28%, transparent);
+  }
+
+  &--warning {
+    --v-alert-accent: var(--v-color-warning-strong);
+    --v-alert-bg: var(--v-color-warning-soft);
+    --v-alert-border: color-mix(in srgb, var(--v-color-warning-base) 32%, transparent);
+  }
+
+  &--danger {
+    --v-alert-accent: var(--v-color-error-strong);
+    --v-alert-bg: var(--v-color-error-soft);
+    --v-alert-border: color-mix(in srgb, var(--v-color-error-base) 28%, transparent);
+  }
+
+  &--neutral {
+    --v-alert-accent: var(--v-color-text-muted);
+    --v-alert-bg: var(--v-color-surface-muted);
+    --v-alert-border: var(--v-color-border);
+  }
+
+  &--disabled {
+    opacity: var(--v-state-disabled-opacity);
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  // Plain glyph in the variant colour, optically aligned with the first text line.
+  &__icon {
+    @apply inline-flex shrink-0 items-center justify-center;
+    height: calc(1em * var(--v-line-height-text-medium));
+    color: var(--v-alert-accent);
+
+    .v-icon,
+    svg {
+      display: block;
+      width: var(--v-alert-icon-size);
+      height: var(--v-alert-icon-size);
+    }
+  }
+
+  &--sm &__icon {
+    height: calc(1em * var(--v-line-height-text-small));
+  }
+
+  &__loader {
+    display: block;
+    width: var(--v-alert-icon-size);
+    height: var(--v-alert-icon-size);
+    border: var(--v-loader-border-width) solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--v-radius-circle);
+    animation: v-alert-spin var(--v-motion-spin-duration) linear infinite;
+  }
+
+  &__content {
+    @apply flex min-w-0 flex-1 flex-col;
+    gap: 2px;
+  }
+
+  &__title,
+  &__message {
+    font-weight: var(--v-font-weight-semibold);
+  }
+
+  &__description {
+    color: var(--v-color-text-muted);
+    font-weight: var(--v-font-weight-regular);
+  }
+
+  &__action {
+    @apply flex shrink-0 items-center;
+    gap: var(--v-space-2);
+    align-self: center;
+  }
+
+  &__close {
+    @apply inline-flex shrink-0 cursor-pointer items-center justify-center;
+    width: var(--v-alert-close-hit-size);
+    height: var(--v-alert-close-hit-size);
+    margin: -4px -6px -4px 0;
+    padding: 0;
+    color: var(--v-color-text-muted);
+    background: transparent;
+    border: 0;
+    border-radius: var(--v-radius-4);
+    transition: background var(--v-motion-normal) var(--v-ease-out), transform var(--v-motion-press) var(--v-ease-out), opacity var(--v-motion-fast) var(--v-ease-out);
+
+    &:hover {
+      color: var(--v-color-text);
+      background: color-mix(in srgb, var(--v-color-text) 8%, transparent);
+    }
+
+    &:active {
+      transform: scale(var(--v-state-press-scale));
+      background: color-mix(in srgb, var(--v-color-text) 12%, transparent);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    svg {
+      display: block;
+      width: var(--v-alert-close-icon-size);
+      height: var(--v-alert-close-icon-size);
+    }
+  }
+
+  &--loading &__close {
+    opacity: var(--v-state-disabled-opacity);
+  }
+}
+
+.v-alert-enter-active,
+.v-alert-leave-active {
+  transition: opacity var(--v-motion-normal) var(--v-ease-in), transform var(--v-motion-normal) var(--v-ease-in);
+}
+
+.v-alert-enter-from,
+.v-alert-leave-to {
+  opacity: 0;
+  transform: translateY(calc(var(--v-space-1) * -1));
+}
+
+@keyframes v-alert-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: calc(var(--v-breakpoint-sm) - 1px)) {
+  .v-alert,
+  .v-alert--inline,
+  .v-alert--banner {
+    display: flex;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-alert,
+  .v-alert__close,
+  .v-alert__loader,
+  .v-alert-enter-active,
+  .v-alert-leave-active {
+    transition: none;
+    animation: none;
+  }
+
+  .v-alert-enter-from,
+  .v-alert-leave-to {
+    transform: none;
+  }
+}

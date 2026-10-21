@@ -1,0 +1,96 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VPaginationStories from './VPagination.stories';
+
+<Meta of={VPaginationStories} />
+
+# VPagination
+
+**Categoria:** navigation
+
+Controle de navegação página a página. Divide grandes volumes em páginas discretas com variantes default, compact, ellipsis e seletor de page size.
+
+## Overview
+
+<Canvas of={VPaginationStories.Default} />
+
+## Anatomy
+
+- **Previous button** — seta `‹` (ou `Prev` na variante compact)
+- **Page item** — célula clicável com número
+- **Active state** — página atual com fundo primary e texto branco
+- **Ellipsis** — indicador `…` não-clicável para intervalos grandes
+- **Next button** — seta `›` (ou `Next` na variante compact)
+- **Page size** (opcional) — `VDropdownMenu` inline à direita + texto "Showing X–Y of Z results"
+
+## Variants
+
+<Canvas of={VPaginationStories.Ellipsis} />
+<Canvas of={VPaginationStories.Compact} />
+<Canvas of={VPaginationStories.WithPageSize} />
+
+## Sizes
+
+<Canvas of={VPaginationStories.Sizes} />
+
+## States
+
+Default · Hover · Focus-visible · Pressed · Active (página selecionada) · Disabled (componente inteiro) · Loading (spinner sobre os controles).
+
+Layout inline com page size: paginação à esquerda, "Items per page" + dropdown + "Showing X–Y of Z results" à direita.
+
+<Canvas of={VPaginationStories.FirstPage} />
+<Canvas of={VPaginationStories.LastPage} />
+<Canvas of={VPaginationStories.Disabled} />
+<Canvas of={VPaginationStories.Loading} />
+
+## Props
+
+<Controls />
+
+## Events
+
+| Event | Payload | Descrição |
+|---|---|---|
+| `update:modelValue` | `number` | Página atual (1-based) |
+| `update:page` | `number` | Alias semântico de troca de página |
+| `update:pageSize` | `number` | Novo tamanho de página |
+
+## Motion
+
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background | 160ms | ease-out |
+| Pressed | transform | 80ms | ease-in |
+| Active change | background/color | 300ms | ease-in-out |
+| Focus | outline | 100ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+
+## Accessibility
+
+- `<nav aria-label="Pagination">` como root
+- `aria-current="page"` na página ativa
+- `aria-label` em prev/next e em cada página
+- Ellipsis com `aria-hidden="true"`
+- Botões desabilitados com atributo `disabled` nativo
+- Teclado: Tab entre controles, ArrowLeft/ArrowRight em prev/next, Enter na página focada
+
+## Interactive
+
+<Canvas of={VPaginationStories.Interactive} />
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VPagination } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VPagination :total="240" :page-size="10" size="md" variant="default" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+
+<Stories />

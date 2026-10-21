@@ -1,0 +1,76 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VTagStories from './VTag.stories';
+
+<Meta of={VTagStories} />
+
+# Tag
+
+**Categoria:** primitives  
+`VTag` é o chip de **ação** (e de token acionável). Use para disparar uma ação compacta, filtrar, ou representar um atributo que o usuário pode remover.
+
+Não use Tag para status. Status é `VBadge`.
+
+## Quando usar Tag vs Badge
+
+| Use **Tag** (`VTag`) | Use **Badge** (`VBadge`) |
+|---|---|
+| Ação compacta: “Add Goals”, “Filter”, “Download” | Status: Ready, Completed, Active, Warning |
+| Token removível num campo (`VTagInput`) | Contagem, dot de presença, “Pro” / “Beta” |
+| Categoria sobre mídia (“Product” no card) | Indicador não clicável de estado (`#header-trailing` no card) |
+
+Tag é um **controle**. Badge é um **sinal**. Não pinte um status com Tag, e não finja um botão com Badge.
+
+No `VCard`: a prop `badge` renderiza uma **Tag overlay** (ex.: Product). Status “Ready” / “Completed” vai no slot `#header-trailing` com `VBadge`.
+
+## Component
+
+<Canvas of={VTagStories.Default} />
+
+## Tag vs Badge
+
+<Canvas of={VTagStories.VsBadge} />
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VTag } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VTag size="md" variant="default" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+
+<Stories />
+
+## Props
+
+<Controls />
+
+## Anatomy
+
+Root (`button` quando `interactive`, `span` quando só `removable` ou overlay estática) → optional `#icon` → label → optional remove.
+
+Data-test-ids: `v-tag`, `v-tag-icon`, `v-tag-label`, `v-tag-remove`.
+
+Variantes: `default` (ação), `outline`, `overlay` (sobre mídia), `soft` (token em campo).
+
+## Tokens
+
+Forma de pílula **não** usa `--v-radius-full` (`50%` — círculo/elipse em retângulos). Tags e chips usam `--v-radius-pill` via aliases:
+
+| Token | Uso |
+|---|---|
+| `--v-radius-full` / `--v-radius-circle` | Círculos: avatar, dot, thumb |
+| `--v-radius-pill` | Cápsulas: tag, badge removível, tabs pill |
+| `--v-tag-*` | Dimensões e motion específicos de `VTag` |
+| `--v-chip-*` | Base compartilhada entre tag e badge removível |
+
+Para customizar a lib, sobrescreva os tokens base em `:root` (ex.: `--v-radius-pill`, `--v-tag-height-md`, `--v-chip-soft-bg-mix`).
+
+## Accessibility
+
+Tag interativa usa `<button>` com foco visível e `aria-pressed` quando selecionada. Tag removível mantém o dismiss num botão próprio (`aria-label`), sem aninhar botões: com `removable`, `interactive` só liga se você passar a prop explicitamente.

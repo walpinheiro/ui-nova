@@ -1,0 +1,36 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as SpacingStories from './Spacing.stories';
+
+<Meta of={SpacingStories} />
+
+# Espaçamento
+
+**Categoria:** Foundations
+
+Escala `--v-space-*` (múltiplos de 4px). Alimenta **padding**, **margin**, **gap** e posicionamento via classes Tailwind `p-*`, `m-*`, `gap-*`, `px-*`, etc.
+
+## 1. Classes funcionais
+
+| Classe | Token | Default |
+|---|---|---|
+| `p-4` / `m-4` / `gap-4` | `--v-space-4` | 16px |
+| `p-6` | `--v-space-6` | 24px |
+| `p-8` | `--v-space-8` | 32px |
+
+<Canvas of={SpacingStories.FunctionalClasses} />
+
+## 2. Exemplos visuais
+
+Padding interno, gap entre itens, margin entre blocos e impacto em `VCard` / `VButton`.
+
+<Canvas of={SpacingStories.Examples} />
+
+## 3. Como customizar
+
+Ao mudar `--v-space-4`, todas as utilities `p-4`, `m-4`, `gap-4` e componentes que usam `var(--v-space-4)` actualizam juntos.
+
+<Canvas of={SpacingStories.Customize} />
+
+## 4. Tokens (busca)
+
+<Canvas of={SpacingStories.TokenCatalogStory} />

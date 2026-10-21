@@ -1,0 +1,60 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VResizablePanelStories from './VResizablePanel.stories';
+
+<Meta of={VResizablePanelStories} />
+# Resizable Panel
+**Categoria:** containment
+A flexible, accessible, and performant resizable panel for modern layouts. Resize with mouse, touch, or keyboard; persist via `v-model:size` + `localStorage` (Pro tip).
+
+## Component
+<Canvas of={VResizablePanelStories.Default} />
+```vue
+<template>
+  <VResizablePanel
+    v-model:size="sidebarWidth"
+    orientation="vertical"
+    :min="200"
+    :max="480"
+    collapsible
+  >
+    <SidebarContent />
+  </VResizablePanel>
+</template>
+```
+## Uso
+```vue
+<script setup lang="ts">
+import { VResizablePanel } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VResizablePanel size="md" variant="left" orientation="vertical" :min="200" :max="480" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Variants
+Variants `left · right · bottom · collapsible`; sizes `sm 240 · md 320 · lg 480` via `v-model:size` + `min`/`max`.
+<Canvas of={VResizablePanelStories.Sizes} />
+<Canvas of={VResizablePanelStories.Variants} />
+## Props
+<Controls />
+## Slots
+Default slot renders panel content inside surface/content; collapse trigger appears when `collapsible`; tooltip "Drag to resize" shows on handle hover.
+## States
+Default · Hover handle · Focus handle (`:focus-visible` ring) · Dragging · Collapsed · Disabled.
+<Canvas of={VResizablePanelStories.States} />
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Resize (programmatic/collapse) | width/height | 160ms | out |
+| Drag (continuous) | width/height direct, `transition: none` | — | — |
+| Hover/Focus | background/outline | 100ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Handle `role="separator"` with `tabindex="0"`, `aria-orientation`, `aria-valuemin/max/now` + `aria-valuetext`; polite `aria-live` region (`v-resizable-panel-live`); collapse trigger with `aria-expanded`; keyboard arrows/Home/End/Enter; `:focus-visible` ring; reduced motion honored.
+## Anatomy
+Root (`v-resizable-panel`) → live region (`v-resizable-panel-live`) → surface (`v-resizable-panel-surface`) → content (`v-resizable-panel-content`) → min/max limits → handle (`v-resizable-panel-handle`, `role="separator"`) + tooltip (`v-resizable-panel-drag-tooltip`) → collapse trigger (`v-resizable-panel-collapse-trigger`).

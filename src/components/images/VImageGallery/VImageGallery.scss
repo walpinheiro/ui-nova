@@ -1,0 +1,234 @@
+.v-image-gallery {
+  display: grid;
+  gap: var(--v-gallery-gap);
+  grid-template-columns: repeat(var(--v-gallery-columns, 3), minmax(0, 1fr));
+
+  &--sm {
+    --v-gallery-thumb-size: var(--v-gallery-thumb-sm);
+  }
+
+  &--md {
+    --v-gallery-thumb-size: var(--v-gallery-thumb-md);
+  }
+
+  &--lg {
+    --v-gallery-thumb-size: var(--v-gallery-thumb-lg);
+  }
+
+  &--masonry {
+    display: columns;
+    columns: var(--v-gallery-columns, 3);
+    column-gap: var(--v-gallery-gap);
+
+    .v-image-gallery__thumb {
+      break-inside: avoid;
+      margin-bottom: var(--v-gallery-gap);
+      height: auto;
+      min-height: calc(var(--v-gallery-thumb-size) * 0.75);
+    }
+  }
+
+  &--carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--v-space-1);
+
+    .v-image-gallery__thumb {
+      flex: 0 0 var(--v-gallery-thumb-size);
+      scroll-snap-align: start;
+    }
+  }
+
+  &__thumb {
+    @apply relative cursor-pointer overflow-hidden;
+    width: 100%;
+    aspect-ratio: 1;
+    min-height: var(--v-gallery-thumb-size);
+    border-radius: var(--v-gallery-radius);
+    border: var(--v-gallery-border-width) solid transparent;
+    background: var(--v-color-neutral-100);
+    transition: var(--v-gallery-transition);
+    outline: none;
+
+    &:hover .v-image-gallery__overlay {
+      opacity: 1;
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-gallery-focus-ring);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    &--selected {
+      border-color: var(--v-gallery-selected-border);
+      background: var(--v-gallery-selected-bg);
+    }
+
+    &--loading .v-image-gallery__image {
+      opacity: 0;
+    }
+  }
+
+  &__image {
+    @apply block h-full w-full object-cover;
+    transition: opacity var(--v-motion-normal) var(--v-ease-out);
+  }
+
+  &__overlay {
+    @apply absolute inset-0 inline-flex items-center justify-center font-sans text-text-medium font-semibold;
+    background: var(--v-gallery-overlay-bg);
+    color: var(--v-gallery-overlay-color);
+    opacity: 0;
+    transition: opacity var(--v-motion-fast) var(--v-ease-out);
+    pointer-events: none;
+  }
+
+  &__selection {
+    @apply absolute right-2 top-2 inline-flex items-center justify-center rounded-full bg-primary text-on-primary;
+    width: var(--v-gallery-nav-size);
+    height: var(--v-gallery-nav-size);
+  }
+
+  &__loading {
+    @apply absolute inset-0;
+    background: var(--v-color-neutral-100);
+
+    &::after {
+      content: '';
+      @apply absolute left-1/2 top-1/2 block rounded-full;
+      width: var(--v-gallery-nav-size);
+      height: var(--v-gallery-nav-size);
+      margin: calc(var(--v-gallery-nav-size) / -2) 0 0 calc(var(--v-gallery-nav-size) / -2);
+      border: var(--v-gallery-border-width) solid var(--v-color-neutral-300);
+      border-right-color: transparent;
+      animation: v-image-gallery-spin var(--v-motion-spin-duration) linear infinite;
+    }
+  }
+
+  &__empty {
+    @apply col-span-full flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed font-sans text-text-medium;
+    min-height: calc(var(--v-gallery-thumb-md) * 2);
+    border-color: var(--v-color-border);
+    color: var(--v-color-text-muted);
+    padding: var(--v-space-8);
+  }
+}
+
+.v-image-gallery-lightbox {
+  @apply fixed inset-0 z-[1200] flex items-center justify-center p-4;
+
+  &__backdrop {
+    @apply absolute inset-0;
+    background: var(--v-gallery-lightbox-bg);
+  }
+
+  &__panel {
+    @apply relative z-[1] flex w-full max-w-4xl flex-col overflow-hidden rounded-xl;
+    background: var(--v-gallery-lightbox-bg);
+    color: var(--v-color-on-primary);
+    animation: v-image-gallery-lightbox-in var(--v-motion-normal) var(--v-ease-out) both;
+  }
+
+  &__header {
+    @apply flex items-center justify-between px-4 py-3 font-sans text-text-medium font-semibold;
+  }
+
+  &__close,
+  &__nav {
+    @apply inline-flex items-center justify-center rounded-full border-0 text-white;
+    background: color-mix(in srgb, currentColor 12%, transparent);
+    min-width: var(--v-field-min-target);
+    min-height: var(--v-field-min-target);
+    cursor: pointer;
+    transition: background var(--v-motion-fast) var(--v-ease-out);
+
+    &:hover {
+      background: color-mix(in srgb, currentColor 20%, transparent);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-gallery-focus-ring);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+  }
+
+  &__stage {
+    @apply relative flex items-center justify-center gap-3 px-3;
+    min-height: var(--v-gallery-lightbox-min-height);
+  }
+
+  &__image {
+    @apply block max-h-[60vh] max-w-full rounded-lg object-contain;
+    animation: v-image-gallery-image-in var(--v-motion-normal) var(--v-ease-out) both;
+  }
+
+  &__filmstrip {
+    @apply flex items-center justify-center gap-2 px-4 py-3;
+    overflow-x: auto;
+  }
+
+  &__filmstrip-thumb {
+    @apply shrink-0 overflow-hidden rounded-md border-transparent p-0;
+    border-width: var(--v-gallery-border-width);
+    border-style: solid;
+    width: var(--v-gallery-filmstrip-width);
+    height: var(--v-gallery-filmstrip-height);
+    cursor: pointer;
+    background: transparent;
+
+    img {
+      @apply block h-full w-full object-cover;
+    }
+
+    &--active {
+      border-color: var(--v-gallery-selected-border);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-gallery-focus-ring);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+  }
+}
+
+@keyframes v-image-gallery-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes v-image-gallery-lightbox-in {
+  from {
+    opacity: 0;
+    transform: scale(var(--v-state-press-scale-spring));
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes v-image-gallery-image-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-image-gallery__thumb,
+  .v-image-gallery__overlay,
+  .v-image-gallery__image,
+  .v-image-gallery-lightbox__panel,
+  .v-image-gallery-lightbox__image,
+  .v-image-gallery__loading::after {
+    transition: none;
+    animation: none;
+  }
+}

@@ -1,0 +1,11 @@
+export { default as VDateRangePicker } from './VDateRangePicker.vue'
+export * from './VDateRangePicker.types'
+export {
+  V_DATE_RANGE_PICKER_CALENDAR_ICON,
+  V_DATE_RANGE_PICKER_CLEAR_ICON,
+  V_DATE_RANGE_PICKER_CHEVRON_DOWN_ICON,
+  V_DATE_RANGE_PICKER_CHEVRON_UP_ICON,
+  V_DATE_RANGE_PICKER_PREV_ICON,
+  V_DATE_RANGE_PICKER_NEXT_ICON,
+  V_DATE_RANGE_PICKER_DEFAULT_PRESETS,
+} from './mountVDateRangePicker'

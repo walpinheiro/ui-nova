@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VCheckboxStories from './VCheckbox.stories';
+
+<Meta of={VCheckboxStories} />
+# Checkbox
+**Categoria:** form  
+Caixa de verificação para escolhas booleanas e multisseleção, com estados checked, unchecked e indeterminate.
+
+## Component
+<Canvas of={VCheckboxStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VCheckbox } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VCheckbox size="md" label="Product updates" :model-value="false" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed · Checked · Indeterminate · Disabled · Error.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Check icon | opacity/scale | 100ms | ease-out |
+| Hover background | background-color | 100ms | ease-out |
+| Focus ring | box-shadow | 100ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Label associado via `<label>`, `aria-checked="mixed"` no indeterminate, Space para alternar, foco visível, área mínima 44×44px, `aria-invalid` no erro.
+## Anatomy
+Root (`v-checkbox`) → input nativo → box → icon → label/description → helper/error. Data-test-ids: `v-checkbox`, `v-checkbox-input`, `v-checkbox-box`, `v-checkbox-icon`, `v-checkbox-label`, `v-checkbox-description`, `v-checkbox-helper`, `v-checkbox-terms-link`.

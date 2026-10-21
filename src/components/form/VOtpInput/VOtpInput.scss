@@ -1,0 +1,161 @@
+@import '../_shared/field';
+.v-otp-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--v-space-3);
+  width: fit-content;
+  font-family: var(--v-font-family-sans);
+
+  --v-otp-slot-size: var(--v-otp-slot-size-md);
+
+  &--sm {
+    --v-otp-slot-size: var(--v-otp-slot-size-sm);
+  }
+
+  &--lg {
+    --v-otp-slot-size: var(--v-otp-slot-size-lg);
+  }
+
+  &__slots {
+    display: flex;
+    align-items: center;
+    gap: var(--v-space-3);
+    cursor: text;
+  }
+
+  &__slot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--v-otp-slot-size);
+    height: var(--v-otp-slot-size);
+    border: var(--v-border-width) solid var(--v-color-neutral-300);
+    border-radius: var(--v-radius-md);
+    background: var(--v-color-surface);
+    color: var(--v-color-text);
+    font-size: var(--v-font-size-text-large);
+    font-weight: var(--v-font-weight-semibold);
+    transition:
+      border-color var(--v-motion-fast) var(--v-ease-out),
+      box-shadow var(--v-motion-fast) var(--v-ease-out),
+      background var(--v-motion-fast) var(--v-ease-out);
+
+    &--active {
+      border-color: var(--v-color-primary-500);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--v-color-primary-500) 30%, transparent);
+    }
+  }
+
+  &--expressive &__slot--filled {
+    border-color: var(--v-color-primary);
+    background: color-mix(in srgb, var(--v-color-primary) 8%, var(--v-color-surface));
+  }
+
+  &--error &__slot {
+    border-color: var(--v-color-error-base);
+    background: color-mix(in srgb, var(--v-color-error-soft) 35%, var(--v-color-surface));
+  }
+
+  &--success &__slot {
+    border-color: var(--v-color-success-base);
+    background: color-mix(in srgb, var(--v-color-success-soft) 35%, var(--v-color-surface));
+  }
+
+  &--disabled {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  &--shaking &__slots {
+    animation: v-otp-shake 280ms var(--v-ease-out);
+  }
+
+  &__separator {
+    color: var(--v-color-text-muted);
+    font-size: var(--v-font-size-text-large);
+    user-select: none;
+  }
+
+  &__hidden {
+    outline: none;
+    position: absolute;
+    width: var(--v-sr-only-size);
+    height: var(--v-sr-only-size);
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  &__helper,
+  &__error,
+  &__success,
+  &__resend-wrap {
+    margin: 0;
+    font-size: var(--v-font-size-text-small);
+    color: var(--v-color-text-muted);
+  }
+
+  &__error,
+  &__success {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--v-space-1);
+  }
+
+  &__error {
+    color: var(--v-color-error-base);
+  }
+
+  &__success {
+    color: var(--v-color-success-base);
+  }
+
+  &__resend-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--v-space-2);
+  }
+
+  &__resend {
+    @include field-focus-outline;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--v-color-primary-text);
+    font: inherit;
+    cursor: pointer;
+
+    &:disabled {
+      color: var(--v-color-text-muted);
+      cursor: not-allowed;
+    }
+  }
+}
+
+@keyframes v-otp-shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-4px);
+  }
+
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-otp-input__slot,
+  .v-otp-input--shaking .v-otp-input__slots {
+    animation: none;
+    transition: none;
+  }
+}

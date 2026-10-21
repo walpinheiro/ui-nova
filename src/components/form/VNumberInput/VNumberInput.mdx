@@ -1,0 +1,32 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VNumberInputStories from './VNumberInput.stories';
+
+<Meta of={VNumberInputStories} />
+# Number Input
+**Categoria:** form  
+Campo numérico com stepper, prefixo/sufixo e validação min/max.
+
+## Component
+<Canvas of={VNumberInputStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VNumberInput } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VNumberInput size="md" label="Quantity" :model-value="42" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus · Pressed stepper · Invalid · Disabled.
+## Motion
+Step feedback scale 100ms · hover/focus 100ms ease-out.
+## Accessibility
+`role="spinbutton"`, ArrowUp/ArrowDown, `aria-valuemin/max/now`, stepper focável, erro com `role="alert"`.

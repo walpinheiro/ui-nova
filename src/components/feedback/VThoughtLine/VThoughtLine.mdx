@@ -1,0 +1,39 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VThoughtLineStories from './VThoughtLine.stories';
+
+<Meta of={VThoughtLineStories} />
+# Thought Line
+**Categoria:** feedback  
+Linha expansível de raciocínio do agente com timer, trace de passos e resumo ao concluir.
+
+## Component
+<Canvas of={VThoughtLineStories.Thinking} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VThoughtLine } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VThoughtLine label="Reasoning" :duration="0" :default-expanded="false" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Thinking (timer ativo) · Complete (`duration` > 0) · Expanded/Collapsed trace.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Expand trace | height/opacity | 200ms | ease-out |
+| Step reveal | opacity/transform | stagger 60ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Header como `<button>` com `aria-expanded`. Trace oculto quando colapsado.
+## Anatomy
+Header (glyph + label + timer + chevron) → expandable trace com steps.

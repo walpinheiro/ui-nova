@@ -1,0 +1,250 @@
+.v-prompt-bar {
+  --v-prompt-bar-control-size: calc(var(--v-icon-size-md) + var(--v-space-3));
+  --v-prompt-bar-text-line-height: calc(var(--v-font-size-text-medium) * var(--v-line-height-text-medium));
+
+  @apply flex w-full items-end gap-2 overflow-hidden rounded-lg border font-sans;
+  box-sizing: border-box;
+  padding: var(--v-space-2);
+  color: var(--v-color-text);
+  background: var(--v-color-surface);
+  border-color: var(--v-color-border);
+  font-family: var(--v-font-family-sans);
+  transition:
+    border-color var(--v-motion-fast) var(--v-ease-out),
+    box-shadow var(--v-motion-fast) var(--v-ease-out);
+
+  &:focus-within {
+    border-color: var(--v-color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--v-color-primary) 16%, transparent);
+  }
+
+  &--disabled {
+    opacity: var(--v-state-disabled-opacity);
+    pointer-events: none;
+  }
+
+  &__input {
+    @apply min-h-0 resize-none bg-transparent;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: var(--v-prompt-bar-control-size);
+    min-height: var(--v-prompt-bar-control-size);
+    max-height: 9rem;
+    padding-block: max(0px, calc((var(--v-prompt-bar-control-size) - var(--v-prompt-bar-text-line-height)) / 2));
+    padding-inline: var(--v-space-2);
+    overflow-y: hidden;
+    color: inherit;
+    border: 0;
+    font-family: inherit;
+    font-size: var(--v-font-size-text-medium);
+    line-height: var(--v-line-height-text-medium);
+    scrollbar-gutter: stable;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--v-color-text-muted);
+    }
+  }
+
+  &__actions {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: var(--v-space-2);
+  }
+
+  &__voice {
+    @apply inline-flex shrink-0 cursor-pointer items-center justify-center gap-1;
+    width: var(--v-prompt-bar-control-size);
+    min-width: var(--v-prompt-bar-control-size);
+    height: var(--v-prompt-bar-control-size);
+    padding: 0;
+    color: var(--v-color-text-muted);
+    background: transparent;
+    border: 0;
+    border-radius: var(--v-radius-md);
+    transition:
+      background var(--v-motion-fast) var(--v-ease-out),
+      color var(--v-motion-fast) var(--v-ease-out),
+      width var(--v-motion-spring-duration) var(--v-ease-spring),
+      min-width var(--v-motion-spring-duration) var(--v-ease-spring);
+
+    &--recording {
+      color: var(--v-color-primary-text);
+    }
+
+    &--expanded {
+      width: auto;
+      min-width: 6.5rem;
+      padding-inline: var(--v-space-3);
+      color: var(--v-color-primary-text);
+      background: color-mix(in srgb, var(--v-color-primary) 12%, transparent);
+    }
+
+    &--unsupported {
+      opacity: var(--v-state-disabled-opacity);
+      cursor: not-allowed;
+    }
+  }
+
+  &__voice-eq {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: var(--v-field-gap-tight);
+    height: var(--v-prompt-bar-wave-height);
+  }
+
+  &__voice-bar {
+    width: var(--v-prompt-bar-wave-bar-width);
+    height: 100%;
+    border-radius: var(--v-checkbox-link-focus-radius);
+    background: var(--v-color-primary);
+    animation: v-prompt-bar-voice-bar 0.6s ease-in-out infinite alternate;
+  }
+
+  &__voice-time {
+    font-size: var(--v-font-size-text-small);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__attach {
+    @apply inline-flex shrink-0 cursor-pointer items-center justify-center;
+    width: var(--v-prompt-bar-control-size);
+    height: var(--v-prompt-bar-control-size);
+    padding: 0;
+    color: var(--v-color-text-muted);
+    background: transparent;
+    border: 0;
+    border-radius: var(--v-radius-md);
+    transition:
+      background var(--v-motion-fast) var(--v-ease-out),
+      color var(--v-motion-fast) var(--v-ease-out);
+
+    &:hover:not(:disabled) {
+      color: var(--v-color-text);
+      background: var(--v-color-elevated);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+  }
+
+  &__action {
+    @apply relative inline-flex shrink-0 cursor-pointer items-center justify-center overflow-hidden;
+    width: var(--v-prompt-bar-control-size);
+    height: var(--v-prompt-bar-control-size);
+    padding: 0;
+    color: var(--v-color-on-primary);
+    background: var(--v-color-primary);
+    border: 0;
+    border-radius: var(--v-radius-md);
+    transition:
+      background var(--v-motion-fast) var(--v-ease-out),
+      transform var(--v-motion-press) var(--v-ease-out),
+      border-radius var(--v-motion-spring-duration) var(--v-ease-spring);
+
+    &:disabled {
+      opacity: var(--v-state-disabled-opacity);
+      cursor: not-allowed;
+    }
+
+    &:not(:disabled):active {
+      transform: scale(var(--v-state-press-scale-spring));
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    &--ready:not(:disabled) {
+      background: var(--v-color-primary-600);
+    }
+
+    &--busy {
+      background: var(--v-color-error-base);
+      border-radius: var(--v-radius-sm);
+    }
+  }
+
+  &--expressive &__action--busy {
+    animation: v-prompt-bar-action-morph var(--v-motion-spring-duration) var(--v-ease-spring);
+  }
+
+  &__action-icon {
+    @apply inline-flex items-center justify-center;
+    transition:
+      opacity var(--v-motion-fast) var(--v-ease-out),
+      transform var(--v-motion-fast) var(--v-ease-out);
+  }
+
+  &__action-icon--send {
+    transform: translateY(0);
+  }
+
+  &__action-icon--stop {
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  &__action--busy &__action-icon--send {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.7);
+  }
+
+  &__action--busy &__action-icon--stop {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes v-prompt-bar-voice-bar {
+  from {
+    transform: scaleY(0.3);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes v-prompt-bar-action-morph {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.06);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-prompt-bar {
+    transition: none;
+
+    &__attach,
+    &__action,
+    &__action-icon,
+    &__voice {
+      transition: none;
+      animation: none;
+    }
+
+    &__action:not(:disabled):active {
+      transform: none;
+    }
+  }
+}

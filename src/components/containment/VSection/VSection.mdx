@@ -1,0 +1,81 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VSectionStories from './VSection.stories';
+
+<Meta of={VSectionStories} />
+
+# VSection
+
+**Categoria:** containment
+
+Contentor flexível para organizar conteúdo relacionado numa secção clara e estruturada. Suporta cabeçalho (ícone, título, descrição), ações, área de conteúdo arbitrária e rodapé opcional.
+
+## Overview
+
+<Canvas of={VSectionStories.Default} />
+
+## Anatomy
+
+1. **Icon (optional)** — contentor arredondado à esquerda do título
+2. **Heading** — título semântico (`h2`/`h3`)
+3. **Description** — subtítulo descritivo
+4. **Actions (optional)** — slot para botões/menus à direita
+5. **Content area** — conteúdo principal
+6. **Footer (optional)** — metadados com separador superior
+
+## Variants
+
+Default · Elevated · Bordered · Borderless · Tinted
+
+<Canvas of={VSectionStories.Variants} />
+
+## Sizes
+
+Small (12px) · Medium (24px, default) · Large (32px)
+
+<Canvas of={VSectionStories.Sizes} />
+
+## States
+
+Default · Hover · Focus-visible (quando `interactive`) · Disabled · Loading
+
+## Props
+
+<Controls />
+
+## Events / Slots
+
+Slots: `default`, `icon`, `title`, `description`, `header`, `actions`, `footer`.
+
+## Motion
+
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background | 150ms | ease-out |
+| Focus | outline | 150ms | ease-out |
+| Elevated | box-shadow | 150ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+
+## Accessibility
+
+- Landmark `<section>` nativo
+- `aria-labelledby` apontando para o heading quando há título
+- Ações internas focáveis por teclado
+- Anel de foco visível em secções `interactive`
+- Contraste WCAG AA para título e descrição
+
+## Examples
+
+<Stories />
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VSection } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VSection size="md" variant="default" title="Personal Information" description="Manage your public profile and personal details." />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").

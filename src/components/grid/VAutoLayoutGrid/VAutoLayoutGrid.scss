@@ -1,0 +1,104 @@
+.v-auto-layout-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(var(--v-grid-min-item-width, 280px), 1fr));
+  gap: var(--v-auto-layout-gap, var(--v-space-4));
+  transition: gap var(--v-motion-normal) var(--v-ease-out);
+
+  &[data-behavior='auto-fill'] {
+    grid-template-columns: repeat(auto-fill, minmax(var(--v-grid-min-item-width, 280px), 1fr));
+  }
+
+  &[data-behavior='dense'] {
+    grid-auto-flow: dense;
+  }
+
+  &[data-equal-height='true'] {
+    grid-auto-rows: 1fr;
+  }
+
+  &--compact {
+    gap: var(--v-space-2);
+  }
+
+  &--medium {
+    gap: var(--v-space-4);
+  }
+
+  &--spacious {
+    gap: var(--v-space-6);
+  }
+
+  &__item {
+    min-width: 0;
+    background: var(--v-card-bg);
+    border: var(--v-border-width) solid var(--v-card-border);
+    border-radius: var(--v-radius-lg, var(--v-radius-md));
+    box-shadow: var(--v-shadow-sm);
+    padding: var(--v-space-4);
+    min-height: var(--v-grid-demo-card-min-height);
+    position: relative;
+    transition:
+      transform var(--v-motion-fast) var(--v-ease-out),
+      box-shadow var(--v-motion-fast) var(--v-ease-out);
+
+    &--interactive:not(&--disabled) {
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--v-card-hover-shadow, var(--v-shadow-md));
+      }
+
+      &:focus-visible {
+        outline: var(--v-focus-ring-width, 2px) solid var(--v-color-focus);
+        outline-offset: var(--v-focus-ring-offset, 2px);
+      }
+    }
+
+    &--selected {
+      box-shadow: 0 0 0 2px var(--v-color-focus);
+    }
+
+    &--disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    &--dragging {
+      opacity: 0.85;
+      transform: scale(1.02);
+      box-shadow: var(--v-shadow-lg);
+    }
+  }
+
+  &__selection-badge {
+    position: absolute;
+    top: var(--v-space-2);
+    right: var(--v-space-2);
+    width: var(--v-space-6);
+    height: var(--v-space-6);
+    border-radius: var(--v-radius-pill);
+    background: var(--v-color-primary);
+    color: var(--v-color-on-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__drop-preview {
+    border: var(--v-grid-demo-border-width) dashed var(--v-color-primary);
+    border-radius: var(--v-radius-md);
+    min-height: var(--v-grid-demo-card-min-height);
+    background: color-mix(in srgb, var(--v-color-primary) 8%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+      transition: none !important;
+    }
+  }
+}

@@ -1,0 +1,314 @@
+.v-badge {
+  @apply inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-sm border font-sans text-text-medium font-semibold select-none align-middle duration-fast ease-standard;
+  box-sizing: border-box;
+  background: var(--v-color-primary-50);
+  border-color: transparent;
+  color: var(--v-color-neutral-700);
+  padding: var(--v-space-1) var(--v-space-3);
+  font-size: var(--v-font-size-text-medium);
+  line-height: var(--v-line-height-text-medium);
+  outline: none;
+  transition-property: background-color, transform, box-shadow, opacity;
+  animation: v-badge-enter var(--v-motion-normal) var(--v-ease-out) both;
+
+  &--xs {
+    @apply px-2 py-1 text-text-small;
+    line-height: var(--v-line-height-text-small);
+  }
+
+  &--sm {
+    @apply px-2 py-1 text-text-medium;
+    line-height: var(--v-line-height-text-medium);
+  }
+
+  &--md {
+    @apply px-3 py-1 text-text-medium;
+    line-height: var(--v-line-height-text-medium);
+  }
+
+  &--lg {
+    @apply px-4 py-2 text-text-large;
+    line-height: var(--v-line-height-text-large);
+  }
+
+  &--neutral {
+    @apply bg-neutral-100 text-neutral-700;
+  }
+
+  &--success {
+    @apply bg-success-soft text-success-strong;
+  }
+
+  &--warning {
+    @apply bg-warning-soft text-warning-strong;
+  }
+
+  &--danger {
+    @apply bg-error-soft text-error-strong;
+  }
+
+  &--primary {
+    @apply bg-primary-600 text-on-primary;
+  }
+
+  &--purple {
+    @apply bg-purple-light text-purple-dark;
+  }
+
+  &--count {
+    @apply bg-primary-50 text-neutral-700;
+  }
+
+  &--dot {
+    @apply bg-neutral-100 text-neutral-700;
+  }
+
+  &--outlined {
+    @apply bg-transparent text-primary;
+    color: var(--v-color-primary-text);
+    border-color: var(--v-color-primary-400);
+  }
+
+  &--interactive {
+    @apply cursor-pointer;
+
+    &:hover {
+      background: color-mix(in srgb, var(--v-color-primary) var(--v-state-hover-mix), var(--v-color-primary-50));
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    &:active {
+      transform: scale(var(--v-chip-press-scale));
+    }
+  }
+
+  &--interactive.v-badge--success:hover {
+    background: color-mix(in srgb, var(--v-color-success-base) var(--v-state-hover-mix), var(--v-color-success-soft));
+  }
+
+  &--interactive.v-badge--warning:hover {
+    background: color-mix(in srgb, var(--v-color-warning-base) var(--v-state-hover-mix), var(--v-color-warning-soft));
+  }
+
+  &--interactive.v-badge--danger:hover {
+    background: color-mix(in srgb, var(--v-color-error-base) var(--v-state-hover-mix), var(--v-color-error-soft));
+  }
+
+  &--interactive.v-badge--primary:hover {
+    @apply bg-primary-hover;
+  }
+
+  &--interactive.v-badge--purple:hover {
+    background: color-mix(in srgb, var(--v-color-purple-base) var(--v-state-hover-mix), var(--v-color-purple-light));
+  }
+
+  &--interactive.v-badge--outlined:hover {
+    background: color-mix(in srgb, var(--v-color-primary) var(--v-state-hover-mix), transparent);
+  }
+
+  &--removable {
+    max-width: 100%;
+    border-radius: var(--v-chip-radius);
+    font-weight: var(--v-font-weight-medium);
+    line-height: var(--v-chip-line-height);
+    justify-content: flex-start;
+    gap: 0;
+    padding-block: 0;
+    padding-inline: var(--v-chip-padding-inline-md) var(--v-chip-padding-inline-end-removable);
+
+    &.v-badge--neutral {
+      background: var(--v-color-primary-50);
+      color: var(--v-color-neutral-800);
+    }
+
+    &.v-badge--xs {
+      height: var(--v-chip-height-xs);
+      padding-inline: var(--v-chip-padding-inline-sm) var(--v-chip-padding-inline-end-removable);
+      font-size: var(--v-chip-font-size-xs);
+    }
+
+    &.v-badge--sm {
+      height: var(--v-chip-height-sm);
+      padding-inline: var(--v-chip-padding-inline-md) var(--v-chip-padding-inline-end-removable);
+      font-size: var(--v-chip-font-size-sm);
+    }
+
+    &.v-badge--md {
+      height: var(--v-chip-height-md);
+      padding-inline: var(--v-chip-padding-inline-md) var(--v-chip-padding-inline-end-removable);
+      font-size: var(--v-chip-font-size-md);
+    }
+
+    &.v-badge--lg {
+      height: var(--v-chip-height-lg);
+      padding-inline: var(--v-chip-padding-inline-lg) var(--v-chip-padding-inline-end-removable-lg);
+      font-size: var(--v-chip-font-size-lg);
+    }
+
+    .v-badge__label {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: var(--v-chip-line-height);
+    }
+
+    .v-badge__remove {
+      width: var(--v-chip-remove-size);
+      height: var(--v-chip-remove-size);
+      margin-inline-start: var(--v-chip-gap);
+    }
+  }
+
+  &--leaving {
+    opacity: 0;
+    transform: scale(var(--v-chip-leaving-scale));
+    transition:
+      opacity var(--v-chip-leaving-duration) var(--v-ease-out),
+      transform var(--v-chip-leaving-duration) var(--v-ease-out);
+  }
+
+  &--selected {
+    @apply bg-primary-600 text-on-primary;
+    border-color: transparent;
+  }
+
+  &--selected.v-badge--interactive:hover {
+    @apply bg-primary-hover;
+  }
+
+  &--warning .v-badge__icon,
+  &--primary .v-badge__icon {
+    color: var(--v-color-warning-base);
+  }
+
+  &[aria-disabled="true"] {
+    @apply cursor-not-allowed opacity-disabled;
+    pointer-events: none;
+  }
+
+  &[aria-busy="true"] {
+    @apply cursor-progress;
+    pointer-events: none;
+  }
+
+  &__label {
+    @apply inline-flex items-center;
+  }
+
+  &__icon {
+    @apply inline-flex shrink-0 items-center justify-center;
+  }
+
+  &__icon svg {
+    display: block;
+    width: var(--v-space-4);
+    height: var(--v-space-4);
+  }
+
+  &__dot {
+    @apply inline-block shrink-0 rounded-full;
+    background: var(--v-color-success-base);
+    width: var(--v-space-2);
+    height: var(--v-space-2);
+  }
+
+  // Dot follows the badge tone (variant `dot`/`success` keep the success green).
+  &--danger &__dot { background: var(--v-color-error-base); }
+  &--warning &__dot { background: var(--v-color-warning-base); }
+  &--primary &__dot,
+  &--outlined &__dot { background: var(--v-color-primary-500); }
+  &--purple &__dot { background: var(--v-color-primary-500); }
+  &--neutral &__dot { background: var(--v-color-neutral-500); }
+
+  &__count {
+    @apply inline-flex shrink-0 items-center justify-center rounded-full bg-primary text-on-primary text-caption font-semibold;
+    min-width: var(--v-space-6);
+    min-height: var(--v-space-6);
+    padding: 0 var(--v-space-1);
+    line-height: var(--v-line-height-caption);
+  }
+
+  &__loader {
+    @apply inline-block shrink-0 rounded-full;
+    width: var(--v-loader-size);
+    height: var(--v-loader-size);
+    border: var(--v-loader-border-width) solid currentColor;
+    border-right-color: transparent;
+    animation: v-badge-spin var(--v-motion-spin-duration) linear infinite;
+  }
+
+  &__remove {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--v-chip-remove-size);
+    height: var(--v-chip-remove-size);
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: var(--v-radius-circle);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    flex-shrink: 0;
+    opacity: 0.7;
+    line-height: 0;
+    transition:
+      opacity var(--v-motion-fast) var(--v-ease-out),
+      background var(--v-motion-fast) var(--v-ease-out);
+
+    svg {
+      display: block;
+      width: var(--v-space-3);
+      height: var(--v-space-3);
+    }
+
+    &:hover {
+      opacity: 1;
+      background: color-mix(in srgb, currentColor 10%, transparent);
+    }
+
+    &:focus-visible {
+      outline: var(--v-focus-ring-width) solid var(--v-color-focus);
+      outline-offset: var(--v-focus-ring-offset);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+  }
+}
+
+@keyframes v-badge-enter {
+  from {
+    opacity: 0;
+    transform: scale(var(--v-chip-press-scale));
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes v-badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .v-badge,
+  .v-badge__loader,
+  .v-badge--leaving {
+    transition: none;
+    animation: none;
+  }
+}

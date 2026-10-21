@@ -1,0 +1,33 @@
+@mixin anchored-overlay-panel($gap: var(--v-space-1), $z-index: var(--v-popover-z-index, 1000)) {
+  position: absolute;
+  z-index: $z-index;
+  margin: 0;
+
+  &--bottom-start {
+    top: calc(100% + #{$gap});
+    bottom: auto;
+    left: 0;
+    right: auto;
+  }
+
+  &--bottom-end {
+    top: calc(100% + #{$gap});
+    bottom: auto;
+    right: 0;
+    left: auto;
+  }
+
+  &--top-start {
+    bottom: calc(100% + #{$gap});
+    top: auto;
+    left: 0;
+    right: auto;
+  }
+
+  &--top-end {
+    bottom: calc(100% + #{$gap});
+    top: auto;
+    right: 0;
+    left: auto;
+  }
+}

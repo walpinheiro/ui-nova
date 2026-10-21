@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VSpinnerStories from './VSpinner.stories';
+
+<Meta of={VSpinnerStories} />
+# Spinner
+**Categoria:** feedback  
+Indicador de carregamento flexível para comunicar progresso e estados de espera: confirma processamento em botões ("Creating project…"), sobreposições ("Loading your project… This may take a few seconds.") e conteúdo inline (listas, tabelas, secções). Pro tip: emparelhar sempre o spinner com um rótulo descritivo (prop `label` ou texto visualmente escondido) para melhor acessibilidade.
+
+## Component
+<Canvas of={VSpinnerStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VSpinner } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VSpinner size="md" variant="circular" color="primary" label="Loading" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Enter/Exit | opacity/transform | 160ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa primeiro, foco visível, labels acessíveis e teclado conforme o padrão WAI-ARIA correspondente.
+## Anatomy
+Root → optional leading visual → content/slot → optional actions/feedback.

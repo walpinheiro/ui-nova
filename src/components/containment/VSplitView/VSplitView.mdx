@@ -1,0 +1,42 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VSplitViewStories from './VSplitView.stories';
+
+<Meta of={VSplitViewStories} />
+# Split View
+**Categoria:** containment  
+Workspace multi-pane ajustavel (2-3 panes: sidebar, conteudo, inspector) com divisores arrastaveis, seguindo tokens semânticos e Light Mode como referência principal.
+
+## Component
+<Canvas of={VSplitViewStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VSplitView } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VSplitView orientation="vertical" mode="resizable" :collapsible="false" :min-size="200" :max-size="600" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+Duas panes (sidebar + conteudo) · Tres panes (sidebar + conteudo + inspector) · Horizontal (topo/baixo) · Fixed · Resizable (default) · Collapsible.
+<Stories />
+## Props
+<Controls />
+## States
+Default (divisor `border`) · Hover (highlight `primary`) · Dragging (ativo `primary`) · Collapsed (pane em tamanho minimo `space-12`) · Disabled (opacidade `state-disabled-opacity`, sem interacao).
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover divisor/handle | background/opacity | 100ms | standard |
+| Drag/resize | grid-template | 120ms | standard |
+| Collapse/expand | grid-template | 120ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Divisores `role="separator"` focaveis com `aria-orientation`, `aria-valuemin/max/now` e label "Redimensionar paineis N e N+1"; teclado: vertical Left/Right e horizontal Up/Down ajustam 24px, Home/End vao a min/max, Enter/Space recolhe; `aria-expanded="false"` quando colapsado; `persist-key="ide-layout"` salva/restaura sizes via localStorage; panes `role="group"` com label "Pane N de M"; ordem logica de tab entre panes; contraste para divisores/handles; `aria-disabled` quando fixo/desabilitado. Segue WAI-ARIA (separator).
+## Anatomy
+Root (`group`, Split view) → track (grid) → pane (slots `pane-1/2/3` ou `start`/`default`/`end`, ex.: Sidebar/Content/Inspector) → divider (`separator`) → handle (visual) → collapse (botao opcional com chevron contextual).

@@ -1,0 +1,15 @@
+@use './tokens/tokens' as *;
+@use './tokens/fonts';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  html,
+  body {
+    font-family: var(--v-font-family-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

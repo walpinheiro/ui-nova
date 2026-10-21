@@ -1,0 +1,40 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VTooltipStories from './VTooltip.stories';
+
+<Meta of={VTooltipStories} />
+# Tooltip
+**Categoria:** feedback  
+Dica contextual (contextual helper hint) que exibe informação breve e contextual ao dar hover, focus ou tap num elemento. Explica recursos, reduz carga cognitiva e mantém a interface limpa e focada. Promessa hero: "Explain more with less. Small hints.
+
+## Component
+<Canvas of={VTooltipStories.Default} />
+## Uso
+```vue
+<script setup lang="ts">
+import { VTooltip } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VTooltip content="This is a helpful tooltip" size="md" variant="default" placement="top" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
+
+## Variations
+<Stories />
+## Props
+<Controls />
+## States
+Default · Hover · Focus-visible · Pressed/Active quando aplicável · Disabled · Loading quando aplicável.
+## Motion
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Hover | background/transform | 100ms | standard |
+| Focus | outline/box-shadow | 100ms | standard |
+| Enter/Exit | opacity/transform | 160ms | standard |
+
+Respeitar `prefers-reduced-motion`.
+## Accessibility
+Semântica nativa primeiro, foco visível, labels acessíveis e teclado conforme o padrão WAI-ARIA correspondente.
+## Anatomy
+Root → optional leading visual → content/slot → optional actions/feedback.

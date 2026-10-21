@@ -1,0 +1,6 @@
+const path=require('path'),os=require('os')
+process.env.PLAYWRIGHT_BROWSERS_PATH ||= path.join(os.homedir(),'AppData','Local','ms-playwright')
+const { chromium } = require('@playwright/test')
+;(async()=>{const b=await chromium.launch();const p=await b.newPage()
+p.on('pageerror',e=>console.log('PE',e.message,(e.stack||'').split('\n').slice(0,6).join('\n')))
+await p.goto('http://localhost:6007/iframe.html?viewMode=story&id='+process.argv[2]);await p.waitForTimeout(2500);await b.close()})()

@@ -1,0 +1,77 @@
+import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
+import * as VTreeNavigationStories from './VTreeNavigation.stories';
+
+<Meta of={VTreeNavigationStories} />
+
+# Tree Navigation
+
+**Categoria:** navigation
+
+Explorador hierárquico expansível para file systems, settings, documentação e qualquer conteúdo nested.
+
+## Overview
+
+<Canvas of={VTreeNavigationStories.Default} />
+
+## Anatomy
+
+1. **Toggle** — chevron que expande/colapsa o nó
+2. **Node icon** — ícone do tipo (pasta, documento, engrenagem…)
+3. **Label** — texto do nó
+4. **Count badge** — pill opcional com contagem de filhos
+5. **Children** — nós aninhados com indentação (`--v-tree-indent-size`)
+
+## Variants
+
+<Stories />
+
+## Props
+
+<Controls />
+
+## States
+
+Collapsed · Expanded · Hover · Focus-visible · Selected · Disabled · Loading (lazy children)
+
+## Motion
+
+| Trigger | Property | Duration | Easing |
+|---|---|---:|---|
+| Expand | height/opacity/chevron | 200ms | ease-out |
+| Collapse | height/opacity/chevron | 200ms | ease-in |
+| Hover | background | 200ms | ease-out |
+| Focus | outline | 200ms | ease-out |
+
+Respeitar `prefers-reduced-motion`.
+
+## Accessibility
+
+- `role="tree"` no container, `role="treeitem"` nos nós
+- `aria-expanded`, `aria-selected`, `aria-level`
+- Teclado: Arrow keys, Enter, Space, Home, End
+- Foco visível com `--v-tree-focus-ring-*`
+- Suporta seleção single e multiple (`aria-multiselectable`)
+
+## Usage
+
+```vue
+<VTreeNavigation
+  v-model:active="activeKey"
+  v-model:expanded-keys="expanded"
+  :items="treeData"
+  :multiple="false"
+  show-counts
+/>
+```
+
+## Uso
+```vue
+<script setup lang="ts">
+import { VTreeNavigation } from 'vueui-nova-kit'
+</script>
+
+<template>
+  <VTreeNavigation size="md" variant="file" show-counts active="vueui-nova" />
+</template>
+```
+Todas as props, eventos e slots estão na tabela **Props** abaixo; cada variação tem uma story com o código ("Show code").
